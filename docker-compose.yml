@@ -1,0 +1,63 @@
+version: '2'
+volumes:
+  database:
+  node_modules:
+
+services:
+    mysql:
+        container_name: skeleton-db
+        image: mysql:8.0.23
+        ports:
+            - "33061:3306"
+        volumes:
+            - database:/var/lib/mysql
+        environment:
+            - "MYSQL_DATABASE=skeleton"
+            - "MYSQL_PASSWORD=secret"
+            - "MYSQL_ROOT_PASSWORD=secret"
+        command: ['--innodb_flush_log_at_trx_commit=2']
+    api:
+        container_name: skeleton-api
+        build:
+            context: ./api/
+            dockerfile: nginx.docker
+        ports:
+            - "7000:80"
+        env_file:
+            - ./api/.env
+        depends_on:
+            - mysql
+    fpm:
+        container_name: skeleton-fpm
+        build:
+            context: ./api/
+        links:
+            - mysql
+        volumes:
+            - ./php.ini:/usr/local/etc/php/conf.d/php.ini
+            - ./api:/var/www
+            - ~/.ssh:/home/ubuntu/.ssh
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=mysql"
+        user: ubuntu
+    vue:
+        container_name: skeleton-vue
+        build:
+            context: ./vue
+        ports:
+            - 8080:8080
+        env_file:
+            - ./vue/.env
+        volumes:
+            - ./vue/:/opt/app
+            - node_modules:/opt/node_modules
+        user: node
+        tty: true
+    mail:
+        container_name: skeleton-mail
+        image: maildev/maildev
+        ports:
+            - "8025:80"
+        command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+
