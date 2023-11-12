@@ -1,4 +1,5 @@
 @import './base.css';
+@import './sass/font-awesome.scss';
 
 aside {
   background-color: #212529 !important;

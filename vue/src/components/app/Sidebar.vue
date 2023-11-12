@@ -1,12 +1,12 @@
 <template>
     <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
         <div class="logo">
-            <img :src="logoURL" alt="LOGO.png">
+            <img :src="logo" alt="LOGO.png">
         </div>
 
         <div class="menu-toggle-wrap">
             <button class="menu-toggle" @click="ToggleMenu">
-                <span class="material-icons">></span>
+				<i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
 
@@ -14,33 +14,49 @@
 
         <div class="menu">
             <router-link to="/" class="button">
-                <span class="text">Home</span>
+				<i class="fa-solid fa-table-columns"></i> <span class="text">Dashboard</span>
             </router-link>
-            <router-link to="/login" class="button">
-                <span class="text">Login</span>
-            </router-link>
-            <router-link to="/item-2" class="button">
-                <span class="text">Item #2</span>
-            </router-link>
+			<!-- <router-link to="/Profile" class="button">
+				<i class="fa-solid fa-user"></i> <span class="text">Profile</span>
+			</router-link>
+			<router-link to="/Profile" class="button">
+				<i class="fa-solid fa-gear"></i> <span class="text">Settings</span>
+			</router-link> -->
         </div>
-
-        <div class="flex"></div>
+		
+        <div class="menu flex">
+			<!-- <router-link to="/works" class="button">
+				<i class="fa-solid fa-book-open-reader"></i> <span class="text">Works</span>
+			</router-link>
+			<router-link to="/bookmarks" class="button">
+				<i class="fa-solid fa-bookmark"></i> <span class="text">Bookmarks</span>
+			</router-link>
+			<router-link to="/drafts" class="button">
+				<i class="fa-regular fa-file-lines"></i> <span class="text">Drafts</span>
+			</router-link>
+			<router-link to="/Collections" class="button">
+				<i class="fa-solid fa-layer-group"></i> <span class="text">Collections</span>
+			</router-link>
+			<router-link to="/Prompts" class="button">
+				<i class="fa-regular fa-comment-dots"></i> <span class="text">Prompts</span>
+			</router-link> -->
+		</div>
 
         <div class="menu">
-            <router-link to="/item-3" class="button">
-                <span class="text">Item #3</span>
+			<router-link to="/login" class="button">
+                <span class="text">Login</span>
             </router-link>
-            <router-link to="/item-4" class="button">
-                <span class="text">Item #4</span>
+			<router-link to="/" class="button">
+                <span class="text">Logout</span>
             </router-link>
         </div>
 
     </aside>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-import logoURL from '../assets/logo.svg'
+<script lang="ts" setup>
+import { ref, computed } from 'vue'
+import logoDefault from '@/assets/logo.svg'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -48,6 +64,10 @@ const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
     localStorage.setItem("is_expanded", is_expanded.value)
 }
+
+const logo = computed(() => {
+	return logoDefault
+})
 </script>
 
 <style lang="scss" scoped>
@@ -79,14 +99,14 @@ aside {
 		transition: 0.2s ease-in-out;
 		.menu-toggle {
 			transition: 0.2s ease-in-out;
-			.material-icons {
+			.material-icons, i {
 				font-size: 2rem;
 				color: var(--light);
 				transition: 0.2s ease-out;
 			}
 			
 			&:hover {
-				.material-icons {
+				.material-icons, i {
 					color: var(--primary);
 					transform: translateX(0.5rem);
 				}
@@ -104,14 +124,14 @@ aside {
 		text-transform: uppercase;
 	}
 	.menu {
-		margin: 0 -1rem;
+		margin: 2rem -1rem;
 		.button {
 			display: flex;
 			align-items: center;
 			text-decoration: none;
 			transition: 0.2s ease-in-out;
 			padding: 0.5rem 1rem;
-			.material-icons {
+			.material-icons, i {
 				font-size: 2rem;
 				color: var(--light);
 				transition: 0.2s ease-in-out;
@@ -122,14 +142,14 @@ aside {
 			}
 			&:hover {
 				background-color: var(--dark-alt);
-				.material-icons, .text {
+				.material-icons, i, .text {
 					color: var(--primary);
 				}
 			}
 			&.router-link-exact-active {
 				background-color: var(--dark-alt);
 				border-right: 5px solid var(--primary);
-				.material-icons, .text {
+				.material-icons, i, .text {
 					color: var(--primary);
 				}
 			}
@@ -156,7 +176,7 @@ aside {
 			opacity: 1;
 		}
 		.button {
-			.material-icons {
+			.material-icons, i {
 				margin-right: 1rem;
 			}
 		}

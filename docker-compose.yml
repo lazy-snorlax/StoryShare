@@ -5,19 +5,19 @@ volumes:
 
 services:
     mysql:
-        container_name: skeleton-db
+        container_name: story-share-db
         image: mysql:8.0.23
         ports:
             - "33061:3306"
         volumes:
             - database:/var/lib/mysql
         environment:
-            - "MYSQL_DATABASE=skeleton"
+            - "MYSQL_DATABASE=story-share"
             - "MYSQL_PASSWORD=secret"
             - "MYSQL_ROOT_PASSWORD=secret"
         command: ['--innodb_flush_log_at_trx_commit=2']
     api:
-        container_name: skeleton-api
+        container_name: story-share-api
         build:
             context: ./api/
             dockerfile: nginx.docker
@@ -28,7 +28,7 @@ services:
         depends_on:
             - mysql
     fpm:
-        container_name: skeleton-fpm
+        container_name: story-share-fpm
         build:
             context: ./api/
         links:
@@ -42,7 +42,7 @@ services:
             - "DB_HOST=mysql"
         user: ubuntu
     vue:
-        container_name: skeleton-vue
+        container_name: story-share-vue
         build:
             context: ./vue
         ports:
@@ -55,7 +55,7 @@ services:
         user: node
         tty: true
     mail:
-        container_name: skeleton-mail
+        container_name: story-share-mail
         image: maildev/maildev
         ports:
             - "8025:80"

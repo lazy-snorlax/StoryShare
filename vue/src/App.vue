@@ -12,8 +12,11 @@
 	</fragment>
 </template>
 
-<script setup>
-import Sidebar from './components/Sidebar.vue';
+<script lang="ts" setup>
+import { computed } from 'vue'
+import {useRoute} from 'vue-router'
+import templates from './templates'
+
 </script>
 
 <!-- <script>
