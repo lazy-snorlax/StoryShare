@@ -1,8 +1,12 @@
 <template>
-    <main id="home-page">
-        <h1>Welcome to Story Share</h1>
-        <p>A fan-run place to create & share stories. The goal of this place is for aspiring storytellers to sharpen & grow their skills, whether it be for writing a novel, a children's picture book, a comic or even a TTRPG campaign. </p>
-    </main>
+    <Header :title="'Story Share'" />
+
+    <Container>
+        <div class="mx-5">
+            <h3>Welcome to Story Share</h3>
+            <p>A fan-run place to create & share stories. The goal of this place is for aspiring storytellers to sharpen & grow their skills, whether it be for writing a novel, a children's picture book, a comic or even a TTRPG campaign. </p>
+        </div>
+    </Container>
   </template>
   
   <script lang="ts" setup>

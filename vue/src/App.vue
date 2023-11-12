@@ -1,35 +1,24 @@
 <template>
-	<!-- TODO: Change to login check -->
-	<div v-if="$route.name !== 'login'" class="app">
-		<!-- Sidebar -->
-		<Sidebar />
-
-		<!-- Content -->
-		<router-view class="bg-light h-100" />
-	</div>
-	<fragment v-else>
-		<router-view />
-	</fragment>
+	<component :is="templateComponent" />
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import {useRoute} from 'vue-router'
-import templates from './templates'
+import { useRoute } from 'vue-router'
+import { templates } from './templates'
+
+window.document.title = import.meta.env.VITE_APP_TITLE
+
+const route = useRoute()
+
+const templateComponent = computed(() => {
+	if (route.meta.template && route.meta.template in templates) {
+		return templates[route.meta.template]
+	}
+	return templates.empty
+})
 
 </script>
-
-<!-- <script>
-import { useRouter, useRoute } from 'vue-router';
-
-export default {
-	setup() {
-		const router = useRouter()
-		const route = useRoute()
-	}
-}
-
-</script> -->
 
 <style lang="scss">
 :root {

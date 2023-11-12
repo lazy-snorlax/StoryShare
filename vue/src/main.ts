@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { pinia } from '@/stores'
 import { components } from './components'
 
-import App from './App.vue'
+import App from '../src/App.vue'
 import router from './router'
 import http from './utilities/http'
 

@@ -5,7 +5,7 @@
         </div>
 
         <div class="menu-toggle-wrap">
-            <button class="menu-toggle" @click="ToggleMenu">
+            <button class="menu-toggle" @click="toggleMenu">
 				<i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
@@ -60,7 +60,7 @@ import logoDefault from '@/assets/logo.svg'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
-const ToggleMenu = () => {
+const toggleMenu = () => {
     is_expanded.value = !is_expanded.value
     localStorage.setItem("is_expanded", is_expanded.value)
 }

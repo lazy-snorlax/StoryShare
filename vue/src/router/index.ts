@@ -1,11 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {routes as defineRoute} from '@/utilities/routes'
+import {routes as defineRoutes} from '@/utilities/routes'
 import routes from './routes'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     ...routes,
+    // ...defineRoutes(
+    //   {
+    //     template: 'error',
+    //     restricted: false,
+    //   },
+    //   [
+    //     {
+    //       path: '/:invalid(.*)*',
+    //       name: 'error.not-found',
+    //       component: ErrorNotFound
+    //     }
+    //   ]
+    // )
   ]
 })
 
