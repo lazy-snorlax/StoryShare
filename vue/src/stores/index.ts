@@ -1,5 +1,5 @@
 import { createPinia } from "pinia";
-import http from "../utilities/http";
+import http from "@/utilities/http";
 
 export const pinia = createPinia()
 

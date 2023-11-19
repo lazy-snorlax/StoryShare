@@ -3,7 +3,7 @@ import Login from '@/views/login/Login.vue'
 
 export default routes(
     {
-        template: 'app',
+        template: 'auth',
         restricted: false,
         guest: true
     },

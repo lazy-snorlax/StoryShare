@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "axios";
 import { Router } from "vue-router";
+import { App } from "vue";
 
 export const http: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
