@@ -1,0 +1,29 @@
+//
+// Auth
+// --------------------------------------------------
+
+.auth {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #444;
+    background-position: center center;
+    background-size: cover;
+}
+
+.card-authentication {
+    flex-grow: 1;
+    width: 100%; // IE bug fix causing card to sit to one side
+    max-width: 560px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin: 1rem;
+
+    .logo {
+        max-width: 60%;
+        max-height: 4rem;
+        margin-left: 0;
+        margin-bottom: 2rem;
+    }
+}

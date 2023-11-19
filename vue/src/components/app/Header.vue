@@ -2,7 +2,7 @@
     <header class="page-header">
         <div class="left"></div>
         <div class="middle">
-            <div class="page-title">
+            <div class="page-title mx-3 my-3 text-center">
                 <h1>{{ title }}</h1>
                 <p v-if="subtitle" class="subheading">{{ subtitle }}</p>
             </div>

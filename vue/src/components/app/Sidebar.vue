@@ -44,11 +44,11 @@
 
         <div class="menu">
 			<router-link to="/login" class="button">
-                <span class="text">Login</span>
+                <i class="fa-solid fa-user"></i> <span class="text">Login</span>
             </router-link>
-			<router-link to="/" class="button">
+			<!-- <router-link to="/" class="button">
                 <span class="text">Logout</span>
-            </router-link>
+            </router-link> -->
         </div>
 
     </aside>
