@@ -58,8 +58,18 @@ const password = defineInputBinds('password')
 const submit = handleSubmit(async (values) => {
     try {
         await login(values)
+
+        if (route.query.redirect) {
+            router.replace(route.query.redirect as string)
+        } else {
+            router.replace({ name: 'dashboard' })
+        }
     } catch ( error ) {
+        if (isAxiosError(error) && error.response && error.response.status === 429){
+
+        }
         console.log('>>>> this is an error: ', error)
+        throw error
     }
 })
 
