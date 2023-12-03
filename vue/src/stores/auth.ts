@@ -1,9 +1,12 @@
 import { defineStore } from "pinia"
 import { http } from '../utilities/http'
+import { HttpStatusCode } from "axios"
 
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
-        user: null
+        user: null,
+        csrf: false,
+        authenticationAttempted: false
     }),
     actions: {
         async login(payload: LoginForm) {
@@ -15,11 +18,22 @@ export const useAuthStore = defineStore('auth', {
             await http.post('logout')
             this.user = null
         },
+
+        async getUser() {
+            this.authenticationAttempted = true
+            const response = await http.get('user', {
+                // userPreflight: true
+            })
+            this.user = response.data.data
+            return this.user
+        }
     }
 
 })
 
 type AuthState = {
+    csrf: boolean
+    authenticationAttempted: boolean
     user: LoggedInUserResource | null
 }
 

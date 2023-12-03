@@ -43,12 +43,12 @@
 		</div>
 
         <div class="menu">
-			<router-link to="/login" class="button">
+			<button class="button" type="button" @click="logout" v-if="loggedInUser">
+				<i class="fa-solid fa-user"></i> <span class="text">Logout</span>
+			</button>
+			<router-link to="/login" class="button" v-else>
                 <i class="fa-solid fa-user"></i> <span class="text">Login</span>
             </router-link>
-			<!-- <router-link to="/" class="button">
-                <span class="text">Logout</span>
-            </router-link> -->
         </div>
 
     </aside>
@@ -57,9 +57,10 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import logoDefault from '@/assets/logo.svg'
+import { useLogout } from '../../composables/use-logout';
+import { useLoggedInUser } from '../../composables/use-logged-in-user'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
-
 const toggleMenu = () => {
     is_expanded.value = !is_expanded.value
     localStorage.setItem("is_expanded", is_expanded.value)
@@ -68,6 +69,10 @@ const toggleMenu = () => {
 const logo = computed(() => {
 	return logoDefault
 })
+
+const { logout } = useLogout();
+const { loggedInUser } = useLoggedInUser();
+
 </script>
 
 <style lang="scss" scoped>
@@ -185,7 +190,6 @@ aside {
 		}
 	}
 	@media (max-width: 1024px) {
-		position: absolute;
 		z-index: 99;
 	}
 }
