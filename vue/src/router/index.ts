@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {routes as defineRoutes} from '@/utilities/routes'
 import routes from './routes'
+import authenticated from './guards/authenticated'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +25,7 @@ const router = createRouter({
 
 
 // Bind the authenticated and authorized guards to ensure users are logged in and have the correct permission.
-// authenticated(router)
+authenticated(router)
 // authorized(router)
 
 // Bind the other middleware to handle things such as account verification and two factor.
