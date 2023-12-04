@@ -1,0 +1,9 @@
+@import '_variables.scss';
+
+// Similar to the bootstrap .container-${breakpoint},
+// However when combined with a .container will not be 100% wide upuntil the breakpoint
+@each $breakpoint, $container-max-width in $container-max-widths {
+    .container-max-#{$breakpoint} {
+        max-width: $container-max-width !important;
+    }
+}
