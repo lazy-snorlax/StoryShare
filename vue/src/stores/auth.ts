@@ -26,7 +26,17 @@ export const useAuthStore = defineStore('auth', {
             })
             this.user = response.data.data
             return this.user
-        }
+        },
+
+        async updateAccountDetails(payload: UpdateAccountDetailsForm) {
+            const response = await http.put('user', payload)
+            this.user = response.data.data
+            return this.user
+        },
+
+        async updateAccountPassword(payload: UpdatePasswordForm) {
+            await this.http.put('user/password', payload)
+        },
     }
 
 })
@@ -46,4 +56,15 @@ export type LoggedInUserResource = {
 export type LoginForm = {
     email: string
     password: string
+}
+
+export type UpdateAccountDetailsForm = {
+    name: string
+    email: string
+}
+
+export type UpdatePasswordForm = {
+    current_password: string
+    password: string
+    password_confirmation: string
 }
