@@ -49,6 +49,7 @@ const password_confirmation = defineInputBinds('password_confirmation')
 
 const save = handleSubmit(async (values, { resetForm }) => {
     console.log(values)
+    // TODO: Update Account Password
     // await updateAccountPassword(values)
     // console.log('Password saved succesfully')
 
