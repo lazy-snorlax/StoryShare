@@ -22,4 +22,6 @@ Route::post('/logout', [Controllers\LoginController::class, 'destroy']);
 // Authenticated ============================================================
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
+    Route::put('/user', Controllers\UpdateAccountDetailsController::class);
+    Route::put('/user/password', Controllers\UpdatePasswordController::class);
 });
