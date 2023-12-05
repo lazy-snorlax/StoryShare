@@ -22,10 +22,18 @@ export const useAuthStore = defineStore('auth', {
         async getUser() {
             this.authenticationAttempted = true
             const response = await http.get('user', {
-                // userPreflight: true
+                userPreflight: true
             })
             this.user = response.data.data
             return this.user
+        },
+
+        async emailForgotPassword(payload: ForgotPasswordForm) {
+            await http.post('password/forgot', payload)  
+        },
+
+        async resetPassword(payload: ResetPasswordForm) {
+            await http.post('password/reset', payload)  
         },
 
         async updateAccountDetails(payload: UpdateAccountDetailsForm) {
@@ -58,6 +66,10 @@ export type LoginForm = {
     password: string
 }
 
+export type ForgotPasswordForm = {
+    email: string
+}
+
 export type UpdateAccountDetailsForm = {
     name: string
     email: string
@@ -67,4 +79,11 @@ export type UpdatePasswordForm = {
     current_password: string
     password: string
     password_confirmation: string
+}
+
+export interface ResetPasswordForm {
+    email: string | null
+    password: string
+    password_confirmation: string
+    token: string
 }
