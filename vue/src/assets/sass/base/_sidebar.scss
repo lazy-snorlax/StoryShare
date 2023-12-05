@@ -26,7 +26,7 @@
 		transition: 0.2s ease-in-out;
 		.menu-toggle {
 			transition: 0.2s ease-in-out;
-			.material-icons, i {
+			.material-icons, i, svg {
 				font-size: 2rem;
 				color: var(--light);
 				transition: 0.2s ease-out;
@@ -60,10 +60,16 @@
 			padding: 0.5rem 1rem;
 			.material-icons, i {
 				font-size: 2rem;
-				color: var(--light);
+				color: white;
 				transition: 0.2s ease-in-out;
 			}
+			svg {
+				color: white;
+				margin: 0.5rem auto;
+
+			}
 			.text {
+				display: none;
 				color: var(--light);
 				transition: 0.2s ease-in-out;
 			}
@@ -76,7 +82,7 @@
 			&.router-link-exact-active {
 				background-color: var(--dark-alt);
 				border-right: 5px solid var(--primary);
-				.material-icons, i, .text {
+				.material-icons, i, .text, svg {
 					color: var(--primary);
 				}
 			}
@@ -94,10 +100,17 @@
 		width: var(--sidebar-width);
 		.menu-toggle-wrap {
 			top: -3rem;
-			
 			.menu-toggle {
 				transform: rotate(-180deg);
 			}
+		}
+		.menu .button {
+			svg {
+				margin: 0.5rem 1rem;
+			}
+			.text {
+		   		display: block;
+	   		}
 		}
 		h3, .button .text {
 			opacity: 1;

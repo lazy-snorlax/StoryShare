@@ -24,6 +24,17 @@ body {
     flex: 1 1 100%;
 }
 
+.app {
+	display: flex;
+	main {
+		flex: 1 1 0;
+		padding: 2rem;
+		@media (max-width: 1024px) {
+			padding-left: 6rem;
+		}
+	}
+}
+
 //
 // Default spacing for content after the header
 .page-header+.container,

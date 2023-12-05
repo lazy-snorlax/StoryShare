@@ -6,15 +6,16 @@
 
         <div class="menu-toggle-wrap">
             <button class="menu-toggle" @click="toggleMenu">
-				<i class="fa-solid fa-arrow-right"></i>
+				<font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
             </button>
         </div>
 
         <h3>Menu</h3>
 
         <div class="menu">
-            <router-link to="/" class="button">
-				<i class="fa-solid fa-table-columns"></i> <span class="text">Dashboard</span>
+            <router-link :to="{ name: 'dashboard' }" class="button">
+				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
+				<span class="text">Dashboard</span>
             </router-link>
 			<div v-if="loggedInUser">
 				<router-link 
@@ -48,9 +49,9 @@
 		</div>
 
         <div class="menu">
-			<button class="button" type="button" @click="logout" v-if="loggedInUser">
+			<a class="button" @click="logout" v-if="loggedInUser">
 				<i class="fa-solid fa-user"></i> <span class="text">Logout</span>
-			</button>
+			</a>
 			<router-link 
 				v-else
 				class="button" 

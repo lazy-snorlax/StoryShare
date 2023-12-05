@@ -8,18 +8,37 @@
 @import './sass/base/_helpers.scss';
 @import './sass/base/_horizontal-nav.scss';
 
+:root {
+	--primary: #4ad4de;
+	--primary-alt: #22a5c5;
+	--grey: #64748b;
+	--dark: #1e293b;
+	--dark-alt: #334155;
+	--light: #f1f5f9;
+	--sidebar-width: 300px;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Fira sans', sans-serif;
+}
+body {
+	display: inline;
+	background: var(--dark);
+}
+button {
+	cursor: pointer;
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}
+
 aside {
   background-color: #212529 !important;
   color: rgba(235, 235, 235, 0.64) !important;
 }
-
-/* #app {  
-  margin: 0 auto;
-  height: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-} */
 
 a,
 .green {
@@ -39,10 +58,4 @@ a,
     display: flex;
     place-items: center;
   }
-
-  /* #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  } */
 }
