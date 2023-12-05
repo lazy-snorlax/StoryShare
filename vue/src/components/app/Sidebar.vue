@@ -17,7 +17,10 @@
 				<i class="fa-solid fa-table-columns"></i> <span class="text">Dashboard</span>
             </router-link>
 			<div v-if="loggedInUser">
-				<router-link to="/my-account" class="button">
+				<router-link 
+					class="button" 
+					:to="{ name:'my-account' }" 
+					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
 					<i class="fa-solid fa-user"></i> <span class="text">My Account</span>
 				</router-link>
 			</div>
@@ -48,7 +51,11 @@
 			<button class="button" type="button" @click="logout" v-if="loggedInUser">
 				<i class="fa-solid fa-user"></i> <span class="text">Logout</span>
 			</button>
-			<router-link to="/login" class="button" v-else>
+			<router-link 
+				v-else
+				class="button" 
+				:to="{ name:'login' }" 
+				>
                 <i class="fa-solid fa-user"></i> <span class="text">Login</span>
             </router-link>
         </div>
