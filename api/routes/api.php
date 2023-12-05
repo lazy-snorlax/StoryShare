@@ -14,6 +14,8 @@ Route::post('/logout', [Controllers\LoginController::class, 'destroy']);
 
 
 // TODO: Password Reset =====================================================
+Route::post('/password/forgot', Controllers\Password\ForgotPasswordController::class);
+Route::post('/password/reset', Controllers\Password\ResetPasswordController::class);
 
 
 // TODO: Global Lookups =====================================================
