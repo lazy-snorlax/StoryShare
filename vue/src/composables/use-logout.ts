@@ -3,12 +3,14 @@ import { useRouter } from 'vue-router'
 
 export function useLogout() {
   const router = useRouter()
-  const app = useAuthStore()
+  const auth = useAuthStore()
 
   const logout = async () => {
-    await app.logout()
+    await auth.logout()
 
-    router.replace({ name: 'login' })
+    // TODO: Alert for successful logout
+
+    router.replace({ name: 'dashboard' })
   }
 
   return {
