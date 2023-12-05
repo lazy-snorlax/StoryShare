@@ -11,6 +11,9 @@ export default routes(
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: Login,
+            meta: {
+                authenticate: false
+            }
         }
     ])

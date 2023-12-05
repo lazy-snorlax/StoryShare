@@ -17,6 +17,6 @@ export function useLoggedInUser() {
 
   return {
     loggedInUser: user as Ref<LoggedInUserResource>,
-    getLoggedInUser: authStore.getUser,
+    getLoggedInUser: authStore.getUser(),
   }
 }
