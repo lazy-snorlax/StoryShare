@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted, onUnmounted } from 'vue'
   import Sidebar from '../components/app/Sidebar.vue'
   // import axios from 'axios'
   
