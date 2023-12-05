@@ -35,7 +35,7 @@ export const useAuthStore = defineStore('auth', {
         },
 
         async updateAccountPassword(payload: UpdatePasswordForm) {
-            await this.http.put('user/password', payload)
+            await http.put('user/password', payload)
         },
     }
 
