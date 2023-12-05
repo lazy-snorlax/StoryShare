@@ -22,7 +22,7 @@
 					class="button" 
 					:to="{ name:'my-account' }" 
 					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
-					<i class="fa-solid fa-user"></i> <span class="text">My Account</span>
+					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">My Account</span>
 				</router-link>
 			</div>
 			<!-- <router-link to="/Profile" class="button">
@@ -50,14 +50,14 @@
 
         <div class="menu">
 			<a class="button" @click="logout" v-if="loggedInUser">
-				<i class="fa-solid fa-user"></i> <span class="text">Logout</span>
+				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 			</a>
 			<router-link 
 				v-else
 				class="button" 
 				:to="{ name:'login' }" 
 				>
-                <i class="fa-solid fa-user"></i> <span class="text">Login</span>
+                <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
             </router-link>
         </div>
 
