@@ -1,6 +1,6 @@
 <template>
     <div class="card card-authentication">
-        <div class="card-body">
+        <div class="card-body p-5">
             <img src="" alt="" class="logo">
             <h1>Log In</h1>
 
@@ -18,7 +18,7 @@
 
             <div class="row">
                 <div class="col-auto text-right d-flex align-items-center">
-                    <a href="" class="small text-muted">Forgot Password?</a>
+                    <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot Password?</router-link>
                 </div>
                 <div class="col text-end">
                     <router-link to="/" class="button">
