@@ -15,7 +15,7 @@
 </template>
     
 <script lang="ts" setup>
-import { useLoggedInUser } from '../composables/use-logged-in-user';
+import { useLoggedInUser } from '../../composables/use-logged-in-user';
 
 const { loggedInUser } = useLoggedInUser()
 

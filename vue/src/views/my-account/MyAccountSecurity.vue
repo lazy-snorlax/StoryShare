@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 
 import { useForm } from 'vee-validate';
-import { useAuthStore, type UpdatePasswordForm } from '../stores/auth'
+import { useAuthStore, type UpdatePasswordForm } from '../../stores/auth'
 import { object, string } from 'yup';
 
 const { updateAccountPassword } = useAuthStore()

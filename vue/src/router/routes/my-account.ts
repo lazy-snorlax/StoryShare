@@ -1,7 +1,7 @@
 import { routes } from '@/utilities/routes'
-import MyAccount from '@/views/MyAccount.vue'
-import MyAccountDetails from '../../views/MyAccountDetails.vue'
-import MyAccountSecurity from '../../views/MyAccountSecurity.vue'
+import MyAccount from '@/views/my-account/MyAccount.vue'
+import MyAccountDetails from '@/views/my-account/MyAccountDetails.vue'
+import MyAccountSecurity from '@/views/my-account/MyAccountSecurity.vue'
 
 export default routes(
     {

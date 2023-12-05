@@ -24,9 +24,9 @@
 <script lang="ts" setup>
 
 import { useForm } from 'vee-validate';
-import { useLoggedInUser } from '../composables/use-logged-in-user';
+import { useLoggedInUser } from '../../composables/use-logged-in-user';
 import { object, string } from 'yup';
-import { useAuthStore, type UpdateAccountDetailsForm } from '../stores/auth'
+import { useAuthStore, type UpdateAccountDetailsForm } from '../../stores/auth'
 
 const { loggedInUser } = useLoggedInUser()
 const { updateAccountDetails } = useAuthStore()
