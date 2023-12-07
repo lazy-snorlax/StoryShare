@@ -51,24 +51,26 @@ export default {
 
                 // 403: Forbidden
                 if (error.response.status === 403) {
-                    alert({
-                        icon: 'warning',
-                        title: 'Unauthorized',
-                        message: 'You are not authorized to access the page you have requested.',
-                        confirm: 'Return to dashboard',
-                        confirmationOnly: true,
-                    })
+                    // alert({
+                    //     icon: 'warning',
+                    //     title: 'Unauthorized',
+                    //     message: 'You are not authorized to access the page you have requested.',
+                    //     confirm: 'Return to dashboard',
+                    //     confirmationOnly: true,
+                    // })
+                    alert( 'You are not authorized to access the page you have requested.' )
         
                     router.replace({ name: 'dashboard' })
                 }
         
                 // 500: Internal Server Error
                 if (error.response.status === 500) {
-                    alert({
-                    icon: 'warning',
-                    message: 'We encountered a server error. We have been alerted and will investigate.',
-                    confirmationOnly: true,
-                    })
+                    // alert({
+                    // icon: 'warning',
+                    // message: 'We encountered a server error. We have been alerted and will investigate.',
+                    // confirmationOnly: true,
+                    // })
+                    alert( 'We encountered a server error. We have been alerted and will investigate.' )
                 }
             }
         })
