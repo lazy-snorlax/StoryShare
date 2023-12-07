@@ -6,11 +6,12 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -53,10 +54,35 @@ class User extends Authenticatable
     }
 
     /**
+     * Determine if the user has verified their email address.
+     */
+    public function isEmailVerified(): bool
+    {
+        return !is_null($this->email_verified_at);
+    }
+
+    /**
+     * Email verification signature parameters.
+     *
+     * Used to generate and validate the signature when verifying a users email.
+     *
+     * @return array
+     */
+    public function emailVerificationSignatureParameters(): array
+    {
+        return [
+            'id' => $this->getKey(),
+            'hash' => sha1($this->getEmailForVerification()),
+        ];
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+
 }
