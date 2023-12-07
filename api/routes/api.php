@@ -10,8 +10,15 @@ Route::get('/', fn () => null);
 Route::post('/login', [Controllers\LoginController::class, 'store']);
 Route::post('/logout', [Controllers\LoginController::class, 'destroy']);
 
-// TODO: Email Verification =================================================
+// TODO: Register New Account =================================================
+Route::prefix('/register')->group(function () {
+    Route::post('', Controllers\Register\RegisterController::class);
+    Route::post('/verification', Controllers\Register\VerificationController::class);
+    Route::post('/verification/resend', Controllers\Register\ResendVerificationController::class);
+});
 
+// TODO: Email Verification =================================================
+Route::get('/verification', Controllers\Register\VerificationController::class)->name('verification');
 
 // TODO: Password Reset =====================================================
 Route::post('/password/forgot', Controllers\Password\ForgotPasswordController::class);

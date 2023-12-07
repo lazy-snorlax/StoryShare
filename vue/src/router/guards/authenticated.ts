@@ -6,6 +6,7 @@ export default (router: Router) =>
         const authStore = useAuthStore()
 
         // Public facing routes
+        console.log('>>> Route', to, to.meta)
         if (to.meta.authenticate === false) {
             return true
         }
