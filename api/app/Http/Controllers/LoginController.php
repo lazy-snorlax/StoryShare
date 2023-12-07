@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Lang;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -29,7 +30,10 @@ class LoginController extends Controller
 
             // check user enabled
 
-            // send user verification email
+            // When user does not have a verified email we send them an email verification email again.
+            if (!$user->hasVerifiedEmail()) {
+                $user->notify(new VerifyEmail);
+            }
 
             return new UserResource($user);
         }
