@@ -13,9 +13,9 @@
         <h3>Menu</h3>
 
         <div class="menu">
-			<a class="button">
+			<router-link :to="{ name: 'stories.search' }" class="button">
 				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Search </span>
-			</a> 
+			</router-link> 
             <router-link :to="{ name: 'dashboard' }" class="button">
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
@@ -35,7 +35,7 @@
 				<router-link 
 					class="button"
 					:to="{ name: 'my-stories' }"
-					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }"
+					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-stories') }"
 					>
 					<i class="fa-solid fa-book-open-reader"></i> <span class="text">Stories</span>
 				</router-link>
