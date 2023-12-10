@@ -1,30 +1,33 @@
 .nav-horizontal {
     flex: 0 0 auto; // required for safari to overflow properly
-    background: #b1b1b1;
+    background: var(--dark-alt);
     border-bottom: none;
     position: relative;
 
     .nav-link {
         padding: 1rem 1.25rem 0.75rem 1.25rem;
-        color: gray;
+        color: var(--light);
         font-weight: medium;
         border-bottom: none;
 
-        &:hover,
-        &:focus {
-            background: #F7F2F2;
-            // border-bottom-color: gray;
-        }
-        &.active {
-            background: #F7F2F2;
-            // border-bottom-color: $primary;
+        &:hover {
+            background-color: hwb(202 0% 26% / 0.2);
+            border-bottom: solid 5px var(--primary);
+            color: var(--primary);
         }
     }
     .nav-item {
         &.active {
+            background: var(--dark-alt);
+            border-bottom: solid 5px var(--primary);
             .nav-link {
-                background: #F7F2F2;
-                // border-bottom-color: $primary;
+                color: var(--primary) !important;
+            }
+
+            &:hover {
+                background-color: hwb(202 0% 26% / 0.2);
+                border-bottom: none;
+                color: var(--primary);
             }
         }
     }
