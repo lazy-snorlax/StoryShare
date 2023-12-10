@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MyStory;
 
 use App\Http\Resources\StoryListResource;
+use App\Http\Controllers\Controller;
 use App\Models\Story;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -14,8 +15,15 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
+        // $query = Story::query()
+        //     ->when($request->input('user_id'), fn (Builder $q, $user_id) => $q->where('user_id', $user_id))
+        //     ->orderBy('updated_at', 'desc')
+        //     ->get();
+
+        $user = $request->user();
+
         $query = Story::query()
-            ->when($request->input('user_id'), fn (Builder $q, $user_id) => $q->where('user_id', $user_id))
+            ->where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
             ->get();
 
