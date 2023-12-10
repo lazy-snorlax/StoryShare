@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,4 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
     Route::put('/user', Controllers\UpdateAccountDetailsController::class);
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
+
+    // Stories ==============================================================
+    Route::get('/stories', [Controllers\StoryController::class, 'index']);
 });
