@@ -36,5 +36,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
 
     // Stories ==============================================================
-    Route::get('/stories', [Controllers\StoryController::class, 'index']);
+    Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
 });
