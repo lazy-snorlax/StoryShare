@@ -13,34 +13,39 @@
         <h3>Menu</h3>
 
         <div class="menu">
+			<a class="button">
+				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Search </span>
+			</a> 
             <router-link :to="{ name: 'dashboard' }" class="button">
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
             </router-link>
-			<div v-if="loggedInUser">
+			<template v-if="loggedInUser">
 				<router-link 
 					class="button" 
 					:to="{ name:'my-account' }" 
 					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">My Account</span>
 				</router-link>
-			</div>
-			<!-- <router-link to="/Profile" class="button">
-				<i class="fa-solid fa-gear"></i> <span class="text">Settings</span>
-			</router-link> -->
+			</template>
         </div>
 		
         <div class="menu flex">
-			<!-- <router-link to="/works" class="button">
-				<i class="fa-solid fa-book-open-reader"></i> <span class="text">Works</span>
-			</router-link>
-			<router-link to="/bookmarks" class="button">
-				<i class="fa-solid fa-bookmark"></i> <span class="text">Bookmarks</span>
-			</router-link>
-			<router-link to="/drafts" class="button">
-				<i class="fa-regular fa-file-lines"></i> <span class="text">Drafts</span>
-			</router-link>
-			<router-link to="/Collections" class="button">
+			<template v-if="loggedInUser">
+				<a class="button">
+					<i class="fa-solid fa-book-open-reader"></i> <span class="text">Stories</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-bookmark"></i> <span class="text">Bookmarks</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-books"></i> <span class="text">Serials</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-file"></i> <span class="text">Drafts</span>
+				</a>
+			</template>
+			<!-- <router-link to="/Collections" class="button">
 				<i class="fa-solid fa-layer-group"></i> <span class="text">Collections</span>
 			</router-link>
 			<router-link to="/Prompts" class="button">
@@ -48,7 +53,24 @@
 			</router-link> -->
 		</div>
 
+		<!-- <div class="menu flex">
+			<template v-if="loggedInUser">
+				<a class="button">
+					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Outlines </span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Character Creator </span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Prompts </span>
+				</a>
+			</template>
+		</div> -->
+
         <div class="menu">
+			<a class="button">
+				<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
+			</a>
 			<a class="button" @click="logout" v-if="loggedInUser">
 				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 			</a>
