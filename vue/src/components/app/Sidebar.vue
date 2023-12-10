@@ -32,9 +32,13 @@
 		
         <div class="menu flex">
 			<template v-if="loggedInUser">
-				<a class="button">
+				<router-link 
+					class="button"
+					:to="{ name: 'my-stories' }"
+					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }"
+					>
 					<i class="fa-solid fa-book-open-reader"></i> <span class="text">Stories</span>
-				</a>
+				</router-link>
 				<a class="button">
 					<i class="fa-solid fa-bookmark"></i> <span class="text">Bookmarks</span>
 				</a>
@@ -68,7 +72,7 @@
 		</div> -->
 
         <div class="menu">
-			<a class="button">
+			<a class="button" v-if="loggedInUser">
 				<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
 			</a>
 			<a class="button" @click="logout" v-if="loggedInUser">
