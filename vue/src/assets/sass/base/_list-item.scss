@@ -1,6 +1,7 @@
 li.blurb {
     list-style: none;
-    border: none;
+    border-top: var(--dark) 3px solid;
+    border-bottom: var(--dark) 3px solid;
     border-radius: 5px;
     margin-bottom: 1.5rem;
     padding: 1rem 1.5rem;
