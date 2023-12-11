@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,6 +26,7 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 
 
 // TODO: Global Lookups =====================================================
+Route::get('/stories', [Controllers\StoryController::class, 'index']);
 
 
 // Authenticated ============================================================
