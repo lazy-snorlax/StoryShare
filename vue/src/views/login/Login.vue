@@ -33,15 +33,19 @@
 </template>
   
 <script lang="ts" setup>
-import { isAxiosError } from 'axios'
+import { AxiosError, isAxiosError } from 'axios'
 
 import { useAuthStore, type LoginForm } from '../../stores/auth';
 import { useRouter, useRoute } from 'vue-router'
 
+import { useLoggedInUser } from '../../composables/use-logged-in-user';
+
 import { useForm } from 'vee-validate'
 import { object, string, number, date, InferType } from 'yup'
 
-const { login }  = useAuthStore()
+const { login, user }  = useAuthStore()
+const { loggedInUser } = useLoggedInUser()
+
 const router = useRouter()
 const route = useRoute()
 
@@ -65,11 +69,11 @@ const submit = handleSubmit(async (values) => {
             router.replace({ name: 'dashboard' })
         }
     } catch ( error ) {
-        if (isAxiosError(error) && error.response && error.response.status === 429){
-
+        if (isAxiosError(error)){
+            alert(error.message)
         }
-        console.log('>>>> this is an error: ', error)
-        throw error
+        console.log('>>>> this is an error: ', error.message)
+        // throw error
     }
 })
 
