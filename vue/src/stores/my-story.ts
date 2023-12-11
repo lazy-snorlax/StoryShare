@@ -20,7 +20,7 @@ type MyStoryState = {
 
 export type MyStoryListResource = {
     id: number,
-    user_id: number,
+    user: string,
     title: string,
     summary: string,
     notes: string,
