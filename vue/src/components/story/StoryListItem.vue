@@ -2,6 +2,7 @@
     <li class="story blurb group" style="">
         <div class="header">
             <h4 class="my-3">{{ item.title }}</h4>
+            <h5 class="my-3">By: {{ item.user }}</h5>
             <div class="dates">
                 <p class="datetime">Created: <span>{{ item.created_at }}</span></p>
                 <p class="datetime">Updated: <span>{{ item.updated_at }}</span></p>
