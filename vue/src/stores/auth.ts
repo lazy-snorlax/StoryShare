@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import { http } from '../utilities/http'
 import { HttpStatusCode } from "axios"
 
 export const useAuthStore = defineStore('auth', {
@@ -10,18 +9,18 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(payload: LoginForm) {
-            const user = await http.post('login', payload)
+            const user = await this.http.post('login', payload)
             this.user = user
         },
 
         async logout() {
-            await http.post('logout')
+            await this.http.post('logout')
             this.user = null
         },
 
         async getUser() {
             this.authenticationAttempted = true
-            const response = await http.get('user', {
+            const response = await this.http.get('user', {
                 userPreflight: true
             })
             this.user = response.data.data
@@ -29,21 +28,21 @@ export const useAuthStore = defineStore('auth', {
         },
 
         async emailForgotPassword(payload: ForgotPasswordForm) {
-            await http.post('password/forgot', payload)  
+            await this.http.post('password/forgot', payload)  
         },
 
         async resetPassword(payload: ResetPasswordForm) {
-            await http.post('password/reset', payload)  
+            await this.http.post('password/reset', payload)  
         },
 
         async updateAccountDetails(payload: UpdateAccountDetailsForm) {
-            const response = await http.put('user', payload)
+            const response = await this.http.put('user', payload)
             this.user = response.data.data
             return this.user
         },
 
         async updateAccountPassword(payload: UpdatePasswordForm) {
-            await http.put('user/password', payload)
+            await this.http.put('user/password', payload)
         },
     }
 

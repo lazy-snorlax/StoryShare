@@ -1,6 +1,4 @@
 import { defineStore } from "pinia"
-import { http } from '../utilities/http'
-import { HttpStatusCode } from "axios"
 
 export const useMyStoryStore = defineStore('my-story', {
     state: (): MyStoryState => ({
@@ -9,7 +7,7 @@ export const useMyStoryStore = defineStore('my-story', {
     }),
     actions: {
         async getMyStoryList() {
-            const response = await http.get('my-stories')
+            const response = await this.http.get('my-stories')
             this.list = response.data.data
         }
     },

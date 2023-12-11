@@ -1,6 +1,4 @@
 import { defineStore } from "pinia"
-import { http } from '../utilities/http'
-import { HttpStatusCode } from "axios"
 
 export const useRegisterStore = defineStore('register', {
     state: () => ({
@@ -9,7 +7,7 @@ export const useRegisterStore = defineStore('register', {
 
     actions: {
         async register(payload: RegisterAccountForm) {
-            await http.post('register', payload)
+            await this.http.post('register', payload)
         }
     }
 })
