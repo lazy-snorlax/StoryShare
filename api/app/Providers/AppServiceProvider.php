@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Macros;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Query\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
+
+        Builder::macro('whereSearchByWords', function (string $search, ...$columns) {
+            /** @var \Illuminate\Database\Query\Builder $this */
+            return (new Macros\WhereSearchByWords($this, $search, $columns))->execute();
+        });
     }
 }
