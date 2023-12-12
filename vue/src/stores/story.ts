@@ -7,8 +7,8 @@ export const useStoryStore = defineStore('story', {
         list: []
     }),
     actions: {
-        async getStoryList() {
-            const response = await this.http.get('stories')
+        async getStoryList(filters: URLSearchParams | null) {
+            const response = await this.http.get('stories' + (filters ? '?' + filters.toString() : ''))
             this.list = response.data.data
         }
     },
