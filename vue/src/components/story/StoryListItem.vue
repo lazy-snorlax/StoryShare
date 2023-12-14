@@ -1,7 +1,9 @@
 <template>
     <li class="story blurb group" style="">
         <div class="header">
-            <h4 class="my-3">{{ item.title }}</h4>
+            <router-link class="story-link" :to="{ name: 'story.single', params: { id: item.id } }">
+                <h4 class="my-3">{{ item.title }}</h4>
+            </router-link>
             <h5 class="my-3">By: {{ item.user }}</h5>
             <div class="dates">
                 <p class="datetime">Created: <span>{{ item.created_at }}</span></p>
@@ -18,6 +20,9 @@
                 </div>
                 <div class="col">
                     <p>Words: <span>{{ item.word_count }}</span></p>
+                </div>
+                <div class="col">
+                    <p>Complete: <span>{{ item.complete ? 'Y' : 'N' }}</span></p>
                 </div>
             </div>
         </div>
