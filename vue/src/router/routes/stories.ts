@@ -1,6 +1,7 @@
 import { routes } from '@/utilities/routes'
 import StorySearch from '../../views/stories/StorySearch.vue'
 import StorySingle from '../../views/stories/StorySingle.vue'
+import StoryChapter from '../../views/stories/StoryChapter.vue'
 
 export default routes(
     {
@@ -25,17 +26,16 @@ export default routes(
                     path: '/story/:id',
                     name: 'story.single',
                     component: StorySingle,
-                    children:
-                    [
-                        {
-                            path: '/stories/:id/chapter/all',
-                            name: 'story.chapter.all',
-                        },
-                        {
-                            path: '/stories/:id/chapter/:chapter',
-                            name: 'story.chapter.single',
-                        },
-                    ]
+                },
+                {
+                    path: '/story/:id/chapter/all',
+                    name: 'story.chapter.all',
+                    component: StoryChapter
+                },
+                {
+                    path: '/story/:id/chapter/:chapter',
+                    name: 'story.chapter.single',
+                    component: StoryChapter
                 },
             ]
         }
