@@ -26,7 +26,11 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 
 
 // TODO: Global Lookups =====================================================
-Route::get('/stories', [Controllers\StoryController::class, 'index']);
+// Route::prefix('/stories')->group(function () {
+//     Route::get('', [Controllers\StoryController::class, 'index']);
+//     Route::get('/{id}', [Controllers\StoryController::class, 'show']);
+// });
+Route::resource('stories', Controllers\StoryController::class);
 
 
 // Authenticated ============================================================
