@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Story extends Model
+class Chapter extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'story_id',
+        'chapter_number',
         'title',
         'summary',
+        'content',
         'notes',
-        'number_of_chapters',
-        'posted',
-        'word_count',
-        'complete',
     ];
 
     protected $hidden = [];
@@ -29,22 +27,12 @@ class Story extends Model
     ];
 
     /**
-     * A story belongs to a user
+     * A chapter belongs to a story
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user() : BelongsTo
+    public function story() : BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * A story can have many chapters
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function chapters() : HasMany
-    {
-        return $this->hasMany(Chapter::class);
+        return $this->belongsTo(Story::class);
     }
 }
