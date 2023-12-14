@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Users
         $admin = \App\Models\User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@test.io',
@@ -21,17 +22,31 @@ class DatabaseSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@test.io',
         ]);
-
         $users = \App\Models\User::factory(5)->create();
 
-        \App\Models\Story::factory(3)->create([
+        // Stories
+        $userStories = \App\Models\Story::factory(3)->create([
             'user_id' => $user->id
         ]);
 
-        foreach ($users as $user) {
-            \App\Models\Story::factory(rand(1, 5))->create([
-                'user_id' => $user->id
-            ]);
+        foreach ($userStories as $story) {
+            $i = 1;
+            while ($i <= $story->number_of_chapters) {
+                $chapter = \App\Models\Chapter::factory()->create([
+                    'story_id' => $story->id,
+                    'chapter_number' => $i,
+                    'title' => 'Chapter ' . $i,
+                    'summary' => 'This is chapter ' . $i . ' in story ' . $story->title,
+                    'notes' => 'This is a section for any author notes on this chapter.',
+                ]);
+                $i++;
+            }
         }
+
+        // foreach ($users as $user) {
+        //     \App\Models\Story::factory(rand(1, 5))->create([
+        //         'user_id' => $user->id
+        //     ]);
+        // }
     }
 }
