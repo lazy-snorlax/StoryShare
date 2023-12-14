@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\StoryListResource;
+use App\Http\Resources\StoryResource;
 use App\Models\Story;
 use Illuminate\Http\Request;
 
@@ -49,7 +50,8 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
-        //
+        // dd($story->chapters()->get());
+        return new StoryResource($story->load('user', 'chapters'));
     }
 
     /**
