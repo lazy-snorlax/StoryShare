@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useStoryStore = defineStore('story', {
     state: (): StoryState => ({
         story: null,
+        chapter: null,
         list: []
     }),
     actions: {
@@ -14,12 +15,23 @@ export const useStoryStore = defineStore('story', {
         async getStory(id: number) {
             const response = await this.http.get('stories/' + id)
             this.story = response.data.data
+        },
+
+        async getChapter(id: Number) {
+            const response = await this.http.get('chapter/' + id)
+            this.chapter = response.data.data
+        },
+
+        async getChapters(id: Number) {
+            const response = await this.http.get('chapters')
+            this.chapter = response.data.data
         }
     },
 })
 
 type StoryState = {
     story: StoryResource,
+    chapter: ChapterResource,
     list: Array<StoryListResource>
 }
 
@@ -36,6 +48,15 @@ export type StoryResource = {
     created_at: string,
     updated_at: string,
     chapters: Array<ChapterListResource> | null,
+}
+
+export type ChapterResource = {
+    id: number,
+    chapter_number: number,
+    title: string,
+    summary: string,
+    content: string,
+    updated_at: string,
 }
 
 export type ChapterListResource = {

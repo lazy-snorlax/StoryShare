@@ -10,6 +10,9 @@
         <p>{{ story?.notes }}</p>
 
         <div class="mt-5">
+            <router-link :to="{ name: 'story.chapter.all' }">
+                <h5>View All Chapters</h5>
+            </router-link>
             <h2>Chapter Index:</h2>
             <template v-for="chapter in story?.chapters">
                 <ChapterListItem :chapter="chapter" />
