@@ -1,30 +1,35 @@
 <template>
     <div class="row my-3 d-flex">
-        <!-- <div class="col mx-auto text-center">
-            <a class="chapter-btn btn">
-                View All Chapters
-            </a>
-        </div> -->
-        <div class="col mx-auto text-center" v-if="props.chapter_number > 1">
-            <router-link class="chapter-btn btn" :to="{ name: 'story.chapter.single', params: { chapter: previous } }">
-                Previous Chapter
-            </router-link>
-        </div>
         <div class="col mx-auto text-center">
-            <router-link class="chapter-btn btn" :to="{ name: 'story.single' }">
+            <router-link v-if="props.chapter_number == 0" class="chapter-btn btn" :to="{ name: 'story.single' }">
                 Return to Story Summary
             </router-link>
-        </div>
-        <div class="col mx-auto text-center">
-            <a class="chapter-btn btn">
-                Jump to Chapter
-            </a>
-        </div>
-        <div class="col mx-auto text-center" v-if="props.chapter_number !== props.chapter_list?.length">
-            <router-link class="chapter-btn btn" :to="{ name: 'story.chapter.single', params: { chapter: next } }">
-                Next Chapter
+            <router-link v-else class="chapter-btn btn" :to="{ name: 'story.chapter.all' }">
+                View Entire Story
             </router-link>
         </div>
+        <template v-if="props.chapter_number !== 0">
+            <div class="col mx-auto text-center" v-if="props.chapter_number > 1">
+                <router-link class="chapter-btn btn" :to="{ name: 'story.chapter.single', params: { chapter: previous } }">
+                    Previous Chapter
+                </router-link>
+            </div>
+            <div class="col mx-auto text-center">
+                <router-link class="chapter-btn btn" :to="{ name: 'story.single' }">
+                    Return to Story Summary
+                </router-link>
+            </div>
+            <div class="col mx-auto text-center">
+                <a class="chapter-btn btn">
+                    Jump to Chapter
+                </a>
+            </div>
+            <div class="col mx-auto text-center" v-if="props.chapter_number !== props.chapter_list?.length">
+                <router-link class="chapter-btn btn" :to="{ name: 'story.chapter.single', params: { chapter: next } }">
+                    Next Chapter
+                </router-link>
+            </div>
+        </template>
         <!-- <div class="col mx-auto text-center">
             <a class="chapter-btn btn">
                 Comments
