@@ -1,10 +1,14 @@
 <template>
     <Header :title="'Story Share'" :subtitle="'A story sharing site for creatives'" />
 
-    <Container>
+    <Container class="dashboard">
         <div class="mx-5 text-center">
-            <h3>Welcome to Story Share</h3>
-            <p>A place to create & share stories. The goal of this place is for aspiring storytellers to sharpen & grow their skills, whether it be for writing a novel, a children's picture book, a comic or even a TTRPG campaign. </p>
+            <div class="card">
+                <div class="card-body">
+                    <h3>Welcome to Story Share</h3>
+                    <p>A place to create & share stories. The goal of this place is for aspiring storytellers to sharpen & grow their skills, whether it be for writing a novel, a children's picture book, a comic or even a TTRPG campaign. </p>
+                </div>
+            </div>
         </div>
     </Container>
   </template>
