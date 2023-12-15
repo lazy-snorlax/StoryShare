@@ -31,6 +31,7 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 //     Route::get('/{id}', [Controllers\StoryController::class, 'show']);
 // });
 Route::resource('stories', Controllers\StoryController::class);
+Route::resource('chapters', Controllers\ChapterController::class);
 
 
 // Authenticated ============================================================
