@@ -1,0 +1,35 @@
+.my-account {
+    &.nav-horizontal{
+        background-color: var(--light) !important;
+        .nav-item {
+            .nav-link{
+                color: var(--light-alt);
+            }
+            &.active{
+                background-color: var(--light-alt);
+                border-bottom: solid 5px var(--primary);
+                .nav-link{
+                    color: var(--dark) !important;
+                }
+            }
+        }
+    }
+    
+    &.card {
+        background-color: var(--light) !important;
+        color: var(--white);
+        h2 {
+            color: var(--light-alt);
+        }
+        .form-control {
+            background-color: var(--dark-alt);
+            color: white;
+            border: none;
+        }
+        .btn-primary {
+            background-color: var(--light-alt);
+            color: var(--dark);
+            border: none;
+        }
+    }
+} 
