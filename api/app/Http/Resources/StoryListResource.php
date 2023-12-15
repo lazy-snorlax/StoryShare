@@ -24,8 +24,8 @@ class StoryListResource extends JsonResource
             'posted' => $this->posted,
             'word_count' => $this->word_count,
             'complete' => $this->complete,
-            'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => $this->updated_at->toDateTimeString(),
+            'created_at' => $this->created_at->format('d M Y'),
+            'updated_at' => $this->updated_at->format('d M Y'),
         ];
     }
 }

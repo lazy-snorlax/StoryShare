@@ -19,7 +19,7 @@ class ChapterListResource extends JsonResource
             'chapter_number' => $this->chapter_number,
             'title' => $this->title,
             'summary' => $this->summary,
-            'updated_at' => $this->updated_at->format('Y-m-d'),
+            'updated_at' => $this->updated_at->format('d M Y'),
         ];
     }
 }
