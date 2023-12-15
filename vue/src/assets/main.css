@@ -1,4 +1,3 @@
-/* @import './base.css'; */
 @import './sass/font-awesome.scss';
 @import './sass/base/_base.scss';
 @import './sass/base/_auth.scss';
@@ -12,13 +11,20 @@
 @import './sass/story-single.scss';
 
 :root {
-	--primary: #4ad4de;
-	--primary-alt: #22a5c5;
-	--grey: #64748b;
-	--dark: #1e293b;
-	--dark-alt: #334155;
-	--light: #f1f5f9;
 	--sidebar-width: 300px;
+	--primary: #347FC4;
+	--primary-alt: #989FCE;
+	--dark: #13151d;
+	--dark-alt: #171923;
+	--light: #252a37;
+	--light-alt: #91F9E5;
+	
+	/* --light-alt: #989FCE; */
+	--primary-alt: #91F9E5;
+
+	--grey: #64748b;
+	--black: #000;
+	--white: #fff;
 }
 * {
 	margin: 0;
@@ -28,7 +34,8 @@
 }
 body {
 	display: inline;
-	background: var(--dark);
+	background: var(--dark-alt) !important;
+	color: var(--white);
 }
 button {
 	cursor: pointer;

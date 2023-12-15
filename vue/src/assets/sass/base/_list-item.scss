@@ -1,14 +1,18 @@
 li.blurb {
     list-style: none;
-    border-top: var(--dark) 3px solid;
-    border-bottom: var(--dark) 3px solid;
+    // border-top: var(--primary) 3px solid;
+    // border-bottom: var(--primary) 3px solid;
     border-radius: 5px;
     margin-bottom: 1.5rem;
     padding: 1rem 1.5rem;
-    background-color: var(--dark);
-    color: var(--light);
+    background-color: var(--light);
+    color: var(--white);
     &:hover {
-        background-color: var(--dark-alt);
+        background-color: var(--dark);
+    }
+    a {
+        text-decoration: none;
+        color: var(--light-alt);
     }
     .header {
         .dates {

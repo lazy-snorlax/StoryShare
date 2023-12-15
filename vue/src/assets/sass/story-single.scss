@@ -1,9 +1,13 @@
 
 .single-story-details {
-    background-color: var(--dark);
-    color: var(--light);
+    background-color: var(--light);
+    color: var(--primary-alt);
     border-radius: 10px;
     padding: 1rem 2rem !important;
+
+    p {
+        color: var(--white);
+    }
     
     .btn {
         border-radius: 10px;
@@ -21,19 +25,32 @@
         margin: 0;
         li {
             list-style: none;
-            color: var(--dark);
-            background-color: var(--light);
+            background-color: var(--dark);
+            color: var(--primary-alt);
             padding: 1rem 1.75rem;
             margin: 1rem 0.5rem;
             border-radius: 10px;
             &:hover {
-                background-color: var(--grey);
-                color: var(--light);
+                background-color: var(--dark-alt);
+                color: var(--light-alt);
             }
         }
         &:hover {
-            background-color: var(--dark);
+            background-color: var(--light);
         }
-        
+    }
+}
+
+.story-content {
+    background-color: var(--dark);
+    color: var(--light-alt);
+    border-radius: 10px;
+    padding-bottom: 2rem;
+    div {
+        padding: 1rem 1.75rem;
+    }
+
+    p, .content {
+        color: var(--white);
     }
 }

@@ -8,4 +8,7 @@
     overflow-y: auto;
     position: relative; // Fix iOS Safari issue with content overlapping side menu on open
     flex-shrink: 1; // Fix IE10 issue with width being incorrect.
+    .main-content {
+        color: var(--primary-alt);
+    }
 }
