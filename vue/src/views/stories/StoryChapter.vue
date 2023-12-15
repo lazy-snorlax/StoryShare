@@ -40,7 +40,9 @@ onMounted(async () => {
 })
 
 watch(() => route.params.chapter, async () => {
-    await getChapters(route.params?.chapter)
+    if (route.params.chapter) {
+        await getChapters(route.params?.chapter)
+    }
 })
 
 watch(() => route.params.id, async () => {
