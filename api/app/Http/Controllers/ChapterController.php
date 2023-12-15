@@ -26,7 +26,7 @@ class ChapterController extends Controller
      */
     public function show(Chapter $chapter)
     {
-        return new ChapterResource($chapter);
+        return new ChapterResource($chapter->load(['story']));
     }
 
     // *******************************************************************

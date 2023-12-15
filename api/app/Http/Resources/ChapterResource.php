@@ -18,6 +18,7 @@ class ChapterResource extends JsonResource
             'content' => $this->content,
             'notes' => $this->notes,
             'updated_at' => $this->updated_at->format('d M Y'),
+            'story' => new StoryResource($this->whenLoaded('story')),
         ];
     }
 }
