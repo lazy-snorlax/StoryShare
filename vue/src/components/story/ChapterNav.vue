@@ -11,6 +11,11 @@
             </router-link>
         </div>
         <div class="col mx-auto text-center">
+            <router-link class="chapter-btn btn" :to="{ name: 'story.single' }">
+                Return to Story Summary
+            </router-link>
+        </div>
+        <div class="col mx-auto text-center">
             <a class="chapter-btn btn">
                 Jump to Chapter
             </a>
