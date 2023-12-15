@@ -17,17 +17,23 @@
                 <h2 class="mt-5 text-center">Chapters</h2>
             </div>
             <div class="row">
-                <!-- <div class="col mx-auto text-center">
-                    <router-link :to="{ name: 'story.chapter' }" class="btn">
-                        <h5>View All Chapters</h5>
+                <div class="col mx-auto text-center">
+                    <router-link class="btn w-100" :to="{ name: 'story.chapter.all' }">
+                        View Entire Story
                     </router-link>
+                </div>
+                <!-- <div class="col mx-auto text-center">
+                    <a class="btn w-100">Download Story</a>
+                </div>
+                <div class="col mx-auto text-center">
+                    <a class="btn w-100">Add to My Bookmarks</a>
                 </div> -->
+            </div>
+            <div class="row">
                 <template v-for="chapter in story?.chapters" class="col mx-auto">
                     <ChapterListItem :chapter="chapter" />
                 </template>
             </div>
-            <!-- <div class="row">
-            </div> -->
         </div>
     </Container>
 </template>
