@@ -27,7 +27,7 @@ import { defineProps } from 'vue';
 
 const props = defineProps<{
         filters?: {
-            search: string | null,
+            search: string,
             sort: string,
         }
     }>()
@@ -56,8 +56,7 @@ onMounted(() => {
 })
 
 watchEffect(() => {
-        emit('updateFilters', filters)
-    }
-)
+    emit('updateFilters', filters)
+})
 
 </script>

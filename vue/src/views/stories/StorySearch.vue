@@ -37,6 +37,7 @@ onMounted(async () => {
 })
 
 watchEffect(async () => {
+    if (filters.value.search == null) return
     await getStoryList(new URLSearchParams(filters.value))
 })
 
