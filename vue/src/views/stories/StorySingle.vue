@@ -1,22 +1,33 @@
 <template>
     <Header :title="story?.title" />
 
-    <Container class="card bg-dark text-light">
-        <h3>Story Details</h3>
-        <h5>Summary</h5>
-        <p>{{ story?.summary }}</p>
+    <Container class="single-story-details">
+        <div class="row">
+            <h4>Summary</h4>
+            <p>{{ story?.summary }}</p>
+        </div>
         
-        <h5>Notes</h5>
-        <p>{{ story?.notes }}</p>
+        <div class="row mt-4 mb-1">
+            <h4>Notes</h4>
+            <p>{{ story?.notes }}</p>
+        </div>
 
-        <div class="mt-5">
-            <router-link :to="{ name: 'story.chapter.all' }">
-                <h5>View All Chapters</h5>
-            </router-link>
-            <h2>Chapter Index:</h2>
-            <template v-for="chapter in story?.chapters">
-                <ChapterListItem :chapter="chapter" />
-            </template>
+        <div class="mt-1">
+            <div class="row d-flex">
+                <h2 class="mt-5 text-center">Chapters</h2>
+            </div>
+            <div class="row">
+                <div class="col mx-auto text-center">
+                    <router-link :to="{ name: 'story.chapter.all' }" class="btn">
+                        <h5>View All Chapters</h5>
+                    </router-link>
+                </div>
+                <template v-for="chapter in story?.chapters" class="col mx-auto">
+                    <ChapterListItem :chapter="chapter" />
+                </template>
+            </div>
+            <!-- <div class="row">
+            </div> -->
         </div>
     </Container>
 </template>

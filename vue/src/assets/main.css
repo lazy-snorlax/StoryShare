@@ -9,6 +9,7 @@
 @import './sass/base/_horizontal-nav.scss';
 @import './sass/base/_list-item.scss';
 @import './sass/story-search-filters.scss';
+@import './sass/story-single.scss';
 
 :root {
 	--primary: #4ad4de;

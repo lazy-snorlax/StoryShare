@@ -1,11 +1,11 @@
 <template>
-    <li class="chapter-item">
-        <router-link :to="{ name: 'story.chapter.single', params: { chapter: chapter.id } }">
-            <h3>{{ chapter.title }}</h3>
-        </router-link>
-        <p>{{ chapter.summary }}</p>
-        <p>{{ chapter.updated_at }}</p>
-    </li>
+    <router-link :to="{ name: 'story.chapter.single', params: { chapter: chapter.id } }" class="chapter-item">
+        <li>
+            <h5>{{ chapter.title }}</h5>
+            <p>{{ chapter.summary }}</p>
+            <small>Updated: {{ chapter.updated_at }}</small>
+        </li>
+    </router-link>
 </template>
 <script lang="ts" setup>
 

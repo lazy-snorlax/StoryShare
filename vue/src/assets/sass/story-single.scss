@@ -1,0 +1,39 @@
+
+.single-story-details {
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 10px;
+    padding: 1rem 2rem !important;
+    
+    .btn {
+        border-radius: 10px;
+        padding: 0.25rem 1rem;
+        background-color: var(--light);
+        &:hover {
+            color: var(--light);
+            background-color: var(--grey);
+        }
+    }
+
+    .chapter-item {
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            color: var(--dark);
+            background-color: var(--light);
+            padding: 1rem 1.75rem;
+            margin: 1rem 0.5rem;
+            border-radius: 10px;
+            &:hover {
+                background-color: var(--grey);
+                color: var(--light);
+            }
+        }
+        &:hover {
+            background-color: var(--dark);
+        }
+        
+    }
+}
