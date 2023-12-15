@@ -19,7 +19,7 @@ class ChapterFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'summary' => $this->faker->paragraph(3),
-            'content' => $this->faker->paragraphs(20, true),
+            'content' => $this->faker->paragraphs(rand(20,100), true),
             'notes' => $this->faker->paragraph(2),
         ];
     }
