@@ -50,7 +50,6 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
-        // dd($story->chapters()->get());
         return new StoryResource($story->load('user', 'chapters'));
     }
 
