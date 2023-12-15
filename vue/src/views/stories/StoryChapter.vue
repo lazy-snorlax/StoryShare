@@ -3,7 +3,7 @@
     <Header :title="chapter?.title" />
 
     <Container class="">
-        <ChapterNav class="chapter-nav" :chapter_number="chapter?.chapter_number" :number_of_chapters="chapter?.story?.number_of_chapters" />
+        <ChapterNav class="chapter-nav" :chapter_number="chapter?.chapter_number" :chapter_list="chapter_list" />
 
         <div class="story-content">
             <div class="mb-3" v-if="chapter?.summary">
@@ -25,15 +25,25 @@
 </template>
 <script lang="ts" setup>
 import { useChapter } from '../../composables/stories/use-get-chapter';
+import { useChapterList } from '../../composables/stories/use-get-chapter-list';
 import { useRoute } from 'vue-router';
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 import ChapterNav from '../../components/story/ChapterNav.vue';
 
 const { chapter, getChapters } = useChapter()
+const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
+    await getChapterList(route.params?.id)
 })
 
+watch(() => route.params.chapter, async () => {
+    await getChapters(route.params?.chapter)
+})
+
+watch(() => route.params.id, async () => {
+    await getChapterList(route.params?.id)
+})
 </script>
