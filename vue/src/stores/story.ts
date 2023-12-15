@@ -17,13 +17,8 @@ export const useStoryStore = defineStore('story', {
             this.story = response.data.data
         },
 
-        async getChapter(id: Number) {
-            const response = await this.http.get('chapter/' + id)
-            this.chapter = response.data.data
-        },
-
         async getChapters(id: Number) {
-            const response = await this.http.get('chapters')
+            const response = await this.http.get('chapters' + (id ? '/' + id : ''))
             this.chapter = response.data.data
         }
     },
