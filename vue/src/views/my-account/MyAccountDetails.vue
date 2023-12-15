@@ -1,23 +1,26 @@
 <template>
     <Container class="container-max-sm mx-auto p-4">
-        <div class="mx-auto">
-            <h2>Details</h2>
-            <div class="mb-3">
-                <label for="name">Name</label>
-                <input class="form-control" type="text" name="name" v-bind="name">
-                <small class="text-danger"></small>
+        <div class="my-account card">
+            <div class="card-body">
+                <div class="mx-auto">
+                    <h2>Details</h2>
+                    <div class="mb-3">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" v-bind="name">
+                        <small class="text-danger">{{ errors.name }}</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" v-bind="email">
+                        <small class="text-danger">{{ errors.email }}</small>
+                    </div>
+                    
+                    <div class="text-end mt-4">
+                        <button class="btn btn-primary" @click="save">Save</button>
+                    </div>
+                </div>
             </div>
-            
-            <div class="mb-3">
-                <label for="email">Email</label>
-                <input class="form-control" type="text" name="email" v-bind="email">
-                <small class="text-danger"></small>
-            </div>
-
-            <div class="text-end mt-4">
-                <button class="btn btn-primary" @click="save">Save</button>
-            </div>
-
         </div>        
     </Container>
 </template>
@@ -31,7 +34,7 @@ import { useAuthStore, type UpdateAccountDetailsForm } from '../../stores/auth'
 const { loggedInUser } = useLoggedInUser()
 const { updateAccountDetails } = useAuthStore()
 
-const {  defineInputBinds, handleSubmit } = useForm<UpdateAccountDetailsForm>({
+const {  defineInputBinds, handleSubmit, errors } = useForm<UpdateAccountDetailsForm>({
     validationSchema: object({
         name: string().required(),
         email: string().email().required(),

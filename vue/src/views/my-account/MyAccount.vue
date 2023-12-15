@@ -2,7 +2,7 @@
     <Header :title="'My Account'" />
 
     <!-- My Account Nav? -->
-    <ul class="nav nav-horizontal">
+    <ul class="my-account nav nav-horizontal">
         <li class="nav-item" :class="{ active: $route.name === 'my-account' }">
             <router-link :to="{ name: 'my-account' }" class="nav-link"> Details </router-link>
         </li>
