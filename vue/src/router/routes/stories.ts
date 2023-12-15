@@ -28,12 +28,7 @@ export default routes(
                     component: StorySingle,
                 },
                 {
-                    path: '/story/:id/chapter/all',
-                    name: 'story.chapter.all',
-                    component: StoryChapter
-                },
-                {
-                    path: '/story/:id/chapter/:chapter',
+                    path: '/story/:id/chapter/:chapter?',
                     name: 'story.chapter.single',
                     component: StoryChapter
                 },
