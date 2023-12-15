@@ -1,0 +1,12 @@
+.dashboard {
+    .card {
+        background-color: var(--light);
+        color: var(--dark);
+        h3 {
+            color: var(--light-alt);
+        }
+        p {
+            color: var(--white);
+        }
+    }
+}
