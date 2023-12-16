@@ -22,7 +22,7 @@
                 </div>
                 <div class="col text-end">
                     <router-link to="/" class="button">
-                       <button class="btn btn-primary me-1">Dashboard</button>
+                       <button class="btn btn-primary me-1">Return to Dashboard</button>
                     </router-link>
                     <button class="btn btn-primary" @click="submit">Login</button>
                 </div>
