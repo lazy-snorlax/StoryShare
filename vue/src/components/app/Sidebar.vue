@@ -14,7 +14,7 @@
 
         <div class="menu">
 			<router-link :to="{ name: 'stories.search' }" class="button">
-				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Search </span>
+				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Browse </span>
 			</router-link> 
             <router-link :to="{ name: 'dashboard' }" class="button">
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>

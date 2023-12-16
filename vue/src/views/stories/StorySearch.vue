@@ -1,5 +1,5 @@
 <template>
-    <Header :title="'Search'" />
+    <Header :title="'Browse'" />
 
     <div class="d-flex">
         <Container class="container-max-xxl mx-auto p-4 d-flex">
