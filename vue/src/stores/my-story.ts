@@ -12,19 +12,32 @@ export const useMyStoryStore = defineStore('my-story', {
         },
 
         async getMyStory(id: Number) {
-            const response = await this.http.get('my-story/' + id)
+            const response = await this.http.get('my-stories/' + id)
             this.story = response.data.data
         },
 
-        // async saveMyStory() {
-        //     const response = await this.http.post('my-story/')
-        // }
+        async saveMyStory(values: MyStoryResource) {
+            console.log('>>> Save my-story: ', values.id)
+            const response = await this.http.put('my-stories/' + values.id, values)
+        }
     },
 })
 
 type MyStoryState = {
     story: MyStoryListResource,
     list: Array<MyStoryListResource>
+}
+
+export type MyStoryResource = {
+    id: number,
+    title: string,
+    summary: string,
+    notes: string,
+    number_of_chapters: number,
+    word_count: number,
+    visible: string,
+    posted: boolean,
+    complete: boolean,
 }
 
 export type MyStoryListResource = {
