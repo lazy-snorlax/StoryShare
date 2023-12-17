@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MyStory;
 
 use App\Http\Resources\StoryListResource;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StoryResource;
 use App\Models\Story;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -49,9 +50,10 @@ class StoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Story $story)
+    public function show($story)
     {
-        //
+        abort_if(auth()->user()->id != $story->user_id, 400, 'You do not have access to this story.');
+        return new StoryResource(Story::where('id', $story)->with('chapters')->first());
     }
 
     /**
@@ -67,7 +69,7 @@ class StoryController extends Controller
      */
     public function update(Request $request, Story $story)
     {
-        //
+        dd('update story', $story, $request->input());
     }
 
     /**

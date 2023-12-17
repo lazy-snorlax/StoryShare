@@ -18,6 +18,7 @@ class StoryController extends Controller
             ->when($request->query('search'), function($query, $search) {
                 $query->whereSearchByWords($search, [ 'title', 'summary' ]);
             })
+            ->canAccess(auth()->user())
             ->when($request->query('sort'), function ($query, $sort) {
                 if (str_starts_with($sort, '-')){
                     $query->orderBy(substr($sort, 1), 'desc');
@@ -50,6 +51,15 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
+        abort_if(!auth()->user() && $story->visible != 'public', 400, 'You don\'t have access to this story');
+
+        abort_if(
+            (auth()->user()->id != $story->user_id)
+            && $story->visible == 'private',
+            400, 
+            'You don\'t have access to this story'
+        );
+
         return new StoryResource($story->load('user', 'chapters'));
     }
 
