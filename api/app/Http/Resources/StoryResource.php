@@ -25,6 +25,7 @@ class StoryResource extends JsonResource
             'posted' => $this->posted,
             'word_count' => $this->word_count,
             'complete' => $this->complete,
+            'visible' => $this->visible,
             'created_at' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->updated_at->format('Y-m-d'),
             'chapters' => ChapterListResource::collection($this->whenLoaded('chapters')),
