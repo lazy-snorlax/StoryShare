@@ -10,9 +10,7 @@
                 <p class="datetime">Updated: <span>{{ item.updated_at }}</span></p>
             </div>
         </div>
-        <div class="summary">
-            <p>{{ item.summary }}</p>
-        </div>
+        <div class="summary" v-html="item.summary" />
         <div class="footer">
             <div class="row d-flex">
                 <div class="col">
