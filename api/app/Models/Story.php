@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Story extends Model
 {
@@ -25,6 +26,8 @@ class Story extends Model
     protected $hidden = [];
 
     protected $casts = [
+        'summary' => PurifyHtmlOnGet::class,
+        'notes' => PurifyHtmlOnGet::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
