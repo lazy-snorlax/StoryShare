@@ -169,13 +169,15 @@
 }
 
 .layout-sidesheet {
-    overflow: scroll;
+    overflow-y: scroll;
+	overflow-x: hidden;
     height: 100%;
     flex-grow: 1;
     margin-left: 0;
     margin-right: 0;
     padding-bottom: 0;
     position: relative;
+	width: 100%;
 
     .side-sheet {
         // flex-grow: 1; Disabled for BS5
