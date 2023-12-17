@@ -51,7 +51,7 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
-        abort_if(!auth()->user() && $story->visible != 'public', 400, 'You don\'t have access to this story');
+        abort_if(!auth()->user() && $story->visible != 'public', 400, 'You must login to view this story');
 
         abort_if(
             (auth()->user()->id != $story->user_id)

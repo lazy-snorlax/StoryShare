@@ -50,10 +50,12 @@ class StoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($story)
+    public function show($id)
     {
+        $story = Story::where('id', $id)->with('chapters')->first();
         abort_if(auth()->user()->id != $story->user_id, 400, 'You do not have access to this story.');
-        return new StoryResource(Story::where('id', $story)->with('chapters')->first());
+
+        return new StoryResource($story);
     }
 
     /**
