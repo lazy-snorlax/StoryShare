@@ -9,7 +9,16 @@ export const useMyStoryStore = defineStore('my-story', {
         async getMyStoryList() {
             const response = await this.http.get('my-stories')
             this.list = response.data.data
-        }
+        },
+
+        async getMyStory(id: Number) {
+            const response = await this.http.get('my-story/' + id)
+            this.story = response.data.data
+        },
+
+        // async saveMyStory() {
+        //     const response = await this.http.post('my-story/')
+        // }
     },
 })
 
