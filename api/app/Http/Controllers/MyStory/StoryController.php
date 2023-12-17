@@ -32,19 +32,14 @@ class StoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $story = Story::create($request->only(['title', 'summary', 'notes', 'visible']));
+        $story->user_id = $request->user()->id;
+
+        return new StoryResource($story);
     }
 
     /**
@@ -59,19 +54,15 @@ class StoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Story $story)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Story $story)
+    public function update(Request $request, $id)
     {
-        dd('update story', $story, $request->input());
+        $story = Story::where('id', $id)->first();
+        $story->fill($request->only(['title', 'summary', 'notes', 'visible']));
+        $story->save();
+
+        return new StoryResource($story);
     }
 
     /**
