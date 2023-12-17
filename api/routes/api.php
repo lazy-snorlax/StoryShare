@@ -44,4 +44,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
+    Route::get('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'show']);
+    Route::put('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'update']);
 });
