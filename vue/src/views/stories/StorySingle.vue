@@ -4,12 +4,12 @@
     <Container class="single-story-details">
         <div class="row">
             <h4>Summary</h4>
-            <p>{{ story?.summary }}</p>
+            <div v-html="story?.summary" />
         </div>
         
         <div class="row mt-4 mb-1">
             <h4>Notes</h4>
-            <p>{{ story?.notes }}</p>
+            <div v-html="story?.notes" />
         </div>
 
         <div class="mt-1">

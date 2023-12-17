@@ -10,9 +10,7 @@
                 <p class="datetime">Updated: <span>{{ item.updated_at }}</span></p>
             </div>
         </div>
-        <div class="summary">
-            <p>{{ item.summary }}</p>
-        </div>
+        <div class="summary" v-html="item.summary"></div>
         <div class="footer">
             <div class="row d-flex">
                 <div class="col">
@@ -22,7 +20,12 @@
                     <p>Words: <span>{{ item.word_count }}</span></p>
                 </div>
                 <div class="col">
-                    <p>Complete: <span>{{ item.complete ? 'Y' : 'N' }}</span></p>
+                    <p>Completed: 
+                        <span>
+                            <font-awesome-icon icon="fa-solid fa-check" v-if="item.complete" />
+                            <font-awesome-icon icon="fa-solid fa-check" v-else />
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
