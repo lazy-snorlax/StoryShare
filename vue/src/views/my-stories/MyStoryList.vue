@@ -5,7 +5,7 @@
         <div class="chapter-nav">
             <div class="row my-3 d-flex">
                 <div class="col mx-auto text-center">
-                    <a class="chapter-btn btn">Create New Story</a>
+                    <button class="chapter-btn btn" @click="open">Create New Story</button>
                 </div>
             </div>
         </div>
@@ -14,15 +14,29 @@
             <MyStoryListItem :item="item" />
         </div>
     </Container>
+
+    <ModalsContainer />
 </template>
 <script lang="ts" setup>
+import { ModalsContainer, useModal } from 'vue-final-modal'
 import { useMyStoryStore } from '../../stores/my-story';
 import { onMounted } from 'vue';
 import { useMyStoryList } from '../../composables/stories/use-get-my-story-list';
 import MyStoryListItem from '../../components/app/my-story/MyStoryListItem.vue';
+import ModalNewStoryForm from '../../components/app/my-story/ModalNewStoryForm.vue';
 
 const myStoryStore = useMyStoryStore()
 const { list } = useMyStoryList()
+
+const { open, close } = useModal({
+    component: ModalNewStoryForm,
+    attrs: {
+        onSubmit(formData) {
+            alert('Submitted Form')
+            close()
+        },
+    },
+})
 
 onMounted(async () => {
     await myStoryStore.getMyStoryList()
