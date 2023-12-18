@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('stories', function (Blueprint $table) {
-            $table->string('visible')->default('public')->before('posted');
+            $table->string('visible')->default('private')->before('posted');
         });
     }
 
