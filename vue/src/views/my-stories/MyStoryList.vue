@@ -25,6 +25,10 @@ import { useMyStoryList } from '../../composables/stories/use-get-my-story-list'
 import MyStoryListItem from '../../components/app/my-story/MyStoryListItem.vue';
 import ModalNewStoryForm from '../../components/app/my-story/ModalNewStoryForm.vue';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
 const myStoryStore = useMyStoryStore()
 const { list } = useMyStoryList()
 
@@ -32,8 +36,9 @@ const { open, close } = useModal({
     component: ModalNewStoryForm,
     attrs: {
         onSubmit(formData) {
-            alert('Submitted Form')
+            // alert(JSON.stringify(formData, null, 2))
             close()
+            router.replace({ name: 'my-stories.single', params: { id: formData.id } })
         },
     },
 })
