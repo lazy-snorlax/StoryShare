@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div id="story-form" class="card">
         <div class="card-body p-5">
             <img src="" alt="" class="logo">
             <h1>Create New Story</h1>
@@ -23,31 +23,34 @@
 <script lang="ts" setup>
 import { useForm } from 'vee-validate';
 import { object, string } from 'yup';
+import { useMyStoryStore } from '@/stores/my-story';
+
+const emit = defineEmits<{
+    (e: 'submit', handleSubmit) : void
+}>()
+
+const { newMyStory } = useMyStoryStore()
 
 const { values, meta, errors, defineInputBinds, handleSubmit } = useForm({
     validationSchema: object({
         title: string().required()
     })
 })
-
 const title = defineInputBinds('title')
-const emit = defineEmits<{
-    (e: 'submit', handleSubmit) : void
-}>()
 
 const submit = handleSubmit(async (values) => {
     try {
-        console.log('>>> Create new story: ', values)
-        emit('submit', values)
+        const response = await newMyStory(values)
+        emit('submit', response)
     } catch (error) {
-        console.log('>>> Error Creating new story: ', values, error)
+        console.log('>>> Error Creating new story: ', values, error.message)
     }
 })
 
 </script>
 
 <style lang="scss">
-    .card {
+    #story-form {
         background-color: var(--light);
         border: none;
         color: var(--white);
