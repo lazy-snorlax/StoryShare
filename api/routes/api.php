@@ -42,9 +42,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/user', Controllers\UpdateAccountDetailsController::class);
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
 
-    // Stories ==============================================================
+    // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
     Route::post('/my-stories', [Controllers\MyStory\StoryController::class, 'store']);
     Route::get('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'show']);
     Route::put('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'update']);
+    
+    // My Chapters =============================================================
+    Route::get('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'index']);
+    Route::post('/my-chapters', [Controllers\MyStory\ChapterController::class, 'index']);
+    Route::put('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'index']);
 });
