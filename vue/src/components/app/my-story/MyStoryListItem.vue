@@ -20,7 +20,12 @@
                     <p>Words: <span>{{ item.word_count }}</span></p>
                 </div>
                 <div class="col">
-                    <p>Complete: <span>{{ item.complete ? 'Y' : 'N' }}</span></p>
+                    <p>Complete: 
+                        <span>
+                            <font-awesome-icon icon="fa-solid fa-check" v-if="item.complete" />
+                            <font-awesome-icon icon="fa-solid fa-check" v-else />
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
