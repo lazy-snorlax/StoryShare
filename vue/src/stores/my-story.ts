@@ -16,8 +16,12 @@ export const useMyStoryStore = defineStore('my-story', {
             this.story = response.data.data
         },
 
+        async newMyStory(values) {
+            const response = await this.http.post('my-stories', values)
+            return response.data.data
+        },
+
         async saveMyStory(values: MyStoryResource) {
-            console.log('>>> Save my-story: ', values.id)
             const response = await this.http.put('my-stories/' + values.id, values)
         }
     },
