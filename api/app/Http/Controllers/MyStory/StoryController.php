@@ -36,8 +36,16 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-        $story = Story::create($request->only(['title', 'summary', 'notes', 'visible']));
-        $story->user_id = $request->user()->id;
+        $story = Story::create([
+            'user_id' => $request->user()->id,
+            'title' => $request->input('title'),
+            'summary' => $request->input('summary'),
+            'notes' => $request->input('notes'),
+            'number_of_chapters' => 0,
+            'posted' => false,
+            'word_count' => 0,
+            'complete' => false,
+        ]);
 
         return new StoryResource($story);
     }
