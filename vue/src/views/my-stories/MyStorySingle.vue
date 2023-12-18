@@ -49,34 +49,39 @@
             </div>
             <div class="row">
                 <div class="col mx-auto text-center">
-                    <a class="btn w-100" >
-                        Add New Chapter
-                    </a>
+                    <button class="btn w-100" @click="open" >Add New Chapter</button>
                 </div>
             </div>
             <div class="row">
                 <template v-for="chapter in story?.chapters" class="col mx-auto">
-                    <ChapterListItem :chapter="chapter" />
+                    <MyChapterListItem :chapter="chapter" />
                 </template>
             </div>
         </template>
     </Container>
+
+    <ModalsContainer />
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { Router } from 'vue-router'
 
 import { useMyStory } from '../../composables/stories/use-get-my-story'
 import { useMyStoryStore, type MyStoryResource } from '../../stores/my-story'
 
-import ChapterListItem from '../../components/story/ChapterListItem.vue'
+import { ModalsContainer, useModal } from 'vue-final-modal'
+
+import MyChapterListItem from '../../components/app/my-story/my-chapters/MyChapterListItem.vue'
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'
 import MultiSelect from '../../components/app/utilities/MultiSelect.vue'
+import ModalNewChapter from '../../components/app/my-story/my-chapters/ModalNewChapter.vue'
 
 const { story, getStory } = useMyStory()
 const { saveMyStory } = useMyStoryStore()
 const route = useRoute()
+const router = useRouter()
 
 const privacyOptions = [
     { label: 'Public', value: 'public', description: 'Visible to everyone, with or without an account' },
@@ -88,6 +93,17 @@ const privacyOptionDescription = computed(() => {
     if (story) {
         return privacyOptions.find((o) => o.value == story.value.visible).description
     }
+})
+
+const { open, close } = useModal({
+    component: ModalNewChapter,
+    attrs: {
+        onSubmit(formData) {
+            // alert(JSON.stringify(formData, null, 2))
+            close()
+            router.replace({ name: 'my-stories.chapter.single', params: { id: formData.id } })
+        },
+    },
 })
 
 onMounted(async () => {
