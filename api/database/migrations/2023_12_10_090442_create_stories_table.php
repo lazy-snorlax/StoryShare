@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('title');
-            $table->text('summary');
+            $table->text('summary')->nullable();
             $table->timestamps();
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->integer('number_of_chapters');
             $table->boolean('posted');
             $table->integer('word_count');
