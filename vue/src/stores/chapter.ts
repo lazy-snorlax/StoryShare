@@ -20,6 +20,22 @@ export const useChapterStore = defineStore('chapter', {
         async getAllChapters(story_id: Number) {
             const response = await this.http.get(`chapters` + (story_id ? '?story_id=' + story_id : ''))
             this.all_chapters = response.data.data
+        },
+
+        // My-Chapters
+        async getMyChapter(id: Number) {
+            const response = await this.http.get(`my-chapters/${id}`)
+            this.chapter = response.data.data
+        },
+
+        async updateMyChapter(values: ChapterResource) {
+            console.log('>>> Save Vals: ', values)
+            const response = await this.http.put(`my-chapters/${values.id}`, values)
+        },
+
+        async newChapter(values) {
+            const response = await this.http.post('my-chapters', values)
+            return response.data.data
         }
     }
 })
@@ -36,6 +52,8 @@ export type ChapterResource = {
     title: string,
     summary: string,
     content: string,
+    notes: string,
+    word_count: number
     updated_at: string,
 }
 
