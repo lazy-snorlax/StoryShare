@@ -48,4 +48,12 @@
         margin-left: 0;
         margin-bottom: 2rem;
     }
+
+    a {
+        color: var(--light-alt) !important;
+        &:hover {
+            color: var(--white) !important;
+            background: none !important;
+        }
+    }
 }
