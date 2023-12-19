@@ -101,7 +101,7 @@ const { open, close } = useModal({
         onSubmit(formData) {
             // alert(JSON.stringify(formData, null, 2))
             close()
-            router.replace({ name: 'my-stories.chapter.single', params: { id: formData.id } })
+            router.replace({ name: 'my-stories.chapter.single', params: { chapter: formData.id } })
         },
     },
 })
