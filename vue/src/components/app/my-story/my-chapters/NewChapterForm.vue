@@ -22,25 +22,32 @@
 
 <script lang="ts" setup>
 import { useForm } from 'vee-validate';
-import { object, string } from 'yup';
-import { useMyStoryStore } from '@/stores/my-story';
+import { number, object, string } from 'yup';
+import { useChapterStore } from '../../../../stores/chapter';
+import { useRoute } from 'vue-router';
 
 const emit = defineEmits<{
     (e: 'submit', handleSubmit) : void
 }>()
 
-const { newMyStory } = useMyStoryStore()
+const route = useRoute()
+const { newChapter } = useChapterStore()
 
 const { values, meta, errors, defineInputBinds, handleSubmit } = useForm({
     validationSchema: object({
-        title: string().required()
-    })
+        title: string().required(),
+        story_id: number().required(),
+    }),
+    initialValues: {
+        title: null,
+        story_id: route.params.id,
+    }
 })
 const title = defineInputBinds('title')
 
 const submit = handleSubmit(async (values) => {
     try {
-        const response = await newMyStory(values)
+        const response = await newChapter(values)
         emit('submit', response)
     } catch (error) {
         console.log('>>> Error Creating new story: ', values, error.message)
