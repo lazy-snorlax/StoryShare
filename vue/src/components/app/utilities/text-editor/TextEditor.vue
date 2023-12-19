@@ -22,12 +22,16 @@
     }
   })
   
-  const emit = defineEmits(['update:modelValue'])
-  
+  const emit = defineEmits<{
+    (e: 'update:modelValue', modelValue: string) : void
+    (e: 'words', wordCount: number) : void
+  }>()
+    
   const editor = useEditor({
     content: props.modelValue,
     onUpdate: ({ editor }) => {
       emit('update:modelValue', editor.getHTML())
+      emit('words', editor.storage.characterCount.words())
     },
     extensions: [
       StarterKit,
