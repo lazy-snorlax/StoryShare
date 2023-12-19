@@ -38,14 +38,17 @@ class ChapterController extends Controller
     {
         $chapter = Chapter::create([
             'story_id' => $request->input('story_id'),
-            'chapter_number' => $request->input('chapter_number'),
+            'chapter_number' => $request->input('chapter_number') ?? 0,
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'content' => $request->input('content'),
             'notes' => $request->input('notes'),
         ]);
 
-        // TODO: Update story word count
+        // TODO: Update story object: number_of_chapters, word_count
+        $story = $chapter->story()->first();
+        $story->number_of_chapters = $story->number_of_chapters + 1;
+        $story->save();
 
         return new ChapterResource($chapter);
     }
@@ -59,7 +62,9 @@ class ChapterController extends Controller
         $chapter->fill($request->only(['chapter_number', 'title', 'summary', 'content', 'notes']));
         $chapter->save();
 
-        // TODO: Update story word count
+        // TODO: Update story object
+        $story = $chapter->story()->first();
+        $story->word_count = $story->word_count + $request->input('word_count');
 
         return new ChapterResource($chapter);
     }

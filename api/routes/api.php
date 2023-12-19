@@ -50,6 +50,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     // My Chapters =============================================================
     Route::get('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'index']);
-    Route::post('/my-chapters', [Controllers\MyStory\ChapterController::class, 'index']);
-    Route::put('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'index']);
+    Route::post('/my-chapters', [Controllers\MyStory\ChapterController::class, 'store']);
+    Route::put('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'update']);
 });
