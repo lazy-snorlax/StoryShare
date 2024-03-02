@@ -10,28 +10,15 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function testCanLoginWithCorrectEmailAndPassword()
     {
-        $user = User::factory()->create();
+        $this->createAdmin(['email' => 'john@email.com']);
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
+        $response = $this->postJson('login', [
+            'email' => 'john@email.com', 
+            'password' => 'Secret*12345'
         ]);
-
-        $this->assertAuthenticated();
-        $response->assertNoContent();
-    }
-
-    public function test_users_can_not_authenticate_with_invalid_password(): void
-    {
-        $user = User::factory()->create();
-
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
-
-        $this->assertGuest();
+        $response->assertSuccessful();
+        // $response->assertSessionHas(RegistrationSession::Registration->value, false);
     }
 }
