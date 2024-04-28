@@ -1,6 +1,6 @@
 <template>
     <div class="card card-authentication">
-        <div class="card-body p-5">
+        <div class="card-body p-3">
             <img src="" alt="" class="logo">
             <h1>Log In</h1>
 
@@ -20,6 +20,8 @@
                 <div class="col-auto text-right d-flex align-items-center">
                     <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot Password?</router-link>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col text-end">
                     <router-link to="/" class="button">
                        <button class="btn btn-primary me-1">Return to Dashboard</button>
