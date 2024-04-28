@@ -8,16 +8,14 @@
         <div class="story-content">
             <div class="mb-3" v-if="chapter?.summary">
                 <h3>Summary</h3>
-                <p>{{ chapter?.summary }}</p>
+                <p v-html=chapter?.summary></p>
             </div>    
             
-            <div class="my-5 content">
-                {{ chapter?.content }}
-            </div>
+            <div class="my-5 content" v-html="chapter?.content"></div>
             
             <div class="mt-3" v-if="chapter?.notes">
                 <h3>Notes</h3>
-                <p>{{ chapter.notes }}</p>
+                <p v-html="chapter.notes"></p>
             </div>
         </div>
     </Container>
