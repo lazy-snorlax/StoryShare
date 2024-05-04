@@ -47,6 +47,9 @@ class StoryController extends Controller
             'complete' => false,
         ]);
 
+        // TODO: Create record in pivot when story created
+        // $story->genres()->attach($request->input('genres'));
+
         return new StoryResource($story);
     }
 
@@ -70,6 +73,9 @@ class StoryController extends Controller
         $story->fill($request->only(['title', 'summary', 'notes', 'visible']));
         $story->save();
 
+        // TODO: Update story genres records
+        // $story->genres()->sync($request->input('genres'));
+
         return new StoryResource($story);
     }
 
@@ -78,6 +84,9 @@ class StoryController extends Controller
      */
     public function destroy(Story $story)
     {
-        //
+        // TODO: Delete story genres records
+        // $story->genres()->detach();
+
+        $story->delete();
     }
 }
