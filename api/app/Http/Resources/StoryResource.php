@@ -28,6 +28,7 @@ class StoryResource extends JsonResource
             'visible' => $this->visible,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->format('d M Y'),
+            'genres' => GenreResource::collection($this->whenLoaded('genres')),
             'chapters' => ChapterListResource::collection($this->whenLoaded('chapters')),
         ];
     }

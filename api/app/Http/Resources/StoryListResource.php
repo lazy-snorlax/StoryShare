@@ -27,6 +27,7 @@ class StoryListResource extends JsonResource
             'complete' => $this->complete,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->format('d M Y'),
+            'genres' => GenreResource::collection($this->whenLoaded('genres')),
         ];
     }
 }

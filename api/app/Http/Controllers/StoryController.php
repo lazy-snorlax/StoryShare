@@ -14,7 +14,9 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Story::with('user')
+        $query = Story::query()
+            // ->with('user')
+            // ->with('genres')
             ->when($request->query('search'), function($query, $search) {
                 $query->whereSearchByWords($search, [ 'title', 'summary' ]);
             })
@@ -27,7 +29,7 @@ class StoryController extends Controller
                 }
             });
 
-        return StoryListResource::collection($query->get());
+        return StoryListResource::collection($query->get()->load('user', 'genres'));
     }
 
     /**
@@ -60,7 +62,7 @@ class StoryController extends Controller
             'You don\'t have access to this story'
         );
 
-        return new StoryResource($story->load('user', 'chapters'));
+        return new StoryResource($story->load('user', 'chapters', 'genres'));
     }
 
     /**

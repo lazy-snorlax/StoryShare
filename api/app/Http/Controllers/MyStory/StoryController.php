@@ -28,7 +28,7 @@ class StoryController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return StoryListResource::collection($query);
+        return StoryListResource::collection($query->load('genres'));
     }
 
     /**
@@ -58,10 +58,11 @@ class StoryController extends Controller
      */
     public function show($id)
     {
-        $story = Story::where('id', $id)->with('chapters')->first();
+        $story = Story::where('id', $id)->first();
+
         abort_if(auth()->user()->id != $story->user_id, 400, 'You do not have access to this story.');
 
-        return new StoryResource($story);
+        return new StoryResource($story->load('chapters', 'genres'));
     }
 
     /**
