@@ -24,12 +24,19 @@ class DatabaseSeeder extends Seeder
         ]);
         $users = \App\Models\User::factory(5)->create();
 
+        // Genres
+        $this->call(GenreSeeder::class);
+
         // Stories
         $userStories = \App\Models\Story::factory(3)->create([
             'user_id' => $user->id
         ]);
 
         foreach ($userStories as $story) {
+            // Seed genres to stories
+            $story->genres()->attach(rand(1, 15));
+            
+            // Seed chapters to stories
             $i = 1;
             while ($i <= $story->number_of_chapters) {
                 $chapter = \App\Models\Chapter::factory()->create([
