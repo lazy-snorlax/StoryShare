@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
@@ -53,6 +54,19 @@ class Story extends Model
         return $this->hasMany(Chapter::class);
     }
 
+    /**
+     * A story can have many genres
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function genres() : BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'stories_genres', 'story_id', 'genre_id');
+    }
+
+    /**
+     * Scopes
+     */
     public function scopePublic($query) {
         $query->where('visible', 'public');
     }
