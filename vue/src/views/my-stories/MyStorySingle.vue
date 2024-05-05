@@ -11,6 +11,14 @@
             </div>
 
             <div class="row mb-4">
+                <h4>Genre</h4>
+                <div class="col mx-auto">
+                    <MultiSelect v-model="story.genres" :options="genreList" :allow-empty="false" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
+                </div>
+                <!-- <div class="col mx-auto"></div> -->
+            </div>
+
+            <div class="row mb-4">
                 <h4>Privacy Settings</h4>
                 <div class="col mx-auto">
                     <MultiSelect v-model="story.visible" :options="privacyOptions" value-only :allow-empty="false" :no-searching="true" />
@@ -35,12 +43,7 @@
             <div class="row">
                 <div class="col-3 mx-auto">
                     <button class="btn w-100" @click="saveStoryDetails">Save</button>
-                </div> 
-                <!-- <div class="col-3 mx-auto">
-                    <button class="btn w-100">
-                        Delete
-                    </button>
-                </div> -->
+                </div>
             </div>
 
             <!-- Chapter List -->
@@ -67,10 +70,12 @@
 import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Router } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 import { useMyStory } from '../../composables/stories/use-get-my-story'
 import { useMyStoryStore, type MyStoryResource } from '../../stores/my-story'
 
+import { useGenreStore } from '../../stores/genres'
 import { ModalsContainer, useModal } from 'vue-final-modal'
 
 import MyChapterListItem from '../../components/app/my-story/my-chapters/MyChapterListItem.vue'
@@ -82,6 +87,11 @@ const { story, getStory } = useMyStory()
 const { saveMyStory } = useMyStoryStore()
 const route = useRoute()
 const router = useRouter()
+
+//  Load genre options into store, use storeToRefs to access pinia stores
+const genreStore = useGenreStore()
+const { genreList } = storeToRefs(genreStore)
+genreStore.getGenreList()
 
 const privacyOptions = [
     { label: 'Public', value: 'public', description: 'Visible to everyone, with or without an account' },
@@ -119,6 +129,7 @@ const saveStoryDetails = async () => {
         visible: story.value.visible,
         posted: story.value.posted,
         complete: story.value.complete,
+        genres: story.value.genres
     }
 
     // console.log('>>> Story Details: ', values)
