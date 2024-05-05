@@ -32,6 +32,7 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 // });
 Route::resource('stories', Controllers\StoryController::class);
 Route::resource('chapters', Controllers\ChapterController::class);
+Route::resource('genres', Controllers\GenreController::class);
 
 // Get Chapter List
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);

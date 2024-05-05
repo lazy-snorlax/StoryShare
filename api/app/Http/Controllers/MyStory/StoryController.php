@@ -75,9 +75,9 @@ class StoryController extends Controller
         $story->save();
 
         // TODO: Update story genres records
-        // $story->genres()->sync($request->input('genres'));
+        $story->genres()->sync(array_column($request->input('genres'), 'value'));
 
-        return new StoryResource($story);
+        return new StoryResource($story->load('genres'));
     }
 
     /**
