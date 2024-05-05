@@ -42,6 +42,7 @@ export type MyStoryResource = {
     visible: string,
     posted: boolean,
     complete: boolean,
+    genres: Array<numbers>,
 }
 
 export type MyStoryListResource = {

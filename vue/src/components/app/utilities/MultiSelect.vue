@@ -42,8 +42,8 @@ const emit = defineEmits<{
 
 const { options } = toRefs(props)
 
-const optionsAreObjects = computed(() =>
-  options.value.some((value) => typeof value === 'object')
+const optionsAreObjects = computed(() => 
+    options.value.some((value) => typeof value === 'object')
 )
 
 const attrs = computed(() => {
