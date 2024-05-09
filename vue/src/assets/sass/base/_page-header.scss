@@ -18,6 +18,30 @@ header.page-header {
         display: flex;
         align-items: center;
     }
+
+    .menu-toggle-wrap {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 1rem;
+		position: relative;
+		top: 0;
+		transition: 0.2s ease-in-out;
+		.menu-toggle {
+			transition: 0.2s ease-in-out;
+			.material-icons, i, svg {
+				font-size: 2rem;
+				color: var(--primary-alt);
+				transition: 0.2s ease-out;
+			}
+			
+			&:hover {
+				.material-icons, i {
+					color: var(--primary-alt);
+					transform: translateX(0.5rem);
+				}
+			}
+		}
+	}
   
     .left {
         order: 1;

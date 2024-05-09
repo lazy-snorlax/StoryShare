@@ -127,5 +127,9 @@
 	}
 	@media (max-width: 1024px) {
 		z-index: 99;
+		display: none;
+		&.is-expanded {
+			display: flex;
+		}
 	}
 }
