@@ -4,12 +4,6 @@
             <img :src="logo" alt="LOGO.png">
         </div>
 
-        <div class="menu-toggle-wrap">
-            <button class="menu-toggle" @click="toggleMenu">
-				<font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
-            </button>
-        </div>
-
         <h3>Menu</h3>
 
         <div class="menu">
@@ -91,22 +85,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import logoDefault from '@/assets/logo.svg'
 import { useLogout } from '../../composables/use-logout'
 import { useLoggedInUser } from '../../composables/use-logged-in-user'
 
-const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
-const toggleMenu = () => {
-    is_expanded.value = !is_expanded.value
-    localStorage.setItem("is_expanded", is_expanded.value)
-}
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
 const logo = computed(() => {
 	return logoDefault
 })
 
-const { logout } = useLogout();
-const { loggedInUser } = useLoggedInUser();
+const { logout } = useLogout()
+const { loggedInUser } = useLoggedInUser()
+
+const authStore = useAuthStore()
+const { is_expanded } = storeToRefs(authStore)
 
 </script>
