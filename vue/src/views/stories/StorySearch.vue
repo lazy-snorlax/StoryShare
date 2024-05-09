@@ -9,7 +9,7 @@
             </div>
 
             <div class="d-inline-flex">
-                <div class="story-list">
+                <div class="story-list w-100">
                     <template v-for="item in list">
                         <StoryListItem :item="item" />
                     </template>
