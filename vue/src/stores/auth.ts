@@ -5,7 +5,9 @@ export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
         user: null,
         csrf: false,
-        authenticationAttempted: false
+        authenticationAttempted: false,
+        is_expanded: false,
+        toggleSearchFilters: false,
     }),
     actions: {
         async login(payload: LoginForm) {
@@ -44,6 +46,14 @@ export const useAuthStore = defineStore('auth', {
         async updateAccountPassword(payload: UpdatePasswordForm) {
             await this.http.put('user/password', payload)
         },
+
+        toggleSidebar() {
+            this.is_expanded = !this.is_expanded
+        },
+
+        toggleFilters() {
+            this.toggleSearchFilters = !this.toggleSearchFilters
+        }
     }
 
 })
@@ -52,6 +62,8 @@ type AuthState = {
     csrf: boolean
     authenticationAttempted: boolean
     user: LoggedInUserResource | null
+    is_expanded: boolean
+    toggleSearchFilters: boolean
 }
 
 export type LoggedInUserResource = {
