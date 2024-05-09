@@ -1,14 +1,14 @@
 <template>
-    <div class="layout-sidesheet row">
+    <div class="layout-sidesheet row" style="width: -moz-available;">
         <div class="col main-content pb-0" :class="{ 'd-flex flex-column': mainContentFlex }">
-        <slot name="beforeContainer" />
+          <slot name="beforeContainer" />
 
-        <slot v-if="noContainer" />
-        <div v-else v-bind="attrs">
-            <slot />
-        </div>
+          <slot v-if="noContainer" />
+          <div v-else v-bind="attrs">
+              <slot />
+          </div>
 
-        <slot name="afterContainer" />
+          <slot name="afterContainer" />
         </div>
 
         <slot name="sidesheet" />
