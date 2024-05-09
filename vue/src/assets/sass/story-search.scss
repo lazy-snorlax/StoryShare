@@ -1,0 +1,97 @@
+
+#latest-page_sub-nav {
+    border-radius: 3px;
+    background-color: #242629;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14),0 2px 2px 0 rgba(0,0,0,0.12),0 1px 3px 0 rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    padding: 0 8px;
+    width: 100%;
+
+    #sub-nav_inner {
+        color: #9398a0;
+        font-size: 1.1em;
+        height: 45px;
+        margin: 0 auto;
+        display: flex;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+
+        &>div {
+            flex: 1;
+        }
+
+        #sub-nav_controls {
+            display: flex;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+            flex: 0 0 auto;
+            position: relative;
+
+            .controls-block {
+                &:first-of-type {
+                    margin-left: auto;
+                }
+                height: 40px;
+                padding: 6px 0 0 0;
+                margin: 0 8px 0 0;
+                flex: 1 none;
+                display: flex;
+
+                a {
+                    background-color: #242629;
+                    border: 1px solid #3f4043;
+                    border-radius: 5px;
+                    color: #9398a0;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: .85em;
+                    height: 28px;
+                    line-height: 27px;
+                    padding: 0 10px;
+                    text-decoration: none;
+                    transition: .2s;
+                    flex: 0 0 auto;
+                }
+            }
+        }
+    }
+}
+
+.sub-nav_paging {
+    display: flex;
+    flex: 1 0 auto;
+
+    a {
+        background-color: #242629;
+        border: 1px solid #3f4043;
+        cursor: pointer;
+        color: #9398a0;
+        display: inline-block;
+        font-size: .85em;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 10px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: .2s;
+        
+        &.nav_next {
+            background-color: #347FC4;
+            border: 1px solid rgba(0,0,0,0.25);
+            border-radius: 3px;
+            color: #d9d9d9;
+        }
+        &.disabled {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+    }
+
+	@media (max-width: 1024px) {
+        .sub-nav_info-paging_nums {
+            display: none;
+        }
+	}
+}
