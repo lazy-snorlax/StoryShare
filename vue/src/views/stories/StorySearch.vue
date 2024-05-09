@@ -5,7 +5,7 @@
         <Container class="m-auto p-4 d-flex flex-column" style="width: -moz-available;">            
             
             <div class="d-inline-flex w-100">
-                <StorySubNav @toggleFilter="toggleFilters" />
+                <StorySearchSubNav @toggleFilter="toggleFilters" @triggerReload="reloadStoryList" />
             </div>
 
             <div class="d-inline-flex">
@@ -26,8 +26,10 @@
 <script lang="ts" setup>
 import { useStoryStore, getStoryList } from '@/stores/story';
 import StoryListItem from '@/components/story/StoryListItem.vue';
-import StorySearchFilters from './StorySearchFilters.vue';
-import StorySubNav from './StorySubNav.vue';
+
+import StorySearchFilters from '../../components/search/StorySearchFilters.vue';
+import StorySearchSubNav from '../../components/search/StorySearchSubNav.vue';
+
 import { useStoryList } from '@/composables/stories/use-get-story-list';
 import { onMounted, ref, watchEffect } from 'vue';
 
@@ -49,6 +51,10 @@ watchEffect(async () => {
     if (filters.value.search == null) return
     await getStoryList(new URLSearchParams(filters.value))
 })
+
+const reloadStoryList = async () => {
+    await getStoryList(new URLSearchParams(filters.value))
+}
 
 const { toggleFilters } = useAuthStore()
 
