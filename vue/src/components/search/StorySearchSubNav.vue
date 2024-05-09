@@ -2,14 +2,14 @@
     <div id="latest-page_sub-nav">
         <div id="sub-nav_inner" class="disabled">
             <div class="sub-nav_paging" style="opacity: 1;">
-                <a class="nav_prev disabled" href="##" rel="ajax">
+                <a class="nav_prev disabled">
                     <i class="fas fa-angle-left"></i>
                     <span>Prev</span>
                 </a>
                 <div class="sub-nav_info-paging_nums">
                     <a class="btn-small current" data-page="1">1</a>
                 </div>
-                <a class="nav_next" href="#/cat=games/page=2" rel="ajax">
+                <a class="nav_next">
                     <span>Next</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
