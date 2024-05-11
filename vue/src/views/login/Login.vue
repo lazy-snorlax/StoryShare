@@ -36,6 +36,8 @@
   
 <script lang="ts" setup>
 import { AxiosError, isAxiosError } from 'axios'
+import { storeToRefs } from 'pinia'
+import { onMounted, watch } from 'vue';
 
 import { useAuthStore, type LoginForm } from '../../stores/auth';
 import { useRouter, useRoute } from 'vue-router'
@@ -45,8 +47,11 @@ import { useLoggedInUser } from '../../composables/use-logged-in-user';
 import { useForm } from 'vee-validate'
 import { object, string, number, date, InferType } from 'yup'
 
-const { login, user }  = useAuthStore()
+const authStore  = useAuthStore()
+const { login }  = useAuthStore()
 const { loggedInUser } = useLoggedInUser()
+
+const { user, error } = storeToRefs(authStore)
 
 const router = useRouter()
 const route = useRoute()
@@ -70,14 +75,25 @@ const submit = handleSubmit(async (values) => {
         } else {
             router.replace({ name: 'dashboard' })
         }
-    } catch ( error ) {
-        if (isAxiosError(error)){
-            alert(error.message)
+    } catch (error) {
+        if (isAxiosError(error) && error.response && error.response.status === 429) {
+            // TODO: Too many attempts error
+            return
         }
-        console.log('>>>> this is an error: ', error.message)
-        // throw error
+        if (isAxiosError(error) && error.response && error.response.status === 422) {
+            alert(error.response.data.message)
+            return
+        }
+        throw error.response
     }
+    // If login unsuccessful, alert user
+    // if (typeof user.value === undefined || typeof user.value === null) {
+    // } 
+    // else {
+    //     // else successful login, reroute to dashboard
+    // }
 })
 
+
 </script>
-  
+   

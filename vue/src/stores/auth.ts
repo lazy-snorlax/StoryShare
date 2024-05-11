@@ -4,6 +4,7 @@ import { HttpStatusCode } from "axios"
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
         user: null,
+        error: null,
         csrf: false,
         authenticationAttempted: false,
         is_expanded: false,
@@ -11,13 +12,14 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(payload: LoginForm) {
-            const user = await this.http.post('login', payload)
-            this.user = user
+            this.authenticationAttempted = false,
+            await this.http.post('login', payload)
         },
 
         async logout() {
             await this.http.post('logout')
             this.user = null
+            this.csrf = false
         },
 
         async getUser() {

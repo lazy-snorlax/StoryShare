@@ -73,6 +73,8 @@ export default {
                     alert( 'We encountered a server error. We have been alerted and will investigate.' )
                 }
             }
+
+            return Promise.reject(error)
         })
     }
 }
