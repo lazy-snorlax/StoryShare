@@ -1,24 +1,4 @@
 <template>
-    <!-- <div id="filter-sidebar-wrapper" :class="`${ is_filter_expanded ? 'is-filter-expanded' : '' }`" >
-        <div class="menu-toggle-wrap">
-            <button class="menu-toggle" @click="toggleMenu">
-                <i class="fa-solid fa-filter"></i>
-            </button>
-        </div>
-        <h3>Filter Stories</h3>
-        <div class="menu">
-            <div class="filter-item">
-                <label class="form-label">Search</label>
-                <input type="text" name="search" class="form-control" v-model="filters.search">
-            </div>
-
-            <div class="filter-item">
-                <label class="form-label">Sort By</label>
-                <MultiSelect v-model="filters.sort" :options="sortByOptions" value-only />
-            </div>
-        </div>
-    </div> -->
-
     <aside id="filter-sidebar-wrapper" :class="`${toggleSearchFilters ? '' : 'hide-filters'}`">
         <div class="content">
             <h3 class="content-filter-title">
@@ -28,7 +8,6 @@
                 </div>
                 <div id="filter-controls">
                     <a class="btn btn-small"><i class="fas fa-undo-alt"></i></a>
-                    <!-- <a class="btn btn-small"><i class="fas fa-times"></i></a> -->
                 </div>
             </h3>
             <div class="filter-block">
