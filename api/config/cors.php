@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'paths' => ['*'],
+    'paths' => ['api/*'],
     'allowed_methods' => [
         'POST',
         'GET',
@@ -29,7 +29,8 @@ return [
 
     'allowed_origins' => [
         env('APP_URL'),
-        env('FRONTEND_URL')
+        env('FRONTEND_URL'),
+        '*'
     ],
 
     'allowed_origins_patterns' => [],
@@ -42,6 +43,7 @@ return [
         'Origin',
         'Authorization',
         'Cache-Control',
+        '*',
     ],
 
     'exposed_headers' => [
