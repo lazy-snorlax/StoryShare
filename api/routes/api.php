@@ -26,11 +26,11 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 
 
 // TODO: Global Lookups =====================================================
-// Route::prefix('/stories')->group(function () {
-//     Route::get('', [Controllers\StoryController::class, 'index']);
-//     Route::get('/{id}', [Controllers\StoryController::class, 'show']);
-// });
-Route::resource('stories', Controllers\StoryController::class);
+Route::prefix('/stories')->group(function () {
+    Route::post('', [Controllers\StoryController::class, 'index']);
+    Route::get('/{id}', [Controllers\StoryController::class, 'show']);
+});
+// Route::resource('stories', Controllers\StoryController::class);
 Route::resource('chapters', Controllers\ChapterController::class);
 Route::resource('genres', Controllers\GenreController::class);
 
@@ -38,7 +38,7 @@ Route::resource('genres', Controllers\GenreController::class);
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);
 
 // Authenticated ============================================================
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
     Route::put('/user', Controllers\UpdateAccountDetailsController::class);
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
