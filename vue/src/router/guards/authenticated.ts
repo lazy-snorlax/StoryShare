@@ -5,11 +5,6 @@ export default (router: Router) =>
     router.beforeEach(async (to) => {
         const authStore = useAuthStore()
 
-        // Public facing routes
-        if (to.meta.authenticate === false) {
-            return true
-        }
-
         try {
             if (authStore.user === null) {
                 if (authStore.authenticationAttempted) {
@@ -31,4 +26,10 @@ export default (router: Router) =>
                 }
             }
         }
+        
+        // Public facing routes
+        if (to.meta.authenticate === false) {
+            return true
+        }
+
     })
