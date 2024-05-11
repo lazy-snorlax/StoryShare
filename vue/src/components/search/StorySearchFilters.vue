@@ -27,12 +27,8 @@
                     Filters
                 </div>
                 <div id="filter-controls">
-                    <a class="btn btn-small">
-                        <i class="fas fa-undo-alt"></i>
-                    </a>
-                    <a class="btn btn-small">
-                        <i class="fas fa-times"></i>
-                    </a>
+                    <a class="btn btn-small"><i class="fas fa-undo-alt"></i></a>
+                    <!-- <a class="btn btn-small"><i class="fas fa-times"></i></a> -->
                 </div>
             </h3>
             <div class="filter-block">
