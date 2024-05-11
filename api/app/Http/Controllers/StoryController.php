@@ -14,20 +14,29 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(auth()->user());
+        // dd($request->post('genre'), array_column($request->post('genre'), 'id'));
         $query = Story::query()
-            ->when($request->query('search'), function($query, $search) {
+            ->when($request->post('search'), function($query, $search) {
                 if ($search !== 'null') {
                     $query->whereSearchByWords($search, [ 'title', 'summary' ]);
                 }
             })
             ->canAccess(auth()->user())
-            ->when($request->query('sort'), function ($query, $sort) {
+            ->when($request->post('sort'), function ($query, $sort) {
                 if (str_starts_with($sort, '-')){
                     $query->orderBy(substr($sort, 1), 'desc');
                 } else {
-                    $query->orderBy($sort, 'asc');
+                    $query->orderBy($sort, 'desc');
                 }
-            });
+            })
+            ->when($request->post('genre'), function ($query, $genre) {
+                $query->whereHas('genres', function ($q) use ($genre) {
+                    $q->whereIn('genres.id', array_column($genre, 'id'));
+                });
+            })
+            ;
+        // dd($query->toRawSql());
 
         return StoryListResource::collection($query->get()->load('user', 'genres'));
     }
