@@ -31,7 +31,7 @@ import StorySearchFilters from '../../components/search/StorySearchFilters.vue';
 import StorySearchSubNav from '../../components/search/StorySearchSubNav.vue';
 
 import { useStoryList } from '@/composables/stories/use-get-story-list';
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect, watch } from 'vue';
 
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
@@ -40,7 +40,9 @@ const { getStoryList } = useStoryStore()
 const { list } = useStoryList()
 const filters = ref({
     search: null,
-    sort: 'updated_at'
+    sort: 'updated_at',
+    genre: [],
+    // tags: []
 })
 
 onMounted(async () => {
@@ -48,14 +50,16 @@ onMounted(async () => {
     reloadStoryList()
 })
 
-watchEffect(async () => {
-    if (filters.value.search == null) return
-    // await getStoryList(new URLSearchParams(filters.value))
-    reloadStoryList()
-})
+watch(
+    filters.value,
+    () => {
+        console.log('Filters: ', filters.value)
+        reloadStoryList()
+    }
+)
 
 const reloadStoryList = async () => {
-    await getStoryList(new URLSearchParams(filters.value))
+    await getStoryList(filters.value)
 }
 
 const { toggleFilters } = useAuthStore()
