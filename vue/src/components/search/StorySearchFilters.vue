@@ -42,6 +42,12 @@
                 </div>
             </div>
             <div class="filter-block">
+                <h4 class="filter-block-title">Author</h4>
+                <div class="filter-block-content">
+                    <input type="text" name="search" class="form-control" v-model="filters.author">
+                </div>
+            </div>
+            <div class="filter-block">
                 <h4 class="filter-block-title">Sort By</h4>
                 <div class="filter-block-content">
                     <MultiSelect v-model="filters.sort" :options="sortByOptions" value-only />
@@ -53,6 +59,12 @@
                     <MultiSelect v-model="filters.genre" :options="genreList" :allow-empty="true" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
                 </div>
             </div>
+            <div class="filter-block">
+                <h4 class="filter-block-title">Story Tags</h4>
+                <div class="filter-block-content">
+                    <MultiSelect v-model="filters.tag" :options="[]" :allow-empty="true" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
+                </div>
+            </div>
         </div>
         <div class="footer"></div>
     </aside>
@@ -62,7 +74,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { onMounted, ref, toRefs, watch, watchEffect, defineProps } from 'vue';
-import MultiSelect from '../../components/app/utilities/MultiSelect.vue';
+import MultiSelect from '@/components/app/utilities/MultiSelect.vue';
 
 import { useAuthStore } from '@/stores/auth'
 import { useGenreStore } from '@/stores/genres'
@@ -70,8 +82,10 @@ import { useGenreStore } from '@/stores/genres'
 const props = defineProps<{
         filters?: {
             search: string,
+            author: string,
             sort: string,
             genre: array,
+            tag: array,
         }
     }>()
 

@@ -40,9 +40,10 @@ const { getStoryList } = useStoryStore()
 const { list } = useStoryList()
 const filters = ref({
     search: null,
+    author: null,
     sort: 'updated_at',
     genre: [],
-    // tags: []
+    tags: [],
 })
 
 onMounted(async () => {
