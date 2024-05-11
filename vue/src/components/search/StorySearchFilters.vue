@@ -45,31 +45,12 @@
                 <h4 class="filter-block-title">Sort By</h4>
                 <div class="filter-block-content">
                     <MultiSelect v-model="filters.sort" :options="sortByOptions" value-only />
-                    <!-- <div class="filter-btn-wrapper">
-                        <a href class="btn btn-small" data-sort="date">
-                            <i class="fas fa-clock"></i>
-                        </a>
-                    </div>
-                    <div class="filter-btn-wrapper">
-                        <a href class="btn btn-small" data-sort="likes">
-                            <i class="fas fa-thumbs-up"></i>
-                        </a>
-                    </div>
-                    <div class="filter-btn-wrapper">
-                        <a href class="btn btn-small" data-sort="views">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                    </div>
-                    <div class="filter-btn-wrapper">
-                        <a href class="btn btn-small" data-sort="name">
-                            <i class="fas fa-sort-alpha-down"></i>
-                        </a>
-                    </div>
-                    <div class="filter-btn-wrapper">
-                        <a href class="btn btn-small" data-sort="rating">
-                            <i class="fas fa-star"></i>
-                        </a>
-                    </div> -->
+                </div>
+            </div>
+            <div class="filter-block">
+                <h4 class="filter-block-title">Genre</h4>
+                <div class="filter-block-content">
+                    <MultiSelect v-model="filters.genre" :options="genreList" :allow-empty="true" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
                 </div>
             </div>
         </div>
@@ -79,17 +60,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, toRefs, watch, watchEffect } from 'vue';
+import { storeToRefs } from 'pinia'
+import { onMounted, ref, toRefs, watch, watchEffect, defineProps } from 'vue';
 import MultiSelect from '../../components/app/utilities/MultiSelect.vue';
-import { defineProps } from 'vue';
 
 import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
+import { useGenreStore } from '@/stores/genres'
 
 const props = defineProps<{
         filters?: {
             search: string,
             sort: string,
+            genre: array,
         }
     }>()
 
@@ -107,6 +89,10 @@ const sortByOptions = [
     { label: 'Last Updated', value: 'updated_at' },
     { label: 'First Created', value: 'created_at' },
 ]
+
+const genreStore = useGenreStore()
+const { genreList } = storeToRefs(genreStore)
+genreStore.getGenreList()
 
 const emit = defineEmits<{
     updateFilters: [filters: {}]
