@@ -6,7 +6,6 @@ export default (router: Router) =>
         const authStore = useAuthStore()
 
         // Public facing routes
-        console.log('>>> Route', to, to.meta)
         if (to.meta.authenticate === false) {
             return true
         }
@@ -21,6 +20,7 @@ export default (router: Router) =>
             }
         } catch {
             // If route is restricted, redirect to dashboard
+            // console.log('>>> Route Redirect ', to.meta.restricted)
             if (to.meta.restricted !== false) {
                 return {
                     name: 'dashboard',

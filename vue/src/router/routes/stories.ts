@@ -7,7 +7,8 @@ import StoryAllChapters from '../../views/stories/StoryAllChapters.vue'
 export default routes(
     {
         template: 'app',
-        restricted: false
+        restricted: false,
+        authenticate: false
     },
     [
         {
