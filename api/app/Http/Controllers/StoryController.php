@@ -15,10 +15,10 @@ class StoryController extends Controller
     public function index(Request $request)
     {
         $query = Story::query()
-            // ->with('user')
-            // ->with('genres')
             ->when($request->query('search'), function($query, $search) {
-                $query->whereSearchByWords($search, [ 'title', 'summary' ]);
+                if ($search !== 'null') {
+                    $query->whereSearchByWords($search, [ 'title', 'summary' ]);
+                }
             })
             ->canAccess(auth()->user())
             ->when($request->query('sort'), function ($query, $sort) {
