@@ -96,7 +96,7 @@ genreStore.getGenreList()
 const privacyOptions = [
     { label: 'Public', value: 'public', description: 'Visible to everyone, with or without an account' },
     { label: 'Protected', value: 'protected', description: 'Visible only to members.' },
-    { label: 'Private', value: 'private', description: 'Visible only to you' },
+    { label: 'Private', value: 'private', description: 'Visible only to you. This will not show in the search results.' },
 ]
 
 const privacyOptionDescription = computed(() => {
