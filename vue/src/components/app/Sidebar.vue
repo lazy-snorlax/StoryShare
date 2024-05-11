@@ -14,7 +14,7 @@
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
             </router-link>
-			<template v-if="loggedInUser">
+			<template v-if="isLoggedIn">
 				<router-link 
 					class="button" 
 					:to="{ name:'my-account' }" 
@@ -25,7 +25,7 @@
         </div>
 		
         <div class="menu flex">
-			<template v-if="loggedInUser">
+			<template v-if="isLoggedIn">
 				<router-link 
 					class="button"
 					:to="{ name: 'my-stories' }"
@@ -52,7 +52,7 @@
 		</div>
 
 		<!-- <div class="menu flex">
-			<template v-if="loggedInUser">
+			<template v-if="isLoggedIn">
 				<a class="button">
 					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Outlines </span>
 				</a>
@@ -66,10 +66,10 @@
 		</div> -->
 
         <div class="menu">
-			<a class="button" v-if="loggedInUser">
+			<a class="button" v-if="isLoggedIn">
 				<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
 			</a>
-			<a class="button" @click="logout" v-if="loggedInUser">
+			<a class="button" @click="logout" v-if="isLoggedIn">
 				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 			</a>
 			<router-link 
@@ -87,8 +87,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import logoDefault from '@/assets/logo.svg'
-import { useLogout } from '../../composables/use-logout'
-import { useLoggedInUser } from '../../composables/use-logged-in-user'
+import { useLogout } from '@/composables/use-logout'
+import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
@@ -98,7 +98,7 @@ const logo = computed(() => {
 })
 
 const { logout } = useLogout()
-const { loggedInUser } = useLoggedInUser()
+const { isLoggedIn } = useIsLoggedIn()
 
 const authStore = useAuthStore()
 const { is_expanded } = storeToRefs(authStore)
