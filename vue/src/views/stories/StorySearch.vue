@@ -44,12 +44,14 @@ const filters = ref({
 })
 
 onMounted(async () => {
-    await getStoryList()
+    // await getStoryList()
+    reloadStoryList()
 })
 
 watchEffect(async () => {
     if (filters.value.search == null) return
-    await getStoryList(new URLSearchParams(filters.value))
+    // await getStoryList(new URLSearchParams(filters.value))
+    reloadStoryList()
 })
 
 const reloadStoryList = async () => {
