@@ -46,7 +46,6 @@ const filters = ref({
 })
 
 onMounted(async () => {
-    // await getStoryList()
     reloadStoryList()
 })
 
