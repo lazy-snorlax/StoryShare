@@ -41,7 +41,12 @@
                 </div>
             </div>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <div class="info-count">
+                <i class="fas fa-info-circle"></i>
+                <span class="ms-3">{{ resultNumber }} Results</span>
+            </div>
+        </div>
     </aside>
 
 </template>
@@ -61,7 +66,8 @@ const props = defineProps<{
             sort: string,
             genre: array,
             tag: array,
-        }
+        },
+        resultNumber?: Number
     }>()
 
 const filters = ref(props.filters);

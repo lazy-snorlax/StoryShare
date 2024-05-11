@@ -15,7 +15,7 @@
                     </template>
                 </div>    
                 <!-- Story Search filters -->
-                <StorySearchFilters :filters="filters" />
+                <StorySearchFilters :filters="filters" :resultNumber="resultNumber" />
             </div>
 
         </Container>
@@ -31,7 +31,7 @@ import StorySearchFilters from '../../components/search/StorySearchFilters.vue';
 import StorySearchSubNav from '../../components/search/StorySearchSubNav.vue';
 
 import { useStoryList } from '@/composables/stories/use-get-story-list';
-import { onMounted, ref, watchEffect, watch } from 'vue';
+import { onMounted, ref, watchEffect, watch, computed } from 'vue';
 
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
@@ -44,6 +44,10 @@ const filters = ref({
     sort: 'updated_at',
     genre: [],
     tags: [],
+})
+
+const resultNumber = computed(() => {
+    return list.value.length
 })
 
 onMounted(async () => {
