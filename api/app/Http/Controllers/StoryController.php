@@ -18,9 +18,12 @@ class StoryController extends Controller
         // dd($request->post('genre'), array_column($request->post('genre'), 'id'));
         $query = Story::query()
             ->when($request->post('search'), function($query, $search) {
-                if ($search !== 'null') {
-                    $query->whereSearchByWords($search, [ 'title', 'summary' ]);
-                }
+                $query->whereSearchByWords($search, [ 'title', 'summary' ]);
+            })
+            ->when($request->post('author'), function($query, $author) {
+                $query->whereHas('user', function ($q) use ($author) {
+                    $q->where('users.name', 'like', $author);
+                });
             })
             ->canAccess(auth()->user())
             ->when($request->post('sort'), function ($query, $sort) {
