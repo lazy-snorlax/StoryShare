@@ -27,10 +27,10 @@
                     Filters
                 </div>
                 <div id="filter-controls">
-                    <a href class="btn btn-small">
+                    <a class="btn btn-small">
                         <i class="fas fa-undo-alt"></i>
                     </a>
-                    <a href class="btn btn-small">
+                    <a class="btn btn-small">
                         <i class="fas fa-times"></i>
                     </a>
                 </div>
