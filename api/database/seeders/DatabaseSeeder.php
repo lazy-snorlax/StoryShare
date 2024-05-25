@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Nette\Utils\Random;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@test.io',
         ]);
         
+        // Primary user
         $user = \App\Models\User::factory()->create([
             'name' => 'User',
             'email' => 'user@test.io',
@@ -27,12 +29,22 @@ class DatabaseSeeder extends Seeder
         // Genres
         $this->call(GenreSeeder::class);
 
-        // Stories
+        // Stories for primary user
         $userStories = \App\Models\Story::factory(3)->create([
             'user_id' => $user->id
         ]);
+        
+        // Stories for other users
+        $visible = ['protected', 'public'];
+        $stories = \App\Models\Story::factory(50)->create([
+            'user_id' => $user->id,
+            'visible' => $visible[array_rand($visible)]
+        ]);
+        
+        foreach ($stories as $story) {
+            $story->user_id = $users->random(1)->first()->id;
+            $story->save();
 
-        foreach ($userStories as $story) {
             // Seed genres to stories
             $story->genres()->attach(rand(1, 15));
             
@@ -49,11 +61,5 @@ class DatabaseSeeder extends Seeder
                 $i++;
             }
         }
-
-        // foreach ($users as $user) {
-        //     \App\Models\Story::factory(rand(1, 5))->create([
-        //         'user_id' => $user->id
-        //     ]);
-        // }
     }
 }
