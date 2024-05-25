@@ -26,7 +26,7 @@
 
             &:hover {
                 background-color: hwb(202 0% 26% / 0.2);
-                border-bottom: none;
+                border-bottom: none !important;
                 color: var(--primary);
             }
         }
