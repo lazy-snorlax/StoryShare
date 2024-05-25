@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\StoryListResource;
-use App\Http\Resources\StoryResource;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use App\Http\Resources\StoryResource;
+use App\Http\Resources\StoryListResource;
+use App\Http\Resources\StoryListCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class StoryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
      */
     public function index(Request $request)
     {
@@ -37,11 +41,10 @@ class StoryController extends Controller
                 $query->whereHas('genres', function ($q) use ($genre) {
                     $q->whereIn('genres.id', array_column($genre, 'id'));
                 });
-            })
-            ;
+            });
         // dd($query->toRawSql());
 
-        return StoryListResource::collection($query->get()->load('user', 'genres'));
+        return new StoryListCollection($query->paginate());
     }
 
     /**
