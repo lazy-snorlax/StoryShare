@@ -4,10 +4,10 @@ import type { Ref } from "vue";
 
 export function useStoryList() {
     const storyStore = useStoryStore()
-    const { list } = storeToRefs(storyStore)
+    const { results } = storeToRefs(storyStore)
 
     return {
-        list: list as Ref<Array<StoryListResource>>,
+        results: results as Ref<Object>,
         getStoryList: storyStore.getStoryList
     }
 }
