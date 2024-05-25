@@ -2,14 +2,16 @@
     <div id="latest-page_sub-nav">
         <div id="sub-nav_inner" class="disabled">
             <div class="sub-nav_paging" style="opacity: 1;">
-                <a class="nav_prev disabled">
+                <a class="nav_prev" :class="pagination.current_page == 1 ? 'disabled' : ''" @click="emit('pagePrevious')">
                     <i class="fas fa-angle-left"></i>
                     <span>Prev</span>
                 </a>
                 <div class="sub-nav_info-paging_nums">
-                    <a class="btn-small current" data-page="1">1</a>
+                    <template v-for="link in pagination.links">
+                        <a v-if="!isNaN(Number (link.label))" class="btn-small current" :class="pagination.current_page == link.label ? 'disabled' : ''" data-page="{{ link.label }}" @click="emit('pageJump', link.label)">{{ link.label }}</a>
+                    </template>
                 </div>
-                <a class="nav_next">
+                <a class="nav_next" :class="pagination.current_page == pagination.last_page ? 'disabled' : ''" @click="emit('pageNext')">
                     <span>Next</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -36,8 +38,21 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, watch, ref } from 'vue'
+import { onMounted, defineEmits, watch, computed, ref } from 'vue'
 
-const emit = defineEmits(['toggleFilter', 'triggerReload'])
+const props = defineProps<{
+    pagination: {
+        current_page?: Number,
+        last_page?: Number,
+        per_page?: Number,
+        total?: Number,
+        from?: Number,
+        to?: Number,
+        links?: Array,
+    }
+}>()
+
+
+const emit = defineEmits(['toggleFilter', 'triggerReload', 'pageNext', 'pagePrevious', 'pageJump'])
 
 </script>
