@@ -4,14 +4,20 @@ import { ChapterListResource } from "./chapter";
 export const useStoryStore = defineStore('story', {
     state: (): StoryState => ({
         story: null,
-        list: []
+        results: {
+            list: [],
+            pagination: {
+                total: 0
+            }
+        }
     }),
     actions: {
-        async getStoryList(filters) {
-            const response = await this.http.post('stories', 
+        async getStoryList(filters, page = 1) {
+            const response = await this.http.post('stories?page='+page, 
                 filters
             )
-            this.list = response.data.data
+            this.results.list = response.data.data
+            this.results.pagination = response.data.meta
         },
 
         async getStory(id: number) {
@@ -23,7 +29,10 @@ export const useStoryStore = defineStore('story', {
 
 type StoryState = {
     story: StoryResource,
-    list: Array<StoryListResource>
+    results: {
+        list: Array<StoryListResource>,
+        pagination: Object
+    }
 }
 
 export type StoryResource = {
