@@ -163,6 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Illuminate\Pagination\PaginationServiceProvider::class,
 
         /*
          * Application Service Providers...
