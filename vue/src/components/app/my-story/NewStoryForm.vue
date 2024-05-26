@@ -51,7 +51,7 @@ const submit = handleSubmit(async (values) => {
 
 <style lang="scss">
     #story-form {
-        background-color: var(--light);
+        background-color: var(--dark);
         border: none;
         color: var(--white);
         .form-control {
@@ -59,7 +59,7 @@ const submit = handleSubmit(async (values) => {
             color: var(--white);
             border: none;
             &::placeholder {
-                color: var(--light-alt);
+                color: var(--primary);
             }
         }
     }

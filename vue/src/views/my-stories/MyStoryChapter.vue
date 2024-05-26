@@ -21,10 +21,13 @@
 
             <div class="my-story-content-summary mb-3">
                 <h3>Summary</h3>
+                <p>A summary of this specific chapter. This is useful when writing anthologies.</p>
                 <text-editor v-model="chapter.summary" name="summary" />
             </div>
             
             <div class="my-3 my-story-content-summary content">
+                <h4>Body</h4>
+                <p>Enter chapter body here</p>
                 <text-editor v-model="chapter.content" @words="setWordCount" name="content" />
                 <div class="row">
                     <div class="col-3 mx-auto">
@@ -36,6 +39,7 @@
 
             <div class="my-story-content-summary mt-3">
                 <h3>Notes</h3>
+                <p>Any notes to be displayed for this specific chapter.</p>
                 <text-editor v-model="chapter.notes" name="notes" />
             </div>
         </div>
@@ -96,8 +100,8 @@ const saveChapter = async () => {
 <style lang="scss">
 .my-story-content {
     .my-story-content-summary {
-        background-color: var(--light);
-        color: var(--light-alt);
+        background-color: var(--dark);
+        color: var(--primary);
         border-radius: 10px;
         padding-bottom: 2rem;
         padding: 1rem;
@@ -105,8 +109,8 @@ const saveChapter = async () => {
 
     .form-control {
         color: var(--white);
-        background-color: var(--dark-alt);
-        border: none;
+        background-color: var(--dark);
+        border-color: var(--grey);
         &:focus {
             color: var(--white);
             background-color: var(--dark-alt);
@@ -115,16 +119,17 @@ const saveChapter = async () => {
 
     .btn {
         color: var(--dark-alt);
-        background-color: var(--light-alt);
+        background-color: var(--primary);
         &:hover{
-            background-color: var(--dark-alt);
-            color: var(--light-alt);
+            background-color: var(--light-alt);
+            color: var(--black);
         }
     }
 
     .content {
-        color: var(--white);
+        color: var(--primary);
         .editor {
+            color: var(--white);
             min-height: 40rem;
             max-height: 40rem;
         }

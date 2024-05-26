@@ -21,7 +21,7 @@
             <div class="row mb-4">
                 <h4>Privacy Settings</h4>
                 <div class="col mx-auto">
-                    <MultiSelect v-model="story.visible" :options="privacyOptions" value-only :allow-empty="false" :no-searching="true" />
+                    <MultiSelect v-model="story.visible" :options="privacyOptions" value-only :allow-empty="false" :no-searching="true" class="privacy" />
                 </div>
                 <div class="col mx-auto">
                     <p>{{ privacyOptionDescription }}</p>

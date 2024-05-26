@@ -26,7 +26,7 @@ const emit = defineEmits<{
     flex-direction: column;
     padding: 1rem;
     color: var(--white);
-    background-color: var(--light);
+    background-color: var(--dark);
     border-radius: 0.5rem;
 
     & > * + * {
@@ -35,13 +35,14 @@ const emit = defineEmits<{
 
     h1 {
         font-size: 1.375rem;
-        color: var(--light-alt);
+        color: var(--primary);
     }
 
     .btn {
-        background-color: var(--light-alt);
+        background-color: var(--primary);
+        color: var(--white);
         &:hover {
-            background-color: var(--dark-alt);
+            background-color: var(--primary-alt);
             color: var(--light-alt);
         }
     }
