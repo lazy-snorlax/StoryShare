@@ -1,6 +1,6 @@
 .my-account {
     &.nav-horizontal{
-        background-color: var(--light) !important;
+        background-color: var(--dark) !important;
         .nav-item {
             .nav-link{
                 color: var(--light-alt);
@@ -16,7 +16,7 @@
     }
     
     &.card {
-        background-color: var(--light) !important;
+        background-color: var(--dark) !important;
         color: var(--white);
         h2 {
             color: var(--light-alt);

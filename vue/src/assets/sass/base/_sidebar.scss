@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	background-color: var(--dark);
-	color: var(--primary-alt);
+	color: var(--light-alt);
 	width: calc(2rem + 32px);
 	overflow: hidden;
 	min-height: 100vh;
@@ -28,13 +28,13 @@
 			transition: 0.2s ease-in-out;
 			.material-icons, i, svg {
 				font-size: 2rem;
-				color: var(--primary-alt);
+				color: var(--light-alt);
 				transition: 0.2s ease-out;
 			}
 			
 			&:hover {
 				.material-icons, i {
-					color: var(--primary-alt);
+					color: var(--light-alt);
 					transform: translateX(0.5rem);
 				}
 			}
@@ -64,24 +64,24 @@
 				transition: 0.2s ease-in-out;
 			}
 			svg {
-				color: var(--primary-alt);
+				color: var(--light-alt);
 				margin: 0.5rem auto;
 
 			}
 			.text {
 				display: none;
-				color: var(--primary-alt);
+				color: var(--light-alt);
 				transition: 0.2s ease-in-out;
 			}
 			&:hover {
-				background-color: var(--primary-alt);
+				background-color: var(--light-alt);
 				border-right: 5px solid var(--primary);
 				.material-icons, i, .text, svg {
 					color: var(--dark-alt);
 				}
 			}
 			&.router-link-exact-active {
-				background-color: var(--primary-alt);
+				background-color: var(--light-alt);
 				border-right: 5px solid var(--primary);
 				.material-icons, i, .text, svg {
 					color: var(--dark-alt);

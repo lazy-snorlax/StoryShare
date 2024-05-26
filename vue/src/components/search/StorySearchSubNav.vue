@@ -6,9 +6,9 @@
                     <i class="fas fa-angle-left"></i>
                     <span>Prev</span>
                 </a>
-                <div class="sub-nav_info-paging_nums">
+                <div class="sub-nav_info-paging_nums mx-2">
                     <template v-for="link in pagination.links">
-                        <a v-if="!isNaN(Number (link.label))" class="btn-small current" :class="pagination.current_page == link.label ? 'disabled' : ''" data-page="{{ link.label }}" @click="emit('pageJump', link.label)">{{ link.label }}</a>
+                        <a v-if="!isNaN(Number (link.label))" class="btn-small " :class="pagination.current_page == link.label ? 'current' : ''" data-page="{{ link.label }}" @click="emit('pageJump', link.label)">{{ link.label }}</a>
                     </template>
                 </div>
                 <a class="nav_next" :class="pagination.current_page == pagination.last_page ? 'disabled' : ''" @click="emit('pageNext')">

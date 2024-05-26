@@ -1,7 +1,7 @@
 
 .single-story-details {
-    background-color: var(--light);
-    color: var(--primary-alt);
+    background-color: var(--dark);
+    color: var(--primary);
     border-radius: 10px;
     padding: 1rem 2rem !important;
 
@@ -22,7 +22,7 @@
     .form-control {
         background-color: var(--dark);
         color: var(--white);
-        border-color: var(--dark);
+        border-color: var(--light);
         // margin: 0 1rem;
         &:focus {
             background-color: var(--dark);
@@ -34,7 +34,7 @@
         background-color: var(--dark);
         color: var(--white);
         border-radius: 5px;
-        border-color: var(--dark);
+        border-color: var(--light);
     }
     .multiselect__content-wrapper {
         background-color: var(--dark);

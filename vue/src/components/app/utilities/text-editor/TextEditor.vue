@@ -85,9 +85,14 @@
     color: var(--white);
     padding: 0.5rem 1rem;
     margin: 0.5rem;
+    &:hover {
+      background-color: var(--light-alt);
+      color: var(--black);
+    }
   }
   .active {
     background-color: var(--light-alt);
+    color: var(--black);
   }
 }
 

@@ -15,15 +15,13 @@
 
 :root {
 	--sidebar-width: 300px;
-	--primary: #347FC4;
-	--primary-alt: #989FCE;
-	--dark: #13151d;
-	--dark-alt: #171923;
-	--light: #252a37;
-	--light-alt: #91F9E5;
 	
-	--light-alt: #347FC4;
-	--primary-alt: #347FC4;
+	--light: #e0fbfc;
+	--light-alt: #9Bd7df;
+	--primary: #347FC4;
+	--primary-alt: #24598b;
+	--dark: #2b303a;
+	--dark-alt: #202a25;
 
 	--grey: #64748b;
 	--black: #000;

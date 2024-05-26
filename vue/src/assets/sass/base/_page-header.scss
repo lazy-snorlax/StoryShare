@@ -3,7 +3,7 @@
 header.page-header {
     padding: 1rem 1.5rem;
     background-color: var(--dark-alt);
-    color: var(--primary-alt);
+    color: var(--primary);
     // border-bottom: 1px solid gray;
   
     display: flex;
@@ -30,13 +30,13 @@ header.page-header {
 			transition: 0.2s ease-in-out;
 			.material-icons, i, svg {
 				font-size: 2rem;
-				color: var(--primary-alt);
+				color: var(--primary);
 				transition: 0.2s ease-out;
 			}
 			
 			&:hover {
 				.material-icons, i {
-					color: var(--primary-alt);
+					color: var(--primary);
 					transform: translateX(0.5rem);
 				}
 			}

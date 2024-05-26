@@ -13,7 +13,7 @@ aside#filter-sidebar-wrapper {
 	}
 	
 	.content {
-		background-color: #212529 !important;
+		background-color: var(--dark) !important;
 		border-radius: 5px;
 		.content-filter-title {
 			border-bottom: 1px solid #3f4043;
@@ -65,6 +65,25 @@ aside#filter-sidebar-wrapper {
 			.filter-block-content {
 				display: flex;
 
+				.form-control {
+					background-color: var(--dark);
+					border-color: #696f78;
+				}
+				
+				.multiselect__tags, .multiselect__single, .multiselect__input, .multiselect__option {
+					background-color: var(--dark);
+					border-color: #696f78;
+					color: #696f78;
+				}
+				
+				.multiselect__option--highlight {
+					background-color: var(--dark);
+				} 
+				
+				.multiselect__option--selected {
+					background-color: var(--primary);
+				} 
+
 				.filter-btn-wrapper {
 					display: inline;
 					flex: 1 0 auto;
@@ -83,7 +102,7 @@ aside#filter-sidebar-wrapper {
 	}
 
 	.footer {
-		background-color: #242629;
+		background-color:  var(--dark);
 		margin: 20px 0 0 0;
 		padding: 15.00038px;
 		position: relative;
