@@ -28,7 +28,7 @@ Route::post('/password/reset', Controllers\Password\ResetPasswordController::cla
 // TODO: Global Lookups =====================================================
 Route::prefix('/stories')->group(function () {
     Route::post('', [Controllers\StoryController::class, 'index']);
-    Route::get('/{id}', [Controllers\StoryController::class, 'show']);
+    Route::get('/{story}', [Controllers\StoryController::class, 'show']);
 });
 // Route::resource('stories', Controllers\StoryController::class);
 Route::resource('chapters', Controllers\ChapterController::class);
