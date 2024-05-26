@@ -25,8 +25,8 @@ class StoryListResource extends JsonResource
             'word_count' => $this->word_count,
             'visible' => $this->visible,
             'complete' => $this->complete,
-            'created_at' => $this->created_at->format('d M Y'),
-            'updated_at' => $this->updated_at->format('d M Y'),
+            'created_at' => $this->created_at?->format('d M Y'),
+            'updated_at' => $this->updated_at?->format('d M Y'),
             'genres' => GenreResource::collection($this->whenLoaded('genres')),
         ];
     }
