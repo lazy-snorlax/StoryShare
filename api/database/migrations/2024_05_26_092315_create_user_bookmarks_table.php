@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('bookmarks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('story_id')->unsigned();
-            $table->unsignedBigInteger('user_id')->unsigned();
+            
+            $table->boolean('private');
+            $table->text('notes');
 
-            $table->foreign('story_id')->references('id')->on('stories');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('story_id')->unsigned();
+
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('story_id')->references('id')->on('stories');
 
             $table->timestamps();
         });
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_bookmarks');
+        Schema::dropIfExists('bookmarks');
     }
 };
