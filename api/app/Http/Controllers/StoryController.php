@@ -48,26 +48,11 @@ class StoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Story $story)
     {
+        abort_if($story->visible == null, 400, 'Internal Server error. Story not found');
         abort_if(!auth()->user() && $story->visible != 'public', 400, 'You must login to view this story');
 
         abort_if(
@@ -77,30 +62,6 @@ class StoryController extends Controller
             'You don\'t have access to this story'
         );
 
-        return new StoryResource($story->load('user', 'chapters', 'genres'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Story $story)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Story $story)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Story $story)
-    {
-        //
+        return new StoryResource($story->load('chapters', 'genres'));
     }
 }
