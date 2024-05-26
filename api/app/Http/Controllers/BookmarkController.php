@@ -7,36 +7,35 @@ use App\Models\Bookmark;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use App\Http\Resources\StoryListCollection;
+use App\Http\Resources\BookmarkResource;
 
 class BookmarkController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of user bookmarks.
      */
     public function index(Request $request)
     {
         $query = Story::query()
         ->leftJoin('bookmarks', 'bookmarks.story_id', '=', 'stories.id')
-        ->where('bookmarks.user_id', '=', $request->user()->id)
-        ;
+        ->where('bookmarks.user_id', '=', $request->user()->id);
 
         return new StoryListCollection($query->paginate());
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created bookmark.
      */
     public function store(Request $request)
     {
-        //
+        $bookmark = Bookmark::create([
+            'user_id' => $request->user()->id,
+            'story_id' => $request->input('story_id'),
+            'private' => $request->input('private'),
+            'notes' => $request->input('notes'),
+        ]);
+
+        return new BookmarkResource($bookmark);
     }
 
     /**
