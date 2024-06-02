@@ -27,11 +27,11 @@ class BookmarkController extends Controller
      */
     public function store(Request $request)
     {
-        $bookmark = Bookmark::create([
+        $bookmark = Bookmark::updateOrCreate([
             'user_id' => $request->user()->id,
             'story_id' => $request->input('story_id'),
-            'private' => $request->input('private'),
-            'notes' => $request->input('notes'),
+            'private' => false, //$request->input('private'),
+            'notes' => '', //$request->input('notes'),
         ]);
 
         return new BookmarkResource($bookmark);
@@ -66,6 +66,7 @@ class BookmarkController extends Controller
      */
     public function destroy(Bookmark $bookmark)
     {
-        //
+        $bookmark->delete();
+        return response()->json(null);
     }
 }
