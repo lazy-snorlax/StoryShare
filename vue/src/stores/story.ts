@@ -44,6 +44,7 @@ export type StoryResource = {
     number_of_chapters: number,
     word_count: number,
     posted: boolean,
+    bookmark: object,
     complete: boolean,
     created_at: string,
     updated_at: string,

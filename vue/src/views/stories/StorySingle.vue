@@ -13,22 +13,22 @@
         </div>
 
         <div class="mt-1">
-            <div class="row d-flex">
-                <h2 class="mt-5 text-center">Chapters</h2>
-            </div>
-            <div class="row">
+            <div class="row d-flex align-items-baseline">
+                <h2 class="col mt-5 text-left">Chapters</h2>
                 <div class="col mx-auto text-center">
                     <router-link class="btn w-100" :to="{ name: 'story.chapter.all' }">
                         View Entire Story
                     </router-link>
                 </div>
+                <div class="col mx-auto text-center">
+                    <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark">Remove from My Bookmarks</a>
+                    <a v-else class="btn w-100" @click="createNewBookmark">Add to My Bookmarks</a>
+                </div>
                 <!-- <div class="col mx-auto text-center">
                     <a class="btn w-100">Download Story</a>
-                </div>
-                <div class="col mx-auto text-center">
-                    <a class="btn w-100">Add to My Bookmarks</a>
                 </div> -->
             </div>
+            <div class="row"></div>
             <div class="row">
                 <template v-for="chapter in story?.chapters" class="col mx-auto">
                     <ChapterListItem :chapter="chapter" />
@@ -38,10 +38,15 @@
     </Container>
 </template>
 <script lang="ts" setup>
-import { onMounted } from 'vue';
-import { useStory } from '../../composables/stories/use-get-story';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router'
-import ChapterListItem from '../../components/story/ChapterListItem.vue';
+import { useMyBookmarkStore } from '@/stores/my-bookmarks'
+
+import ChapterListItem from '@/components/story/ChapterListItem.vue';
+
+import { useStory } from '@/composables/stories/use-get-story';
+
+const { newBookmark, deleteBookmark } = useMyBookmarkStore()
 
 const { story, getStory } = useStory()
 const route = useRoute()
@@ -50,5 +55,15 @@ onMounted(async () => {
     await getStory(route.params.id)
 })
 
+const createNewBookmark = async () => {
+    await newBookmark({ story_id: story.value.id })
+    await getStory(route.params.id)
+}
+
+const removeBookmark = async () => {
+    // console.log('>>> Remove bookmark: ', story.value.bookmark.id)
+    await deleteBookmark(story.value.bookmark.id)
+    await getStory(route.params.id)
+}
 
 </script>

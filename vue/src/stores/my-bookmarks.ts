@@ -17,8 +17,13 @@ export const useMyBookmarkStore = defineStore('my-bookmark', {
             this.results.pagination = response.data.meta
         },
 
-        async saveMyBookmark(values) {
-            const response = await this.http.post('my-bookmarks', values)
+        async newBookmark(values) {
+            const response = await this.http.post('my-bookmark', values)
+            return response.data.data
+        },
+
+        async deleteBookmark(id) {
+            const response = await this.http.delete('my-bookmark/'+id)
             return response.data.data
         }
     },
