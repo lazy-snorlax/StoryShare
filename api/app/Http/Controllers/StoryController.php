@@ -62,6 +62,6 @@ class StoryController extends Controller
             'You don\'t have access to this story'
         );
 
-        return new StoryResource($story->load('chapters', 'genres'));
+        return new StoryResource($story->load('chapters', 'genres', 'bookmarks'));
     }
 }
