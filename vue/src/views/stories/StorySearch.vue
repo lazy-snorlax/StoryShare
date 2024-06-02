@@ -50,13 +50,7 @@ onMounted(async () => {
     reloadStoryList()
 })
 
-watch(
-    filters.value,
-    () => {
-        console.log('Filters: ', filters.value)
-        reloadStoryList()
-    }
-)
+watch(filters.value, () => { reloadStoryList() })
 
 const reloadStoryList = async () => {
     await getStoryList(filters.value)
