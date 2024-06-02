@@ -65,6 +65,14 @@ class Story extends Model
     }
 
     /**
+     * A story can have many bookmarks
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class, 'story_id', 'id');
+    }
+
+    /**
      * Scopes
      */
     public function scopePublic($query) {

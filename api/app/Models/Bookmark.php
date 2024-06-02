@@ -33,9 +33,9 @@ class Bookmark extends Model
      * 
      * @return 
      */
-    public function story() : HasOne
+    public function story() : BelongsTo
     {
-        return $this->hasOne(Story::class, 'id', 'story_id');
+        return $this->belongsTo(Story::class, 'id', 'story_id');
     }
 
     /**
