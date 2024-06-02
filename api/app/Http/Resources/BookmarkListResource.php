@@ -20,7 +20,8 @@ class BookmarkListResource extends JsonResource
             'notes' => $this->notes,
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
-            'story' => new StoryResource($this->story->load('genres'))
+            'user' => $this->user->id,
+            'story' => $this->story ? new StoryResource($this->story->load('genres')) : null
         ];
     }
 }
