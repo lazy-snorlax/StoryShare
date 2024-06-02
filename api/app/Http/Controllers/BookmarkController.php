@@ -7,6 +7,7 @@ use App\Models\Bookmark;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use App\Http\Resources\StoryListCollection;
+use App\Http\Resources\BookmarkListCollection;
 use App\Http\Resources\BookmarkResource;
 
 class BookmarkController extends Controller
@@ -16,11 +17,9 @@ class BookmarkController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Story::query()
-        ->leftJoin('bookmarks', 'bookmarks.story_id', '=', 'stories.id')
-        ->where('bookmarks.user_id', '=', $request->user()->id);
+        $query = $request->user()->bookmarks()->with('story');
 
-        return new StoryListCollection($query->paginate());
+        return new BookmarkListCollection($query->paginate());
     }
 
     /**
