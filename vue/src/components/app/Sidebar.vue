@@ -31,7 +31,7 @@
 					:to="{ name: 'my-stories' }"
 					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-stories') }"
 					>
-					<i class="fa-solid fa-book-open-reader"></i> <span class="text">Stories</span>
+					<i class="fa-solid fa-book-open-reader"></i> <span class="text">My Stories</span>
 				</router-link>
 				<a class="button">
 					<i class="fa-solid fa-bookmark"></i> <span class="text">Bookmarks</span>
