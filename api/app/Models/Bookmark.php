@@ -29,7 +29,7 @@ class Bookmark extends Model
 
 
     /**
-     * A bookmark has one story
+     * A bookmark belongs to one story
      * 
      * @return 
      */
