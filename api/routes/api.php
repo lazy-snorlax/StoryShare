@@ -56,8 +56,8 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     
     // My Bookmarks ============================================================
     Route::get('/my-bookmarks', [Controllers\BookmarkController::class, 'index']);
-    Route::put('/my-bookmark/{id}', [Controllers\BookmarkController::class, 'update']);
+    Route::put('/my-bookmark/{bookmark}', [Controllers\BookmarkController::class, 'update']);
     Route::post('/my-bookmark', [Controllers\BookmarkController::class, 'store']);
-    Route::delete('/my-bookmark/{id}', [Controllers\BookmarkController::class, 'destroy']);
+    Route::delete('/my-bookmark/{bookmark}', [Controllers\BookmarkController::class, 'destroy']);
 
 });
