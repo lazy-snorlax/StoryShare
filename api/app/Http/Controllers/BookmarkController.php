@@ -17,7 +17,7 @@ class BookmarkController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->user()->bookmarks()->with('story');
+        $query = $request->user()->bookmarks();
 
         return new BookmarkListCollection($query->paginate());
     }

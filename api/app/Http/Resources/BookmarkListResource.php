@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +22,8 @@ class BookmarkListResource extends JsonResource
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
             'user' => $this->user->id,
-            'story' => $this->story ? new StoryResource($this->story->load('genres')) : null
+            'story_id' => $this->story_id,
+            'story' => new StoryResource(Story::find($this->story_id)->load('genres'))
         ];
     }
 }
