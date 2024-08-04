@@ -2,9 +2,10 @@
     <div id="sidebar-wrapper" :class="`${is_expanded ? 'is-expanded' : ''}`">
         <div class="logo">
             <img :src="logo" alt="LOGO.png">
+			<h5 v-if="is_expanded">STORY SHARE</h5>
         </div>
 
-        <h3>Menu</h3>
+        <!-- <h3>Menu</h3> -->
 
         <div class="menu">
 			<router-link :to="{ name: 'stories.search' }" class="button">

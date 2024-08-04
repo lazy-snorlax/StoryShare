@@ -12,6 +12,8 @@
 		flex: 1 1 0%;
 	}
 	.logo {
+		display: flex;
+		color: var(--primary);
 		margin-bottom: 1rem;
 		img {
 			width: 2rem;
