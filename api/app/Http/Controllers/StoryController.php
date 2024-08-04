@@ -26,7 +26,7 @@ class StoryController extends Controller
             })
             ->when($request->post('author'), function($query, $author) {
                 $query->whereHas('user', function ($q) use ($author) {
-                    $q->where('users.name', 'like', $author);
+                    $q->where('users.name', 'like', '%'.$author.'%');
                 });
             })
             ->canAccess(auth()->user())
