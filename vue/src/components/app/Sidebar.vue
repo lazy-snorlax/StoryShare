@@ -43,7 +43,7 @@
 					<span class="text">My Bookmarks</span>
 				</router-link>
 				<a class="button">
-					<i class="fa-solid fa-books"></i> <span class="text">Serials</span>
+					<i class="fa-solid fa-layer-group"></i> <span class="text">My Collections</span>
 				</a>
 				<a class="button">
 					<i class="fa-solid fa-file"></i> <span class="text">Drafts</span>
