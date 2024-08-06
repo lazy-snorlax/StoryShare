@@ -21,8 +21,11 @@
                     </router-link>
                 </div>
                 <div class="col mx-auto text-center">
-                    <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark">Remove from My Bookmarks</a>
-                    <a v-else class="btn w-100" @click="createNewBookmark">Add to My Bookmarks</a>
+                    <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark"> <i class="fa-solid fa-bookmark"></i> Bookmarked</a>
+                    <a v-else class="btn w-100" @click="createNewBookmark"> <i class="fa-regular fa-bookmark"></i> Bookmark</a>
+                </div>
+                <div class="col mx-auto text-center">
+                    <a class="btn w-100" @click="applaude"> <i class="fa-solid fa-hands-clapping"></i> Applaude</a>
                 </div>
                 <!-- <div class="col mx-auto text-center">
                     <a class="btn w-100">Download Story</a>
@@ -41,12 +44,14 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { useMyBookmarkStore } from '@/stores/my-bookmarks'
+import { useApplauseStore } from '@/stores/applause'
 
 import ChapterListItem from '@/components/story/ChapterListItem.vue';
 
 import { useStory } from '@/composables/stories/use-get-story';
 
 const { newBookmark, deleteBookmark } = useMyBookmarkStore()
+const { applaudeStory } = useApplauseStore()
 
 const { story, getStory } = useStory()
 const route = useRoute()
@@ -64,6 +69,10 @@ const removeBookmark = async () => {
     // console.log('>>> Remove bookmark: ', story.value.bookmark.id)
     await deleteBookmark(story.value.bookmark.id)
     await getStory(route.params.id)
+}
+
+const applaude = async () => {
+    await applaudeStory(route.params.id)
 }
 
 </script>
