@@ -37,6 +37,9 @@ Route::resource('genres', Controllers\GenreController::class);
 // Get Chapter List
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);
 
+// Applause
+Route::post('/applause', [Controllers\ApplauseController::class, 'store']);
+
 // Authenticated ============================================================
 Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
