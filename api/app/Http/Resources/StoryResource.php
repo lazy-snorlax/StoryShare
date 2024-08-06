@@ -28,7 +28,7 @@ class StoryResource extends JsonResource
             'visible' => $this->visible,
             'created_at' => $this->created_at->format('d M Y'),
             'updated_at' => $this->updated_at->format('d M Y'),
-            'bookmark' => $this->bookmarks != null ? $request->user()->bookmarks()->where('story_id', $this->id)->first() : null,
+            'bookmark' => $this->bookmarks->count() > 0 ? $request->user()->bookmarks()->where('story_id', $this->id)->first() : null,
             'genres' => GenreResource::collection($this->whenLoaded('genres')),
             'chapters' => ChapterListResource::collection($this->whenLoaded('chapters')),
         ];
