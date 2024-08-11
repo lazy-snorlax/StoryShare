@@ -49,6 +49,16 @@ export const useAuthStore = defineStore('auth', {
             await this.http.put('user/password', payload)
         },
 
+        async getClientIpAddress() {
+            this.http.get('https://ipinfo.io/json')
+            .then(response => {
+                this.ip_address = response.data.ip
+            }).catch(error => {
+                console.log('>>> Error: ', error)
+                this.ip_address = 'localhost' // TODO: Dev route
+            })
+        },
+
         toggleSidebar() {
             this.is_expanded = !this.is_expanded
         },
@@ -71,7 +81,8 @@ type AuthState = {
 export type LoggedInUserResource = {
     id: number,
     name: string,
-    email: string,    
+    email: string,
+    ip_address: string | null,
 }
 
 export type LoginForm = {
