@@ -45,14 +45,19 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { useMyBookmarkStore } from '@/stores/my-bookmarks'
 import { useApplauseStore } from '@/stores/applause'
+import { useAuthStore } from '@/stores/auth'
 
 import ChapterListItem from '@/components/story/ChapterListItem.vue';
 
+import { useLoggedInUser } from '../../composables/use-logged-in-user';
 import { useStory } from '@/composables/stories/use-get-story';
+
 
 const { newBookmark, deleteBookmark } = useMyBookmarkStore()
 const { applaudeStory } = useApplauseStore()
+const { getClientIpAddress } = useAuthStore()
 
+const { loggedInUser } = useLoggedInUser()
 const { story, getStory } = useStory()
 const route = useRoute()
 
@@ -72,7 +77,19 @@ const removeBookmark = async () => {
 }
 
 const applaude = async () => {
-    await applaudeStory(route.params.id)
+    if (loggedInUser) {
+        // Applaude story using user_id
+        await applaudeStory(route.params.id) 
+    } else {
+        // Get client ip_address
+        const ip_address = 'localhost' // await getClientIpAddress()
+
+        // console.log('>>> IP Address: ', ip_address)
+        if (ip_address != null) {    
+            // Applaude story using client ip_address
+            await applaudeStory(route.params.id, ip_address)
+        }
+    }
 }
 
 </script>
