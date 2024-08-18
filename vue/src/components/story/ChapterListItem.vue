@@ -3,7 +3,17 @@
         <li>
             <h5>{{ chapter.title }}</h5>
             <p v-html="chapter.summary"></p>
-            <small>Updated: {{ chapter.updated_at }}</small>
+            <div class="mt-3 row d-flex">
+                <div class="col">
+                    <small>Updated: {{ chapter.updated_at }}</small>
+                </div>
+                <div class="col">
+                    <small>Word Count: {{ chapter.word_count }}</small>
+                </div>
+                <div class="col">
+                    <small>Comments: {{ chapter.comment_count }}</small>
+                </div>
+            </div>
         </li>
     </router-link>
 </template>
