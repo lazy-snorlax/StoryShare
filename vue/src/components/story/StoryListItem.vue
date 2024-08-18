@@ -18,12 +18,15 @@
         </div>
         <div class="summary" v-html="item.summary"></div>
         <div class="footer">
-            <div class="row d-flex">
+            <div class="mt-3 row d-flex">
                 <div class="col">
-                    <p>Chapters: <span>{{ item.number_of_chapters }}</span></p>
+                    <p>Chapters: <span> {{ item.completed_number_of_chapters }} / {{ item.total_number_of_chapters > 0 ?  item.total_number_of_chapters : '?' }}</span></p>
                 </div>
                 <div class="col">
                     <p>Words: <span>{{ item.word_count }}</span></p>
+                </div>
+                <div v-if="item.applause_count > 0" class="col">
+                    <p>Applause: <span>{{ item.applause_count }}</span></p>
                 </div>
                 <div class="col">
                     <p>Completed: 
