@@ -20,7 +20,7 @@
     "@tiptap/pm": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@tiptap/vue-3": "^2.1.13",
-    "axios": "^1.4.0",
+    "axios": "^1.7.4",
     "bootstrap": "^5.3.0",
     "pinia": "^2.0.35",
     "vee-validate": "^4.11.8",
