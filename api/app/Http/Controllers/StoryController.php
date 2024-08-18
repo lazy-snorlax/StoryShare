@@ -41,8 +41,12 @@ class StoryController extends Controller
                 $query->whereHas('genres', function ($q) use ($genre) {
                     $q->whereIn('genres.id', array_column($genre, 'id'));
                 });
-            });
+            })
+            ->withCount('applause')
+            ;
+
         // dd($query->toRawSql());
+        // dd($query->get());
 
         return new StoryListCollection($query->paginate());
     }
@@ -62,6 +66,6 @@ class StoryController extends Controller
             'You don\'t have access to this story'
         );
 
-        return new StoryResource($story->load('chapters', 'genres', 'bookmarks'));
+        return new StoryResource($story->load('chapters', 'genres', 'bookmarks', 'applause'));
     }
 }
