@@ -12,26 +12,46 @@
             <div v-html="story?.notes" />
         </div>
 
-        <div class="mt-1">
-            <div class="row d-flex align-items-baseline">
-                <h2 class="col mt-5 text-left">Chapters</h2>
-                <div class="col mx-auto text-center">
-                    <router-link class="btn w-100" :to="{ name: 'story.chapter.all' }">
-                        View Entire Story
-                    </router-link>
-                </div>
-                <div class="col mx-auto text-center">
-                    <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark"> <i class="fa-solid fa-bookmark"></i> Bookmarked</a>
-                    <a v-else class="btn w-100" @click="createNewBookmark"> <i class="fa-regular fa-bookmark"></i> Bookmark</a>
-                </div>
-                <div class="col mx-auto text-center">
-                    <a class="btn w-100" @click="applaude"> <i class="fa-solid fa-hands-clapping"></i> Applaude</a>
-                </div>
-                <!-- <div class="col mx-auto text-center">
-                    <a class="btn w-100">Download Story</a>
-                </div> -->
+        <div class="row mt-1 d-flex">
+            <div class="col">
+                <p>Chapters: <span>{{ story?.number_of_chapters }}</span></p>
             </div>
-            <div class="row"></div>
+            <div class="col">
+                <p>Words: <span>{{ story?.word_count }}</span></p>
+            </div>
+            <div v-if="story?.applause > 0" class="col">
+                <p>Applause: <span>{{ story?.applause }}</span></p>
+            </div>
+            <div class="col">
+                <p>Completed: 
+                    <span>
+                        <font-awesome-icon icon="fa-solid fa-check" v-if="story?.complete" />
+                        <font-awesome-icon icon="fa-solid fa-check" v-else />
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-1 d-flex align-items-baseline">
+            <div class="col mx-auto text-center">
+                <router-link class="btn w-100" :to="{ name: 'story.chapter.all' }">
+                    View Entire Story
+                </router-link>
+            </div>
+            <div class="col mx-auto text-center">
+                <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark"> <i class="fa-solid fa-bookmark"></i> Bookmarked</a>
+                <a v-else class="btn w-100" @click="createNewBookmark"> <i class="fa-regular fa-bookmark"></i> Bookmark</a>
+            </div>
+            <div class="col mx-auto text-center">
+                <a class="btn w-100" @click="applaude"> <i class="fa-solid fa-hands-clapping"></i> Applaude</a>
+            </div>
+            <!-- <div class="col mx-auto text-center">
+                <a class="btn w-100">Download Story</a>
+            </div> -->
+        </div>
+
+        <div class="mt-1">
+            <h2 class="col mt-5 text-left">Chapters</h2>
             <div class="row">
                 <template v-for="chapter in story?.chapters" class="col mx-auto">
                     <ChapterListItem :chapter="chapter" />
