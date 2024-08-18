@@ -21,7 +21,6 @@ class Story extends Model
         'number_of_chapters',
         'visible',
         'posted',
-        'word_count',
         'complete',
     ];
 
@@ -67,9 +66,25 @@ class Story extends Model
     /**
      * A story can have many bookmarks
      */
-    public function bookmarks()
+    public function bookmarks() : HasMany
     {
         return $this->hasMany(Bookmark::class, 'story_id', 'id');
+    }
+
+    /**
+     * A story can have multiple users appluading
+     */
+    public function applause() : HasMany
+    {
+        return $this->hasMany(Applause::class, 'story_id', 'id');
+    }
+
+    /**
+     * A story can have many comments
+     */
+    public function comments() : HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id', 'id');
     }
 
     /**

@@ -107,4 +107,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Bookmark::class);
     }
+
+
+    /**
+     * A user can applaud many stories
+     * 
+     * @return 
+     */
+    public function applause() : HasMany
+    {
+        return $this->hasMany(Applause::class);
+    }
 }
