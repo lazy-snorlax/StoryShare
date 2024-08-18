@@ -41,7 +41,7 @@ class StoryController extends Controller
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'notes' => $request->input('notes'),
-            'number_of_chapters' => 0,
+            'number_of_chapters' => $request->input('number_of_chapters'),
             'posted' => false,
             'word_count' => 0,
             'complete' => false,
@@ -71,7 +71,7 @@ class StoryController extends Controller
     public function update(Request $request, $id)
     {
         $story = Story::where('id', $id)->first();
-        $story->fill($request->only(['title', 'summary', 'notes', 'visible']));
+        $story->fill($request->only(['title', 'summary', 'notes', 'visible', 'number_of_chapters']));
         $story->save();
 
         // TODO: Update story genres records
