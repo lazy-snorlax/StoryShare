@@ -28,6 +28,16 @@
                 </div>
             </div>
 
+            <div class="row mb-4">
+                <h4>Total Number of Chapters</h4>
+                <div class="col mx-auto">
+                    <input type="number" v-model="story.number_of_chapters" name="number_of_chapters" class="form-control">
+                </div>
+                <div class="col mx-auto">
+                    <p>This is the total number of chapters this story is planned to have. If unsure, type '0'.</p>
+                </div>
+            </div>
+
             <div class="row">
                 <h4>Summary</h4>
                 <p>Write a brief summary or premise for this story</p>
@@ -37,7 +47,7 @@
             <div class="row mt-4 mb-1">
                 <h4>Notes</h4>
                 <p>Add any author notes for the story as a whole here.</p>
-                <text-editor v-model="story.notes" name="notes" />
+                <text-editor v-model="story.notes" @words="notesWordCount" name="notes" />
             </div>
 
             <div class="row">
@@ -120,12 +130,19 @@ onMounted(async () => {
     await getStory(route.params.id)
 })
 
+function notesWordCount(words) {
+    if (words == 0) {
+        story.value.notes = null
+    }
+}
+
 const saveStoryDetails = async () => {
     const values = <MyStoryResource>{
         id: story.value.id,
         title: story.value.title,
         summary: story.value.summary,
         notes: story.value.notes,
+        number_of_chapters: story.value.number_of_chapters,
         visible: story.value.visible,
         posted: story.value.posted,
         complete: story.value.complete,

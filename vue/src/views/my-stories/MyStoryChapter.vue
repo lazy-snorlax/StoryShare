@@ -40,7 +40,7 @@
             <div class="my-story-content-summary mt-3">
                 <h3>Notes</h3>
                 <p>Any notes to be displayed for this specific chapter.</p>
-                <text-editor v-model="chapter.notes" name="notes" />
+                <text-editor v-model="chapter.notes" @words="notesWordCount" name="notes" />
             </div>
         </div>
     </Container>
@@ -61,15 +61,20 @@ const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
 const { updateMyChapter } = useChapterStore()
 
-const wordCount = reactive(ref())
-
 onMounted(async () => {
     await getChapters(route.params?.chapter)
     await getChapterList(route.params?.id)
 })
 
 function setWordCount(words) {
-    wordCount.value = words
+    console.log('>>>> Word Count: ', words)
+    chapter.value.word_count = words
+}
+
+function notesWordCount(words) {
+    if (words == 0) {
+        chapter.value.notes = null
+    }
 }
 
 watch(() => route.params.chapter, async () => {
@@ -90,9 +95,10 @@ const saveChapter = async () => {
         summary: chapter.value.summary,
         content: chapter.value.content,
         notes: chapter.value.notes,
-        word_count: wordCount.value,
+        word_count: chapter.value.word_count,
     }
 
+    // console.log('>>> ', values, chapter)
     await updateMyChapter(values)
 }
 </script>
