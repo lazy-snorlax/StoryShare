@@ -16,6 +16,7 @@ class Chapter extends Model
         'title',
         'summary',
         'content',
+        'word_count',
         'notes',
     ];
 
