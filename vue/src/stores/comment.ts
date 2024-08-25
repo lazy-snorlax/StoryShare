@@ -8,6 +8,10 @@ export const useCommentsStore = defineStore('comments', {
             // .then(response => {
             //     console.log('Successfully added comment')
             // })
+        },
+        async deleteComment(comment_id) {
+            const response  = await this.http.delete('comment/' + comment_id)
+            return response.data
         }
     }
 })

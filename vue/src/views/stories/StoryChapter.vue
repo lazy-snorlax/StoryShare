@@ -52,7 +52,7 @@ import { useCommentsStore } from '/src/stores/comment.ts'
 
 const { isLoggedIn, getLoggedInUser } = useIsLoggedIn()
 
-const { commentChapter } = useCommentsStore()
+const { commentChapter, deleteComment } = useCommentsStore()
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
@@ -84,7 +84,7 @@ function replyComment(comment_id) {
     //  Open Modal to reply to a comment
 }
 
-function deleteComment(comment_id) {
+function deleteCom(comment_id) {
     console.log('>>> Delete comment_id', comment_id)
     // Open modal to confirm deletion
 }
@@ -97,5 +97,11 @@ const submitComment = async (parent_id) => {
 
     console.log('>>> Submit Comment: ', values)
     await commentChapter(values)
+    comment.value = ''
+}
+
+const commentDel = async (comment_id) => {
+    console.log('>>> Delete Comment: ', values)
+    await deleteComment(comment_id)
 }
 </script>
