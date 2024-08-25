@@ -13,7 +13,7 @@ class ChapterListController extends Controller
         abort_if($id == null, '400', 'No story id detected.');
 
         return ChapterListResource::collection(
-            Chapter::where('story_id', $id)->get()
+            Chapter::where('story_id', $id)->with('comments')->get()
         );
     }
 }

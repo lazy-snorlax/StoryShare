@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comment extends Model
 {
@@ -28,6 +30,18 @@ class Comment extends Model
     ];
 
     /**
-     * A comment can only have one parent, whether it's a story_id, chapter_id, or another comment_id
+     * A comment belongs to a user
      */
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * A comment can have many replies
+     */
+    public function replies() : HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id', 'id')->with('replies');
+    }
 }

@@ -19,6 +19,7 @@ class ChapterResource extends JsonResource
             'word_count' => $this->word_count,
             'notes' => $this->notes,
             'updated_at' => $this->updated_at->format('d M Y'),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'story' => new StoryResource($this->whenLoaded('story')),
         ];
     }

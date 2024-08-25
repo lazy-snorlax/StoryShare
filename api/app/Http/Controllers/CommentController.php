@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -10,17 +11,14 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $query = Comment::query()
+            ->where('parent_id', '=', $request->input('parent_id'))
+            ->with('replies')
+            ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return CommentResource::collection($query->load('replies'));
     }
 
     /**
@@ -35,14 +33,6 @@ class CommentController extends Controller
      * Display the specified resource.
      */
     public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
     {
         //
     }

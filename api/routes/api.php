@@ -40,6 +40,9 @@ Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController
 // Applause
 Route::post('/applause', [Controllers\ApplauseController::class, 'store']);
 
+// Get all comments for a story
+Route::get('/comments', [Controllers\CommentController::class, 'index']);
+
 // Authenticated ============================================================
 Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
@@ -62,5 +65,8 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::put('/my-bookmark/{bookmark}', [Controllers\BookmarkController::class, 'update']);
     Route::post('/my-bookmark', [Controllers\BookmarkController::class, 'store']);
     Route::delete('/my-bookmark/{bookmark}', [Controllers\BookmarkController::class, 'destroy']);
+    
+    // Comments ============================================================
+    Route::post('/comment', [Controllers\CommentController::class, 'store']);
 
 });
