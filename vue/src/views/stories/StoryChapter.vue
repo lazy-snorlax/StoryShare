@@ -17,20 +17,45 @@
                 <h3>Notes</h3>
                 <p v-html="chapter.notes"></p>
             </div>
+            
+            <div class="mt-3" v-if="chapter?.comments">
+                <h3>Comments</h3>
+
+                <div v-if="isLoggedIn" class="border mb-4 p-0">
+                    <text-editor v-model="comment" name="comment" :showMenuBar="false" class="p-0 m-0"></text-editor>
+                    
+                    <div class="row justify-content-end m-0 p-0">
+                        <div class="col-2">
+                            <button class="w-100 btn btn-primary" @click="submitComment(chapter.id)">Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="reply"/>
+            </div>
         </div>
     </Container>
 
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { useChapter } from '../../composables/stories/use-get-chapter';
 import { useChapterList } from '../../composables/stories/use-get-chapter-list';
 import { useRoute } from 'vue-router';
 import { onMounted, watch } from 'vue';
 import ChapterNav from '../../components/story/ChapterNav.vue';
+import Comment from '../../components/app/Comment.vue';
+import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'
+
+import { useIsLoggedIn } from '../../composables/use-is-logged-in.ts'
+
+const { isLoggedIn, getLoggedInUser } = useIsLoggedIn()
 
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
+
+const comment = ref('')
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
@@ -46,4 +71,17 @@ watch(() => route.params.chapter, async () => {
 watch(() => route.params.id, async () => {
     await getChapterList(route.params?.id)
 })
+
+function reply(comment_id) {
+    console.log('>>> Reply to comment_id', comment_id)
+}
+
+const submitComment = async (parent_id) => {
+    const values = {
+        content: comment.value,
+        parent_id: parent_id
+    }
+
+    console.log('>>> Submit Comment: ', values)
+}
 </script>
