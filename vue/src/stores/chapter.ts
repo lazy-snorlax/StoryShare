@@ -52,6 +52,7 @@ export type ChapterResource = {
     title: string,
     summary: string,
     content: string,
+    comments: Array<Object>
     notes: string,
     word_count: number
     updated_at: string,
