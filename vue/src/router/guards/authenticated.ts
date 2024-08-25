@@ -14,8 +14,8 @@ export default (router: Router) =>
                 await authStore.getUser()
             }
         } catch {
-            // If route is restricted, redirect to dashboard
-            // console.log('>>> Route Redirect ', to.meta.restricted)
+            // If the intended route is restricted we'll redirect back to the login page with the intended path.
+            console.log('>>> Route Redirect: ', to.meta.restricted)
             if (to.meta.restricted !== false) {
                 return {
                     name: 'dashboard',
