@@ -48,9 +48,11 @@ import Comment from '../../components/app/Comment.vue';
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'
 
 import { useIsLoggedIn } from '../../composables/use-is-logged-in.ts'
+import { useCommentsStore } from '/src/stores/comment.ts'
 
 const { isLoggedIn, getLoggedInUser } = useIsLoggedIn()
 
+const { commentChapter } = useCommentsStore()
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
@@ -94,5 +96,6 @@ const submitComment = async (parent_id) => {
     }
 
     console.log('>>> Submit Comment: ', values)
+    await commentChapter(values)
 }
 </script>
