@@ -26,7 +26,19 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = Comment::create([
+            'user_id' => $request->user()->id,
+            'parent_id' => $request->input('parent_id'),
+            'parent_type' => 'comment',
+            'content' => $request->input('content'),
+
+            // TODO: Make vars not fixed
+            'approved' => true,
+            'approved_by' => 2,
+            'approved_at' => now(),
+        ]);
+
+        return new CommentResource($comment);
     }
 
     /**
