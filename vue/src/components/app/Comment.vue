@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="comment-replies" v-if="comment.replies.length > 0">
-        <Comment v-for="reply in comment.replies" :comment="reply"  @reply="emitReply"/>
+        <Comment v-for="reply in comment.replies" :comment="reply" @reply="emitReply" @delete="emitDelete"/>
     </div>
 </template>
 
@@ -46,9 +46,9 @@ const emit = defineEmits<{
 
 // const reply = (id) => { emit('reply', id) }
 
-function emitReply(id) {
-    emit('reply', id)
-}
+function emitReply(id) { emit('reply', id) }
+function emitDelete(id) { emit('delete', id) }
+
 </script>
 
 <style lang="scss">

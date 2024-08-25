@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="reply"/>
+                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment"/>
             </div>
         </div>
     </Container>
@@ -56,6 +56,10 @@ const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
 
 const comment = ref('')
+const reply = ref({
+    content: '',
+    parent_id: 0,
+})
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
@@ -72,8 +76,15 @@ watch(() => route.params.id, async () => {
     await getChapterList(route.params?.id)
 })
 
-function reply(comment_id) {
+function replyComment(comment_id) {
     console.log('>>> Reply to comment_id', comment_id)
+    reply.value.parent_id = comment_id
+    //  Open Modal to reply to a comment
+}
+
+function deleteComment(comment_id) {
+    console.log('>>> Delete comment_id', comment_id)
+    // Open modal to confirm deletion
 }
 
 const submitComment = async (parent_id) => {
