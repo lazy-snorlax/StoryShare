@@ -1,6 +1,6 @@
 <template>
     <div class="wysiwyg-container">
-      <TextEditorMenuBar :editor="editor" />
+      <TextEditorMenuBar v-if="showMenuBar" :editor="editor" />
       <editor-content :editor="editor" />
     </div>
 </template>
@@ -17,6 +17,9 @@
   import CharacterCount from '@tiptap/extension-character-count'
   
   const props = defineProps({
+    showMenuBar: {
+      type: Boolean, default: true
+    },
     modelValue: {
       type: String || null
     }
@@ -65,7 +68,7 @@
   margin-bottom: 1rem;
   padding: 1rem;
   border: var(--light-alt) 1px solid;
-  border-top: none;
+  // border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   min-height: 12rem;
