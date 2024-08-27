@@ -25,7 +25,7 @@
                     <text-editor v-model="comment" name="comment" :showMenuBar="false" class="p-0 m-0"></text-editor>
                     
                     <div class="row justify-content-end m-0 p-0">
-                        <div class="col-2">
+                        <div class="col-lg-2 col-md-4 col-sm-4">
                             <button class="w-100 btn btn-primary" @click="submitComment(chapter.id)">Comment</button>
                         </div>
                     </div>
