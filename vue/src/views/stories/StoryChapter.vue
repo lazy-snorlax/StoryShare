@@ -97,11 +97,13 @@ const submitComment = async (parent_id) => {
 
     console.log('>>> Submit Comment: ', values)
     await commentChapter(values)
-    comment.value = ''
+    await getChapters(route.params?.chapter)
+    comment.value = '' // TODO: Pass event to child
 }
 
 const commentDel = async (comment_id) => {
     console.log('>>> Delete Comment: ', values)
     await deleteComment(comment_id)
+    // TODO: Update UI after deletion
 }
 </script>
