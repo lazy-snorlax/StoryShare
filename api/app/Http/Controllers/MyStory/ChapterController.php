@@ -42,7 +42,7 @@ class ChapterController extends Controller
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
             'content' => $request->input('content'),
-            'word_count' => $request->input('word_count'),
+            'word_count' => 0,
             'notes' => $request->input('notes'),
         ]);
 
