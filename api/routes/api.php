@@ -68,6 +68,6 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     
     // Comments ============================================================
     Route::post('/comment', [Controllers\CommentController::class, 'store']);
-    Route::delete('/comment', [Controllers\CommentController::class, 'destroy']);
+    Route::delete('/comment/{comment}', [Controllers\CommentController::class, 'destroy']);
 
 });
