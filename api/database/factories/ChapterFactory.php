@@ -20,6 +20,7 @@ class ChapterFactory extends Factory
             'title' => $this->faker->sentence(),
             'summary' => $this->faker->paragraph(3),
             'content' => $this->faker->paragraphs(rand(20,100), true),
+            'word_count' => rand(100, 50000),
             'notes' => $this->faker->paragraph(2),
         ];
     }

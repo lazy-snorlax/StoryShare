@@ -23,7 +23,7 @@ class StoryFactory extends Factory
             'notes' => $this->faker->paragraph(2),
             'number_of_chapters' => rand(1,5),
             'posted' => fake()->randomElement([ true, false ]),
-            'word_count' => rand(100, 50000),
+            // 'word_count' => rand(100, 50000),
             'complete' => fake()->randomElement([ true, false ]),
         ];
     }
