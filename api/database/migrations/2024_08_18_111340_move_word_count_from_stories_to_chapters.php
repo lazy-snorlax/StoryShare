@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chapters', function (Blueprint $table) {
-            $table->integer('word_count')->after('content');
+            $table->integer('word_count')->after('content')->default(0);
         });
         
         Schema::table('stories', function (Blueprint $table) {
