@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 docker compose -f docker-compose-build.yml up -d --build
+docker compose -f docker-compose-build.yml exec build-fpm composer install
+docker compose -f docker-compose-build.yml exec build-fpm php artisan migrate:fresh --seed
 docker compose -f docker-compose-build.yml exec build-fpm composer install --no-dev
 docker compose -f docker-compose-build.yml exec build-vue npm run staging
 docker compose -f docker-compose-build.yml stop
