@@ -1,4 +1,3 @@
-version: '2'
 volumes:
   database:
   node_modules:
@@ -17,7 +16,7 @@ services:
             - "MYSQL_ROOT_PASSWORD=secret"
         command: ['--innodb_flush_log_at_trx_commit=2']
     testing:
-        container_name: story-share-db-test
+        container_name: story-share-testing
         image: mysql:8.0.23
         ports:
             - "33062:3306"
@@ -41,7 +40,7 @@ services:
             - ./api/.env
         depends_on:
             - mysql
-    app-fpm:
+    fpm:
         container_name: story-share-fpm
         build:
             context: ./api/

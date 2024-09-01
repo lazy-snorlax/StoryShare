@@ -68,7 +68,7 @@ return [
             'url' => env('TESTING_DATABASE_URL'),
             'host' => env('DB_TESTING_HOST', env('DB_HOST')),
             'port' => env('DB_TESTING_PORT', env('DB_PORT')),
-            'database' => env('DB_TESTING_DATABASE', (getenv('TEST_TOKEN') !== false ? 'testing_'.getenv('TEST_TOKEN') : 'qa_staging_cba')),
+            'database' => env('DB_TESTING_DATABASE', 'testing_1'),
             'username' => env('DB_TESTING_USER', env('DB_USERNAME')),
             'password' => env('DB_TESTING_PASSWORD', env('DB_PASSWORD')),
             'unix_socket' => env('DB_SOCKET', ''),
