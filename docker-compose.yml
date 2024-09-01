@@ -41,7 +41,7 @@ services:
             - ./api/.env
         depends_on:
             - mysql
-    fpm:
+    app-fpm:
         container_name: story-share-fpm
         build:
             context: ./api/
