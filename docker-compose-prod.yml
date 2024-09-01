@@ -1,0 +1,39 @@
+volumes:
+  dbdata:
+
+services:
+  app-fpm:
+    build:
+      context: ./api/
+      dockerfile: Dockerfile.prod
+    image: story-share-build-fpm
+    expose:
+      - "9000"
+  app-api:
+    build:
+      context: ./api/
+      dockerfile: nginx.docker
+    image: story-share-build-api
+    ports:
+      - "8000:80"
+    depends_on:
+      - app-fpm
+  app-vue:
+    build:
+      context: ./vue/
+      dockerfile: prod.docker
+    image: story-share-build-vue
+    ports:
+      - "8080:80"
+  mysql:
+    image: mysql:8.0.23
+    ports:
+      - "33061:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    environment:
+      - "MYSQL_DATABASE=story-share"
+      - "MYSQL_USER=story-share"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
