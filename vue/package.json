@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --mode staging",
+    "build": "vite build",
+    "staging": "vite build --mode staging",
+    "production": "vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
