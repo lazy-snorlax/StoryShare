@@ -1,5 +1,5 @@
-# Story Share
-A full stack project skeleton built using MySQL and Laravel as a backend, with Vue 3 as a frontend.
+# Story Share (working title)
+Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction. A full stack application built using MySQL, Laravel as an API and Vue 3 as a frontend.
 
 ## Build 0.1.0
 - Vue 3
@@ -7,3 +7,4 @@ A full stack project skeleton built using MySQL and Laravel as a backend, with V
 - Nginx server
 - MySql Database
 - Containerized for local development environment
+- For production environment, run start.sh
