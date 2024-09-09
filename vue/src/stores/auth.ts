@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('auth', {
         error: null,
         csrf: false,
         authenticationAttempted: false,
-        is_expanded: true,
+        is_expanded: false,
         toggleSearchFilters: true,
     }),
     actions: {
