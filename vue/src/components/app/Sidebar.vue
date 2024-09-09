@@ -8,6 +8,7 @@
         <!-- <h3>Menu</h3> -->
 
         <div class="menu">
+			<theme-button />
 			<router-link :to="{ name: 'stories.search' }" class="button">
 				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Browse </span>
 			</router-link> 
@@ -91,7 +92,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, reactive, watchEffect } from 'vue'
 import logoDefault from '@/assets/logo.svg'
 import { useLogout } from '@/composables/use-logout'
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
@@ -99,9 +100,9 @@ import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
-const logo = computed(() => {
-	return logoDefault
-})
+import ThemeButton from './utilities/ThemeButton.vue'
+
+const logo = computed(() => { return logoDefault })
 
 const { logout } = useLogout()
 const { isLoggedIn } = useIsLoggedIn()
@@ -109,4 +110,32 @@ const { isLoggedIn } = useIsLoggedIn()
 const authStore = useAuthStore()
 const { is_expanded } = storeToRefs(authStore)
 
+
 </script>
+
+<style scoped>
+
+p {
+  color: var(--text-primary-color);
+}
+
+.container-center {
+  background-color: var(--background-color-primary);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  padding: 2rem 4rem;
+  height: 200px;
+  width: 300px;
+  text-align: center;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  background-color: var(--background-color-secondary);
+}
+
+</style>

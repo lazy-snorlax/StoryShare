@@ -15,7 +15,25 @@
 
 :root {
 	--sidebar-width: 300px;
-	
+
+	color-scheme: dark light;
+
+}
+
+:root.light {
+	--dark: #e0f2fe;
+	--dark-alt: #a5f3fc;
+	--primary: #2563eb;
+	--primary-alt: #24598b;
+	--light-alt: #242629;
+	--light: #181a1d;
+
+	--grey: #d1d5db;
+	--white: #000;
+	--black: #fff;
+}
+
+:root.dark {
 	--light: #e0fbfc;
 	--light-alt: #9Bd7df;
 	--primary: #347FC4;
@@ -27,6 +45,8 @@
 	--black: #000;
 	--white: #fff;
 }
+
+
 * {
 	margin: 0;
 	padding: 0;
