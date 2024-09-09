@@ -2,7 +2,7 @@
     <header class="page-header">
         <div class="left">
             <div class="menu-toggle-wrap">
-                <button class="menu-toggle" @click="toggleSidebar">
+                <button class="menu-toggle" @click="sidebarToggle">
                     <font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
                 </button>
             </div>
@@ -28,5 +28,16 @@ const props = defineProps<{
 }>()
 
 const { toggleSidebar } = useAuthStore()
+
+const sidebarToggle = () => {
+
+    const wrapper = document.getElementById('wrapper')
+    toggleSidebar()
+    wrapper.classList.add('transitioning')
+
+    setTimeout(() => {
+        wrapper.classList.remove('transitioning')
+    }, 300)
+}
 
 </script>
