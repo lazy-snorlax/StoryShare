@@ -1,26 +1,23 @@
 <template>
     <Header :title="'Browse'" />
 
-    <div class="d-flex">
-        <Container class="m-auto p-4 d-flex flex-column" style="width: -moz-available;">            
-            
-            <div class="d-inline-flex w-100">
-                <StorySearchSubNav :pagination="results.pagination" @toggleFilter="toggleFilters" @triggerReload="reloadStoryList" @pagePrevious="previous" @pageNext="next" @pageJump="pageJump"/>
-            </div>
-
-            <div class="d-inline-flex">
-                <div class="story-list w-100">
-                    <template v-for="item in results.list">
-                        <StoryListItem :item="item" />
-                    </template>
-                </div>
-                <!-- Story Search filters -->
-                <StorySearchFilters :filters="filters" :resultNumber="results.pagination.total" />
-            </div>
-
-        </Container>
+    <Container class="m-auto p-4 d-flex flex-column" style="width: -moz-available;">            
         
-    </div>
+        <div class="d-inline-flex w-100">
+            <StorySearchSubNav :pagination="results.pagination" @toggleFilter="toggleFilters" @triggerReload="reloadStoryList" @pagePrevious="previous" @pageNext="next" @pageJump="pageJump"/>
+        </div>
+
+        <div class="d-inline-flex">
+            <div class="story-list w-100">
+                <template v-for="item in results.list">
+                    <StoryListItem :item="item" />
+                </template>
+            </div>
+            <!-- Story Search filters -->
+            <StorySearchFilters :filters="filters" :resultNumber="results.pagination.total" />
+        </div>
+
+    </Container>
 
 </template>
 <script lang="ts" setup>
