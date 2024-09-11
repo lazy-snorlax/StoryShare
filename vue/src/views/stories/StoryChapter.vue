@@ -92,6 +92,7 @@ function deleteCom(comment_id) {
 const submitComment = async (parent_id) => {
     const values = {
         content: comment.value,
+        chapter_id: route.params.chapter,
         parent_id: parent_id
     }
 

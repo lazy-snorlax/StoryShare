@@ -15,6 +15,8 @@ class Comment extends Model
         'user_id',
         'parent_id',
         'parent_type',
+        'commentable_id',
+        'commentable_type',
         'content',
         'approved',
         'approved_by',

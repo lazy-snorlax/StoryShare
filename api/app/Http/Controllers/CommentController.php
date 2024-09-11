@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CommentResource;
+use App\Models\Chapter;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,11 @@ class CommentController extends Controller
             'user_id' => $request->user()->id,
             'parent_id' => $request->input('parent_id'),
             'parent_type' => 'comment',
+
+            // Fill polymorphic cols
+            'commentable_id' => $request->input('chapter_id'),
+            'commentable_type' => Chapter::class,
+
             'content' => $request->input('content'),
 
             // TODO: Make vars not fixed
