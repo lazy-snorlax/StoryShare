@@ -2,7 +2,7 @@
   <div id="wrapper">
     <Sidebar />
 
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" class="dark">
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Suspense :timeout="0">
