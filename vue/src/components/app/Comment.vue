@@ -6,8 +6,8 @@
         </header>
         <p v-html="comment.content" class="comment-body"></p>
         
-        <div class="row justifiy-content-end m-0 p-0">
-            <div v-if="loggedInUser != null && comment.user_id === loggedInUser.id" class="col-md-4 col-sm-6 ms-auto p-0 d-flex">
+        <div class="row justifiy-content-end m-0 p-0" v-if="loggedInUser != null">
+            <div v-if="comment.user_id === loggedInUser.id" class="col-md-4 col-sm-6 ms-auto p-0 d-flex">
                 <button class="w-100 mx-1 btn btn-danger" @click="emit('delete', comment.id)">Delete</button>
                 <button class="w-100 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
             </div>
