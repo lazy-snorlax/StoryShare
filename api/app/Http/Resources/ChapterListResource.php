@@ -20,7 +20,7 @@ class ChapterListResource extends JsonResource
             'title' => $this->title,
             'summary' => $this->summary,
             'word_count' => $this->word_count,
-            'comments' => $this->whenCounted('comments'),
+            'comment_count' => $this->allComments()->count(),
             'updated_at' => $this->updated_at->format('d M Y'),
         ];
     }
