@@ -18,20 +18,20 @@
                 <p v-html="chapter.notes"></p>
             </div>
             
-            <div class="my-3">
+            <div class="mt-3 mb-4" v-if="chapter?.comments">
                 <h3>Comments</h3>
 
-                <div class="border mb-4 p-0">
+                <div v-if="isLoggedIn" class="border mb-4 p-0">
                     <text-editor v-model="comment" name="comment" :showMenuBar="false" class="p-0 m-0"></text-editor>
                     
                     <div class="row justify-content-end m-0 p-0">
                         <div class="col-lg-2 col-md-4 col-sm-4">
-                            <button v-if="isLoggedIn" class="w-100 btn btn-primary" @click="submitComment(chapter.id)">Comment</button>
+                            <button class="w-100 btn btn-primary" @click="submitComment(chapter.id)">Comment</button>
                         </div>
                     </div>
                 </div>
 
-                <Comment v-if="chapter?.comments" v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment"/>
+                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment"/>
             </div>
         </div>
     </Container>
