@@ -22,6 +22,18 @@ body {
     display: flex;
     min-height: 100%;
     flex: 1 1 100%;
+    
+    #page-content-wrapper { min-width: calc(100% - 5rem); }
+    &.toggled {
+        #page-content-wrapper { min-width: calc(100% - 16rem); }
+    }
+
+    &.transitioning {
+        #page-content-wrapper {
+            min-width: 100vw; // when animating close prevent visual shift of content by adding 100vw
+            overflow-x: hidden;
+        }
+    }
 }
 
 .app {

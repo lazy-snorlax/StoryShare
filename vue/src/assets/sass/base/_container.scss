@@ -14,8 +14,3 @@
         color: var(--primary-alt);
     }
 }
-
-#wrapper.transitioning #page-content-wrapper {
-    min-width: 100vw; // when animating close prevent visual shift of content by adding 100vw
-    overflow-x: hidden;
-}

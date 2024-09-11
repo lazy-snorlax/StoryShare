@@ -34,8 +34,8 @@ const sidebarToggle = () => {
     const wrapper = document.getElementById('wrapper')
     toggleSidebar()
     wrapper.classList.add('transitioning')
-
-    setTimeout(() => {
+    
+    setTimeout(() => { 
         wrapper.classList.remove('transitioning')
     }, 300)
 }
