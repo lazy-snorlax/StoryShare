@@ -40,7 +40,7 @@
             </div>
             <div class="col mx-auto text-center">
                 <a v-if="story?.bookmark" class="btn w-100" @click="removeBookmark"> <i class="fa-solid fa-bookmark"></i> Bookmarked</a>
-                <a v-else class="btn w-100" @click="createNewBookmark"> <i class="fa-regular fa-bookmark"></i> Bookmark</a>
+                <a v-else class="btn w-100" @click="createNewBookmark"> <i class="fa-solid fa-bookmark"></i> Bookmark</a>
             </div>
             <div class="col mx-auto text-center">
                 <a class="btn w-100" @click="applaude"> <i class="fa-solid fa-hands-clapping"></i> Applaude</a>
