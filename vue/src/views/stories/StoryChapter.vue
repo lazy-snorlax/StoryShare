@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment"/>
+                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment" @edit="editComment" />
             </div>
         </div>
     </Container>
@@ -77,6 +77,12 @@ watch(() => route.params.chapter, async () => {
 watch(() => route.params.id, async () => {
     await getChapterList(route.params?.id)
 })
+
+function editComment(comment_id) {
+    console.log('>>> Edit comment_id', comment_id)
+    // reply.value.parent_id = comment_id
+    //  Open Modal to reply to a comment
+}
 
 function replyComment(comment_id) {
     console.log('>>> Reply to comment_id', comment_id)

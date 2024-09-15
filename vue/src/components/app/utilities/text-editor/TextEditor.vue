@@ -1,7 +1,7 @@
 <template>
     <div class="wysiwyg-container">
       <TextEditorMenuBar v-if="showMenuBar" :editor="editor" />
-      <editor-content :editor="editor" />
+      <editor-content :editor="editor" :editable="editable" />
     </div>
 </template>
   
@@ -17,9 +17,8 @@
   import CharacterCount from '@tiptap/extension-character-count'
   
   const props = defineProps({
-    showMenuBar: {
-      type: Boolean, default: true
-    },
+    showMenuBar: { type: Boolean, default: true },
+    editable: { type: Boolean, default: true },
     modelValue: {
       type: String || null
     }
@@ -32,6 +31,7 @@
     
   const editor = useEditor({
     content: props.modelValue,
+    editable: props.editable,
     onUpdate: ({ editor }) => {
       emit('update:modelValue', editor.getHTML())
       emit('words', editor.storage.characterCount.words())

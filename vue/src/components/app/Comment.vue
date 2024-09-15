@@ -4,10 +4,12 @@
             <h5>{{ comment.user_name }}</h5>
             <p class="timestamp">{{ comment.updated_at }}</p>
         </header>
+        <!-- <text-editor v-model="comment.content" class="comment-body"  :showMenuBar="false" :editable="false"></text-editor> -->
         <p v-html="comment.content" class="comment-body"></p>
         
         <div class="row justifiy-content-end m-0 p-0" v-if="loggedInUser != null">
             <div v-if="comment.user_id === loggedInUser.id" class="col-md-4 col-sm-6 ms-auto p-0 d-flex">
+                <button class="w-100 mx-1 btn btn-primary" @click="emit('edit', comment.id)">Edit</button>
                 <button class="w-100 mx-1 btn btn-danger" @click="emit('delete', comment.id)">Delete</button>
                 <button class="w-100 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
             </div>
@@ -17,12 +19,14 @@
         </div>
     </div>
     <div class="comment-replies" v-if="comment.replies.length > 0">
-        <Comment v-for="reply in comment.replies" :comment="reply" @reply="emitReply" @delete="emitDelete"/>
+        <Comment v-for="reply in comment.replies" :comment="reply" @reply="emitReply" @delete="emitDelete" @edit="emitEdit" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import { useLoggedInUser } from '../../composables/use-logged-in-user.ts'
+
+import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue';
 
 const { loggedInUser } = useLoggedInUser()
 const props = defineProps({
@@ -40,12 +44,16 @@ const props = defineProps({
     }
 })
 const emit = defineEmits<{
+    (e: 'edit', parent_id: Number) : void
     (e: 'reply', parent_id: Number) : void
     (e: 'delete', comment_id: Number) : void
 }>()
 
 // const reply = (id) => { emit('reply', id) }
 
+function emitEdit(id) {
+  emit('edit', id) 
+}
 function emitReply(id) { emit('reply', id) }
 function emitDelete(id) { emit('delete', id) }
 
