@@ -25,10 +25,8 @@ body {
     
     #page-content-wrapper { min-width: calc(100% - 5rem); }
     &.toggled {
-        #page-content-wrapper { min-width: calc(100% - 16rem); }
-
-        @media (max-width: 1024px) {
-            min-width: calc(100% + 16rem);
+        #page-content-wrapper { 
+            min-width: 100%;
         }
     }
 

@@ -3,6 +3,9 @@
         <div class="logo">
             <img :src="logo" alt="LOGO.png">
 			<h5 v-if="is_expanded">STORY SHARE</h5>
+			<button class="close-sidebar"  @click="sidebarToggle">
+				<i class="fa fa-times"></i>
+			</button>
         </div>
 
         <!-- <h3>Menu</h3> -->
@@ -130,6 +133,17 @@ const { open, close } = useModal({
 })
 
 
+const { toggleSidebar } = useAuthStore()
+const sidebarToggle = () => {
+
+    const wrapper = document.getElementById('wrapper')
+    toggleSidebar()
+    wrapper.classList.add('transitioning')
+    
+    setTimeout(() => { 
+        wrapper.classList.remove('transitioning')
+    }, 300)
+}
 </script>
 
 <style scoped>
@@ -155,6 +169,18 @@ p {
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   background-color: var(--background-color-secondary);
+}
+
+.close-sidebar {
+	display: none;
+}
+
+@media (max-width: 1024px) {
+	.close-sidebar {	
+		display: block;
+		margin-left: auto;
+		font-size: 20px;
+	}
 }
 
 </style>
