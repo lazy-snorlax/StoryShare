@@ -15,10 +15,8 @@
         </div>
     </Container>
 
-    <ModalsContainer />
 </template>
 <script lang="ts" setup>
-import { ModalsContainer, useModal } from 'vue-final-modal'
 import { useMyStoryStore } from '../../stores/my-story';
 import { onMounted } from 'vue';
 import { useMyStoryList } from '../../composables/stories/use-get-my-story-list';

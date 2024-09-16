@@ -73,7 +73,6 @@
         </template>
     </Container>
 
-    <ModalsContainer />
 </template>
 
 <script lang="ts" setup>
@@ -86,7 +85,6 @@ import { useMyStory } from '../../composables/stories/use-get-my-story'
 import { useMyStoryStore, type MyStoryResource } from '../../stores/my-story'
 
 import { useGenreStore } from '../../stores/genres'
-import { ModalsContainer, useModal } from 'vue-final-modal'
 
 import MyChapterListItem from '../../components/app/my-story/my-chapters/MyChapterListItem.vue'
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'

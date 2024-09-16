@@ -12,9 +12,12 @@
       </RouterView>
     </div>
   </div>
+
+  <ModalsContainer />
 </template>
 
 <script lang="ts" setup>
+import { ModalsContainer, useModal } from 'vue-final-modal'
 import Sidebar from '../components/app/Sidebar.vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'

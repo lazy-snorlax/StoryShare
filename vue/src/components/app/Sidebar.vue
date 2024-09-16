@@ -79,13 +79,16 @@
 			<a class="button" @click="logout" v-if="isLoggedIn">
 				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 			</a>
-			<router-link 
+			<!-- <router-link 
 				v-else
 				class="button" 
 				:to="{ name:'login' }" 
 				>
                 <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-            </router-link>
+            </router-link> -->
+			<a v-else class="button" @click="open">
+				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
+			</a>
         </div>
 
     </div>
@@ -102,6 +105,9 @@ import { storeToRefs } from 'pinia'
 
 import ThemeButton from './utilities/ThemeButton.vue'
 
+import { useModal } from 'vue-final-modal'
+import ModalLogin from '../../components/app/ModalLogin.vue'
+
 const logo = computed(() => { return logoDefault })
 
 const { logout } = useLogout()
@@ -109,6 +115,19 @@ const { isLoggedIn } = useIsLoggedIn()
 
 const authStore = useAuthStore()
 const { is_expanded } = storeToRefs(authStore)
+
+const { open, close } = useModal({
+	component: ModalLogin,
+	attrs: {
+		onSubmit(formData) {
+			try {
+				close()
+			} catch (error) {
+				console.log('>>> ', error)
+			}
+		},
+	},
+})
 
 
 </script>
