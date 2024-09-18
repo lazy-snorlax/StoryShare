@@ -24,6 +24,8 @@ import MyStoryListItem from '../../components/app/my-story/MyStoryListItem.vue';
 import ModalNewStoryForm from '../../components/app/my-story/ModalNewStoryForm.vue';
 
 import { useRouter } from 'vue-router';
+import { useModal } from 'vue-final-modal'
+
 
 const router = useRouter()
 
