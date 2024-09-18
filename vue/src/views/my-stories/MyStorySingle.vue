@@ -91,6 +91,9 @@ import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vu
 import MultiSelect from '../../components/app/utilities/MultiSelect.vue'
 import ModalNewChapter from '../../components/app/my-story/my-chapters/ModalNewChapter.vue'
 
+import { useModal } from 'vue-final-modal'
+
+
 const { story, getStory } = useMyStory()
 const { saveMyStory } = useMyStoryStore()
 const route = useRoute()
