@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="deleteComment" @edit="editComment" />
+                <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="delComment" @edit="editComment" />
             </div>
         </div>
     </Container>
@@ -50,6 +50,9 @@ import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vu
 import { useIsLoggedIn } from '../../composables/use-is-logged-in.ts'
 import { useCommentsStore } from '/src/stores/comment.ts'
 
+import ModalComment from '@/components/app/ModalComment.vue'
+import { VueFinalModal, useModal, useModalSlot } from 'vue-final-modal'
+
 const { isLoggedIn, getLoggedInUser } = useIsLoggedIn()
 
 const { commentChapter, deleteComment } = useCommentsStore()
@@ -58,9 +61,22 @@ const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
 
 const comment = ref('')
+const action = ref('')
 const reply = ref({
     content: '',
     parent_id: 0,
+})
+
+const modalInstance = useModal({
+    component: VueFinalModal,
+    slots: {
+        default: useModalSlot({
+            component: ModalComment,
+            attrs: {
+                action: action,
+            }
+        })
+    }
 })
 
 onMounted(async () => {
@@ -81,18 +97,23 @@ watch(() => route.params.id, async () => {
 function editComment(comment_id) {
     console.log('>>> Edit comment_id', comment_id)
     // reply.value.parent_id = comment_id
-    //  Open Modal to reply to a comment
+    //  Open Modal to edit to a comment
+    action.value = 'edit'
+    modalInstance.open()
 }
 
 function replyComment(comment_id) {
     console.log('>>> Reply to comment_id', comment_id)
     reply.value.parent_id = comment_id
     //  Open Modal to reply to a comment
+    action.value = 'reply'
+    modalInstance.open()
 }
 
-function deleteCom(comment_id) {
+function delComment(comment_id) {
     console.log('>>> Delete comment_id', comment_id)
-    // Open modal to confirm deletion
+    action.value = 'delete'
+    modalInstance.open()
 }
 
 const submitComment = async (parent_id) => {
@@ -109,8 +130,8 @@ const submitComment = async (parent_id) => {
 }
 
 const commentDel = async (comment_id) => {
-    console.log('>>> Delete Comment: ', values)
-    await deleteComment(comment_id)
+    console.log('>>> Delete Comment: ', comment_id)
+    // await deleteComment(comment_id)
     // TODO: Update UI after deletion
 }
 </script>
