@@ -7,9 +7,9 @@
                 <text-editor v-model="comment.content" name="edit" :showMenuBar="false" class="p-0 m-0"></text-editor>
 
                 <div class="row m-0 p-0 d-flex">
-                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitUpdatedComment(edit.id)">Update</button>
-                    <div class="col-2 col-lg-8"></div>
                     <button class="col-5 col-lg-2 btn btn-primary" @click="close">Cancel</button>
+                    <div class="col-2 col-lg-8"></div>
+                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitUpdatedComment(edit.id)">Update</button>
                 </div>
             </div>
 
@@ -19,9 +19,9 @@
                 <text-editor v-model="comment.content" name="comment" :showMenuBar="false" class="p-0 m-0"></text-editor>
 
                 <div class="row justify-content-end m-0 p-0">
-                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitComment(reply.id)">Reply</button>
-                    <div class="col-2 col-lg-8"></div>
                     <button class="col-5 col-lg-2 btn btn-primary" @click="close">Cancel</button>
+                    <div class="col-2 col-lg-8"></div>
+                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitComment(reply.id)">Reply</button>
                 </div>
             </div>
             
@@ -30,9 +30,9 @@
                 <div class="quote" v-html="confirmDel.content"></div>
 
                 <div class="row justify-content-end m-0 p-0 d-flex">
-                    <button class="col-5 col-lg-2 btn btn-danger" @click="submitConfirmDelete(confirmDel.id)">Delete</button>
-                    <div class="col-2 col-lg-8"></div>
                     <button class="col-5 col-lg-2 btn btn-primary" @click="close">Cancel</button>
+                    <div class="col-2 col-lg-8"></div>
+                    <button class="col-5 col-lg-2 btn btn-danger" @click="submitConfirmDelete(confirmDel.id)">Delete</button>
                 </div>
             </div>
         </div>
