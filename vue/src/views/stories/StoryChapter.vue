@@ -77,14 +77,17 @@ const modalInstance = useModal({
             component: ModalComment,
             attrs: {
                 action: action,
-                comment: commentVal,
+                comment_id: commentVal,
                 close: modalClose
             }
         })
     }
 })
 
-function modalClose() { modalInstance.close() }
+async function modalClose() { 
+    modalInstance.close() 
+    await getChapters(route.params?.chapter)
+}
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
@@ -102,26 +105,23 @@ watch(() => route.params.id, async () => {
 })
 
 function editComment(comment_id) {
-    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
-    console.log('>>> Edit comment', comm)
+    console.log('>>> Edit comment', comment_id)
     action.value = 'edit'
-    commentVal.value = comm
+    commentVal.value = comment_id
     modalInstance.open()
 }
 
 function replyComment(comment_id) {
-    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
-    console.log('>>> Reply to comment', comm)
+    console.log('>>> Reply to comment', comment_id)
     action.value = 'reply'
-    commentVal.value = comm
+    commentVal.value = comment_id
     modalInstance.open()
 }
 
 function delComment(comment_id) {
-    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
-    console.log('>>> Delete comment', comm)
+    console.log('>>> Delete comment', comment_id)
     action.value = 'delete'
-    commentVal.value = comm
+    commentVal.value = comment_id
     modalInstance.open()
 }
 
