@@ -42,6 +42,8 @@ Route::post('/applause', [Controllers\ApplauseController::class, 'store']);
 
 // Get all comments for a story
 Route::get('/comments', [Controllers\CommentController::class, 'index']);
+// Get single comment
+Route::get('/comment/{comment}', [Controllers\CommentController::class, 'show']);
 
 // Authenticated ============================================================
 Route::middleware(['auth:sanctum', 'cors'])->group(function () {
