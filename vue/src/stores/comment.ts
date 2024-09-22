@@ -10,6 +10,11 @@ export const useCommentsStore = defineStore('comments', {
             const response = await this.http.post('comment', comment)
             return response.data
         },
+        async updateComment(comment) {
+            console.log('>>> updateComment: ', comment)
+            const response  = await this.http.put('comment/' + comment.id, comment)
+            return response.data
+        },
         async deleteComment(comment_id) {
             const response  = await this.http.delete('comment/' + comment_id)
             return response.data

@@ -46,7 +46,7 @@ class CommentController extends Controller
 
         return new CommentResource($comment);
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -54,13 +54,16 @@ class CommentController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        // dd($request->input(), $comment);
+        $comment->fill($request->only('content'));
+        $comment->save();
+        return new CommentResource($comment);
     }
 
     /**

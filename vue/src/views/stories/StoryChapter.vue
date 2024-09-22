@@ -55,13 +55,16 @@ import { VueFinalModal, useModal, useModalSlot } from 'vue-final-modal'
 
 const { isLoggedIn, getLoggedInUser } = useIsLoggedIn()
 
-const { commentChapter, deleteComment } = useCommentsStore()
+const { commentChapter } = useCommentsStore()
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
 
 const comment = ref('')
+const commentVal = ref('')
 const action = ref('')
+const actionFunction = ref()
+
 const reply = ref({
     content: '',
     parent_id: 0,
@@ -74,10 +77,14 @@ const modalInstance = useModal({
             component: ModalComment,
             attrs: {
                 action: action,
+                comment: commentVal,
+                close: modalClose
             }
         })
     }
 })
+
+function modalClose() { modalInstance.close() }
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
@@ -95,24 +102,26 @@ watch(() => route.params.id, async () => {
 })
 
 function editComment(comment_id) {
-    console.log('>>> Edit comment_id', comment_id)
-    // reply.value.parent_id = comment_id
-    //  Open Modal to edit to a comment
+    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
+    console.log('>>> Edit comment', comm)
     action.value = 'edit'
+    commentVal.value = comm
     modalInstance.open()
 }
 
 function replyComment(comment_id) {
-    console.log('>>> Reply to comment_id', comment_id)
-    reply.value.parent_id = comment_id
-    //  Open Modal to reply to a comment
+    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
+    console.log('>>> Reply to comment', comm)
     action.value = 'reply'
+    commentVal.value = comm
     modalInstance.open()
 }
 
 function delComment(comment_id) {
-    console.log('>>> Delete comment_id', comment_id)
+    const comm = chapter.value.comments.filter((comment) => comment.id === comment_id).pop()
+    console.log('>>> Delete comment', comm)
     action.value = 'delete'
+    commentVal.value = comm
     modalInstance.open()
 }
 
@@ -122,16 +131,10 @@ const submitComment = async (parent_id) => {
         chapter_id: route.params.chapter,
         parent_id: parent_id
     }
-
+    
     console.log('>>> Submit Comment: ', values)
     await commentChapter(values)
     await getChapters(route.params?.chapter)
     comment.value = '' // TODO: Pass event to child
-}
-
-const commentDel = async (comment_id) => {
-    console.log('>>> Delete Comment: ', comment_id)
-    // await deleteComment(comment_id)
-    // TODO: Update UI after deletion
 }
 </script>
