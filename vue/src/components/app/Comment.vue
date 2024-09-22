@@ -8,14 +8,16 @@
         <p v-html="comment.content" class="comment-body"></p>
         
         <div class="row justifiy-content-end m-0 p-0" v-if="loggedInUser != null">
-            <div v-if="comment.user_id === loggedInUser.id" class="col-md-4 col-sm-6 ms-auto p-0 d-flex">
-                <button class="w-100 mx-1 btn btn-primary" @click="emit('edit', comment.id)">Edit</button>
-                <button class="w-100 mx-1 btn btn-danger" @click="emit('delete', comment.id)">Delete</button>
-                <button class="w-100 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
-            </div>
-            <div v-else class="col-md-2 col-sm-4 ms-auto p-0 d-flex">
-                <button class="w-100 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
-            </div>
+          <div v-if="comment.user_id === loggedInUser.id" class="ms-auto p-0 d-flex">
+            <div class="col-8"></div>
+            <!-- <button class="col-md-4 col-sm-6 mx-1 btn btn-primary" @click="emit('edit', comment.id)">Edit</button> -->
+            <button class="col-2 mx-1 btn btn-danger" @click="emit('delete', comment.id)">Delete</button>
+            <button class="col-2 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
+          </div>
+          <div v-else class="ms-auto p-0 d-flex">
+            <div class="col-10"></div>
+            <button class="col-2 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
+          </div>
         </div>
     </div>
     <div class="comment-replies" v-if="comment.replies.length > 0">
