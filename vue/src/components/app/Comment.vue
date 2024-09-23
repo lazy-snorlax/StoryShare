@@ -9,14 +9,14 @@
         
         <div class="row justifiy-content-end m-0 p-0" v-if="loggedInUser != null">
           <div v-if="comment.user_id === loggedInUser.id" class="ms-auto p-0 d-flex">
-            <div class="col-8"></div>
-            <!-- <button class="col-md-4 col-sm-6 mx-1 btn btn-primary" @click="emit('edit', comment.id)">Edit</button> -->
-            <button class="col-2 mx-1 btn btn-danger" @click="emit('delete', comment.id)">Delete</button>
-            <button class="col-2 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
+            <div class="col-3 col-sm-3 col-md-2 col-lg-9"></div>
+            <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-primary" @click="emit('edit', comment.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-danger" @click="emit('delete', comment.id)"><i class="fa-solid fa-trash"></i></button>
+            <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-primary" @click="emit('reply', comment.id)"><i class="fa-solid fa-reply"></i></button>
           </div>
           <div v-else class="ms-auto p-0 d-flex">
-            <div class="col-10"></div>
-            <button class="col-2 mx-1 btn btn-primary" @click="emit('reply', comment.id)">Reply</button>
+            <div class="col col-sm-3 col-md-2 col-lg-9"></div>
+            <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-primary" @click="emit('reply', comment.id)"><i class="fa-solid fa-reply"></i></button>
           </div>
         </div>
     </div>
