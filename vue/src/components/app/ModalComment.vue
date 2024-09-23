@@ -27,9 +27,9 @@
             </div>
             
             <div v-else-if="action == 'delete'" class="">
-                <h4>Confirm Deletion</h4>
+                <h4>Confirm Delete</h4>
+                <p class="text-center">Note: This will delete all replies to this comment. Are you sure you want to do this?</p>
                 <div class="quote" v-html="confirmDel.content"></div>
-
                 <div class="row justify-content-end m-0 p-0 d-flex">
                     <button class="col-5 col-lg-2 btn btn-primary" @click="close">Cancel</button>
                     <div class="col-2 col-lg-8"></div>
