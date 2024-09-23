@@ -1,5 +1,5 @@
 <template>
-    <header class="page-header sticky-top">
+    <header class="page-header">
         <div class="left">
             <div class="menu-toggle-wrap">
                 <button class="menu-toggle" @click="sidebarToggle">
@@ -14,7 +14,9 @@
             </div>
         </div>
         <div class="right">
-            <p>Profile pic</p>
+            <template v-if="loggedInUser != null">
+                <p>Profile pic</p>
+            </template>
         </div>
     </header>
 </template>
@@ -23,11 +25,16 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
+import { useIsLoggedIn } from '@/composables/use-is-logged-in'
+import { useLoggedInUser } from '@/composables/use-logged-in-user';
 
 const props = defineProps<{
     title?: string|null,
     subtitle?: string|null,
 }>()
+
+const { getLoggedInUser } = useIsLoggedIn()
+const { loggedInUser } = useLoggedInUser()
 
 const { toggleSidebar } = useAuthStore()
 
