@@ -1,5 +1,5 @@
 <template>
-    <header class="page-header">
+    <header class="page-header sticky-top">
         <div class="left">
             <div class="menu-toggle-wrap">
                 <button class="menu-toggle" @click="sidebarToggle">
@@ -13,7 +13,9 @@
                 <p v-if="subtitle" class="subheading">{{ subtitle }}</p>
             </div>
         </div>
-        <div class="right"></div>
+        <div class="right">
+            <p>Profile pic</p>
+        </div>
     </header>
 </template>
 
