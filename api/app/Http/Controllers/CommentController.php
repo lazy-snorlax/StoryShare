@@ -73,7 +73,8 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         abort_if($comment->user_id !== auth()->user()->id, 500, 'You are not authorized to do this.');
-        
+
+        // TODO: Delete replies of replies
         $comment->replies()->delete();
         $comment->delete();
         return response()->json(null);
