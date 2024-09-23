@@ -76,22 +76,26 @@
 		</div> -->
 
         <div class="menu">
-			<a class="button" v-if="isLoggedIn">
-				<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
-			</a>
-			<a class="button" @click="logout" v-if="isLoggedIn">
-				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
-			</a>
-			<!-- <router-link 
-				v-else
-				class="button" 
-				:to="{ name:'login' }" 
-				>
-                <font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-            </router-link> -->
-			<a v-else class="button" @click="open">
-				<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-			</a>
+			<template v-if="isLoggedIn">
+				<a class="button">
+					<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
+				</a>
+				<a class="button" @click="logout">
+					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
+				</a>
+				<!-- <router-link 
+					v-else
+					class="button" 
+					:to="{ name:'login' }" 
+					>
+					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
+				</router-link> -->
+			</template>
+			<template v-else>
+				<a class="button" @click="open">
+					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
+				</a>
+			</template>
         </div>
 
     </div>
