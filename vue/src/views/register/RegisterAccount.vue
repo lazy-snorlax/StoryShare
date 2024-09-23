@@ -14,7 +14,7 @@
                 <!-- name -->
                 <div class="mb-3">
                     <label for="">Account Name</label>
-                    <p class="small text-muted">This will be your public name. It can be changed later.</p>
+                    <p class="small">This will be your public name. It can be changed later.</p>
                     <input type="text" class="form-control" v-bind="name">
                     <small class="text-danger">{{ errors.name }}</small>
                 </div>
