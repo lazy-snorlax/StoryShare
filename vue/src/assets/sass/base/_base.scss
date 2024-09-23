@@ -24,16 +24,24 @@ body {
     flex: 1 1 100%;
     
     #page-content-wrapper { min-width: calc(100% - 5rem); }
+
     &.toggled {
         #page-content-wrapper { 
-            min-width: 100%;
+            min-width: calc(100% - 16rem);
+            header.page-header .middle {
+                min-width: calc(100% - 16rem);
+            }
         }
+
     }
 
     &.transitioning {
         #page-content-wrapper {
             min-width: 100vw; // when animating close prevent visual shift of content by adding 100vw
             overflow-x: hidden;
+            header.page-header .middle {
+                min-width: 100%;
+            }
         }
     }
 }

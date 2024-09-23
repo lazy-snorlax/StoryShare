@@ -7,7 +7,7 @@ header.page-header {
     // border-bottom: 1px solid gray;
   
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex: 0 0 auto;
   
     &>[class*="col-"] {
@@ -43,19 +43,16 @@ header.page-header {
 		}
 	}
   
-    .left {
-        order: 1;
-  
+    .left {  
         flex: 0 0 auto;
         width: auto;
         max-width: 100%;
     }
     .middle {
         padding-top: 0.5rem;
-        order: 3;
   
         flex: 0 0 100%;
-        max-width: 100%;
+        max-width: calc(100% - 5rem);
   
         flex-wrap: wrap;
         overflow: hidden;
@@ -73,9 +70,7 @@ header.page-header {
             overflow: visible;
         }
     }
-    .right {
-        order: 2;
-  
+    .right {  
         flex-basis: 0;
         flex-grow: 1;
         max-width: 100%;
@@ -158,5 +153,5 @@ header.page-header {
     //         max-width: 100%;
     //     }
     // }
-  }
+}
   
