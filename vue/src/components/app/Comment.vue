@@ -2,7 +2,7 @@
     <div class="comment">
         <header>
             <h5>{{ comment.user_name }}</h5>
-            <p class="timestamp">{{ comment.updated_at }}</p>
+            <p class="timestamp">{{ comment.updated_at == comment.created_at ? comment.created_at : 'Modified: ' + comment.updated_at }}</p>
         </header>
         <!-- <text-editor v-model="comment.content" class="comment-body"  :showMenuBar="false" :editable="false"></text-editor> -->
         <p v-html="comment.content" class="comment-body"></p>
@@ -15,7 +15,7 @@
             <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-primary" @click="emit('reply', comment.id)"><i class="fa-solid fa-reply"></i></button>
           </div>
           <div v-else class="ms-auto p-0 d-flex">
-            <div class="col col-sm-3 col-md-2 col-lg-9"></div>
+            <div class="col col-sm-3 col-md-2 col-lg-11"></div>
             <button class="col-3 col-sm-3 col-md-3 col-lg-1 mx-1 btn btn-primary" @click="emit('reply', comment.id)"><i class="fa-solid fa-reply"></i></button>
           </div>
         </div>

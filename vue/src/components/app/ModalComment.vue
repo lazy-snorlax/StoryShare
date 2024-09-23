@@ -3,13 +3,14 @@
         <div id="comment-form" class="card">
 
             <div v-if="action == 'edit'" class="">
-                <h4>Editing Comment</h4>
+                <h4>Edit Comment</h4>
+                <div v-html="comment.content" class="quote" />
                 <text-editor v-model="comment.content" name="edit" :showMenuBar="false" class="p-0 m-0"></text-editor>
 
                 <div class="row m-0 p-0 d-flex">
                     <button class="col-5 col-lg-2 btn btn-primary" @click="close">Cancel</button>
                     <div class="col-2 col-lg-8"></div>
-                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitUpdatedComment(edit.id)">Update</button>
+                    <button class="col-5 col-lg-2 btn btn-primary" @click="submitUpdatedComment(comment.id)">Update</button>
                 </div>
             </div>
 
@@ -83,8 +84,12 @@ onMounted(async () => {
 
 // Edit existing Comment
 const submitUpdatedComment = async (parent_id) => {
-    console.log('>>> Updated Comment: ', props)
-    await updateComment(props.comment)
+    const values = {
+        id: props.comment_id,
+        content: comment.content,
+    }
+    console.log('>>> Updated Comment: ', values)
+    await updateComment(values)
     props.close()
 }
 
