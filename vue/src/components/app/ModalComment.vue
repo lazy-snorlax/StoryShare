@@ -138,10 +138,10 @@ const submitConfirmDelete = async (comment_id) => {
     }
 
     .btn {
-        background-color: var(--light-alt);
+        background-color: var(--primary);
         &:hover {
-            background-color: var(--dark-alt);
-            color: var(--light-alt);
+            color: var(--dark-alt);
+            background-color: var(--light-alt);
         }
     }
 }
