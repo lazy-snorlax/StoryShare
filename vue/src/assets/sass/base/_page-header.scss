@@ -5,6 +5,11 @@ header.page-header {
     background-color: var(--dark-alt);
     color: var(--primary);
     // border-bottom: 1px solid gray;
+    
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   
     display: flex;
     flex-wrap: nowrap;
@@ -42,7 +47,7 @@ header.page-header {
 			}
 		}
 	}
-  
+      
     .left {  
         flex: 0 0 auto;
         width: auto;
