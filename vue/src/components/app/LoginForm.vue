@@ -17,16 +17,16 @@
             </div>
 
             <div class="row">
+                <div class="col">
+                    <router-link class="small text-muted" :to="{ name: 'register.account' }">
+                        Register new account
+                    </router-link>
+                </div>
                 <div class="col-auto text-right d-flex align-items-center">
-                    <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot Password?</router-link>
+                    <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot password?</router-link>
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col">
-                    <router-link class="btn btn-primary" :to="{ name: 'register.account' }">
-                        <span class="text">Register New Account</span>
-                    </router-link>
-                </div>
                 <div class="col text-end">
                     <button class="btn btn-primary" @click="submit">Login</button>
                 </div>
