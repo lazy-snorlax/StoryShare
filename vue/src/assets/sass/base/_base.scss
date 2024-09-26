@@ -23,13 +23,18 @@ body {
     min-height: 100%;
     flex: 1 1 100%;
     
-    #page-content-wrapper { min-width: calc(100% - 5rem); }
+    #page-content-wrapper { 
+        min-width: calc(100% - 5rem);
+        @media (max-width: 1024px) {
+			min-width: 100%;
+		}
+    }
 
     &.toggled {
         #page-content-wrapper { 
             min-width: calc(100% - 16rem);
-            header.page-header .middle {
-                min-width: calc(100% - 16rem);
+            @media (max-width: 1024px) {
+                min-width: 100%;
             }
         }
 

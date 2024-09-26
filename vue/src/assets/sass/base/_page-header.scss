@@ -6,14 +6,17 @@ header.page-header {
     color: var(--primary);
     // border-bottom: 1px solid gray;
     
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
   
     display: flex;
     flex-wrap: nowrap;
     flex: 0 0 auto;
+
+    &.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
   
     &>[class*="col-"] {
         padding-left: 0;
@@ -28,8 +31,7 @@ header.page-header {
 		display: flex;
 		justify-content: flex-end;
 		margin-bottom: 1rem;
-		position: relative;
-		top: 0;
+
 		transition: 0.2s ease-in-out;
 		.menu-toggle {
 			transition: 0.2s ease-in-out;
@@ -47,39 +49,6 @@ header.page-header {
 			}
 		}
 	}
-      
-    .left {  
-        flex: 0 0 auto;
-        width: auto;
-        max-width: 100%;
-    }
-    .middle {
-        padding-top: 0.5rem;
-  
-        flex: 0 0 100%;
-        max-width: calc(100% - 5rem);
-  
-        flex-wrap: wrap;
-        overflow: hidden;
-  
-        &>[class*="col-"] {
-            padding-left: 0;
-            padding-right: 0;
-        }
-        .page-title {
-            max-width: 100%;
-            max-width: 100%;
-            flex: 1 1 100%;
-        }
-        &.has-search {
-            overflow: visible;
-        }
-    }
-    .right {  
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-    }
   
     #menu-toggle {
         padding: 0 0.5rem;
@@ -98,7 +67,6 @@ header.page-header {
     .header-nav { margin-left: auto; }
     .page-title {
         overflow: hidden;
-        padding-right: 1rem;
         margin-top: 0.5rem;
         width: 100%;
   
