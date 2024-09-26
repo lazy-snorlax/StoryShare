@@ -37,8 +37,10 @@
                     <input class="form-control" type="password" v-bind="password_confirmation">
                     <small class="text-danger">{{ errors.password_confirmation }}</small>
                 </div>
-                <div class="text-end mt-4">
-                <router-link :to="{ name: 'dashboard' }" class="button mx-3">Return to Dashboard</router-link>
+                <div class="text-start mt-4">
+                    <router-link :to="{ name: 'dashboard' }" class="button">Return to Dashboard</router-link>
+                </div>
+                <div class="text-end">    
                     <button class="btn btn-primary" @click="register"> Register Account </button>
                 </div>
             </template>
