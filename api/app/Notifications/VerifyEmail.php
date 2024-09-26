@@ -34,7 +34,7 @@ class VerifyEmail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         // TODO: refactor url generation
-        $url = config('app.frontend_url') . '/verification/' . ($notifiable->emailVerificationSignatureParameters())['hash'] . '?expires=' . strtotime(now()->addHours(1)) . '&id=' . $notifiable->id . '&email=' . rawurlencode($notifiable->getEmailForVerification());
+        $url = config('app.frontend_url') . '/register/verification/' . ($notifiable->emailVerificationSignatureParameters())['hash'] . '?expires=' . strtotime(now()->addHours(1)) . '&id=' . $notifiable->id . '&email=' . rawurlencode($notifiable->getEmailForVerification());
         
         return (new MailMessage)
             ->subject('Verify Your Account')
