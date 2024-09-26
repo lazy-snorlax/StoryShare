@@ -1,22 +1,20 @@
 <template>
-    <header class="page-header">
-        <div class="left">
-            <div class="menu-toggle-wrap">
-                <button class="menu-toggle" @click="sidebarToggle">
-                    <font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
-                </button>
-            </div>
+    <header class="page-header sticky pb-0">
+        <div class="menu-toggle-wrap">
+            <button class="menu-toggle" @click="sidebarToggle">
+                <font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
+            </button>
         </div>
-        <div class="middle">
+        <div v-if="loggedInUser != null">
+            <p>{{ loggedInUser.email }}</p>
+        </div>
+    </header>
+    <header class="page-header">
+        <div class="d-flex text-center w-100">
             <div class="page-title mx-3 my-3 text-center">
                 <h1>{{ title }}</h1>
                 <p v-if="subtitle" class="subheading">{{ subtitle }}</p>
             </div>
-        </div>
-        <div class="right">
-            <template v-if="loggedInUser != null">
-                <p>Profile pic</p>
-            </template>
         </div>
     </header>
 </template>
