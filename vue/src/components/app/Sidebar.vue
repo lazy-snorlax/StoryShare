@@ -12,7 +12,7 @@
 
         <div class="menu">
 			<theme-button />
-			<router-link :to="{ name: 'stories.search' }" class="button">
+			<router-link :to="{ name: 'stories.search' }" class="button mt-3">
 				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Browse </span>
 			</router-link> 
             <router-link :to="{ name: 'dashboard' }" class="button">
