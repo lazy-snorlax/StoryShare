@@ -15,16 +15,16 @@ export default (router: Router) =>
             }
         } catch {
             // If the intended route is restricted we'll redirect back to the login page with the intended path.
-            // console.log('>>> Route Redirect: ', to.meta.restricted, to.meta.authenticate)
-            // if (to.meta.restricted !== false) {
-            //     return {
-            //         name: 'login',
-            //         replace: true,
-            //         query: {
-            //             redirect: to.path
-            //         }
-            //     }
-            // }
+            console.log('>>> Route Redirect: ', to.meta.restricted, to.meta.authenticate)
+            if (to.meta.restricted !== false) {
+                return {
+                    name: 'login',
+                    replace: true,
+                    query: {
+                        redirect: to.path
+                    }
+                }
+            }
         }
 
         // Public facing routes
