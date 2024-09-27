@@ -129,8 +129,6 @@ const { open, close } = useModal({
 		onSubmit(formData) {
 			try {
 				close()
-				// Force a reload on successful login to get credentials in state
-				location.reload()
 			} catch (error) {
 				console.log('>>> ', error)
 			}
