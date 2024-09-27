@@ -5,7 +5,7 @@ export default routes(
     {
         template: 'app',
         restricted: false,
-        guest: true
+        authenticate: false
     },
     [
         {
