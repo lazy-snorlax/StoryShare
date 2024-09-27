@@ -29,13 +29,15 @@ export default {
         http.interceptors.response.use(null, async (error) => {
             if (isAxiosError(error) && error.response) {
                 const route = router.currentRoute.value
+                
+                // console.log('>>>> http.ts error: ', route)
 
                 // TODO: Parsing files
                 // if (error.response.request.responseType === 'blob')
                 
                 // 401: Unauthenticated
                 if (error.response.status === 401) {
-                    if (route.name === 'login') {
+                    if (route.name === 'login' || route.path === "/") {
                         return Promise.reject(error)
                     }
 
