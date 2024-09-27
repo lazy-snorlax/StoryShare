@@ -28,7 +28,9 @@ export default {
     setTheme(theme) {
       localStorage.setItem("user-theme", theme);
       this.userTheme = theme;
-      document.querySelector('#page-content-wrapper').className = theme;
+      if (document.querySelector('#page-content-wrapper') != null) {
+        document.querySelector('#page-content-wrapper').className = theme;
+      }
     },
 
     getMediaPreference() {
