@@ -45,7 +45,7 @@ export default {
                         route.name !== null &&
                         route.meta.restricted === true ? route.path : null
                     
-                    router.replace({ name: 'dashboard', query: { redirect } })
+                    router.replace({ name: 'login', query: { redirect } })
                     return Promise.reject(error)
                 }
 
@@ -59,8 +59,14 @@ export default {
                     //     confirmationOnly: true,
                     // })
                     alert( 'You are not authorized to access the page you have requested.' )
+
+                    const redirect = 
+                        route.name !== 'login' &&
+                        route.name !== 'logout' &&
+                        route.name !== null &&
+                        route.meta.restricted === true ? route.path : null
         
-                    router.replace({ name: 'dashboard' })
+                    router.replace({ name: 'login', query: { redirect } })
                 }
         
                 // 500: Internal Server Error
