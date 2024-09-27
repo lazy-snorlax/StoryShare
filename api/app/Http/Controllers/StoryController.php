@@ -56,13 +56,13 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
-        abort_if($story->visible == null, 400, 'Internal Server error. Story not found');
-        abort_if(!auth()->user() && $story->visible != 'public', 400, 'You must login to view this story');
+        abort_if($story->visible == null, 404, 'Internal Server error. Story not found');
+        abort_if(!auth()->user() && $story->visible != 'public', 403, 'You must login to view this story');
 
         abort_if(
             (auth()->user() && auth()->user()->id != $story->user_id)
             && $story->visible == 'private',
-            400, 
+            403, 
             'You don\'t have access to this story'
         );
 
