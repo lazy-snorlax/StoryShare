@@ -1,18 +1,21 @@
 <template>
-  <h1>Registration Complete</h1>
-
-  <template v-if="loggedInUser">
-    <p>Welcome to Story Share</p>
-
-    <p>Click below to return to the dashboard</p>
-
-    <a class="btn btn-primary btn-lg w-100" @click.prevent="complete">
-      Take me to my company portal
-    </a>
-  </template>
-  <p v-else>
-    Thanks for creating an account.
-  </p>
+  <div class="card card-authentication">
+    <div class="card-body p-5">
+      <h1>Registration Complete</h1>
+      
+      <template v-if="loggedInUser">
+        <p>Welcome to Story Share</p>
+        <p>Click below to return to the dashboard</p>
+      </template>
+      <p v-else>
+        Thanks for creating an account.
+      </p>
+      <router-link class="button" :to="{ name: 'dashboard' }">
+        Proceed to Dashboard
+      </router-link>
+      
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
