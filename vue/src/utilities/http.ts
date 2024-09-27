@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "axios";
 import { Router } from "vue-router";
 import { App } from "vue";
+import { useIsLoggedIn } from '../composables/use-is-logged-in'
 
 export const http: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -27,6 +28,9 @@ export default {
         })
 
         http.interceptors.response.use(null, async (error) => {
+
+            const { isLoggedIn } = useIsLoggedIn()
+
             if (isAxiosError(error) && error.response) {
                 const route = router.currentRoute.value
                 
@@ -46,9 +50,12 @@ export default {
                         route.name !== 'logout' &&
                         route.name !== null &&
                         route.meta.restricted === true ? route.path : null
-                    
-                    router.replace({ name: 'login', query: { redirect } })
-                    return Promise.reject(error)
+
+                    if (isLoggedIn) {
+                        router.replace({ name: 'dashboard', query: { redirect } })
+                    } else {
+                        router.replace({ name: 'login', query: { redirect } })
+                    }
                 }
 
                 // 403: Forbidden
@@ -60,15 +67,19 @@ export default {
                     //     confirm: 'Return to dashboard',
                     //     confirmationOnly: true,
                     // })
-                    alert( 'You are not authorized to access the page you have requested.' )
+                    alert( error.response.data.message )
 
                     const redirect = 
                         route.name !== 'login' &&
                         route.name !== 'logout' &&
                         route.name !== null &&
                         route.meta.restricted === true ? route.path : null
-        
-                    router.replace({ name: 'login', query: { redirect } })
+                    
+                    if (isLoggedIn) {
+                        router.replace({ name: 'dashboard', query: { redirect } })
+                    } else {
+                        router.replace({ name: 'login', query: { redirect } })
+                    }
                 }
         
                 // 500: Internal Server Error
