@@ -63,7 +63,7 @@ class StoryController extends Controller
             (auth()->user() && auth()->user()->id != $story->user_id)
             && $story->visible == 'private',
             403, 
-            'You don\'t have access to this story'
+            'This story has been marked private by the author. You cannot access it.'
         );
 
         return new StoryResource($story->load('chapters', 'genres', 'bookmarks', 'applause'));
