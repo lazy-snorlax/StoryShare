@@ -12,8 +12,9 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(payload: LoginForm) {
-            this.authenticationAttempted = false,
-            await this.http.post('login', payload)
+            this.authenticationAttempted = false
+            const response = await this.http.post('login', payload)
+            this.user = response.data.data
         },
 
         async logout() {
