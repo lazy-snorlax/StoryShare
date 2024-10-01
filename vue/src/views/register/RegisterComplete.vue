@@ -10,8 +10,8 @@
       <p v-else>
         Thanks for creating an account.
       </p>
-      <router-link class="button" :to="{ name: 'dashboard' }">
-        Proceed to Dashboard
+      <router-link :to="{ name: 'dashboard' }">
+        <button class="btn btn-primary">Proceed to Dashboard</button>
       </router-link>
       
     </div>
@@ -25,13 +25,4 @@ import { useLoggedInUser } from '@/composables/use-logged-in-user'
 // const appStore = useAppStore()
 const { loggedInUser } = useLoggedInUser()
 
-async function complete() {
-  const url = loggedInUser.value.registration_company_url!
-
-  // Log the user out of the subscription portal as they have completed their registration.
-  // await appStore.logout()
-
-  // Redirect the user to their company portal.
-  window.location.replace(url)
-}
 </script>

@@ -49,6 +49,17 @@ header.page-header {
 			}
 		}
 	}
+
+    &.verify-email {
+        background-color: beige;
+        color: black;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        span {
+            margin: 0 auto;
+        }
+    }
   
     #menu-toggle {
         padding: 0 0.5rem;

@@ -1,4 +1,9 @@
 <template>
+    <header v-if="!loggedInUser.email_verified" class="page-header verify-email">
+        <span class="">
+            Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, go to your account settings and click 'Verify Email'
+        </span>
+    </header>
     <header class="page-header sticky pb-0">
         <div class="menu-toggle-wrap">
             <button class="menu-toggle" @click="sidebarToggle">

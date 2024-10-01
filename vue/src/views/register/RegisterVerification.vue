@@ -28,10 +28,9 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-info mb-5" @click="resend">Re-send Email</button>
                 <div class="row">
                     <div class="col d-flex align-items-center">
-                        <button class="text-muted" @click.prevent="logout">Sign Out</button>
+                        <button type="button" class="btn btn-info" @click="resend">Re-send Email</button>
                     </div>
                     <div class="col-auto">
                         <button type="button" class="btn btn-primary" @click="verify">
@@ -48,13 +47,14 @@
 import { computed, onMounted, ref } from 'vue';
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 import { useLogout } from '@/composables/use-logout'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { isAxiosError } from 'axios';
 import { http } from '../../utilities/http';
 
 const { getLoggedInUser } = useIsLoggedIn()
 const { logout } = useLogout()
 const route = useRoute()
+const router = useRouter()
 
 const email = computed(() => route.query.email)
 const verifying = ref(route.params.signature !== undefined)
@@ -72,8 +72,15 @@ onMounted(async () => {
                 id: route.query.id
             })
 
-            await getLoggedInUser()
+            // await getLoggedInUser()
             passedVerification.value = true
+            const redirect = 
+                route.name !== 'login' &&
+                route.name !== 'logout' &&
+                route.name !== null &&
+                route.meta.restricted === true ? route.path : null
+            router.replace({ name: 'register.complete', query: { redirect } })
+
         } catch (error) {
             console.log('>>>> Testing onMounted: ', error)
             if ((await emailAlreadyVerified(error)) === false) {
