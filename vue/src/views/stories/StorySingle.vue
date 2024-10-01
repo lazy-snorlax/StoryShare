@@ -61,7 +61,7 @@
     </Container>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { useMyBookmarkStore } from '@/stores/my-bookmarks'
 import { useApplauseStore } from '@/stores/applause'
@@ -81,7 +81,7 @@ const { loggedInUser } = useLoggedInUser()
 const { story, getStory } = useStory()
 const route = useRoute()
 
-onMounted(async () => {
+onBeforeMount(async () => {
     await getStory(route.params.id)
 })
 
