@@ -31,6 +31,12 @@
                     </div>
                 </div>
 
+                <div v-else class="mb-4 p-0">
+                    <p class="text-center">
+                        You must login to comment on this chapter
+                    </p>
+                </div>
+
                 <Comment v-for="comment in chapter.comments" :comment="comment" @reply="replyComment" @delete="delComment" @edit="editComment" />
             </div>
         </div>
