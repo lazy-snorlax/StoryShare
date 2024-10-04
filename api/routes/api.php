@@ -14,11 +14,11 @@ Route::post('/logout', [Controllers\LoginController::class, 'destroy']);
 Route::prefix('/register')->group(function () {
     Route::post('', Controllers\Register\RegisterController::class);
     Route::post('/verification', Controllers\Register\VerificationController::class);
-    Route::post('/verification/resend', Controllers\Register\ResendVerificationController::class);
+    Route::post('/verification/resend', [Controllers\Register\ResendVerificationController::class, 'store']);
 });
 
 // TODO: Email Verification =================================================
-Route::get('/verification', Controllers\Register\VerificationController::class)->name('verification');
+// Route::get('/verification', Controllers\Register\VerificationController::class)->name('verification');
 
 // TODO: Password Reset =====================================================
 Route::post('/password/forgot', Controllers\Password\ForgotPasswordController::class);
@@ -48,8 +48,10 @@ Route::get('/comment/{comment}', [Controllers\CommentController::class, 'show'])
 // Authenticated ============================================================
 Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::get('/user', Controllers\LoggedInController::class);
-    Route::put('/user', Controllers\UpdateAccountDetailsController::class);
+    Route::put('/user', [Controllers\UpdateAccountDetailsController::class, 'update']);
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
+    // Email Verification
+    Route::post('/auth/verification/resend', [Controllers\Register\ResendVerificationController::class, 'store']);
 
     // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
