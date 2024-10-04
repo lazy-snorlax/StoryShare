@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\LoggedInResource;
 use Illuminate\Http\Request;
+use App\Http\Resources\LoggedInResource;
+use Illuminate\Auth\Notifications\VerifyEmail;
 
 class UpdateAccountDetailsController extends Controller
 {
@@ -14,14 +15,17 @@ class UpdateAccountDetailsController extends Controller
     {
         $user = $request->user();
 
-        $user->fill($request->only(['name', 'email']));
-
-        if ($request->input('email') !== $user->email) {
+        if (($email = $request->input('email')) !== $user->email) {
+            
             // TODO: Update email and send verification
-            // $user->update([]);
-            // $user->sendEmail;
+            $user->update([
+                'email' => $email,
+                'email_verified_at' => null,
+            ]);
+            $user->notify(new VerifyEmail);
         }
-
+        $user->fill($request->only(['name', 'email']));
+        
         $user->save();
 
         return new LoggedInResource($user);
