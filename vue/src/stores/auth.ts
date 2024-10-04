@@ -40,9 +40,14 @@ export const useAuthStore = defineStore('auth', {
             await this.http.post('password/reset', payload)  
         },
 
+        async resendVerifyEmail() {
+            await this.http.post('auth/verification/resend')
+        },
+
         async updateAccountDetails(payload: UpdateAccountDetailsForm) {
             const response = await this.http.put('user', payload)
             this.user = response.data.data
+            this.resendVerifyEmail()
             return this.user
         },
 

@@ -1,7 +1,7 @@
 <template>
     <header v-if="loggedInUser != null && !loggedInUser.email_verified" class="page-header verify-email">
         <span class="">
-            Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, go to your account settings and click 'Verify Email'
+            Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, <a class="link-underline-primary" @click="resend">click here</a>
         </span>
     </header>
     <header class="page-header sticky pb-0">
@@ -25,11 +25,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
-import { useLoggedInUser } from '@/composables/use-logged-in-user';
+import { useLoggedInUser } from '@/composables/use-logged-in-user'
 
 const props = defineProps<{
     title?: string|null,
@@ -39,10 +37,9 @@ const props = defineProps<{
 const { getLoggedInUser } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
 
-const { toggleSidebar } = useAuthStore()
+const { toggleSidebar, resendVerifyEmail } = useAuthStore()
 
 const sidebarToggle = () => {
-
     const wrapper = document.getElementById('wrapper')
     toggleSidebar()
     wrapper.classList.add('transitioning')
@@ -50,6 +47,11 @@ const sidebarToggle = () => {
     setTimeout(() => { 
         wrapper.classList.remove('transitioning')
     }, 300)
+}
+
+const resend = async() => {
+    resendVerifyEmail()
+    alert('Verification email has been re-sent')
 }
 
 </script>
