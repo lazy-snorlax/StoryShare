@@ -1,5 +1,5 @@
 <template>
-    <header v-if="!loggedInUser.email_verified" class="page-header verify-email">
+    <header v-if="loggedInUser != null && !loggedInUser.email_verified" class="page-header verify-email">
         <span class="">
             Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, go to your account settings and click 'Verify Email'
         </span>
