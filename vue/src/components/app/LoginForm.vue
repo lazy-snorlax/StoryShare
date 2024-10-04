@@ -2,33 +2,33 @@
     <div id="login-form" class="card">
         <div class="card-body p-3">
             <img src="" alt="" class="logo">
-            <h1>Log In</h1>
+            <h2 class="text-center">Log In</h2>
 
             <div class="mb-3">
-                <label for="">Email Address</label>
-                <input class="form-control" type="text" v-bind="email">
+                <input class="form-control" type="text" v-bind="email" placeholder="Email">
                 <small class="text-danger">{{ errors.email }}</small>
             </div>
 
             <div class="mb-3">
-                <label for="">Password</label>
-                <input class="form-control" type="password" v-bind="password" >
+                <input class="form-control" type="password" v-bind="password" placeholder="Password">
                 <small class="text-danger">{{ errors.password }}</small>
             </div>
 
             <div class="row">
-                <div class="col">
-                    <router-link class="small text-muted" :to="{ name: 'register.account' }">
-                        Register new account
-                    </router-link>
+                <div class="col text-end">
+                    <button class="btn btn-primary w-100" @click="submit">Login</button>
                 </div>
+            </div>
+            <div class="row mt-3">
                 <div class="col-auto text-right d-flex align-items-center">
                     <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot password?</router-link>
                 </div>
             </div>
+            <hr />
             <div class="row mt-3">
-                <div class="col text-end">
-                    <button class="btn btn-primary" @click="submit">Login</button>
+                <div class="col">
+                    <span class="small text-muted me-3">Don't have an account?</span>
+                    <router-link class="small" :to="{ name: 'register.account' }">Sign up</router-link>
                 </div>
             </div>
         </div>
