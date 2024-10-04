@@ -37,8 +37,9 @@ class VerifyEmail extends Notification implements ShouldQueue
         $url = config('app.frontend_url') . '/register/verification/' . ($notifiable->emailVerificationSignatureParameters())['hash'] . '?expires=' . strtotime(now()->addHours(1)) . '&id=' . $notifiable->id . '&email=' . rawurlencode($notifiable->getEmailForVerification());
         
         return (new MailMessage)
-            ->subject('Verify Your Account')
+            ->subject('Verify Your Account | Story Share')
             ->markdown('mail.email_verification', [
+                // 'url' => sprintf('%s&email=%s', $this->verificationUrl($notifiable), rawurlencode($notifiable->getEmailForVerification())),
                 'url' => $url,
                 'newEmail' => $notifiable->getEmailForVerification() == $notifiable->new_email
             ]);

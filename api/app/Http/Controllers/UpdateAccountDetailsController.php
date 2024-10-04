@@ -11,22 +11,22 @@ class UpdateAccountDetailsController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function update(Request $request)
     {
         $user = $request->user();
 
         if (($email = $request->input('email')) !== $user->email) {
             
-            // TODO: Update email and send verification
+            // TODO: Debug send verification email
             $user->update([
                 'email' => $email,
                 'email_verified_at' => null,
             ]);
-            $user->notify(new VerifyEmail);
+            $user->save();
+            // $request->user()->notify(new VerifyEmail);
         }
-        $user->fill($request->only(['name', 'email']));
-        
-        $user->save();
+        // $user->fill($request->only(['name', 'email']));
+        // $user->save();
 
         return new LoggedInResource($user);
     }
