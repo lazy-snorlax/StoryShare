@@ -23,8 +23,10 @@ class VerificationController extends Controller
         //     (new DetailedReason('Email verification signature is invalid'))
         // );
 
+        // dd($user->isEmailVerified());
+
         // Email must not already be verified.
-        abort_if($user->isEmailVerified(), 'Email is already verified');
+        abort_if($user->isEmailVerified(), 403, 'Email is already verified');
 
         $user->markEmailAsVerified();
 
