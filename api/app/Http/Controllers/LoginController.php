@@ -31,9 +31,9 @@ class LoginController extends Controller
             // check user enabled
 
             // When user does not have a verified email we send them an email verification email again.
-            if (!$user->hasVerifiedEmail()) {
-                $user->notify(new VerifyEmail);
-            }
+            // if (!$user->hasVerifiedEmail()) {
+            //     $user->notify(new VerifyEmail);
+            // }
 
             return new UserResource($user);
         }
