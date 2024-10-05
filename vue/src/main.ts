@@ -12,6 +12,9 @@ import '@fortawesome/fontawesome-free'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 // Vue MultiSelect library
 import 'vue-multiselect/dist/vue-multiselect.css'
 import MultiSelect from 'vue-multiselect'
@@ -27,6 +30,12 @@ app.use(pinia)
 app.use(router)
 app.use(components)
 app.use(vfm)
+
+app.use(Vue3Toastify, 
+    {
+      autoClose: 3000,
+    } as ToastContainerOptions,
+)
 
 // Font Awesome Icons
 app.component('font-awesome-icon', FontAwesomeIcon)

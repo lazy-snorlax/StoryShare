@@ -92,7 +92,7 @@ import MultiSelect from '../../components/app/utilities/MultiSelect.vue'
 import ModalNewChapter from '../../components/app/my-story/my-chapters/ModalNewChapter.vue'
 
 import { useModal } from 'vue-final-modal'
-
+import { toast, type ToastOptions } from 'vue3-toastify';
 
 const { story, getStory } = useMyStory()
 const { saveMyStory } = useMyStoryStore()
@@ -151,6 +151,19 @@ const saveStoryDetails = async () => {
     }
 
     // console.log('>>> Story Details: ', values)
-    await saveMyStory(values)
+    try {
+        await saveMyStory(values)
+        toast("Story Saved", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            type: 'success',
+        } as ToastOptions);
+    } catch (error) {
+        toast("Error: Story not saved", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            type: 'error',
+        } as ToastOptions);
+    }
 }
 </script>
