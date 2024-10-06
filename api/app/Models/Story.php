@@ -18,6 +18,7 @@ class Story extends Model
         'user_id',
         'title',
         'summary',
+        'rating_id',
         'notes',
         'number_of_chapters',
         'visible',
@@ -51,7 +52,7 @@ class Story extends Model
      */
     public function rating() : HasOne
     {
-        return $this->hasOne(Rating::class, 'id');
+        return $this->hasOne(Rating::class, 'id', 'rating_id');
     }
 
     /**
