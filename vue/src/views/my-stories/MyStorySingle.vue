@@ -50,13 +50,13 @@
 
             <div class="row">
                 <h4>Summary</h4>
-                <p>Write a brief summary or premise for this story</p>
+                <p>Write a brief summary or premise for this story. This will be visible at the beginning of every chapter or the start of the story if viewing all chapters at once.</p>
                 <text-editor v-model="story.summary" name="summary" />
             </div>
             
             <div class="row mt-4 mb-1">
                 <h4>Notes</h4>
-                <p>Add any author notes for the story as a whole here.</p>
+                <p>Add any author notes for the overall story here. These will be visible at the end of every chapter or the end of the story if viewing all chapters at once.</p>
                 <text-editor v-model="story.notes" @words="notesWordCount" name="notes" />
             </div>
 
