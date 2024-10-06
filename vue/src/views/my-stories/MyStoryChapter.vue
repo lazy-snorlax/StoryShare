@@ -55,6 +55,7 @@ import { onMounted, watch, ref, reactive } from 'vue';
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue';
 import MyChapterNav from '../../components/app/my-story/MyChapterNav.vue';
 import { useChapterStore, type ChapterResource } from '../../stores/chapter';
+import { toast } from 'vue3-toastify';
 
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
@@ -99,7 +100,23 @@ const saveChapter = async () => {
     }
 
     // console.log('>>> ', values, chapter)
-    await updateMyChapter(values)
+    try {
+        await updateMyChapter(values)
+        toast("Chapter successfully saved", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'success',
+        })
+    } catch (error) {
+        console.error(error)
+        toast("An error has occurred. Chapter was not able to be updated.", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'error',
+        })
+    }
 }
 </script>
 

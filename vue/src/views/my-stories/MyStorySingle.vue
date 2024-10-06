@@ -153,15 +153,17 @@ const saveStoryDetails = async () => {
     // console.log('>>> Story Details: ', values)
     try {
         await saveMyStory(values)
-        toast("Story Saved", {
+        toast("Story Details Saved", {
             autoClose: 1500,
             position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
             type: 'success',
         } as ToastOptions);
     } catch (error) {
         toast("Error: Story not saved", {
             autoClose: 1500,
             position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
             type: 'error',
         } as ToastOptions);
     }
