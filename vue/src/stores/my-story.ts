@@ -28,7 +28,7 @@ export const useMyStoryStore = defineStore('my-story', {
 })
 
 type MyStoryState = {
-    story: MyStoryListResource,
+    story: MyStoryListResource | null,
     list: Array<MyStoryListResource>
 }
 
@@ -42,7 +42,8 @@ export type MyStoryResource = {
     visible: string,
     posted: boolean,
     complete: boolean,
-    genres: Array<numbers>,
+    rating: number,
+    genres: Array<number>,
 }
 
 export type MyStoryListResource = {
