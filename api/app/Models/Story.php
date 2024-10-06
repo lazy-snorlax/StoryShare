@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Story extends Model
@@ -41,6 +42,16 @@ class Story extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * A story has only one rating
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rating() : HasOne
+    {
+        return $this->hasOne(Rating::class, 'id');
     }
 
     /**
