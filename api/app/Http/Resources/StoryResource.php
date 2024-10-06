@@ -31,7 +31,7 @@ class StoryResource extends JsonResource
             'bookmark' => $request->user() ? $request->user()->bookmarks()->where('story_id', $this->id)->first() : null,
             'applauded' => $request->user() ? $request->user()->applause()->where('story_id', $this->id)->first() : null,
             'applause' => $this->applause()->count(),
-            'rating' => $this->rating()->first(),
+            'rating' => $this->rating()->first()->id,
             'genres' => GenreResource::collection($this->whenLoaded('genres')),
             'chapters' => ChapterListResource::collection($this->whenLoaded('chapters')),
         ];
