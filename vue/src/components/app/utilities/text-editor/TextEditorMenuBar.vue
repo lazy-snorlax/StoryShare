@@ -64,7 +64,7 @@
         <button class="me-auto" @click="editor.chain().focus().redo().run()">
             <font-awesome-icon icon="fa-solid fa-rotate-right" />
         </button>
-        <div class="character-count text-white ms-auto me-3">
+        <div class="character-count text-primary-color ms-auto me-3">
             {{ editor.storage.characterCount.words() }} words
         </div>
     </div>

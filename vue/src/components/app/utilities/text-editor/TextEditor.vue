@@ -44,7 +44,7 @@
       }),
       Paragraph.configure({
         HTMLAttributes: {
-          class: 'text-white'
+          class: 'text-primary-color'
         }
       }),
       TextAlign.configure({
@@ -78,6 +78,8 @@
     border-color: var(--light-alt);
   }
 }
+
+.text-primary-color { color: var(--light); }
 
 .buttons {
   border: var(--light-alt) 1px solid;
