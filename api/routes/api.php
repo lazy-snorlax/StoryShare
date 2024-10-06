@@ -33,6 +33,7 @@ Route::prefix('/stories')->group(function () {
 // Route::resource('stories', Controllers\StoryController::class);
 Route::resource('chapters', Controllers\ChapterController::class);
 Route::resource('genres', Controllers\GenreController::class);
+Route::resource('ratings', Controllers\RatingController::class);
 
 // Get Chapter List
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);
