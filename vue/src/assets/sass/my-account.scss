@@ -17,13 +17,13 @@
     
     &.card {
         background-color: var(--dark) !important;
-        color: var(--white);
+        color: var(--light);
         h2 {
             color: var(--light-alt);
         }
         .form-control {
             background-color: var(--dark-alt);
-            color: white;
+            color: var(--light);
             border: none;
         }
         .btn-primary {

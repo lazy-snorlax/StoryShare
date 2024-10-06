@@ -43,6 +43,7 @@
 	--black: #fff;
 }
 
+.text-primary-color { color: var(--light); }
 
 * {
 	margin: 0;

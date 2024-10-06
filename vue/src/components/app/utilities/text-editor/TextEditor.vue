@@ -79,8 +79,6 @@
   }
 }
 
-.text-primary-color { color: var(--light); }
-
 .buttons {
   border: var(--light-alt) 1px solid;
   border-radius: 10px 10px 0 0;
