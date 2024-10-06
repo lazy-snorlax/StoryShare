@@ -166,6 +166,7 @@ const saveStoryDetails = async () => {
         id: story.value.id,
         title: story.value.title,
         summary: story.value.summary,
+        rating: story.value.rating,
         notes: story.value.notes,
         number_of_chapters: story.value.number_of_chapters,
         visible: story.value.visible,
