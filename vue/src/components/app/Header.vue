@@ -1,5 +1,5 @@
 <template>
-    <header v-if="loggedInUser != null && !loggedInUser.email_verified" class="page-header verify-email">
+    <header v-if="isLoggedIn && !loggedInUser.email_verified" class="page-header verify-email">
         <span class="">
             Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, <a class="link-underline-primary" @click="resend">click here</a>
         </span>
@@ -10,7 +10,7 @@
                 <font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
             </button>
         </div>
-        <div v-if="loggedInUser != null">
+        <div v-if="isLoggedIn">
             <p>{{ loggedInUser.email }}</p>
         </div>
     </header>
@@ -28,13 +28,14 @@
 import { useAuthStore } from '@/stores/auth'
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 import { useLoggedInUser } from '@/composables/use-logged-in-user'
+import { toast } from 'vue3-toastify';
 
 const props = defineProps<{
     title?: string|null,
     subtitle?: string|null,
 }>()
 
-const { getLoggedInUser } = useIsLoggedIn()
+const { isLoggedIn } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
 
 const { toggleSidebar, resendVerifyEmail } = useAuthStore()
@@ -50,8 +51,23 @@ const sidebarToggle = () => {
 }
 
 const resend = async() => {
-    resendVerifyEmail()
-    alert('Verification email has been re-sent')
+    try {
+        resendVerifyEmail()
+        toast("Verification email has been re-sent", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_CENTER,
+            theme: 'colored',
+            type: 'info'
+        })
+    } catch (error) {
+        toast("Verification email could not re-sent", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_CENTER,
+            theme: 'colored',
+            type: 'error'
+        })
+        console.error(error)
+    }
 }
 
 </script>
