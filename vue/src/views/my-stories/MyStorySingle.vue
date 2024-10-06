@@ -11,6 +11,16 @@
             </div>
 
             <div class="row mb-4">
+                <h4>Rating</h4>
+                <div class="col mx-auto">
+                    <MultiSelect class="privacy" v-model="story.rating" :options="ratingList" value-only :allow-empty="false" :no-searching="true" :trackBy="'id'" :label="'name'" />
+                </div>
+                <div class="col mx-auto">
+                    <p>{{ ratingOptionDescription }}</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
                 <h4>Genre</h4>
                 <div class="col mx-auto">
                     <MultiSelect v-model="story.genres" :options="genreList" :allow-empty="false" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
@@ -85,6 +95,7 @@ import { useMyStory } from '../../composables/stories/use-get-my-story'
 import { useMyStoryStore, type MyStoryResource } from '../../stores/my-story'
 
 import { useGenreStore } from '../../stores/genres'
+import { useRatingStore } from '../../stores/ratings'
 
 import MyChapterListItem from '../../components/app/my-story/my-chapters/MyChapterListItem.vue'
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'
@@ -99,10 +110,14 @@ const { saveMyStory } = useMyStoryStore()
 const route = useRoute()
 const router = useRouter()
 
-//  Load genre options into store, use storeToRefs to access pinia stores
+//  Load genre options into state, use storeToRefs to access pinia stores
 const genreStore = useGenreStore()
 const { genreList } = storeToRefs(genreStore)
-genreStore.getGenreList()
+
+// Load rating options into state
+const ratingStore = useRatingStore()
+const { ratingList } = storeToRefs(ratingStore)
+
 
 const privacyOptions = [
     { label: 'Public', value: 'public', description: 'Visible to everyone, with or without an account' },
@@ -113,6 +128,13 @@ const privacyOptions = [
 const privacyOptionDescription = computed(() => {
     if (story) {
         return privacyOptions.find((o) => o.value == story.value.visible).description
+    }
+})
+
+const ratingOptionDescription = computed(() => {
+    console.log('>>>> ', story.value.rating.id, ratingList.value)
+    if (story && ratingList) {
+        return ratingList.value.find((o) => o.id == story.value.rating).description
     }
 })
 
@@ -128,6 +150,8 @@ const { open, close } = useModal({
 })
 
 onMounted(async () => {
+    ratingStore.getRatingList()
+    genreStore.getGenreList()
     await getStory(route.params.id)
 })
 
