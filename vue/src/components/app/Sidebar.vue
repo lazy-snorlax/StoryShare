@@ -19,6 +19,9 @@
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
             </router-link>
+        </div>
+		
+        <div class="menu flex">
 			<template v-if="isLoggedIn">
 				<router-link 
 					class="button" 
@@ -26,11 +29,6 @@
 					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">My Account</span>
 				</router-link>
-			</template>
-        </div>
-		
-        <div class="menu flex">
-			<template v-if="isLoggedIn">
 				<router-link 
 					class="button"
 					:to="{ name: 'my-stories' }"
