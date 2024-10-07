@@ -103,7 +103,10 @@ class Story extends Model
      * Scopes
      */
     public function scopePublic($query) {
-        $query->where('visible', 'public');
+        $query->where('visible', 'public')
+        ->whereHas('rating', function($query) { // Public stories cannot display Mature or Explicit stories
+            $query->whereNotIn('name', ['Mature', 'Explicit']);
+        });
     }
 
     public function scopeAuthenticated($query) {
