@@ -5,6 +5,7 @@
                 <h4 class="my-3">{{ item.title }}</h4>
             </router-link>
             <h5 class="my-3">By: {{ item.user }}</h5>
+            <div class="rating my-3">{{ item.rating }}</div>
             <div class="genres">
                 <span v-for="genre in item.genres">
                     {{ genre.name }} &nbsp; &nbsp;
