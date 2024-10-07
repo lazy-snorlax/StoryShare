@@ -23,7 +23,7 @@ class BookmarkListResource extends JsonResource
             'updated_at' => $this->updated_at?->format('d M Y'),
             'user' => $this->user->id,
             'story_id' => $this->story_id,
-            'story' => new StoryResource(Story::find($this->story_id)->load('genres'))
+            'story' => new StoryListResource(Story::find($this->story_id)->load('genres'))
         ];
     }
 }
