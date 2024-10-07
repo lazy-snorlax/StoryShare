@@ -29,6 +29,7 @@ class StoryListResource extends JsonResource
             'applause_count' => $this->applause_count,
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
+            'rating' => $this->rating()->first()->name,
             'genres' => GenreResource::collection($this->whenLoaded('genres')),
         ];
     }
