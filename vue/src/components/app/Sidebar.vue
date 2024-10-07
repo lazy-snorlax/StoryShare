@@ -24,12 +24,6 @@
         <div class="menu flex">
 			<template v-if="isLoggedIn">
 				<router-link 
-					class="button" 
-					:to="{ name:'my-account' }" 
-					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
-					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">My Account</span>
-				</router-link>
-				<router-link 
 					class="button"
 					:to="{ name: 'my-stories' }"
 					:class="{'router-link-exact-active': $route.name.toString().includes('my-stories')}"
@@ -49,6 +43,9 @@
 				</a>
 				<a class="button">
 					<i class="fa-solid fa-file"></i> <span class="text">Drafts</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
 				</a>
 			</template>
 			<!-- <router-link to="/Collections" class="button">
@@ -75,9 +72,12 @@
 
         <div class="menu">
 			<template v-if="isLoggedIn">
-				<a class="button">
-					<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
-				</a>
+				<router-link 
+					class="button" 
+					:to="{ name:'my-account' }" 
+					:class="{ 'router-link-exact-active': $route.name.toString().includes('my-account') }">
+					<font-awesome-icon icon="fa-solid fa-gear"></font-awesome-icon> <span class="text">Settings</span>
+				</router-link>
 				<a class="button" @click="logout">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 				</a>
