@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-sidesheet row mx-auto" style="width: -moz-available;">
+    <div class="layout-sidesheet row" style="width: -moz-available;">
         <div class="col main-content pb-0" :class="{ 'd-flex flex-column': mainContentFlex }">
           <slot name="beforeContainer" />
 
