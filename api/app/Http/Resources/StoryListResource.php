@@ -23,7 +23,7 @@ class StoryListResource extends JsonResource
             'completed_number_of_chapters' => $this->chapters->count(),
             'total_number_of_chapters' => $this->number_of_chapters,
             'posted' => $this->posted,
-            'word_count' => $this->chapters->sum('word_count'),
+            'word_count' => number_format($this->chapters->sum('word_count')),
             'visible' => $this->visible,
             'complete' => $this->complete,
             'applause_count' => $this->applause_count,
