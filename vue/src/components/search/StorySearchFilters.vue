@@ -29,6 +29,12 @@
                 </div>
             </div>
             <div class="filter-block">
+                <h4 class="filter-block-title">Ratings</h4>
+                <div class="filter-block-content">
+                    <MultiSelect v-model="filters.rating" :options="ratingList" :allow-empty="true" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
+                </div>
+            </div>
+            <div class="filter-block">
                 <h4 class="filter-block-title">Genre</h4>
                 <div class="filter-block-content">
                     <MultiSelect v-model="filters.genre" :options="genreList" :allow-empty="true" :trackBy="'id'" :label="'name'" :no-searching="true" :multiple="true" />
@@ -58,6 +64,7 @@ import MultiSelect from '@/components/app/utilities/MultiSelect.vue';
 
 import { useAuthStore } from '@/stores/auth'
 import { useGenreStore } from '@/stores/genres'
+import { useRatingStore } from '@/stores/ratings';
 
 const props = defineProps<{
         filters?: {
@@ -88,6 +95,10 @@ const sortByOptions = [
 const genreStore = useGenreStore()
 const { genreList } = storeToRefs(genreStore)
 genreStore.getGenreList()
+
+const ratingStore = useRatingStore()
+const { ratingList } = storeToRefs(ratingStore)
+ratingStore.getRatingList()
 
 const emit = defineEmits<{
     updateFilters: [filters: {}]
