@@ -1,11 +1,11 @@
 <template>
     <li class="story blurb group" style="">
         <div class="header">
-            <router-link class="story-link" :to="{ name: 'story.single', params: { id: item.id } }">
+            <router-link class="story-link" target="_blank" :to="{ name: 'story.single', params: { id: item.id } }">
                 <h4 class="my-3">{{ item.title }}</h4>
             </router-link>
             <div class="d-flex my-3">
-                <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`">{{ item.rating[0] }}</div>
+                <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`" @click="open">{{ item.rating[0] }}</div>
                 <h5 class="">By: {{ item.user }}</h5>
             </div>
             <div class="genres">
@@ -45,6 +45,9 @@
 </template>
 <script lang="ts" setup>
 
+import { useModal } from 'vue-final-modal'
+import ModalRatings from '../app/ModalRatings.vue';
+
 const props = defineProps({
     item: {
         title: String,
@@ -54,6 +57,10 @@ const props = defineProps({
         number_of_chapters: Number,
         word_count: Number,
     }
+})
+
+const { open, close } = useModal({
+	component: ModalRatings
 })
 
 </script>
