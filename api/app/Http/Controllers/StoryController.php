@@ -29,7 +29,6 @@ class StoryController extends Controller
                     $q->where('users.name', 'like', '%'.$author.'%');
                 });
             })
-            ->canAccess(auth()->user())
             ->when($request->post('sort'), function ($query, $sort) {
                 if (str_starts_with($sort, '-')){
                     $query->orderBy(substr($sort, 1), 'desc');
@@ -42,7 +41,13 @@ class StoryController extends Controller
                     $q->whereIn('genres.id', array_column($genre, 'id'));
                 });
             })
+            ->when($request->post('rating'), function ($query, $rating) {
+                $query->whereHas('rating', function ($q) use ($rating) {
+                    $q->whereIn('ratings.id', array_column($rating, 'id'));
+                });
+            })
             ->withCount('applause')
+            ->canAccess(auth()->user())
             ;
 
         // dd($query->toRawSql());

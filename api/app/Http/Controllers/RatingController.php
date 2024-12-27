@@ -13,7 +13,11 @@ class RatingController extends Controller
      */
     public function index()
     {
-        $query = Rating::query()->get();
+        $query = Rating::query()
+        ->when(!auth()->user(), function ($query) {
+            $query->where('id', '!=', 5);
+        })
+        ->get();
 
         return RatingListResource::collection($query);
     }
