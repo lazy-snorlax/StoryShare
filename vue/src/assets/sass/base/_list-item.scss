@@ -22,5 +22,16 @@ li.blurb {
                 margin-bottom: 1rem;
             }
         }
+        .rating {
+            font-size: 1.25rem;
+            text-align: center;
+            width: 3rem;
+            border-radius: 15%;
+            &.general { background-color: green; }
+            &.teen { background-color: gold; }
+            &.young-adult { background-color: skyblue; }
+            &.mature { background-color: orange; }
+            &.explicit { background-color: red; }
+        }
     }
 }

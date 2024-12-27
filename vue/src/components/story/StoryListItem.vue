@@ -4,8 +4,10 @@
             <router-link class="story-link" :to="{ name: 'story.single', params: { id: item.id } }">
                 <h4 class="my-3">{{ item.title }}</h4>
             </router-link>
-            <h5 class="my-3">By: {{ item.user }}</h5>
-            <div class="rating my-3">{{ item.rating }}</div>
+            <div class="d-flex my-3">
+                <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`">{{ item.rating[0] }}</div>
+                <h5 class="">By: {{ item.user }}</h5>
+            </div>
             <div class="genres">
                 <span v-for="genre in item.genres">
                     {{ genre.name }} &nbsp; &nbsp;
