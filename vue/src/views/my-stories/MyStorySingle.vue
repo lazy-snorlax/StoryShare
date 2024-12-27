@@ -88,7 +88,6 @@
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Router } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 import { useMyStory } from '../../composables/stories/use-get-my-story'

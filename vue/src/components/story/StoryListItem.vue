@@ -35,7 +35,7 @@
                     <p>Completed: 
                         <span>
                             <font-awesome-icon icon="fa-solid fa-check" v-if="item.complete" />
-                            <font-awesome-icon icon="fa-solid fa-check" v-else />
+                            <font-awesome-icon icon="fa-solid fa-xmark" v-else />
                         </span>
                     </p>
                 </div>

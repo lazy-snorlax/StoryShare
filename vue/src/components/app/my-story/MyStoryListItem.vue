@@ -23,7 +23,7 @@
         <div class="footer">
             <div class="row d-flex">
                 <div class="col">
-                    <p>Chapters: <span>{{ item.number_of_chapters }}</span></p>
+                    <p>Chapters: <span> {{ item.completed_number_of_chapters }} / {{ item.total_number_of_chapters > 0 ?  item.total_number_of_chapters : '?' }}</span></p>
                 </div>
                 <div class="col">
                     <p>Words: <span>{{ item.word_count }}</span></p>
@@ -32,7 +32,7 @@
                     <p>Complete: 
                         <span>
                             <font-awesome-icon icon="fa-solid fa-check" v-if="item.complete" />
-                            <font-awesome-icon icon="fa-solid fa-check" v-else />
+                            <font-awesome-icon icon="fa-solid fa-xmark" v-else />
                         </span>
                     </p>
                 </div>
@@ -41,6 +41,8 @@
     </li>
 </template>
 <script lang="ts" setup>
+import { useModal } from 'vue-final-modal'
+import ModalRatings from '../ModalRatings.vue';
 
 const props = defineProps({
     item: {
@@ -51,6 +53,10 @@ const props = defineProps({
         number_of_chapters: Number,
         word_count: Number,
     }
+})
+
+const { open, close } = useModal({
+	component: ModalRatings
 })
 
 </script>
