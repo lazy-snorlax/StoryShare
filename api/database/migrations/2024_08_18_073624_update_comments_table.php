@@ -27,10 +27,10 @@ return new class extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->integer('parent_id')->change();
-            $table->integer('user_id')->change();
+            // $table->integer('user_id')->change();
             $table->integer('approved_by')->change();
 
-            $table->dropForeign('user_id')->references('id')->on('users');
+            // $table->dropForeign('user_id')->references('id')->on('users');
         });
     }
 };
