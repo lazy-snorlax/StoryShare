@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         
         // Genres
         $this->call(GenreSeeder::class);
+        $this->callWith(Required\RoleSeeder::class);
         
         // Generate Data for local dev use
         if (app()->environment('local')) {
