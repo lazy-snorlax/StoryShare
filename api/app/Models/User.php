@@ -12,10 +12,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
+/**
+ * @property-read \App\Models\Role $role
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRolesAndAbilities;
@@ -50,6 +54,23 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * A user has a role through the assigned roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
+    public function role(): HasOneThrough
+    {
+        return $this->hasOneThrough(Role::class, AssignedRole::class, 'entity_id', 'id', 'id', 'role_id')
+            ->where('assigned_roles.entity_type', self::class);
+    }
+
+    public function loadAbilities(): self
+    {
+        $this->setRelation('abilities', $this->abilities->merge($this->role?->abilities ?? []));
+        return $this;
+    }
 
     /**
      * Password attribute caster.
@@ -120,5 +141,22 @@ class User extends Authenticatable implements MustVerifyEmail
     public function applause() : HasMany
     {
         return $this->hasMany(Applause::class);
+    }
+
+    /**
+     * Return all the user's abilities and if they have explicitly been
+     * forbidden from having an ability, then we return with a forbidden flag
+     * set to true. Unfortunately bouncer doesn't have a method for returning
+     * all abilities, forbidden or not
+     */
+    public function getUserAbilities()
+    {
+        $abilities = $this->getAbilities()->merge($this->getForbiddenAbilities());
+
+        $abilities->each(function ($ability) {
+            $ability->forbidden = $this->getForbiddenAbilities()->contains($ability);
+        });
+
+        return $abilities;
     }
 }
