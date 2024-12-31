@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Support\Enums\UserRole;
 use App\Support\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -38,23 +40,32 @@ class UserFactory extends Factory
         ]);
     }
 
-    public function enabled()
+    public function enabled(): self
     {
         return $this->state(['status' => UserStatus::Enabled->value]);
     }
 
-    public function archived()
+    public function archived(): self
     {
         return $this->state(['status' => UserStatus::Archived->value]);
     }
 
-    public function pending()
+    public function pending(): self
     {
         return $this->state(['status' => UserStatus::Pending->value, 'email_verified_at' => null]);
     }
 
-    public function user()
+    public function admin(): self
     {
-        return $this;
+        return $this->afterCreating(function (User $user) {
+            $user->assign(UserRole::Admin->value);
+        });
+    }
+
+    public function user(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assign(UserRole::User->value);
+        });
     }
 }
