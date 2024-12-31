@@ -6,7 +6,6 @@ use App\Http\Resources\StoryListResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoryResource;
 use App\Models\Story;
-use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -40,7 +39,7 @@ class StoryController extends Controller
             'user_id' => $request->user()->id,
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
-            'rating' => $request->input('rating'),
+            'rating_id' => $request->input('rating'),
             'notes' => $request->input('notes'),
             'number_of_chapters' => $request->input('number_of_chapters'),
             'posted' => false,
