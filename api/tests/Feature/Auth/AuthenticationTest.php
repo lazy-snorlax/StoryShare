@@ -12,12 +12,15 @@ class AuthenticationTest extends TestCase
 
     public function testCanLoginWithCorrectEmailAndPassword()
     {
-        $this->createAdmin(['email' => 'john@email.com']);
+        $this->createUser(['email' => 'john@email.com']);
 
-        $response = $this->postJson('login', [
+        $response = $this->postJson('api/login', [
             'email' => 'john@email.com', 
             'password' => 'Secret*12345'
         ]);
+
+        // dd($response);
+
         $response->assertSuccessful();
         // $response->assertSessionHas(RegistrationSession::Registration->value, false);
     }
