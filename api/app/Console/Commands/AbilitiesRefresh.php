@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Support\Str;
 use Silber\Bouncer\Bouncer;
 use App\Models\User\Ability;
+use App\Support\Enums\RoleType;
 use App\Support\Enums\UserRole;
 use Illuminate\Console\Command;
 use Silber\Bouncer\Database\Role;
@@ -45,6 +46,22 @@ class AbilitiesRefresh extends Command
      */
     public function handle() {
         $this->createAbilities();
+
+        // Create abilities here
+        $this->assignAbilitiesToRole($this->createRole(UserRole::Admin), [
+            UserAbility::ReadUsers,
+            UserAbility::WriteUsers,
+            UserAbility::ReadBan,
+            UserAbility::WriteBan,
+            UserAbility::ReadComment,
+            UserAbility::WriteComment,
+        ]);
+
+        $this->assignAbilitiesToRole($this->createRole(UserRole::User), [
+            UserAbility::ReadComment,
+            UserAbility::WriteComment,
+        ]);
+
         $this->info('Roles created and abilities assigned.');
 
         if ($this->option('clean')) {
