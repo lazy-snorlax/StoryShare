@@ -12,6 +12,7 @@ class LoggedInController extends Controller
     public function __invoke(Request $request): LoggedInResource
     {
         $user = $request->user();
+        $user->loadAbilities();
         return new LoggedInResource($user);
     }
 }
