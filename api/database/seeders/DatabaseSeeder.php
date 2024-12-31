@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Nette\Utils\Random;
 
 class DatabaseSeeder extends Seeder
@@ -13,25 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        
+        // Genres
+        $this->call(GenreSeeder::class);
+        $this->callWith(Required\RoleSeeder::class);
+
+        // Artisan::call('abilities:refresh');
+
         // Users
-        $admin = \App\Models\User::factory()->create([
+        $admin = \App\Models\User::factory()->admin()->create([
             'name' => 'Admin User',
             'email' => 'admin@test.io',
         ]);
         
         // Primary user
-        $user = \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->user()->create([
             'name' => 'User',
             'email' => 'user@test.io',
         ]);
         
-        // Genres
-        $this->call(GenreSeeder::class);
-        $this->callWith(Required\RoleSeeder::class);
-        
         // Generate Data for local dev use
         if (app()->environment('local')) {
-            $users = \App\Models\User::factory(5)->create();
+            $users = \App\Models\User::factory(5)->user()->create();
 
             // Stories for primary user
             $userStories = \App\Models\Story::factory(3)->create([

@@ -26,8 +26,15 @@ class RoleSeeder extends Seeder
             $admin->allow($ability->value);
         }
 
-        Role::create(
-            ['title' => UserRole::User->title(), 'name' => UserRole::User->value, 'restricted' => true, 'type' => RoleType::User]
-        );
+        $user = Role::create([
+            'title' => UserRole::User->title(), 
+            'name' => UserRole::User->value, 
+            'restricted' => true, 
+            'type' => RoleType::User
+        ]);
+
+        // Assign abilities to general user role
+        $user->allow(UserAbility::ReadComment->value);
+        $user->allow(UserAbility::WriteComment->value);
     }
 }
