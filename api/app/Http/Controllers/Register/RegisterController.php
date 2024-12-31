@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Register\RegisterRequest;
 use App\Http\Resources\User as UserResource;
 use App\Notifications\VerifyEmail;
+use App\Support\Enums\UserRole;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 class RegisterController extends Controller
@@ -23,6 +24,8 @@ class RegisterController extends Controller
 
         $user->password = $request->validated('password');
         $user->save();
+
+        $user->assign(UserRole::User->value);
 
         $user->notify(new VerifyEmail);
 
