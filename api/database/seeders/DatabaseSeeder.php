@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
         // Genres
         $this->call(GenreSeeder::class);
+        $this->call(RatingSeeder::class);
         $this->callWith(Required\RoleSeeder::class);
 
         // Artisan::call('abilities:refresh');
