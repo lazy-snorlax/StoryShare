@@ -13,7 +13,7 @@ Route::post('/logout', [Controllers\LoginController::class, 'destroy']);
 // TODO: Register New Account =================================================
 Route::prefix('/register')->group(function () {
     Route::post('', Controllers\Register\RegisterController::class);
-    Route::post('/verification', Controllers\Register\VerificationController::class);
+    Route::post('/verification', Controllers\Register\VerificationController::class)->name('verification.verify');
     Route::post('/verification/resend', [Controllers\Register\ResendVerificationController::class, 'store']);
 });
 
