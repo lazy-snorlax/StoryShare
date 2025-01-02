@@ -29,7 +29,7 @@ const router = createRouter({
 authenticated(router)
 
 /** Check the abilites of the user */
-// authorized(router)
+authorized(router)
 
 // Bind the other middleware to handle things such as account verification and two factor.
 // middleware(router)
