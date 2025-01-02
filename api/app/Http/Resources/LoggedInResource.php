@@ -19,6 +19,7 @@ class LoggedInResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'email_verified' => $this->when($request->user()?->id === $this->id, fn () => $this->email_verified_at !== null),
+            'role' => new RoleResource($this->role),
             'abilities' => $this->whenLoaded('abilities', function () {
                 return AbilityResource::collection($this->abilities->where('name', '<>', '*'));
             }),
