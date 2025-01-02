@@ -1,9 +1,11 @@
 <template>
-    <header v-if="isLoggedIn && !loggedInUser.email_verified" class="page-header verify-email">
-        <span class="">
-            Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, <a class="link-underline-primary" @click="resend">click here</a>
-        </span>
-    </header>
+    <template v-if="isLoggedIn">
+        <header v-if="!loggedInUser?.email_verified" class="page-header verify-email">
+            <span class="">
+                Your email is un-verified. Please click the link that was sent to your email. If you need to re-send the link, <a class="link-underline-primary" @click="resend">click here</a>
+            </span>
+        </header>
+    </template>
     <header class="page-header sticky pb-0">
         <div class="menu-toggle-wrap">
             <button class="menu-toggle" @click="sidebarToggle">
@@ -11,7 +13,7 @@
             </button>
         </div>
         <div v-if="isLoggedIn">
-            <p>{{ loggedInUser.email }}</p>
+            <p>{{ loggedInUser?.email }}</p>
         </div>
     </header>
     <header class="page-header">
@@ -69,5 +71,4 @@ const resend = async() => {
         console.error(error)
     }
 }
-
 </script>
