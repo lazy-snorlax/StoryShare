@@ -2,6 +2,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "
 import { Router } from "vue-router";
 import { App } from "vue";
 import { useIsLoggedIn } from '../composables/use-is-logged-in'
+import { useLoggedInUser } from "../composables/use-logged-in-user";
 
 export const http: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -30,6 +31,7 @@ export default {
         http.interceptors.response.use(null, async (error) => {
 
             const { isLoggedIn } = useIsLoggedIn()
+            const { loggedInUser } = useLoggedInUser()
 
             if (isAxiosError(error) && error.response) {
                 const route = router.currentRoute.value
@@ -52,7 +54,11 @@ export default {
                         route.meta.restricted === true ? route.path : null
 
                     if (isLoggedIn) {
-                        router.replace({ name: 'dashboard', query: { redirect } })
+                        if (loggedInUser?.value.role.name == 'admin') {
+                            router.replace({ name: 'admin.dashboard', query: { redirect } })
+                        } else {
+                            router.replace({ name: 'dashboard', query: { redirect } })
+                        }
                     } else {
                         router.replace({ name: 'login', query: { redirect } })
                     }
@@ -76,7 +82,11 @@ export default {
                         route.meta.restricted === true ? route.path : null
                     
                     if (isLoggedIn) {
-                        router.replace({ name: 'dashboard', query: { redirect } })
+                        if (loggedInUser?.value.role.name == 'admin') {
+                            router.replace({ name: 'admin.dashboard', query: { redirect } })
+                        } else {
+                            router.replace({ name: 'dashboard', query: { redirect } })
+                        }
                     } else {
                         router.replace({ name: 'login', query: { redirect } })
                     }
