@@ -13,8 +13,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login(payload: LoginForm) {
             this.authenticationAttempted = false
-            const response = await this.http.post('login', payload)
-            this.user = response.data.data
+            await this.http.post('login', payload)
         },
 
         async logout() {
@@ -89,6 +88,21 @@ export type LoggedInUserResource = {
     name: string,
     email: string,
     ip_address: string | null,
+    role: RoleResource,
+    abilities: AbilityLookupResource[],
+}
+
+export type RoleResource = {
+    name: string
+    title: string
+    group: string
+}
+
+export type AbilityLookupResource = {
+    id: number
+    name: string
+    title: string
+    group: string
 }
 
 export type LoginForm = {
