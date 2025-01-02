@@ -19,6 +19,12 @@
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
             </router-link>
+			<template v-if="isLoggedIn">
+				<router-link :to="{ name: 'admin.dashboard' }" class="button" v-if="loggedInUser?.role?.name == 'admin'">
+					<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
+					<span class="text">Admin Portal</span>
+				</router-link>
+			</template>
         </div>
 		
         <div class="menu flex">
@@ -90,9 +96,15 @@
 				</router-link> -->
 			</template>
 			<template v-else>
-				<a class="button" @click="open">
+				<!-- <a class="button" @click="open">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-				</a>
+				</a> -->
+				<router-link 
+					class="button" 
+					:to="{ name:'login' }" 
+					>
+					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
+				</router-link>
 			</template>
         </div>
 
@@ -104,6 +116,7 @@ import { computed, reactive, watchEffect } from 'vue'
 import logoDefault from '@/assets/logo.svg'
 import { useLogout } from '@/composables/use-logout'
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
+import { useLoggedInUser } from '@/composables/use-logged-in-user'
 
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
@@ -117,6 +130,7 @@ const logo = computed(() => { return logoDefault })
 
 const { logout } = useLogout()
 const { isLoggedIn } = useIsLoggedIn()
+const { loggedInUser } = useLoggedInUser()
 
 const authStore = useAuthStore()
 const { is_expanded } = storeToRefs(authStore)
