@@ -1,6 +1,7 @@
 import { useAuthStore, type LoggedInUserResource } from '../stores/auth'
 import { storeToRefs } from 'pinia'
 import type { Ref } from 'vue'
+import { defineAbility } from '@casl/ability'
 
 export function useLoggedInUser() {
   const authStore = useAuthStore()
@@ -15,8 +16,15 @@ export function useLoggedInUser() {
     }
   }
 
+  const abilities = user.value.abilities as { name: string }[]
+  const ability = defineAbility((can) => {
+    abilities.forEach(({ name }) => can(name, '*'))
+  })
+
   return {
     loggedInUser: user as Ref<LoggedInUserResource>,
+    can: (action: string) => ability.can(action, '*'),
+    cannot: (action: string) => ability.cannot(action, '*'),
     getLoggedInUser: authStore.getUser(),
   }
 }
