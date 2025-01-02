@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LoggedInResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Lang;
-use App\Http\Resources\User as UserResource;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Validation\ValidationException;
@@ -35,7 +35,7 @@ class LoginController extends Controller
             //     $user->notify(new VerifyEmail);
             // }
 
-            return new UserResource($user);
+            return new LoggedInResource($user->load('abilities'));
         }
 
         //Randomize request time
