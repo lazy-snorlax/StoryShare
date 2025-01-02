@@ -39,20 +39,15 @@
 <script lang="ts" setup>
 import { AxiosError, isAxiosError } from 'axios'
 import { storeToRefs } from 'pinia'
-import { onMounted, watch } from 'vue';
 
 import { useAuthStore, type LoginForm } from '../../stores/auth';
 import { useRouter, useRoute } from 'vue-router'
-
-import { useLoggedInUser } from '../../composables/use-logged-in-user';
 
 import { useForm } from 'vee-validate'
 import { object, string, number, date, InferType } from 'yup'
 
 const authStore  = useAuthStore()
 const { login }  = useAuthStore()
-const { loggedInUser } = useLoggedInUser()
-
 const { user, error } = storeToRefs(authStore)
 
 const router = useRouter()
@@ -71,7 +66,7 @@ const password = defineInputBinds('password')
 const submit = handleSubmit(async (values) => {
     try {
         const response = await login(values)
-
+        
         if (route.query.redirect) {
             router.replace(route.query.redirect as string)
         } else {
