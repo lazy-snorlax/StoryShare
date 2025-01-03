@@ -67,4 +67,19 @@ class AuthenticationTest extends TestCase
                 )
         ));
     }
+
+    public function testCannotLoginWithInvalidEmail() {
+        $response = $this->postJson('api/login', ['email' => 'john@email.com', 'password' => 'Secret*12345']);
+        $response->assertStatus(422);
+        $response->assertJsonFragment(['email' => ['These credentials do not match our records.']]);
+    }
+
+    public function testCannotLoginWithInvalidPassword()
+    {
+        $this->createAdmin(['email' => 'john@email.com']);
+
+        $response = $this->postJson('api/login', ['email' => 'john@email.com', 'password' => 'Secret*32145']);
+        $response->assertStatus(422);
+        $response->assertJsonFragment(['email' => ['These credentials do not match our records.']]);
+    }
 }
