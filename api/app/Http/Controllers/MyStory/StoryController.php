@@ -39,16 +39,14 @@ class StoryController extends Controller
             'user_id' => $request->user()->id,
             'title' => $request->input('title'),
             'summary' => $request->input('summary'),
-            'rating_id' => $request->input('rating'),
+            'rating_id' => 1,
             'notes' => $request->input('notes'),
-            'number_of_chapters' => $request->input('number_of_chapters'),
+            'number_of_chapters' => 0,
+            'visible' => 'private',
             'posted' => false,
             'word_count' => 0,
             'complete' => false,
         ]);
-
-        // TODO: Create record in pivot when story created
-        // $story->genres()->attach($request->input('genres'));
 
         return new StoryResource($story);
     }
