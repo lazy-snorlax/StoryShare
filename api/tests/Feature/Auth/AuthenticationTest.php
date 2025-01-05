@@ -80,6 +80,6 @@ class AuthenticationTest extends TestCase
 
         $response = $this->postJson('api/login', ['email' => 'john@email.com', 'password' => 'Secret*32145']);
         $response->assertStatus(422);
-        $response->assertJsonFragment(['email' => ['These credentials do not match our records.']]);
+        $response->assertJsonFragment(['message' => 'These credentials do not match our records.']);
     }
 }
