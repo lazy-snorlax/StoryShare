@@ -6,6 +6,7 @@ use App\Http\Resources\StoryListResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChapterResource;
 use App\Models\Chapter;
+use App\Models\Story;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,9 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
+        $story = Story::whereBelongsTo($request->user())->where('id', $request->input('story_id'))->first();
+        abort_if($story == null, 401, 'You are not authorized for this action');
+
         $chapter = Chapter::create([
             'story_id' => $request->input('story_id'),
             'chapter_number' => $request->input('chapter_number') ?? 0,
@@ -54,6 +58,9 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $story = Story::whereBelongsTo($request->user())->where('id', $request->input('story_id'))->first();
+        abort_if($story == null, 401, 'You are not authorized for this action');
+        
         $chapter = Chapter::where('id', $id)->first();
         $chapter->fill($request->only(['chapter_number', 'title', 'summary', 'content', 'word_count', 'notes']));
         $chapter->save();
