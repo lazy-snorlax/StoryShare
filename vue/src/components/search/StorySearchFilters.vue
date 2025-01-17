@@ -13,7 +13,7 @@
             <div class="filter-block">
                 <h4 class="filter-block-title">Search</h4>
                 <div class="filter-block-content">
-                    <input type="text" name="search" class="form-control" v-model="filters.search">
+                    <input type="text" name="search" class="form-control" v-model="query">
                 </div>
             </div>
             <div class="filter-block">
@@ -66,6 +66,8 @@ import { useAuthStore } from '@/stores/auth'
 import { useGenreStore } from '@/stores/genres'
 import { useRatingStore } from '@/stores/ratings';
 
+import debouncedRef from '../../composables/debouceRef';
+
 const props = defineProps<{
         filters?: {
             search: string,
@@ -78,6 +80,8 @@ const props = defineProps<{
     }>()
 
 const filters = ref(props.filters);
+
+const query = debouncedRef(filters.value?.search, 1000)
 
 const is_filter_expanded = ref(localStorage.getItem("is_filter_expanded") === "true")
 const toggleMenu = () => {
@@ -108,7 +112,8 @@ onMounted(() => {
   emit('updateFilters', filters)
 })
 
-watchEffect(() => {
+watch(query, newQuery => {
+    filters.value.search = newQuery
     emit('updateFilters', filters)
 })
 
