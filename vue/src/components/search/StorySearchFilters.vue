@@ -7,7 +7,7 @@
                     Filters
                 </div>
                 <div id="filter-controls">
-                    <a class="btn btn-small"><i class="fas fa-undo-alt"></i></a>
+                    <a class="btn btn-small" @click="clearFilters"><i class="fas fa-undo-alt"></i></a>
                 </div>
             </h3>
             <div class="filter-block">
@@ -19,7 +19,7 @@
             <div class="filter-block">
                 <h4 class="filter-block-title">Author</h4>
                 <div class="filter-block-content">
-                    <input type="text" name="search" class="form-control" v-model="filters.author">
+                    <input type="text" name="search" class="form-control" v-model="queryAuthor">
                 </div>
             </div>
             <div class="filter-block">
@@ -73,6 +73,7 @@ const props = defineProps<{
             search: string,
             author: string,
             sort: string,
+            rating: array,
             genre: array,
             tag: array,
         },
@@ -81,7 +82,8 @@ const props = defineProps<{
 
 const filters = ref(props.filters);
 
-const query = debouncedRef(filters.value?.search, 1000)
+const query = debouncedRef(filters.value?.search, 400)
+const queryAuthor = debouncedRef(filters.value?.author, 400)
 
 const is_filter_expanded = ref(localStorage.getItem("is_filter_expanded") === "true")
 const toggleMenu = () => {
@@ -116,8 +118,23 @@ watch(query, newQuery => {
     filters.value.search = newQuery
     emit('updateFilters', filters)
 })
+watch(queryAuthor, newQueryAuthor => {
+    filters.value.author = newQueryAuthor
+    emit('updateFilters', filters)
+})
 
 const authStore = useAuthStore()
 const { toggleSearchFilters } = storeToRefs(authStore)
+
+const clearFilters = () => {
+    query.value = ''
+    queryAuthor.value = ''
+
+    filters.value.search = ''
+    filters.value.author = ''
+    filters.value.sort = 'updated_at'
+    filters.value.genre = null
+    filters.value.rating = null
+}
 
 </script>
