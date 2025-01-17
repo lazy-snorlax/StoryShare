@@ -106,3 +106,10 @@ const attrs = computed(() => {
   }
 })
 </script>
+
+<style lang="scss">
+.multiselect__tag {
+    background-color: var(--primary);
+    color: var(--white);
+}
+</style>
