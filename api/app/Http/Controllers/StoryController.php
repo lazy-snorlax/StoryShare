@@ -33,7 +33,7 @@ class StoryController extends Controller
                 if (str_starts_with($sort, '-')){
                     $query->orderBy(substr($sort, 1), 'desc');
                 } else {
-                    $query->orderBy($sort, 'desc');
+                    $query->orderBy($sort, 'asc');
                 }
             })
             ->when($request->post('genre'), function ($query, $genre) {
