@@ -88,32 +88,23 @@ class SingleStoryTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $response = $this->be($user)->postJson('api/my-chapters', [
+        $chapter = Chapter::factory()->create([
             'story_id' => $story->id,
-            'title' => 'Test Chapter',
-        ]);
-        $response->assertSuccessful();
-        $response->assertJson(fn (AssertableJson $json) => $json
-            ->has('data', fn (AssertableJson $json) => $json
-                ->has('id')
-                ->where('title', 'Test Chapter')
-                ->where('chapter_number', 0)
-                ->where('story_id', $story->id)
-                ->where('summary', null)
-                ->where('content', null)
-                ->where('word_count', '0')
-                ->where('notes', null)
-                ->where('updated_at', now()->format('d M Y'))
-        ));
-
-        $response = $this->be($user)->putJson('api/my-chapters/'. $response->json('data.id'), [
             'chapter_number' => 1,
             'title' => 'Chapter ' . 1,
             'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
-            'content' => 'This is chapter 1 content.',
-            'word_count' => 5,
             'notes' => 'This is a section for any author notes on this chapter.',
         ]);
+
+        $response = $this->be($user)->putJson('api/my-chapters/'. $chapter->id, [
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is a chapter in the story ' . $story->title,
+            'content' => 'This is where chapter content goes.',
+            'word_count' => 6,
+            'notes' => 'Author notes for the chapter go here.',
+        ]);
+        // dd($response);
         $response->assertSuccessful();
         $response->assertJson(fn (AssertableJson $json) => $json
             ->has('data', fn (AssertableJson $json) => $json
@@ -121,10 +112,10 @@ class SingleStoryTest extends TestCase
                 ->where('title', 'Chapter 1')
                 ->where('chapter_number', 1)
                 ->where('story_id', $story->id)
-                ->where('summary', 'This is chapter ' . 1 . ' in story ' . $story->title)
-                ->where('content', 'This is chapter 1 content.')
-                ->where('word_count', '5')
-                ->where('notes', 'This is a section for any author notes on this chapter.')
+                ->where('summary', 'This is a chapter in the story ' . $story->title)
+                ->where('content', 'This is where chapter content goes.')
+                ->where('word_count', '6')
+                ->where('notes', 'Author notes for the chapter go here.')
                 ->where('updated_at', now()->format('d M Y'))
         ));
     }
@@ -154,7 +145,32 @@ class SingleStoryTest extends TestCase
             'story_id' => $story->id,
             'title' => 'Test Chapter',
         ]);
-        // dd($response);
+        $response->assertStatus(401);
+        $response->assertJsonFragment(['message' => 'You are not authorized for this action']);
+    }
+
+    public function testAnotherUserCannotModifyAChapterToStoryTheyDontOwn() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+        
+        $testUser = $this->createUser();
+        $response = $this->be($testUser)->putJson('api/my-chapters/'. $chapter->id, [
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is a chapter in the story ' . $story->title,
+            'content' => 'This is where chapter content goes.',
+            'word_count' => 6,
+            'notes' => 'Author notes for the chapter go here.',
+        ]);
         $response->assertStatus(401);
         $response->assertJsonFragment(['message' => 'You are not authorized for this action']);
     }

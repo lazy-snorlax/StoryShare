@@ -58,10 +58,12 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $story = Story::whereBelongsTo($request->user())->where('id', $request->input('story_id'))->first();
+        $chapter = Chapter::where('id', $id)->first();
+        abort_if($chapter == null, 404, 'The chapter cannot be found');
+        
+        $story = Story::where('id', $chapter->story_id)->whereBelongsTo($request->user())->first();
         abort_if($story == null, 401, 'You are not authorized for this action');
         
-        $chapter = Chapter::where('id', $id)->first();
         $chapter->fill($request->only(['chapter_number', 'title', 'summary', 'content', 'word_count', 'notes']));
         $chapter->save();
 
