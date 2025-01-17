@@ -27,6 +27,8 @@ class StoryListResource extends JsonResource
             'visible' => $this->visible,
             'complete' => $this->complete,
             'applause_count' => $this->applause_count,
+            'view_count' => 0, // TODO
+            'bookmark_count' => 0, // TODO
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
             'rating' => $this->rating()->first()->name,
