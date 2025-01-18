@@ -6,7 +6,9 @@
             </router-link>
             <div class="d-flex my-3">
                 <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`" @click="open">{{ item.rating[0] }}</div>
-                <h5 class="">By: {{ item.user }}</h5>
+                <h5 class="">By: 
+                    <router-link class="story-link" :to="{ name: 'profile', params: { id: item.user_id } }">{{ item.user }}</router-link>
+                </h5>
             </div>
             <div class="genres">
                 <span v-for="genre in item.genres">

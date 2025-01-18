@@ -17,6 +17,7 @@ class StoryListResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => $this->user->name,
+            'user_id' => $this->user->id,
             'title' => $this->title,
             'summary' => $this->summary,
             'notes' => $this->notes,
@@ -29,6 +30,7 @@ class StoryListResource extends JsonResource
             'applause_count' => number_format($this->applause_count),
             'view_count' => 0, // TODO
             'bookmark_count' => number_format($this->bookmarks_count),
+            'comment_count' => 0, // TODO
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
             'rating' => $this->rating()->first()->name,
