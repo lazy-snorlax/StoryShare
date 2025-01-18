@@ -49,7 +49,8 @@ li.blurb {
             display: flex;
             .icon-group {
                 margin-right: 0.5rem;
-                border: 1px var(--white) solid;
+                color: var(--light-alt);
+                border: 1px var(--light-alt) solid;
                 border-radius: 5px;
                 .icon { padding: 10px }
                 .stat { padding: 10px }
