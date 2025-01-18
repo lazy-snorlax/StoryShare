@@ -73,8 +73,14 @@ class ChapterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chapter $chapter)
+    public function destroy(Chapter $chapter, $id)
     {
-        //
+        $chapter = Chapter::where('id', $id)->first();
+        abort_if($chapter == null, 404, 'The chapter cannot be found');
+        
+        $story = Story::where('id', $chapter->story_id)->whereBelongsTo(auth()->user())->first();
+        abort_if($story == null, 401, 'You are not authorized for this action');
+        
+        $chapter->delete();
     }
 }

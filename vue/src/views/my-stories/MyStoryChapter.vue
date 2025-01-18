@@ -33,6 +33,9 @@
                     <div class="col-3 mx-auto">
                         <button class="btn w-100" @click="saveChapter">Save</button>
                     </div>
+                    <div class="col-3 mx-auto">
+                        <button class="btn btn-danger w-100" style="background-color: red;" @click="deleteChapter">Delete</button>
+                    </div>
                 </div>
             </div>
 
@@ -60,7 +63,7 @@ import { toast } from 'vue3-toastify';
 const { chapter, getChapters } = useChapter()
 const { chapter_list, getChapterList } = useChapterList()
 const route = useRoute()
-const { updateMyChapter } = useChapterStore()
+const { updateMyChapter, deleteMyChapter } = useChapterStore()
 
 onMounted(async () => {
     await getChapters(route.params?.chapter)
@@ -102,6 +105,30 @@ const saveChapter = async () => {
     // console.log('>>> ', values, chapter)
     try {
         await updateMyChapter(values)
+        toast("Chapter successfully saved", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'success',
+        })
+    } catch (error) {
+        console.error(error)
+        toast("An error has occurred. Chapter was not able to be updated.", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'error',
+        })
+    }
+}
+
+const deleteChapter = async () => {
+    const values = <ChapterResource>{
+        id: chapter.value.id,
+    }
+
+    try {
+        await deleteMyChapter(values)
         toast("Chapter successfully saved", {
             autoClose: 1500,
             position: toast.POSITION.TOP_RIGHT,

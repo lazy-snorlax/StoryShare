@@ -59,11 +59,13 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::post('/my-stories', [Controllers\MyStory\StoryController::class, 'store']);
     Route::get('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'show']);
     Route::put('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'update']);
+    Route::delete('/my-stories/{id}', [Controllers\MyStory\StoryController::class, 'destroy']);
     
     // My Chapters =============================================================
     Route::get('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'index']);
     Route::post('/my-chapters', [Controllers\MyStory\ChapterController::class, 'store']);
     Route::put('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'update']);
+    Route::delete('/my-chapters/{id}', [Controllers\MyStory\ChapterController::class, 'destroy']);
     
     // My Bookmarks ============================================================
     Route::get('/my-bookmarks', [Controllers\BookmarkController::class, 'index']);

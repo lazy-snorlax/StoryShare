@@ -84,12 +84,11 @@ class StoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Story $story)
+    public function destroy(Story $story, $id)
     {
+        $story = Story::where('id', $id)->first();
         abort_if(auth()->user()->id != $story->user_id, 401, 'You do not have access to this story.');
-        // TODO: Delete story genres records
-        // $story->genres()->detach();
-
+        $story->genres()->detach();
         $story->delete();
     }
 }

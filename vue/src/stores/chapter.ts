@@ -33,6 +33,11 @@ export const useChapterStore = defineStore('chapter', {
             const response = await this.http.put(`my-chapters/${values.id}`, values)
         },
 
+        async deleteMyChapter(values: ChapterResource) {
+            console.log('>>> Delete Vals: ', values)
+            const response = await this.http.delete(`my-chapters/${values.id}`, values)
+        },
+
         async newChapter(values) {
             const response = await this.http.post('my-chapters', values)
             return response.data.data

@@ -64,6 +64,9 @@
                 <div class="col-3 mx-auto">
                     <button class="btn w-100" @click="saveStoryDetails">Save</button>
                 </div>
+                <div class="col-3 mx-auto">
+                    <button class="btn btn-danger w-100" style="background-color: red !important;" @click="deleteStory">Delete</button>
+                </div>
             </div>
 
             <!-- Chapter List -->
@@ -105,7 +108,7 @@ import { useModal } from 'vue-final-modal'
 import { toast, type ToastOptions } from 'vue3-toastify';
 
 const { story, getStory } = useMyStory()
-const { saveMyStory } = useMyStoryStore()
+const { saveMyStory, deleteMyStory } = useMyStoryStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -191,5 +194,32 @@ const saveStoryDetails = async () => {
             type: 'error',
         } as ToastOptions);
     }
+}
+
+const deleteStory = async () => {
+    console.log('>>> Delete story: ', story.value.id)
+    const values = {
+        id: story.value.id
+    }
+
+    try {
+        await deleteMyStory(values)
+        toast("Story Deleted", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'success'
+        } as ToastOptions)
+        router.replace({ name: 'my-stories' })
+    } catch (error) {
+        console.log(error)
+        toast("Error: Story not deleted", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'error',
+        } as ToastOptions);
+    }
+
 }
 </script>

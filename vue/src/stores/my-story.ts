@@ -23,7 +23,11 @@ export const useMyStoryStore = defineStore('my-story', {
 
         async saveMyStory(values: MyStoryResource) {
             const response = await this.http.put('my-stories/' + values.id, values)
-        }
+        },
+
+        async deleteMyStory(values) {
+            const response = await this.http.delete('my-stories/' + values.id, values)
+        },
     },
 })
 
