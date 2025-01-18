@@ -5,10 +5,13 @@
         <h1>Ratings</h1>
         <p>This explains the meaning of each of the ratings</p>
         <div class="" v-for="rating in ratingList">
-            <div class="d-flex my-3">
+            <div class="d-flex mt-2 mb-1">
                 <div class="rating me-3" :class="`${ rating.name.toLowerCase().replace(' ', '-') }`" @click="open">{{ rating.name[0] }}</div>
-                <p class="">{{ rating.description }}</p>
+                <div class="">
+                    <h5 class="py-2 mb-0">{{ rating.name }}</h5>
+                </div>
             </div>
+            <p class="mb-0">{{ rating.description }}</p>
         </div>
     </VueFinalModal>
 </template>
