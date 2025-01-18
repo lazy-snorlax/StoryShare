@@ -8,20 +8,6 @@
                 <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`" @click="open">{{ item.rating[0] }}</div>
                 <h5 class="">By: {{ item.user }}</h5>
             </div>
-            <div class="stats">
-                <div class="icon-group">
-                    <span class="icon"><font-awesome-icon icon="fa-solid fa-eye" /></span>
-                    <span class="stat">{{ item.view_count }}</span>
-                </div>
-                <div class="icon-group">
-                    <span class="icon"><font-awesome-icon icon="fa-solid fa-hands-clapping" /></span>
-                    <span class="stat">{{ item.applause_count }}</span>
-                </div>
-                <div class="icon-group">
-                    <span class="icon"><font-awesome-icon icon="fa-solid fa-bookmark" /></span>
-                    <span class="stat">{{ item.bookmark_count }}</span>
-                </div>
-            </div>
             <div class="genres">
                 <span v-for="genre in item.genres">
                     {{ genre.name }}
@@ -50,6 +36,24 @@
                         </span>
                     </p>
                 </div>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="icon-group">
+                <span class="icon"><font-awesome-icon icon="fa-solid fa-eye" /></span>
+                <span class="stat">{{ item.view_count }}</span>
+            </div>
+            <div class="icon-group">
+                <span class="icon"><font-awesome-icon icon="fa-solid fa-hands-clapping" /></span>
+                <span class="stat">{{ item.applause_count }}</span>
+            </div>
+            <div class="icon-group">
+                <span class="icon"><font-awesome-icon icon="fa-solid fa-bookmark" /></span>
+                <span class="stat">{{ item.bookmark_count }}</span>
+            </div>
+            <div class="icon-group">
+                <span class="icon"><font-awesome-icon icon="fa-solid fa-comment" /></span>
+                <span class="stat">{{ item.comment_count }}</span>
             </div>
         </div>
     </li>
