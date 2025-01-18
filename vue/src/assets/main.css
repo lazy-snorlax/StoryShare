@@ -3,6 +3,7 @@
 @import './sass/base/_auth.scss';
 @import './sass/base/_sidebar.scss';
 @import './sass/base/_page-header.scss';
+@import './sass/base/_profile.scss';
 @import './sass/base/_container.scss';
 @import './sass/base/_helpers.scss';
 @import './sass/base/_horizontal-nav.scss';

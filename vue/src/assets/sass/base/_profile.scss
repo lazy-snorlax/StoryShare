@@ -1,0 +1,37 @@
+.profile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .profile-pic img {
+        width: 100%;
+        // border-radius: 100%;
+    }
+
+    .blurb {
+        flex: 55%;
+        background-color: var(--dark);
+        color: var(--light);
+        border-radius: 15px;
+        padding: 1rem;
+    }
+}
+
+.profile > div {
+    flex: max(400px, (100% - 20px)/3);
+}
+
+.recents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.recents > div {
+    flex: max(400px, (100% - 20px)/3);
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
