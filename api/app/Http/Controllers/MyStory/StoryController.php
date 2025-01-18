@@ -69,6 +69,8 @@ class StoryController extends Controller
     public function update(Request $request, $id)
     {
         $story = Story::where('id', $id)->first();
+        abort_if(auth()->user()->id != $story->user_id, 401, 'You do not have access to this story.');
+        
         $story->fill($request->only(['title', 'summary', 'notes', 'visible', 'number_of_chapters']));
         $story->rating_id = $request->input('rating');
         $story->save();
@@ -84,6 +86,7 @@ class StoryController extends Controller
      */
     public function destroy(Story $story)
     {
+        abort_if(auth()->user()->id != $story->user_id, 401, 'You do not have access to this story.');
         // TODO: Delete story genres records
         // $story->genres()->detach();
 

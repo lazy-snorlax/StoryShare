@@ -42,6 +42,57 @@ class SingleStoryTest extends TestCase
         ));
     }
 
+    public function testUserCanUpdateAStory() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->be($user)->putJson('api/my-stories/' . $story->id, [
+            "title" => 'Test Story',
+            "visible" => "private",
+            "rating" => 1,
+            "genres" => [],
+        ]);
+
+        $response->assertSuccessful();
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has('data', fn (AssertableJson $json) => $json
+                ->has('id')
+                ->where('title', 'Test Story')
+                ->where('summary', $story->summary)
+                ->where('notes', $story->notes)
+                ->where('number_of_chapters', $story->number_of_chapters)
+                ->where('word_count', '0')
+                ->where('visible', 'private')
+                ->where('created_at', now()->format('d M Y'))
+                ->where('updated_at', now()->format('d M Y'))
+                ->where('bookmark', null)
+                ->where('applauded', null)
+                ->where('applause', 0)
+                ->where('rating', 1)
+                ->has('posted')
+                ->has('complete')
+                ->has('chapters')
+                ->has('genres')
+        ));
+    }
+
+    public function testUserCannotUpdateAStoryTheyDontOwn() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $testUser = $this->createUser();
+        $response = $this->be($testUser)->putJson('api/my-stories/' . $story->id, [
+            "title" => 'Test Story',
+        ]);
+
+        $response->assertStatus(401);
+        $response->assertJsonFragment(['message' => 'You do not have access to this story.']);
+    }
+
     public function testGuestCannotUploadAStory() {
         $response = $this->postJson('api/my-stories', [
             "title" => 'Test Story',

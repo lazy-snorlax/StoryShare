@@ -25,6 +25,7 @@ class StoryFactory extends Factory
             'posted' => fake()->randomElement([ true, false ]),
             // 'word_count' => rand(100, 50000),
             'complete' => fake()->randomElement([ true, false ]),
+            'rating_id' => 1,
         ];
     }
 }
