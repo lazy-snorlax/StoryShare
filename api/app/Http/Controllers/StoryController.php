@@ -47,6 +47,7 @@ class StoryController extends Controller
                 });
             })
             ->withCount('applause')
+            ->withCount('bookmarks')
             ->canAccess(auth()->user())
             ;
 

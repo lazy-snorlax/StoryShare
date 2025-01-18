@@ -26,9 +26,9 @@ class StoryListResource extends JsonResource
             'word_count' => number_format($this->chapters->sum('word_count')),
             'visible' => $this->visible,
             'complete' => $this->complete,
-            'applause_count' => $this->applause_count,
+            'applause_count' => number_format($this->applause_count),
             'view_count' => 0, // TODO
-            'bookmark_count' => 0, // TODO
+            'bookmark_count' => number_format($this->bookmarks_count),
             'created_at' => $this->created_at?->format('d M Y'),
             'updated_at' => $this->updated_at?->format('d M Y'),
             'rating' => $this->rating()->first()->name,
