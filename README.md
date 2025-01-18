@@ -41,6 +41,16 @@ docker compose exec fpm bash
 docker compose exec vue bash
 ```
 
+### Generate Code Coverage Reports
+To generate code coverage reports run this command in the fpm container
+```bash
+vendor/bin/phpunit --coverage-html=build/coverage
+```
+or this outside the container
+```bash
+docker compose exec fpm vendor/bin/phpunit --coverage-html=build/coverage
+```
+
 ## For Production Build
 Running the start script should handle building the containers for production.
 
