@@ -4,14 +4,14 @@
     <Container class="container-max-xl mx-auto p-4" >
         <div class="chapter-nav">
             <div class="row my-3 d-flex">
-                <div class="col mx-auto text-center">
+                <div class="col-3 mx-auto text-center">
                     <button class="chapter-btn btn" @click="open">Create New Story</button>
                 </div>
             </div>
         </div>
 
         <div v-for="item in list">
-            <MyStoryListItem :item="item" />
+            <StoryListItem :item="item" />
         </div>
     </Container>
 
@@ -20,7 +20,7 @@
 import { useMyStoryStore } from '../../stores/my-story';
 import { onMounted } from 'vue';
 import { useMyStoryList } from '../../composables/stories/use-get-my-story-list';
-import MyStoryListItem from '../../components/app/my-story/MyStoryListItem.vue';
+import StoryListItem from '../../components/story/StoryListItem.vue';
 import ModalNewStoryForm from '../../components/app/my-story/ModalNewStoryForm.vue';
 
 import { useRouter } from 'vue-router';
