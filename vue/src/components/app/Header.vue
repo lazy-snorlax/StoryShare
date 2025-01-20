@@ -16,7 +16,7 @@
             <p>{{ loggedInUser?.email }}</p>
         </div>
     </header>
-    <header class="page-header">
+    <header class="page-header" v-if="title != null && title != ''">
         <div class="d-flex text-center w-100">
             <div class="page-title mx-3 my-3 text-center">
                 <h1>{{ title }}</h1>
