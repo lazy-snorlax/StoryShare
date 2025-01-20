@@ -35,6 +35,9 @@ Route::resource('chapters', Controllers\ChapterController::class);
 Route::resource('genres', Controllers\GenreController::class);
 Route::resource('ratings', Controllers\RatingController::class);
 
+// User profiles
+Route::get('/profile/{id}', [Controllers\ProfileController::class, 'show']);
+
 // Get Chapter List
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);
 
@@ -53,6 +56,9 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::put('/user/password', Controllers\UpdatePasswordController::class);
     // Email Verification
     Route::post('/auth/verification/resend', [Controllers\Register\ResendVerificationController::class, 'store']);
+
+    // Update User Profile 
+    Route::put('/profile/{id}', [Controllers\ProfileController::class, 'update']);
 
     // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
