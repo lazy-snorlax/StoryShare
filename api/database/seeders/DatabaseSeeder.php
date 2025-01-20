@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User\Profile;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Nette\Utils\Random;
@@ -26,16 +28,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@test.io',
         ]);
+        Profile::factory()->for($admin)->create();
         
         // Primary user
         $user = \App\Models\User::factory()->user()->create([
             'name' => 'User',
             'email' => 'user@test.io',
         ]);
+        Profile::factory()->for($user)->create();
         
         // Generate Data for local dev use
         if (app()->environment('local')) {
             $users = \App\Models\User::factory(5)->user()->create();
+            foreach ($users as $u) {
+                Profile::factory()->for($u)->create();
+            }
 
             // Stories for primary user
             $userStories = \App\Models\Story::factory(3)->create([
