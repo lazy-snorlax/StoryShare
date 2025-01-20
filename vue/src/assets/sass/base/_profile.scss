@@ -1,37 +1,61 @@
-.profile {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    .profile-pic img {
-        width: 100%;
-        // border-radius: 100%;
+.user-profile {
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-height: 10rem;
+        
+        .profile-pic img {
+            height: 12rem;
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+            align-items: center;
+            // border-radius: 50%;
+            clip-path: circle();
+        }
+        
+        .stats {
+            flex: 55%;
+            background-color: var(--dark);
+            color: var(--light);
+            border-radius: 15px;
+            padding: 0.5rem 1rem;
+            & > div {
+                display: flex;
+            }
+        }
     }
 
-    .blurb {
+    .bio {
+        flex-wrap: wrap;
+        gap: 10px;
+        max-height: 15rem;
+        overflow: scroll;
+        
         flex: 55%;
         background-color: var(--dark);
         color: var(--light);
         border-radius: 15px;
         padding: 1rem;
     }
-}
 
-.profile > div {
-    flex: max(400px, (100% - 20px)/3);
-}
+    .profile > div {
+        flex: max(400px, (100% - 20px)/3);
+    }
 
-.recents {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    .recents {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-.recents > div {
-    flex: max(400px, (100% - 20px)/3);
-    background-color: var(--dark);
-    color: var(--light);
-    border-radius: 15px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    .recents > div {
+        flex: max(400px, (100% - 20px)/3);
+        background-color: var(--dark);
+        color: var(--light);
+        border-radius: 15px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
 }
