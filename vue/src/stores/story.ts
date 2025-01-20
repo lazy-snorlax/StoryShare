@@ -28,7 +28,7 @@ export const useStoryStore = defineStore('story', {
 })
 
 type StoryState = {
-    story: StoryResource,
+    story: StoryResource | null,
     results: {
         list: Array<StoryListResource>,
         pagination: Object
