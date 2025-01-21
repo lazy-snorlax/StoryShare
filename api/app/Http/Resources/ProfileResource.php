@@ -15,8 +15,8 @@ class ProfileResource extends JsonResource
             'joined' => $this->user->created_at->format('d M Y'),
             'about_me' => $this->about_me,
             'language' => $this->language,
-            'recent_stories' => [],
-            'recent_bookmarks' => [],
+            'recent_stories' => StoryListResource::collection($this->recent_stories),
+            'recent_bookmarks' => BookmarkListResource::collection($this->recent_bookmarks),
         ];
     }
 }

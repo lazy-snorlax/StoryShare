@@ -11,6 +11,8 @@ class ProfileController extends Controller
     // GET
     public function show($id) {
         $profile = Profile::where('id', $id)->first();
+        $profile->recent_stories = $profile->user()->first()->stories()->canAccess(auth()->user())->limit(4)->orderBy('updated_at', 'desc')->get();
+        $profile->recent_bookmarks = $profile->user()->first()->bookmarks()->limit(4)->orderBy('updated_at', 'desc')->get();
         return new ProfileResource($profile);
     }
 
