@@ -13,7 +13,10 @@
             </button>
         </div>
         <div v-if="isLoggedIn">
-            <p>{{ loggedInUser?.email }}</p>
+            <div class="avatar-border">
+                <Avatar :name="loggedInUser?.name" :avatar="''" />
+            </div>
+            <p class="mb-0 ms-2">{{ loggedInUser?.email }}</p>
         </div>
     </header>
     <header class="page-header" v-if="title != null && title != ''">
@@ -31,6 +34,8 @@ import { useAuthStore } from '@/stores/auth'
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 import { useLoggedInUser } from '@/composables/use-logged-in-user'
 import { toast } from 'vue3-toastify';
+
+import Avatar from '@/components/user/Avatar.vue';
 
 const props = defineProps<{
     title?: string|null,
@@ -72,3 +77,44 @@ const resend = async() => {
     }
 }
 </script>
+
+<style>
+.avatar-border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    clip-path: circle();
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    font-size: 1.15rem;
+    color: var(--light);
+    font-weight: 500;
+    width: 10rem;
+    height: 10rem;
+    clip-path: circle();
+    margin: 0 auto;
+}
+
+.avatar.avatar-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    font-size: 1.15rem;
+    color: var(--light);
+    font-weight: 500;
+    width: 3rem;
+    height: 3rem;
+    clip-path: circle();
+    margin: 0 auto;
+}
+
+</style>
