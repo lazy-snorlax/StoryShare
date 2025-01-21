@@ -16,44 +16,34 @@
         </div>
 
         <div class="mb-3 bio">
-            <h2>Description</h2>
+            <h3>Description</h3>
             {{ profile?.about_me }}
         </div>
 
         <div class="recents">
-            <div class="stories">
+            <div class="stories" v-if="profile?.recent_stories.length > 0">
                 <div class="header">
-                    <h2>Recent Stories</h2>
+                    <h3>Recent Stories</h3>
                 </div>
-                <template v-if="profile?.recent_stories.length == 0">
-                    <h4 class="text-center">{{ profile.name }} has no stories available</h4>
-                </template>
-                <template v-else>
-                    <div class="body">
-                        <template v-for="item in profile?.recent_stories">
-                            <StoryListItem :item="item" />
-                        </template>
-                        <div class="footer mt-3 text-end"><a class="">See all stories >></a></div>
-                    </div>
-                </template>
+                <div class="body">
+                    <template v-for="item in profile?.recent_stories">
+                        <StoryListItem :item="item" />
+                    </template>
+                    <div class="footer mt-3 text-end"><a class="">See all stories >></a></div>
+                </div>
             </div>
         </div>
         <div class="recents">
-            <div class="bookmarks">
+            <div class="bookmarks" v-if="profile?.recent_bookmarks.length > 0">
                 <div class="header">
                     <h2>Recent Bookmarks</h2>
                 </div>
-                <template v-if="profile?.recent_bookmarks.length == 0">
-                    <h4 class="text-center">{{ profile.name }} has no bookmarks available</h4>
-                </template>
-                <template v-else>
-                    <div class="body">
-                        <template v-for="item in profile?.recent_bookmarks">
-                            <StoryListItem :item="item.story" />
-                        </template>
-                    </div>
-                    <div class="footer mt-3 text-end"><a class="">See all bookmarks >></a></div>
-                </template>
+                <div class="body">
+                    <template v-for="item in profile?.recent_bookmarks">
+                        <StoryListItem :item="item.story" />
+                    </template>
+                </div>
+                <div class="footer mt-3 text-end"><a class="">See all bookmarks >></a></div>
             </div>
         </div>
 
