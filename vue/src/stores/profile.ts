@@ -23,6 +23,7 @@ type UserProfileState = {
 
 export type ProfileState = {
     name: string,
+    avatar: string | null,
     joined: string,
     about_me: string | null,
     language: string,
