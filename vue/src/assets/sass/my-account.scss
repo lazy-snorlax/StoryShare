@@ -1,3 +1,10 @@
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 10rem;
+}
+
 .my-account {
     &.nav-horizontal{
         background-color: var(--dark) !important;
@@ -14,8 +21,8 @@
             }
         }
     }
-    
     &.card {
+        width: 100%;
         background-color: var(--dark) !important;
         color: var(--light);
         h2 {
@@ -32,4 +39,5 @@
             border: none;
         }
     }
+    
 } 

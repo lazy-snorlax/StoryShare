@@ -17,7 +17,8 @@
 
         <div class="mb-3 bio">
             <h3>Description</h3>
-            {{ profile?.about_me }}
+            <!-- <text-editor v-model="aboutMe" name="about_me" :editable="false" :showMenuBar="false" /> -->
+            <div v-html="aboutMe"></div>
         </div>
 
         <div class="recents">
@@ -50,12 +51,13 @@
     </Container>
 </template>
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, watchEffect } from 'vue'
+import { computed, onBeforeMount, reactive, ref, watchEffect } from 'vue'
 import { useProfileStore } from '../stores/profile';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from "pinia";
 
 import StoryListItem from '../components/story/StoryListItem.vue';
+import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue'
 
 import Avatar from '../components/user/Avatar.vue';
 import logoDefault from '@/assets/logo.svg'
@@ -66,6 +68,8 @@ import logoDefault from '@/assets/logo.svg'
 const { getProfile } = useProfileStore()
 const { profile } = storeToRefs(useProfileStore())
 const route = useRoute()
+
+const aboutMe = ref(profile.value.about_me)
 
 onBeforeMount(async () => {
     await getProfile(route.params.id)

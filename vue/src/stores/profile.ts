@@ -12,6 +12,7 @@ export const useProfileStore = defineStore('profile', {
         },
 
         async saveProfile(values: ProfileState, id) {
+            console.log('testing profile save', values, id)
             await this.http.put('profile/' + id, values)
         },
     }
@@ -21,7 +22,7 @@ type UserProfileState = {
     profile: ProfileState | null,
 }
 
-export type ProfileState = {
+export type ProfileResource = {
     name: string,
     avatar: string | null,
     joined: string,
