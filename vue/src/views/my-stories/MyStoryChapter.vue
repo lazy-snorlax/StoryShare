@@ -71,7 +71,7 @@ onMounted(async () => {
 })
 
 function setWordCount(words) {
-    console.log('>>>> Word Count: ', words)
+    // console.log('>>>> Word Count: ', words)
     chapter.value.word_count = words
 }
 
