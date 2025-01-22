@@ -23,6 +23,7 @@ class LoggedInResource extends JsonResource
             'abilities' => $this->whenLoaded('abilities', function () {
                 return AbilityResource::collection($this->abilities->where('name', '<>', '*'));
             }),
+            'profile' => $this->profile,
         ];
     }
 }
