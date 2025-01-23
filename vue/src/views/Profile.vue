@@ -17,8 +17,8 @@
 
         <div class="mb-3 bio">
             <h3>Description</h3>
-            <!-- <text-editor v-model="aboutMe" name="about_me" :editable="false" :showMenuBar="false" /> -->
-            <div v-html="aboutMe"></div>
+            <!-- <text-editor v-model="profile.about_me" name="about_me" :editable="false" :showMenuBar="false" /> -->
+            <div class="" v-html="profile.about_me"></div>
         </div>
 
         <div class="recents">
@@ -51,25 +51,16 @@
     </Container>
 </template>
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref, watchEffect } from 'vue'
-import { useProfileStore } from '../stores/profile';
+import { onBeforeMount } from 'vue'
+import { useProfile } from '../composables/get-profile';
 import { useRoute } from 'vue-router';
-import { storeToRefs } from "pinia";
-
 import StoryListItem from '../components/story/StoryListItem.vue';
 import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue'
 
 import Avatar from '../components/user/Avatar.vue';
-import logoDefault from '@/assets/logo.svg'
 
-// const profile = computed(() => { return profileExample })
-// const logo = computed(() => { return logoDefault })
-
-const { getProfile } = useProfileStore()
-const { profile } = storeToRefs(useProfileStore())
+const { profile, getProfile } = useProfile()
 const route = useRoute()
-
-const aboutMe = ref(profile.value.about_me)
 
 onBeforeMount(async () => {
     await getProfile(route.params.id)
