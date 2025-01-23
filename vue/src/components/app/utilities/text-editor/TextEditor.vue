@@ -1,5 +1,5 @@
 <template>
-    <div class="wysiwyg-container">
+    <div class="wysiwyg-container" :class="editable ? '' : 'not-editable'">
       <TextEditorMenuBar v-if="showMenuBar" :editor="editor" />
       <editor-content :editor="editor" :editable="editable" />
     </div>
@@ -63,11 +63,19 @@
 </script>
 
 <style lang="scss">
+.not-editable {
+  .editor {
+    border: none;
+    min-height: auto;
+    max-height: auto;
+  }
+}
+
 .editor {
   background-color: var(--dark);
+  border: var(--light-alt) 1px solid;
   margin-bottom: 1rem;
   padding: 1rem;
-  border: var(--light-alt) 1px solid;
   // border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
