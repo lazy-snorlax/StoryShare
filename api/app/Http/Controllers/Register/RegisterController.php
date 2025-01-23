@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Register;
 
+use App\Events\UserRegistered;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Register\RegisterRequest;
 use App\Http\Resources\User as UserResource;
+use App\Models\User\Profile;
 use App\Notifications\VerifyEmail;
 use App\Support\Enums\UserRole;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -26,6 +28,8 @@ class RegisterController extends Controller
         $user->save();
 
         $user->assign(UserRole::User->value);
+
+        UserRegistered::dispatch($user);
 
         $user->notify(new VerifyEmail);
 
