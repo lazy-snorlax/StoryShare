@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     // GET
     public function show($id) {
-        $profile = Profile::where('id', $id)->first();
+        $profile = Profile::where('user_id', $id)->first();
 
         $profile->recent_stories = $profile->user()->first()->stories()->canAccess(auth()->user())->limit(4)->orderBy('updated_at', 'desc')->get();
         
@@ -22,10 +22,10 @@ class ProfileController extends Controller
 
     // UPDATE
     public function update(Request $request, $id) {
-        $profile = Profile::where('id', $id)->first();
+        $profile = Profile::where('user_id', $id)->first();
         // dd($id, $profile);
 
-        abort_if($profile == null, 404, 'Profile no found');
+        abort_if($profile == null, 404, 'Profile not found');
         abort_if($request->user()->id != $profile->user_id, 401, 'You do not have access to this profile.');
 
         $profile->fill($request->only(['language', 'about_me']));
