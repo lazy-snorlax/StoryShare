@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\User;
+use App\Models\User\Profile;
 use Database\Seeders\GenreSeeder;
 use Database\Seeders\RatingSeeder;
 use Silber\Bouncer\BouncerFacade;
@@ -84,7 +85,11 @@ abstract class TestCase extends BaseTestCase
      */
     public function createUser(array $attributes = []): User
     {
-        return User::factory()->user()->enabled()->create($attributes);
+        $user = User::factory()->user()->enabled()->create($attributes);
+        Profile::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        return $user;
     }
 
     /**
@@ -92,6 +97,10 @@ abstract class TestCase extends BaseTestCase
      */
     public function createAdmin(array $attributes = []): User
     {
-        return User::factory()->admin()->enabled()->create($attributes);
+        $admin = User::factory()->admin()->enabled()->create($attributes);
+        Profile::factory()->create([
+            'user_id' => $admin->id,
+        ]);
+        return $admin;
     }
 }
