@@ -10,7 +10,6 @@ export default (router: Router) =>
                 if (authStore.authenticationAttempted) {
                     throw new Error('Authentication has already been attempted.')
                 }
-                
                 await authStore.getUser()
             }
         } catch {

@@ -4,7 +4,6 @@ import { HttpStatusCode } from "axios"
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
         user: null,
-        error: null,
         csrf: false,
         authenticationAttempted: false,
         is_expanded: false,
@@ -76,9 +75,9 @@ export const useAuthStore = defineStore('auth', {
 })
 
 type AuthState = {
+    user: LoggedInUserResource | null
     csrf: boolean
     authenticationAttempted: boolean
-    user: LoggedInUserResource | null
     is_expanded: boolean
     toggleSearchFilters: boolean
 }

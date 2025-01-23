@@ -25,6 +25,6 @@ export function useLoggedInUser() {
     loggedInUser: user as Ref<LoggedInUserResource>,
     can: (action: string) => ability.can(action, '*'),
     cannot: (action: string) => ability.cannot(action, '*'),
-    getLoggedInUser: authStore.getUser(),
+    getLoggedInUser: authStore.getUser,
   }
 }
