@@ -21,12 +21,14 @@ export const useProfileStore = defineStore('profile', {
 
         async saveProfile(values, id) {
             console.log('testing profile save', values, id)
-            await this.http.put('profile/' + id, values)
+            await this.http.put(`profile/${id}`, values)
         },
 
         async updateProfilePic(payload, id) {
             console.log('testing profile img save', payload, id)
-            await this.http.post('profile-image/' + id, payload)
+            await this.http.post(`profile-image/${id}`, payload,
+                { headers: { 'Content-Type': undefined }, }
+            )
         }
     }
 })
