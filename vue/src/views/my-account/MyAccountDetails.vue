@@ -26,8 +26,10 @@
                     <h3>User Profile</h3>
                     <small>This will be visible on your profile.</small>
                     <div class="mt-4 mx-auto avatar-border">
-                        <input type="file" ref="fileInput" class="d-none" @change="handleFileChange">
-                        <Avatar :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" @click="openFileInput" />
+                        <Avatar v-if="loggedInUser?.profile.avatar" :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" @click="() => open()" />
+                        <a v-else @click="() => open()">
+                            <Avatar :name="loggedInUser?.name" />
+                        </a>
                     </div>
                     <div class="mt-4">
                         <label for="name">Preferred Language</label>
@@ -64,7 +66,8 @@ import { useAuthStore, type UpdateAccountDetailsForm } from '../../stores/auth'
 
 import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue'
 import Avatar from '../../components/user/Avatar.vue';
-import { computed, ref } from 'vue';
+import { useFileDialog } from '@vueuse/core'
+import { ref } from 'vue';
 
 const { loggedInUser } = useLoggedInUser()
 const { saveProfile, updateProfilePic } = useProfile()
@@ -87,19 +90,25 @@ const email =  defineInputBinds('email')
 const language = ref(loggedInUser?.value.profile.language)
 const aboutMe = ref(loggedInUser?.value.profile.about_me)
 
-const fileInput = ref(null)
-const openFileInput = () => {
-    fileInput.value.click()
-}
-const handleFileChange = async (event) => {
-    const file = event.target.files[0]
-    console.log('>>> file: ', file)
-    loggedInUser.value.profile.avatar = URL.createObjectURL(file)
+const { open, onChange } = useFileDialog({
+  multiple: false,
+  accept: 'image/png,image/jpeg',
+})
 
-    // const formData = new FormData();
-    // formData.append('profile_picture', file, "user-pic.jpg")
-    // await updateProfilePic(formData, loggedInUser?.value.id)
-}
+onChange(async (files) => {
+    console.log('>>> test files: ', files)
+    if (!files || files.length === 0) { return }
+
+    loggedInUser.value.profile.avatar = URL.createObjectURL(files[0])
+    const payload = new FormData()
+    payload.append('file', files[0])
+
+    try {
+        await updateProfilePic(payload, loggedInUser?.value.id)
+    } catch (error) {
+        console.error('>> upload profile img', error)
+    }
+})
 
 const profileSave = (async () => {
     const values = {
