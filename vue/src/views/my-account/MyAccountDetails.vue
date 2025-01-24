@@ -25,6 +25,10 @@
                 <div class="card-body">
                     <h3>User Profile</h3>
                     <small>This will be visible on your profile.</small>
+                    <div class="mt-4 mx-auto avatar-border">
+                        <input type="file" ref="fileInput" class="d-none" @change="handleFileChange">
+                        <Avatar :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" @click="openFileInput" />
+                    </div>
                     <div class="mt-4">
                         <label for="name">Preferred Language</label>
                         <input class="form-control" type="text" name="language" v-model="language">
@@ -59,10 +63,11 @@ import { object, string } from 'yup';
 import { useAuthStore, type UpdateAccountDetailsForm } from '../../stores/auth'
 
 import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue'
+import Avatar from '../../components/user/Avatar.vue';
 import { computed, ref } from 'vue';
 
 const { loggedInUser } = useLoggedInUser()
-const { saveProfile } = useProfile()
+const { saveProfile, updateProfilePic } = useProfile()
 const { updateAccountDetails } = useAuthStore()
 
 const {  defineInputBinds, handleSubmit, errors } = useForm<UpdateAccountDetailsForm>({
@@ -81,6 +86,20 @@ const email =  defineInputBinds('email')
 
 const language = ref(loggedInUser?.value.profile.language)
 const aboutMe = ref(loggedInUser?.value.profile.about_me)
+
+const fileInput = ref(null)
+const openFileInput = () => {
+    fileInput.value.click()
+}
+const handleFileChange = async (event) => {
+    const file = event.target.files[0]
+    console.log('>>> file: ', file)
+    loggedInUser.value.profile.avatar = URL.createObjectURL(file)
+
+    // const formData = new FormData();
+    // formData.append('profile_picture', file, "user-pic.jpg")
+    // await updateProfilePic(formData, loggedInUser?.value.id)
+}
 
 const profileSave = (async () => {
     const values = {
@@ -101,3 +120,45 @@ const save = handleSubmit(async (values) => {
 })
 
 </script>
+
+<style lang="scss" scoped>
+
+.avatar-border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-alt);
+    clip-path: circle();
+    width: 11rem;
+    height: 11rem;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    font-size: 1.15rem;
+    color: var(--light);
+    font-weight: 500;
+    width: 10rem;
+    height: 10rem;
+    clip-path: circle();
+    margin: 0 auto;
+}
+
+.avatar.avatar-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    font-size: 1.15rem;
+    color: var(--light);
+    font-weight: 500;
+    width: 10rem;
+    height: 10rem;
+    clip-path: circle();
+    margin: 0 auto;
+}
+
+</style>

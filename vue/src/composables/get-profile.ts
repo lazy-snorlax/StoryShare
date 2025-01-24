@@ -10,5 +10,6 @@ export function useProfile() {
         profile: profile as Ref<ProfileResource>,
         getProfile: profileStore.getProfile,
         saveProfile: profileStore.saveProfile,
+        updateProfilePic: profileStore.updateProfilePic,
     }
 }

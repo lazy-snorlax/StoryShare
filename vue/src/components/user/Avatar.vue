@@ -18,7 +18,7 @@ import { computed, onBeforeMount, reactive, watchEffect } from 'vue'
 
 const props = defineProps({
   name: String || null,
-  avatar: String,
+  avatar: String || null || undefined,
   country: String,
   current_season_status: String,
   in_off_season: Boolean,
