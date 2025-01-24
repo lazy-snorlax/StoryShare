@@ -12,6 +12,7 @@ class Profile extends Model
 
     protected $fillable = [
         'user_id',
+        'avatar',
         'language',
         'about_me',
     ];
