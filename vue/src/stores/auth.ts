@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { HttpStatusCode } from "axios"
+import { ProfileResource } from "./profile"
 
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
@@ -87,6 +88,7 @@ export type LoggedInUserResource = {
     name: string,
     email: string,
     ip_address: string | null,
+    profile: ProfileResource,
     role: RoleResource,
     abilities: AbilityLookupResource[],
 }
