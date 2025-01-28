@@ -2,7 +2,7 @@
   <div class="avatar" :class="classNames">
     <img
       v-if="avatar"
-      :src="avatar"
+      :src="imgSrc"
       width="256"
       height="256"
       :alt="name"
@@ -19,6 +19,7 @@ import { computed, onBeforeMount, reactive, watchEffect } from 'vue'
 const props = defineProps({
   name: String || null,
   avatar: String || null || undefined,
+  imgSrc: String || null || undefined,
   country: String,
   current_season_status: String,
   in_off_season: Boolean,
@@ -48,4 +49,5 @@ const initials = computed(() => {
   }
   return firstName.substring(0, 2)
 })
+
 </script>

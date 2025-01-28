@@ -26,7 +26,7 @@
                     <h3>User Profile</h3>
                     <small>This will be visible on your profile.</small>
                     <div class="mt-4 mx-auto avatar-border">
-                        <Avatar v-if="loggedInUser?.profile.avatar" :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" @click="() => open()" />
+                        <Avatar v-if="loggedInUser?.profile.avatar" :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" :imgSrc="imgSrc" @click="() => open()" />
                         <a v-else @click="() => open()">
                             <Avatar :name="loggedInUser?.name" />
                         </a>
@@ -67,10 +67,10 @@ import { useAuthStore, type UpdateAccountDetailsForm } from '../../stores/auth'
 import TextEditor from '@/components/app/utilities/text-editor/TextEditor.vue'
 import Avatar from '../../components/user/Avatar.vue';
 import { useFileDialog } from '@vueuse/core'
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const { loggedInUser } = useLoggedInUser()
-const { saveProfile, updateProfilePic } = useProfile()
+const { getProfileImg, saveProfile, updateProfilePic } = useProfile()
 const { updateAccountDetails } = useAuthStore()
 
 const {  defineInputBinds, handleSubmit, errors } = useForm<UpdateAccountDetailsForm>({
@@ -89,6 +89,10 @@ const email =  defineInputBinds('email')
 
 const language = ref(loggedInUser?.value.profile.language)
 const aboutMe = ref(loggedInUser?.value.profile.about_me)
+
+const imgSrc = computed(() => {
+    return import.meta.env.VITE_API_URL + `profile-image/${loggedInUser?.value.id}`
+})
 
 const { open, onChange } = useFileDialog({
   multiple: false,

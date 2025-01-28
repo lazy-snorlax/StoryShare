@@ -14,7 +14,8 @@
         </div>
         <div v-if="isLoggedIn">
             <div class="avatar-border">
-                <Avatar :name="loggedInUser?.name" :avatar="''" />
+                <Avatar v-if="loggedInUser?.profile.avatar" :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" :imgSrc="imgSrc" />
+                <Avatar v-else :name="loggedInUser?.name" />
             </div>
             <p class="mb-0 ms-2">{{ loggedInUser?.email }}</p>
         </div>
@@ -36,6 +37,7 @@ import { useLoggedInUser } from '@/composables/use-logged-in-user'
 import { toast } from 'vue3-toastify';
 
 import Avatar from '@/components/user/Avatar.vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
     title?: string|null,
@@ -46,6 +48,10 @@ const { isLoggedIn } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
 
 const { toggleSidebar, resendVerifyEmail } = useAuthStore()
+
+const imgSrc = computed(() => {
+    return import.meta.env.VITE_API_URL + `profile-image/${loggedInUser?.value.id}`
+})
 
 const sidebarToggle = () => {
     const wrapper = document.getElementById('wrapper')
