@@ -37,6 +37,7 @@ Route::resource('ratings', Controllers\RatingController::class);
 
 // User profiles
 Route::get('/profile/{id}', [Controllers\ProfileController::class, 'show']);
+Route::get('/profile-image/{id}', [Controllers\ProfileImageController::class, 'show']);
 
 // Get Chapter List
 Route::get('/stories/{story_id}/chapter-list', Controllers\ChapterListController::class);
@@ -59,7 +60,7 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
 
     // Update User Profile 
     Route::put('/profile/{id}', [Controllers\ProfileController::class, 'update']);
-    Route::post('/profile-image/{id}', Controllers\ProfileImageController::class)->middleware('uploads');
+    Route::post('/profile-image/{id}', [Controllers\ProfileImageController::class, 'store'])->middleware('uploads');
 
     // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
