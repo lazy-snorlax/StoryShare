@@ -58,6 +58,11 @@ class AuthenticationTest extends TestCase
                 ->where('email', $user->email)
                 ->where('email_verified', !!isNull($user->email_verified_at))
                 ->has('abilities')
+                ->has('avatar')
+                ->has('imgSrc')
+                ->has('joined')
+                ->has('language')
+                ->has('about_me')
                 ->has('role', fn (AssertableJson $json) => $json
                     ->where('id', $user->role->id)
                     ->where('name', $user->role->name)
