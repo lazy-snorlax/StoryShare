@@ -1,5 +1,5 @@
 <template>
-    <Header :title="'My Account'" />
+    <Header :title="'My Account'" :key="headerKey" :headerKey="headerKey" />
 
     <!-- My Account Nav? -->
     <ul class="my-account nav nav-horizontal">
@@ -18,12 +18,18 @@
         </li> -->
     </ul>
 
-    <RouterView v-if="loggedInUser?.id" />
+    <RouterView v-if="loggedInUser?.id" @rerender="forceRerender" />
 </template>
     
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useLoggedInUser } from '../../composables/use-logged-in-user';
 
 const { loggedInUser } = useLoggedInUser()
+
+const headerKey = ref(0)
+const forceRerender = () => {
+    headerKey.value += 1
+}
 
 </script>

@@ -14,8 +14,7 @@
         </div>
         <div v-if="isLoggedIn">
             <div class="avatar-border">
-                <Avatar v-if="loggedInUser?.profile.avatar" :name="loggedInUser?.name" :avatar="loggedInUser?.profile?.avatar" :imgSrc="imgSrc" />
-                <Avatar v-else :name="loggedInUser?.name" />
+                <Avatar :name="loggedInUser?.name" :imgSrc="imgSrc" :imgSize="60" />
             </div>
             <p class="mb-0 ms-2">{{ loggedInUser?.email }}</p>
         </div>
@@ -32,25 +31,30 @@
 
 <script lang="ts" setup>
 import { useAuthStore } from '@/stores/auth'
+import { useProfile } from '../../composables/get-profile' 
 import { useIsLoggedIn } from '@/composables/use-is-logged-in'
 import { useLoggedInUser } from '@/composables/use-logged-in-user'
 import { toast } from 'vue3-toastify';
 
 import Avatar from '@/components/user/Avatar.vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { rand } from '@vueuse/core';
 
 const props = defineProps<{
+    headerKey?: Number | null,
     title?: string|null,
     subtitle?: string|null,
 }>()
 
 const { isLoggedIn } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
-
 const { toggleSidebar, resendVerifyEmail } = useAuthStore()
 
-const imgSrc = computed(() => {
-    return import.meta.env.VITE_API_URL + `profile-image/${loggedInUser?.value.id}`
+const imgSrc = computed(()=> {
+    if (props.headerKey != null) {
+        return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc + '?r=' + props.headerKey
+    }
+    return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc
 })
 
 const sidebarToggle = () => {
@@ -103,8 +107,8 @@ const resend = async() => {
     font-size: 1.15rem;
     color: var(--light);
     font-weight: 500;
-    width: 10rem;
-    height: 10rem;
+    width: 3rem;
+    height: 3rem;
     clip-path: circle();
     margin: 0 auto;
 }
