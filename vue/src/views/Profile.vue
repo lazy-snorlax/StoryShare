@@ -5,7 +5,7 @@
 
         <div class="mb-3 profile">
             <div class="avatar-border">
-                <Avatar :name="profile?.name" :avatar="profile?.avatar" />
+                <Avatar :name="profile?.name" :avatar="profile?.avatar" :imgSrc="imgSrc" />
             </div>
             <div class="stats">
                 <h2 class="text-center">{{ profile?.name }}</h2>
@@ -51,7 +51,7 @@
     </Container>
 </template>
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
+import { computed, onBeforeMount } from 'vue'
 import { useProfile } from '../composables/get-profile';
 import { useRoute } from 'vue-router';
 import StoryListItem from '../components/story/StoryListItem.vue';
@@ -61,6 +61,12 @@ import Avatar from '../components/user/Avatar.vue';
 
 const { profile, getProfile } = useProfile()
 const route = useRoute()
+
+const imgSrc = computed(() => {
+    if (profile.value.avatar) {
+        return import.meta.env.VITE_API_URL + `profile-image/${route.params.id}`
+    }
+})
 
 onBeforeMount(async () => {
     await getProfile(route.params.id)
