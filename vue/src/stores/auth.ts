@@ -88,7 +88,11 @@ export type LoggedInUserResource = {
     name: string,
     email: string,
     ip_address: string | null,
-    profile: ProfileResource,
+    avatar: boolean,
+    joined: string,
+    language: string,
+    about_me: string | null,
+    imgSrc: string | null,
     role: RoleResource,
     abilities: AbilityLookupResource[],
 }
