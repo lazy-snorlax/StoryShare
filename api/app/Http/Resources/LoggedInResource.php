@@ -23,7 +23,11 @@ class LoggedInResource extends JsonResource
             'abilities' => $this->whenLoaded('abilities', function () {
                 return AbilityResource::collection($this->abilities->where('name', '<>', '*'));
             }),
-            'profile' => new ProfileResource($this->profile),
+            'avatar' => $this->profile->avatar != null ? true : false,
+            'imgSrc' => $this->when($this->profile->avatar != null, 'profile-image/' . $this->id, null),
+            'joined' => $this->created_at->format('d M Y'),
+            'language' => $this->profile->language,
+            'about_me' => $this->profile->about_me,
         ];
     }
 }

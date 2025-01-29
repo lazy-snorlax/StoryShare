@@ -6,6 +6,7 @@ use App\Models\Bookmark;
 use App\Models\Story;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 class ProfileTest extends TestCase
@@ -158,5 +159,41 @@ class ProfileTest extends TestCase
         ]);
         $response->assertStatus(401);
         $response->assertJsonFragment(['message' => 'You do not have access to this profile.']);
+    }
+
+    public function testGuestCanGetProfileImage() {
+        $user = $this->createUser();
+        $payload = [
+            'file' => UploadedFile::fake()->image('photo.jpg')
+        ];
+
+        $response = $this->be($user)->postJson('api/profile-image/'.$user->id, $payload);
+        $response->assertSuccessful();
+
+        $response = $this->getJson('api/profile-image/'.$user->id);
+        $response->assertSuccessful();
+    }
+
+    public function testUserCanUploadAProfileImage() {
+        $user = $this->createUser();
+        $payload = [
+            'file' => UploadedFile::fake()->image('photo.jpg')
+        ];
+
+        $response = $this->be($user)->postJson('api/profile-image/'.$user->id, $payload);
+        $response->assertSuccessful();
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has('data', fn (AssertableJson $json) => $json
+                ->has('id')
+                ->has('name')
+                ->has('email')
+                ->has('email_verified')
+                ->has('avatar')
+                ->has('imgSrc')
+                ->has('joined')
+                ->has('language')
+                ->has('about_me')
+                ->has('role')
+        ));
     }
 }
