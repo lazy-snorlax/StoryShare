@@ -87,4 +87,12 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonFragment(['message' => 'These credentials do not match our records.']);
     }
+
+    public function testLoggedInUserCanLogoutAndHaveSessionDestroyed() {
+        $user = $this->createUser();
+
+        $response = $this->be($user)->postJson('api/logout');
+        // dd($response);
+        $response->assertSuccessful();
+    }
 }

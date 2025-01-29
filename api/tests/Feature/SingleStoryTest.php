@@ -13,6 +13,43 @@ class SingleStoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testUserCanGetAListOfStoriesTheyOwn() {
+        $user = $this->createUser();
+        Story::factory()->create([ 'user_id' => $user->id ]);
+    
+        $response = $this->be($user)->getJson('api/my-stories');
+        $response->assertSuccessful();
+    }
+
+    public function testUserCanGetAStoryTheyOwn() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->be($user)->getJson('api/my-stories/' . $story->id);
+        $response->assertSuccessful();
+        // $response->assertJson([ 'data' => [
+        //     'id' => $story->id,
+        //     'title' => $story->title,
+        //     'summary' => $story->summary,
+        //     'notes' => $story->notes,
+        //     'number_of_chapters' => $story->number_of_chapters,
+        //     'posted' => $story->posted,
+        //     'word_count' => $story->word_count,
+        //     'complete' => $story->complete,
+        //     'visible' => $story->visible,
+        //     'created_at' => $story->created_at,
+        //     'updated_at' => $story->updated_at,
+        //     'bookmark' => $story->bookmark,
+        //     'applauded' => $story->applauded,
+        //     'applause' => $story->applause,
+        //     'rating' => $story->rating,
+        //     'chapters' => $story->chapters,
+        //     'genres' => $story->genres,
+        // ]]);
+    }
+
     public function testUserCanUploadAStory() {
         $user = $this->createUser();
 
@@ -104,6 +141,60 @@ class SingleStoryTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJsonFragment(['message' => 'Unauthenticated.']);
+    }
+
+    public function testUserCanDeleteAStory() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->be($user)->deleteJson('api/my-stories/' . $story->id);
+        $response->assertSuccessful();
+    }
+
+    public function testUserCanGetAListOfChaptersToAStory() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 2,
+            'title' => 'Chapter ' . 2,
+            'summary' => 'This is chapter ' . 2 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $response = $this->be($user)->getJson('api/stories/'. $story->id . '/chapter-list');
+        $response->assertSuccessful();
+    }
+
+    public function testUserCanGetAChapterOfAStory() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $response = $this->be($user)->getJson('api/chapters/'.$chapter->id);
+        $response->assertSuccessful();
     }
 
     public function testUserCanAddAChapter() {
@@ -224,5 +315,23 @@ class SingleStoryTest extends TestCase
         ]);
         $response->assertStatus(401);
         $response->assertJsonFragment(['message' => 'You are not authorized for this action']);
+    }
+
+
+    public function testUserCanDeleteAChapter() {
+        $user = $this->createUser();
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $response = $this->be($user)->deleteJson('api/my-chapters/'. $chapter->id);
+        $response->assertSuccessful();
     }
 }
