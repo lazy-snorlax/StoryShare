@@ -1,10 +1,10 @@
 <template>
-  <div class="avatar" :class="classNames">
+  <div class="avatar" >
     <img
-      v-if="avatar"
+      v-if="imgSrc != null"
       :src="imgSrc"
-      width="256"
-      height="256"
+      :width="imgSize"
+      :height="imgSize"
       :alt="name"
     />
     <div v-else>
@@ -14,30 +14,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, watchEffect } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   name: String || null,
-  avatar: String || null || undefined,
   imgSrc: String || null || undefined,
-  country: String,
-  current_season_status: String,
-  in_off_season: Boolean,
+  imgSize: {
+    type: Number,
+    default: 200,
+  },
   size: {
     type: String,
     default: 'm'
   }
-})
-
-const classNames = computed(() => {
-  return [
-    `avatar-${props.size}`,
-    {
-      'avatar-empty': !props.avatar,
-      ending: props.current_season_status === 'ending',
-      ended: props.current_season_status === 'ended' || props.in_off_season
-    }
-  ]
 })
 
 const initials = computed(() => {
