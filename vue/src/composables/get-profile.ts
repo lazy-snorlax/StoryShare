@@ -4,11 +4,13 @@ import type { Ref } from "vue";
 
 export function useProfile() {
     const profileStore = useProfileStore()
-    const { profile } = storeToRefs(profileStore)
+    const { profile, profile_avatar } = storeToRefs(profileStore)
 
     return {
         profile: profile as Ref<ProfileResource>,
+        profile_avatar: profile_avatar,
         getProfile: profileStore.getProfile,
+        getProfileImage: profileStore.getProfileImage,
         saveProfile: profileStore.saveProfile,
         updateProfilePic: profileStore.updateProfilePic,
     }
