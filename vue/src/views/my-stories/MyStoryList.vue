@@ -11,7 +11,7 @@
         </div>
 
         <div v-for="item in list">
-            <StoryListItem :item="item" />
+            <StoryListItem :item="item" :my_story="true" />
         </div>
     </Container>
 
