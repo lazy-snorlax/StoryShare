@@ -1,7 +1,10 @@
 <template>
     <li class="story blurb group" style="">
         <div class="header">
-            <router-link class="story-link" target="_blank" :to="{ name: 'story.single', params: { id: item.id } }">
+            <router-link v-if="props.my_story" class="story-link" :to="{ name: 'my-stories.single', params: { id: item.id } }">
+                <h4 class="my-3">{{ item.title }}</h4>
+            </router-link>
+            <router-link v-else class="story-link" target="_blank" :to="{ name: 'story.single', params: { id: item.id } }">
                 <h4 class="my-3">{{ item.title }}</h4>
             </router-link>
             <div class="d-flex my-3">
@@ -73,7 +76,8 @@ const props = defineProps({
         summary: String,
         number_of_chapters: Number,
         word_count: Number,
-    }
+    },
+    my_story: Boolean,
 })
 
 const { open, close } = useModal({
