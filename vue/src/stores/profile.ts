@@ -12,7 +12,8 @@ export const useProfileStore = defineStore('profile', {
             recent_stories: [],
             recent_bookmarks: [],
         },
-        profile_avatar: null
+        profile_avatar: null,
+        rerender: 0,
     }),
     actions: {
         async getProfile(id: number) {
@@ -41,6 +42,7 @@ export const useProfileStore = defineStore('profile', {
 type UserProfileState = {
     profile: ProfileResource | null,
     profile_avatar: String | null,
+    rerender: number,
 }
 
 export type ProfileResource = {

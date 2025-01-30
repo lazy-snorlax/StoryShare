@@ -49,10 +49,11 @@ const props = defineProps<{
 const { isLoggedIn } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
 const { toggleSidebar, resendVerifyEmail } = useAuthStore()
+const { rerender } = useProfile()
 
 const imgSrc = computed(()=> {
-    if (props.headerKey != null) {
-        return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc + '?r=' + props.headerKey
+    if (rerender.value > 0) {
+        return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc + '?r=' + rerender.value
     }
     return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc
 })

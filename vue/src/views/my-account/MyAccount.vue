@@ -1,5 +1,5 @@
 <template>
-    <Header :title="'My Account'" :key="headerKey" :headerKey="headerKey" />
+    <Header :title="'My Account'" />
 
     <!-- My Account Nav? -->
     <ul class="my-account nav nav-horizontal">
@@ -18,7 +18,7 @@
         </li> -->
     </ul>
 
-    <RouterView v-if="loggedInUser?.id" @rerender="forceRerender" />
+    <RouterView v-if="loggedInUser?.id" />
 </template>
     
 <script lang="ts" setup>

@@ -63,12 +63,8 @@ import { getCurrentInstance, onMounted, ref } from 'vue';
 
 import { toast, type ToastOptions } from 'vue3-toastify';
 
-const emit = defineEmits<{
-    (e: 'rerender') : void
-}>()
-
 const { loggedInUser } = useLoggedInUser()
-const { profile_avatar, saveProfile, updateProfilePic } = useProfile()
+const { profile_avatar, rerender, saveProfile, updateProfilePic } = useProfile()
 const { updateAccountDetails } = useAuthStore()
 
 const {  defineInputBinds, handleSubmit, errors } = useForm<UpdateAccountDetailsForm>({
@@ -96,7 +92,7 @@ const { open, onChange } = useFileDialog({
 
 onMounted(async () => {
     if (loggedInUser?.value.imgSrc != null) {
-        profile_avatar.value = import.meta.env.VITE_API_URL + loggedInUser?.value.imgSrc //+ '?rand=' + rand(1, 999999999)
+        profile_avatar.value = import.meta.env.VITE_API_URL + loggedInUser?.value.imgSrc + '?r=' + rerender.value
     }
 })
 
@@ -117,6 +113,7 @@ onChange(async (files) => {
             theme: 'colored',
             type: 'success',
         })
+        rerender.value = rerender.value + 1
     } catch (error) {
         toast("New profile picture could not be saved. Please reload the page.", {
             autoClose: 1500,
@@ -125,7 +122,6 @@ onChange(async (files) => {
             type: 'error',
         } as ToastOptions);
     }
-    emit('rerender')
 })
 
 const profileSave = (async () => {
