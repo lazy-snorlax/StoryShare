@@ -1,4 +1,4 @@
-FROM php:8.2.2-fpm
+FROM php:8.3.17-fpm
 
 # Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
 # "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev"
