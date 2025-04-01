@@ -6,10 +6,11 @@
         <ChapterNav class="chapter-nav" :chapter_number="chapter?.chapter_number" :chapter_list="chapter_list" />
 
         <div class="story-content">
+            <AccessibilityControls />
             <div class="mb-3" v-if="chapter?.summary">
                 <h3>Summary</h3>
                 <p v-html=chapter?.summary></p>
-            </div>    
+            </div>
             
             <div class="my-5 content" v-html="chapter?.content"></div>
             
@@ -52,6 +53,7 @@ import { onMounted, watch } from 'vue';
 import ChapterNav from '../../components/story/ChapterNav.vue';
 import Comment from '../../components/app/Comment.vue';
 import TextEditor from '../../components/app/utilities/text-editor/TextEditor.vue'
+import AccessibilityControls from '../../components/app/utilities/AccessibilityControls.vue';
 
 import { useIsLoggedIn } from '../../composables/use-is-logged-in.ts'
 import { useCommentsStore } from '/src/stores/comment.ts'
