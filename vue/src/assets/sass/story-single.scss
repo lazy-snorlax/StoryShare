@@ -110,6 +110,8 @@
 
     p, .content {
         color: var(--white) !important;
+        font-size: var(--story-font-size);
+        font-family: var(--story-font-family);
     }
 }
 
