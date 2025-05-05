@@ -1,4 +1,4 @@
-# Story Share - 
+# Story Share
 Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction. A full stack application built using MySQL, Laravel as an API and Vue 3 as a frontend.
 
 ## Getting Started
