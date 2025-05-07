@@ -51,8 +51,8 @@ or this outside the container
 docker compose exec fpm vendor/bin/phpunit --coverage-html=build/coverage
 ```
 
-## For Production Build
-Running the start script should handle building the containers for production.
+## For Deployment Build
+Running the start script should handle building the containers for deployment.
 
 ```bash
 ./start.sh
