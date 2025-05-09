@@ -59,7 +59,7 @@ Running the start script should handle building the containers for deployment.
 ```
 
 
-## Build 0.3.2
+## Build 0.3.3
 - Vue 3
 - Laravel API
 - Nginx server
