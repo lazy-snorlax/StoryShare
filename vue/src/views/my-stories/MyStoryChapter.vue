@@ -137,7 +137,7 @@ const deleteChapter = async () => {
         })
     } catch (error) {
         console.error(error)
-        toast("An error has occurred. Chapter was not able to be updated.", {
+        toast("An error has occurred. Chapter was not able to be deleted.", {
             autoClose: 1500,
             position: toast.POSITION.TOP_RIGHT,
             theme: 'colored',
