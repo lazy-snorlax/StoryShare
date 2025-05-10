@@ -15,6 +15,9 @@ import 'bootstrap'
 import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
+import Vue3ColorPicker from "vue3-colorpicker";
+import "vue3-colorpicker/style.css";
+
 // Vue MultiSelect library
 import 'vue-multiselect/dist/vue-multiselect.css'
 import MultiSelect from 'vue-multiselect'
@@ -36,6 +39,8 @@ app.use(Vue3Toastify,
       autoClose: 3000,
     } as ToastContainerOptions,
 )
+
+app.use(Vue3ColorPicker)
 
 // Font Awesome Icons
 app.component('font-awesome-icon', FontAwesomeIcon)
