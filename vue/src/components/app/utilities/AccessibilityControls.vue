@@ -16,8 +16,6 @@
 </template>
 
 <script setup lang="ts">
-    import MultiSelect from './MultiSelect.vue'
-
     const fontOptions = [
         "Fira sans",
         "Helvetica",
