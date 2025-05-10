@@ -15,6 +15,7 @@ class Profile extends Model
         'avatar',
         'language',
         'about_me',
+        'preferences',
     ];
 
     protected $casts = [
