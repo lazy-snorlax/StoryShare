@@ -95,6 +95,10 @@ export type LoggedInUserResource = {
     imgSrc: string | null,
     role: RoleResource,
     abilities: AbilityLookupResource[],
+    preferences: {
+        themes: []
+        theme: string
+    }
 }
 
 export type RoleResource = {
