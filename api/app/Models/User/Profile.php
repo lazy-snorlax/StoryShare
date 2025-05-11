@@ -21,6 +21,7 @@ class Profile extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'preferences' => 'array',
     ];
 
     public function user() {
