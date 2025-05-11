@@ -14,6 +14,10 @@ export const useProfileStore = defineStore('profile', {
         },
         profile_avatar: null,
         rerender: 0,
+        preferences: {
+            themes: [],
+            theme: '',
+        }
     }),
     actions: {
         async getProfile(id: number) {
@@ -35,6 +39,12 @@ export const useProfileStore = defineStore('profile', {
             await this.http.post(`profile-image/${id}`, payload,
                 { headers: { 'Content-Type': undefined }, }
             )
+        },
+
+        // Add Profile Theme
+        async saveProfileTheme(id, payload) {
+            const response = await this.http.post(`/profile/${id}/theme`, payload)
+            this.themes = response.data.data.preferences.themes
         }
     }
 })
@@ -43,6 +53,10 @@ type UserProfileState = {
     profile: ProfileResource | null,
     profile_avatar: String | null,
     rerender: number,
+    preferences: {
+        themes: [] | null,
+        theme: string | null,
+    }
 }
 
 export type ProfileResource = {
