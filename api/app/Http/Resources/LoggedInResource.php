@@ -28,6 +28,7 @@ class LoggedInResource extends JsonResource
             'joined' => $this->created_at->format('d M Y'),
             'language' => $this->profile->language,
             'about_me' => $this->profile->about_me,
+            'preferences' => $this->profile->preferences,
         ];
     }
 }
