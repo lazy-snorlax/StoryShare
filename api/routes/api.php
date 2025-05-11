@@ -61,6 +61,8 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     // Update User Profile 
     Route::put('/profile/{id}', [Controllers\ProfileController::class, 'update']);
     Route::post('/profile-image/{id}', [Controllers\ProfileImageController::class, 'store'])->middleware('uploads');
+    // Add Profile Theme
+    Route::post('/profile/{id}/theme', [Controllers\PreferenceThemeController::class, 'store']);
 
     // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);
