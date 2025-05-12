@@ -40,12 +40,6 @@ export const useProfileStore = defineStore('profile', {
                 { headers: { 'Content-Type': undefined }, }
             )
         },
-
-        // Add Profile Theme
-        async saveProfileTheme(id, payload) {
-            const response = await this.http.post(`/profile/${id}/theme`, payload)
-            this.themes = response.data.data.preferences.themes
-        }
     }
 })
 
@@ -55,7 +49,6 @@ type UserProfileState = {
     rerender: number,
     preferences: {
         themes: [] | null,
-        theme: string | null,
     }
 }
 

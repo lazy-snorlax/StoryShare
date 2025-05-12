@@ -54,6 +54,26 @@ export const useAuthStore = defineStore('auth', {
             await this.http.put('user/password', payload)
         },
 
+
+        // Add Profile Theme
+        async saveProfileTheme(id, payload) {
+            const response = await this.http.post(`/profile/${id}/theme`, payload)
+            this.user = response.data.data
+        },
+
+        async setProfileDarkTheme(themeIdx) {
+            const response = await this.http.post(`/profile/${this.user.id}/dark`, {
+                themeName: themeIdx
+            })
+            this.user = response.data.data
+        },
+        async setProfileLightTheme(themeIdx) {
+            const response = await this.http.post(`/profile/${this.user.id}/light`, {
+                themeName: themeIdx
+            })
+            this.user = response.data.data
+        },
+
         async getClientIpAddress() {
             this.http.get('https://ipinfo.io/json')
             .then(response => {
@@ -96,8 +116,9 @@ export type LoggedInUserResource = {
     role: RoleResource,
     abilities: AbilityLookupResource[],
     preferences: {
-        themes: []
-        theme: string
+        themes: [] | null
+        defaultLight: string | null
+        defaultDark: string | null
     }
 }
 
