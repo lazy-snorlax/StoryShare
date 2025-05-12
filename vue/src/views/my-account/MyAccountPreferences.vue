@@ -46,40 +46,44 @@
             
             <div v-if="loggedInUser?.preferences.themes" class="my-account card">
                 <div class="card-body">
-                    <h2 class="text-center">Saved Theme</h2>
+                    <h2 class="text-center">Saved Themes</h2>
                     <div class="mx-auto d-flex">
                         <template v-for="(theme, index) in loggedInUser?.preferences.themes" class="">
-                            <div class="col-3 mx-3">
+                            <div class="col mx-3">
                                 <h5 class="text-center">{{ index }}</h5>
-                                <div class="row">
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['primary']" />
+                                <div class="row mb-2">
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['primary']}`"></div>
                                         {{ theme['primary'] }}
                                     </div>
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['primaryAlt']" />
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['primaryAlt']}`"></div>
                                         {{ theme['primaryAlt'] }}
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['light']" />
+                                <div class="row mb-2">
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['light']}`"></div>
                                         {{ theme['light'] }}
                                     </div>
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['lightAlt']" />
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['lightAlt']}`"></div>
                                         {{ theme['lightAlt'] }}
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['dark']" />
-                                        {{ theme['light'] }}
+                                <div class="row mb-2">
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['dark']}`"></div>
+                                        {{ theme['dark'] }}
                                     </div>
-                                    <div class="col">
-                                        <color-picker format="hex" v-model:pureColor="theme['darkAlt']" />
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['darkAlt']}`"></div>
                                         {{ theme['darkAlt'] }}
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-primary w-50 text-center mx-auto" @click="setDefaultTheme(index, 'dark')">Set as Theme</button>
+                                    <!-- <button class="btn btn-primary w-50" @click="setDefaultTheme(index, 'light')">Set as Light</button> -->
                                 </div>
                             </div>
                         </template>
@@ -96,11 +100,11 @@ import { ref } from "vue";
 import { ColorInputWithoutInstance } from "tinycolor2";
 
 import { useLoggedInUser } from '../../composables/use-logged-in-user';
-import { useProfileStore } from "../../stores/profile";
+import { useAuthStore } from "../../stores/auth";
 import { toast } from 'vue3-toastify';
 
 const { loggedInUser } = useLoggedInUser()
-const { saveProfileTheme } = useProfileStore()
+const { saveProfileTheme, setProfileDarkTheme, setProfileLightTheme } = useAuthStore()
 const themeName = ref('')
 
 const primaryColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--primary"));
@@ -109,8 +113,6 @@ const lightColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.doc
 const lightAltColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--light-alt"));
 const darkColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--dark"));
 const darkAltColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--dark-alt"));
-
-const changeColour = (prop, color) => { document.documentElement.style.setProperty(prop, color) }
 
 const saveTheme = async () => {
     let theme = {
@@ -146,5 +148,35 @@ const saveTheme = async () => {
             type: 'error',
         })
     }
+}
+
+const setDefaultTheme = (themeIdx, themeType) => {
+    console.log(">>>> Themes: ", themeIdx, themeType)
+    if (themeType == "dark") {
+        setProfileDarkTheme(themeIdx)
+    } else {
+        setProfileLightTheme(themeIdx)
+    }
+    loadTheme(themeIdx)
+    const theme = loggedInUser?.value.preferences.themes[themeIdx]
+    primaryColour.value = theme['primary']
+    primaryAltColour.value = theme['primaryAlt']
+    lightColour.value = theme['light']
+    lightAltColour.value = theme['lightAlt']
+    darkColour.value = theme['dark']
+    darkAltColour.value = theme['darkAlt']
+    console.log(">>>> Themes: ", loggedInUser?.value.preferences)
+}
+
+const changeColour = (prop, color) => { document.documentElement.style.setProperty(prop, color) }
+const loadTheme = (themeIdx) => {
+    const theme = loggedInUser?.value.preferences.themes[themeIdx]
+    console.log(">>>> Loading Theme: ", themeIdx, theme)
+    changeColour('--primary', theme["primary"])
+    changeColour('--primary-alt', theme["primaryAlt"])
+    changeColour('--light', theme["light"])
+    changeColour('--light-alt', theme["lightAlt"])
+    changeColour('--dark', theme["dark"])
+    changeColour('--dark-alt', theme["darkAlt"])
 }
 </script>
