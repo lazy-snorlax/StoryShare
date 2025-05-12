@@ -11,7 +11,7 @@
         <!-- <h3>Menu</h3> -->
 
         <div class="menu">
-			<theme-button />
+			<!-- <theme-button /> -->
 			<router-link :to="{ name: 'stories.search' }" class="button mt-3">
 				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Browse </span>
 			</router-link> 
