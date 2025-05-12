@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Preferences;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LoggedInResource;
 use App\Models\User\Profile;
 use Illuminate\Http\Request;
