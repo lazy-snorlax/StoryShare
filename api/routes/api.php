@@ -62,8 +62,9 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::put('/profile/{id}', [Controllers\ProfileController::class, 'update']);
     Route::post('/profile-image/{id}', [Controllers\ProfileImageController::class, 'store'])->middleware('uploads');
 
-    // Add Profile Theme
+    // Profile Theme Actions
     Route::post('/profile/{id}/theme', [Controllers\Preferences\PreferenceThemeController::class, 'store']);
+    Route::post('/profile/{id}/remove-theme', [Controllers\Preferences\PreferenceThemeController::class, 'destroy']);
     // Set Dark Theme
     Route::post('/profile/{id}/dark', Controllers\Preferences\PreferenceSetDarkController::class);
     // Set Light Theme

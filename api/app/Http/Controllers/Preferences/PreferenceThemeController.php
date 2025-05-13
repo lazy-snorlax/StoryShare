@@ -11,7 +11,6 @@ class PreferenceThemeController extends Controller
 {
     public function store(Request $request, $id) {
         $profile = Profile::where('user_id', $id)->first();
-        // dd($request->input(), $request->input("theme")["dark"]);
         $preferences = $profile->preferences;
         $preferences['themes'][$request->input("themeName")] = [
             "primary" => $request->input("theme")["primary"],
@@ -29,6 +28,21 @@ class PreferenceThemeController extends Controller
         $profile->preferences = $preferences;
         $profile->save();
 
-        return new LoggedInResource($profile->user()->first());
+        return new LoggedInResource($profile->user()->first()->load('abilities'));
+    }
+
+    public function destroy(Request $request, $id) {
+        $profile = Profile::where('user_id', $id)->first();
+
+        $preferences = $profile->preferences;
+        if ($preferences['defaultDark'] == $request->input("themeName")) {
+            $preferences['defaultDark'] = null;
+        }
+        unset($preferences['themes'][$request->input("themeName")]);
+        
+        $profile->preferences = $preferences;
+        $profile->save();
+
+        return new LoggedInResource($profile->user()->first()->load('abilities'));
     }
 }
