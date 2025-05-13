@@ -6,6 +6,7 @@
                     <div class="mx-auto text-center">
                         <h2>Change Site Theme</h2>
                         <div class="row">
+                            <h4>Colour Palette</h4>
                             <div class="col">
                                 <color-picker format="hex" v-model:pureColor="primaryColour" @pureColorChange="changeColour('--primary', primaryColour)" />
                                 {{ primaryColour.toString().toUpperCase() }}
@@ -33,6 +34,20 @@
                                 {{ darkAltColour.toString().toUpperCase() }}
                             </div>
                         </div>
+                        <div class="row my-3">
+                            <div class="col">
+                                <color-picker format="hex" v-model:pureColor="whiteColour" @pureColorChange="changeColour('--white', whiteColour)" />
+                                {{ whiteColour.toString().toUpperCase() }}
+                            </div>
+                            <div class="col">
+                                <color-picker format="hex" v-model:pureColor="greyColour" @pureColorChange="changeColour('--grey', greyColour)" />
+                                {{ greyColour.toString().toUpperCase() }}
+                            </div>
+                            <div class="col">
+                                <color-picker format="hex" v-model:pureColor="blackColour" @pureColorChange="changeColour('--black', blackColour)" />
+                                {{ blackColour.toString().toUpperCase() }}
+                            </div>
+                        </div>
                         <div class="mt-4">
                             <label for="">Theme Name: </label>
                             <input type="text" v-model="themeName" class="form-control w-50 mx-auto" placeholder="Enter theme name">
@@ -50,7 +65,10 @@
                     <div class="mx-auto d-flex">
                         <template v-for="(theme, index) in loggedInUser?.preferences.themes" class="">
                             <div class="col mx-3">
-                                <h5 class="text-center">{{ index }}</h5>
+                                <h5 class="text-center">
+                                    {{ index }}
+                                    <span v-if="index.toString() == loggedInUser?.preferences.defaultDark">(active)</span>
+                                </h5>
                                 <div class="row mb-2">
                                     <div class="col d-flex">
                                         <div class="w-50 h-100 me-2" :style="`background-color: ${theme['primary']}`"></div>
@@ -59,6 +77,10 @@
                                     <div class="col d-flex">
                                         <div class="w-50 h-100 me-2" :style="`background-color: ${theme['primaryAlt']}`"></div>
                                         {{ theme['primaryAlt'] }}
+                                    </div>
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['white']}`"></div>
+                                        {{ theme['white'] }}
                                     </div>
                                 </div>
                                 <div class="row mb-2">
@@ -70,6 +92,10 @@
                                         <div class="w-50 h-100 me-2" :style="`background-color: ${theme['lightAlt']}`"></div>
                                         {{ theme['lightAlt'] }}
                                     </div>
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['grey']}`"></div>
+                                        {{ theme['grey'] }}
+                                    </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col d-flex">
@@ -79,6 +105,10 @@
                                     <div class="col d-flex">
                                         <div class="w-50 h-100 me-2" :style="`background-color: ${theme['darkAlt']}`"></div>
                                         {{ theme['darkAlt'] }}
+                                    </div>
+                                    <div class="col d-flex">
+                                        <div class="w-50 h-100 me-2" :style="`background-color: ${theme['black']}`"></div>
+                                        {{ theme['black'] }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -114,6 +144,10 @@ const lightAltColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.
 const darkColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--dark"));
 const darkAltColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--dark-alt"));
 
+const whiteColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--white"));
+const greyColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--grey"));
+const blackColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--black"));
+
 const saveTheme = async () => {
     let theme = {
         primary: primaryColour.value.toString().toUpperCase(),
@@ -122,6 +156,10 @@ const saveTheme = async () => {
         lightAlt: lightAltColour.value.toString().toUpperCase(),
         dark: darkColour.value.toString().toUpperCase(),
         darkAlt: darkAltColour.value.toString().toUpperCase(),
+
+        white: whiteColour.value.toString().toUpperCase(),
+        grey: greyColour.value.toString().toUpperCase(),
+        black: blackColour.value.toString().toUpperCase(),
     }
     console.log(">>>> Theme: ", themeName.value, theme)
     if (themeName.value == "") {
@@ -165,6 +203,10 @@ const setDefaultTheme = (themeIdx, themeType) => {
     lightAltColour.value = theme['lightAlt']
     darkColour.value = theme['dark']
     darkAltColour.value = theme['darkAlt']
+
+    whiteColour.value = theme['white']
+    greyColour.value = theme['grey']
+    blackColour.value = theme['black']
     console.log(">>>> Themes: ", loggedInUser?.value.preferences)
 }
 
@@ -178,5 +220,9 @@ const loadTheme = (themeIdx) => {
     changeColour('--light-alt', theme["lightAlt"])
     changeColour('--dark', theme["dark"])
     changeColour('--dark-alt', theme["darkAlt"])
+
+    changeColour('--white', theme["white"])
+    changeColour('--grey', theme["grey"])
+    changeColour('--black', theme["black"])
 }
 </script>

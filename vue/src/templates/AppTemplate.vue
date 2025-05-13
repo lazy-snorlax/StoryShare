@@ -44,6 +44,10 @@ const loadTheme = (themeIdx) => {
   changeColour('--light-alt', theme["lightAlt"])
   changeColour('--dark', theme["dark"])
   changeColour('--dark-alt', theme["darkAlt"])
+  
+  changeColour('--white', theme["white"])
+  changeColour('--grey', theme["grey"])
+  changeColour('--black', theme["black"])
 }
 
 const changeColour = (prop, color) => { 

@@ -20,6 +20,10 @@ class PreferenceThemeController extends Controller
             "lightAlt" => $request->input("theme")["lightAlt"],
             "dark" => $request->input("theme")["dark"],
             "darkAlt" => $request->input("theme")["darkAlt"],
+
+            "white" => $request->input("theme")["white"],
+            "grey" => $request->input("theme")["grey"],
+            "black" => $request->input("theme")["black"],
         ];
 
         $profile->preferences = $preferences;

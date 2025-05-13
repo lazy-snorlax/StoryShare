@@ -27,8 +27,8 @@
 	--dark-alt: #181a1d;
 
 	--grey: #474f5a;
-	--black: #000;
-	--white: #fff;
+	--black: #000000;
+	--white: #ffffff;
 
 	--story-font-size: 1rem;
 	--story-font-family: 'Fira sans';
@@ -43,8 +43,8 @@
 	--light: #181a1d;
 
 	--grey: #d1d5db;
-	--white: #000;
-	--black: #fff;
+	--white: #000000;
+	--black: #ffffff;
 }
 
 .text-primary-color { color: var(--light); }
