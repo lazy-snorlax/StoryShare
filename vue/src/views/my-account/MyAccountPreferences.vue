@@ -4,7 +4,7 @@
             <div class="my-account card">
                 <div class="card-body">
                     <div class="mx-auto text-center">
-                        <h2>Change Site Theme</h2>
+                        <h2>Create Site Theme</h2>
                         <div class="row">
                             <h4>Colour Palette</h4>
                             <div class="col">
@@ -12,36 +12,36 @@
                                 {{ primaryColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="lightColour" @pureColorChange="changeColour('--light', lightColour)" />
-                                {{ lightColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="primaryAltColour" @pureColorChange="changeColour('--primary-alt', primaryAltColour)" />
+                                {{ primaryAltColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="darkColour" @pureColorChange="changeColour('--dark', darkColour)" />
-                                {{ darkColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="whiteColour" @pureColorChange="changeColour('--white', whiteColour)" />
+                                {{ whiteColour.toString().toUpperCase() }}
                             </div>
                         </div>
                         <div class="row my-3">
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="primaryAltColour" @pureColorChange="changeColour('--primary-alt', primaryAltColour)" />
-                                {{ primaryAltColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="lightColour" @pureColorChange="changeColour('--light', lightColour)" />
+                                {{ lightColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
                                 <color-picker format="hex" v-model:pureColor="lightAltColour" @pureColorChange="changeColour('--light-alt', lightAltColour)" />
                                 {{ lightAltColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="darkAltColour" @pureColorChange="changeColour('--dark-alt', darkAltColour)" />
-                                {{ darkAltColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="greyColour" @pureColorChange="changeColour('--grey', greyColour)" />
+                                {{ greyColour.toString().toUpperCase() }}
                             </div>
                         </div>
                         <div class="row my-3">
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="whiteColour" @pureColorChange="changeColour('--white', whiteColour)" />
-                                {{ whiteColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="darkColour" @pureColorChange="changeColour('--dark', darkColour)" />
+                                {{ darkColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
-                                <color-picker format="hex" v-model:pureColor="greyColour" @pureColorChange="changeColour('--grey', greyColour)" />
-                                {{ greyColour.toString().toUpperCase() }}
+                                <color-picker format="hex" v-model:pureColor="darkAltColour" @pureColorChange="changeColour('--dark-alt', darkAltColour)" />
+                                {{ darkAltColour.toString().toUpperCase() }}
                             </div>
                             <div class="col">
                                 <color-picker format="hex" v-model:pureColor="blackColour" @pureColorChange="changeColour('--black', blackColour)" />
@@ -62,9 +62,9 @@
             <div v-if="loggedInUser?.preferences.themes" class="my-account card">
                 <div class="card-body">
                     <h2 class="text-center">Saved Themes</h2>
-                    <div class="mx-auto d-flex">
+                    <div class="mx-auto d-flex row row-cols-auto">
                         <template v-for="(theme, index) in loggedInUser?.preferences.themes" class="">
-                            <div class="col mx-3">
+                            <div class="col col-sm-12 mx-3 mb-4">
                                 <h5 class="text-center">
                                     {{ index }}
                                     <span v-if="index.toString() == loggedInUser?.preferences.defaultDark">(active)</span>
@@ -112,7 +112,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button class="btn btn-primary w-50 text-center mx-auto" @click="setDefaultTheme(index, 'dark')">Set as Theme</button>
+                                    <button v-if="index.toString() !== loggedInUser?.preferences.defaultDark" class="btn btn-primary w-25 text-center mx-auto" @click="setAsDefaultTheme(index, 'dark')">Set as Theme</button>
+                                    <button v-else class="btn btn-primary w-25 text-center mx-auto" @click="setAsDefaultTheme(null, 'dark')">Unset Theme</button>
+                                    <button class="btn btn-danger w-25 text-center mx-auto" @click="removeTheme(index)">Remove Theme</button>
                                     <!-- <button class="btn btn-primary w-50" @click="setDefaultTheme(index, 'light')">Set as Light</button> -->
                                 </div>
                             </div>
@@ -134,7 +136,7 @@ import { useAuthStore } from "../../stores/auth";
 import { toast } from 'vue3-toastify';
 
 const { loggedInUser } = useLoggedInUser()
-const { saveProfileTheme, setProfileDarkTheme, setProfileLightTheme } = useAuthStore()
+const { saveProfileTheme, removeProfileTheme, setProfileDarkTheme, setProfileLightTheme } = useAuthStore()
 const themeName = ref('')
 
 const primaryColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--primary"));
@@ -147,6 +149,19 @@ const darkAltColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.d
 const whiteColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--white"));
 const greyColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--grey"));
 const blackColour = ref<ColorInputWithoutInstance>(getComputedStyle(document.documentElement).getPropertyValue("--black"));
+
+const defaultTheme = {
+    primary: "#347FC4",
+    primaryAlt: "#24598b",
+    light: "#e0fbfc",
+    lightAlt: "#9Bd7df",
+    dark: "#242629",
+    darkAlt: "#181a1d",
+
+    white: "#ffffff",
+    grey: "#474f5a",
+    black: "#000000",
+}
 
 const saveTheme = async () => {
     let theme = {
@@ -188,13 +203,54 @@ const saveTheme = async () => {
     }
 }
 
-const setDefaultTheme = (themeIdx, themeType) => {
+const setDefaultTheme = () => {
+    changeColour('--primary', defaultTheme["primary"])
+    changeColour('--primary-alt', defaultTheme["primaryAlt"])
+    changeColour('--light', defaultTheme["light"])
+    changeColour('--light-alt', defaultTheme["lightAlt"])
+    changeColour('--dark', defaultTheme["dark"])
+    changeColour('--dark-alt', defaultTheme["darkAlt"])
+    changeColour('--white', defaultTheme["white"])
+    changeColour('--grey', defaultTheme["grey"])
+    changeColour('--black', defaultTheme["black"])
+}
+
+const removeTheme = async (themeIdx) => {
+    try {
+        if (loggedInUser?.value.preferences.defaultDark == themeIdx) {
+            setDefaultTheme()
+        }
+        await removeProfileTheme(loggedInUser?.value.id, themeIdx)
+        toast("Theme successfully removed", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'success',
+        })
+    } catch (error) {
+        console.error(error)
+        toast("An error has occurred. Theme was not able to be removed.", {
+            autoClose: 1500,
+            position: toast.POSITION.TOP_RIGHT,
+            theme: 'colored',
+            type: 'error',
+        })
+    }
+}
+
+const setAsDefaultTheme = (themeIdx, themeType) => {
     console.log(">>>> Themes: ", themeIdx, themeType)
     if (themeType == "dark") {
         setProfileDarkTheme(themeIdx)
     } else {
         setProfileLightTheme(themeIdx)
     }
+    
+    if (themeIdx == null) {
+        setDefaultTheme()
+        return
+    }
+
     loadTheme(themeIdx)
     const theme = loggedInUser?.value.preferences.themes[themeIdx]
     primaryColour.value = theme['primary']
