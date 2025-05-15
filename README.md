@@ -1,5 +1,5 @@
 # Story Share
-Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction. A full stack application built using MySQL, Laravel as an API and Vue 3 as a frontend.
+Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction.
 
 ## Getting Started
 Story Share consists of a Laravel API backend, Vue frontend and MySQL database. To start the application, you will need to use [Docker Compose](https://docs.docker.com/compose/). 
