@@ -194,6 +194,7 @@ class ProfileTest extends TestCase
                 ->has('language')
                 ->has('about_me')
                 ->has('role')
+                ->has('preferences')
         ));
     }
 }

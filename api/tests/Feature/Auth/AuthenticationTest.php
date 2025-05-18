@@ -63,6 +63,7 @@ class AuthenticationTest extends TestCase
                 ->has('joined')
                 ->has('language')
                 ->has('about_me')
+                ->has('preferences')
                 ->has('role', fn (AssertableJson $json) => $json
                     ->where('id', $user->role->id)
                     ->where('name', $user->role->name)
