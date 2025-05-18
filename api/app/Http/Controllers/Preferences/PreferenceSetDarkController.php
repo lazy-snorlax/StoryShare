@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class PreferenceSetDarkController extends Controller
 {
-    public function __invoke (Request $request, $id) {
-        $profile = Profile::where('user_id', $id)->first();
-
-        $preferences = $profile->preferences;
+    public function __invoke (Request $request) {
+        $user = $request->user();
+        $preferences = $user->profile->preferences;
+        
         $preferences['defaultDark'] = $request->input("themeName");
-        $profile->preferences = $preferences;
-        $profile->save();
+        $user->profile->preferences = $preferences;
+        $user->profile->save();
 
-        return new LoggedInResource($profile->user()->first()->load('abilities'));
+        return new LoggedInResource($user->loadAbilities());
     }
 }

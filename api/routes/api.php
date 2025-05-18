@@ -63,12 +63,12 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::post('/profile-image/{id}', [Controllers\ProfileImageController::class, 'store'])->middleware('uploads');
 
     // Profile Theme Actions
-    Route::post('/profile/{id}/theme', [Controllers\Preferences\PreferenceThemeController::class, 'store']);
-    Route::post('/profile/{id}/remove-theme', [Controllers\Preferences\PreferenceThemeController::class, 'destroy']);
+    Route::post('/profile/theme', [Controllers\Preferences\PreferenceThemeController::class, 'store']);
+    Route::post('/profile/remove-theme', [Controllers\Preferences\PreferenceThemeController::class, 'destroy']);
     // Set Dark Theme
-    Route::post('/profile/{id}/dark', Controllers\Preferences\PreferenceSetDarkController::class);
+    Route::post('/profile/dark', Controllers\Preferences\PreferenceSetDarkController::class);
     // Set Light Theme
-    Route::post('/profile/{id}/light', Controllers\Preferences\PreferenceSetLightController::class);
+    Route::post('/profile/light', Controllers\Preferences\PreferenceSetLightController::class);
 
     // My-Stories ==============================================================
     Route::get('/my-stories', [Controllers\MyStory\StoryController::class, 'index']);

@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 class PreferenceSetLightController extends Controller
 {
     public function __invoke (Request $request, $id) {
-        $profile = Profile::where('user_id', $id)->first();
-
-        $preferences = $profile->preferences;
+        $user = $request->user();
+        $preferences = $user->profile->preferences;
+        
         $preferences['defaultLight'] = $request->input("themeName");
-        $profile->preferences = $preferences;
-        $profile->save();
+        $user->profile->preferences = $preferences;
+        $user->profile->save();
 
-        return new LoggedInResource($profile->user()->first());
+        return new LoggedInResource($user->loadAbilities());
     }
 }

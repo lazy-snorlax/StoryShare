@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class PreferenceThemeController extends Controller
 {
-    public function store(Request $request, $id) {
-        $profile = Profile::where('user_id', $id)->first();
-        $preferences = $profile->preferences;
+    public function store(Request $request) {
+        $user = $request->user();
+        $preferences = $user->profile->preferences;
         $preferences['themes'][$request->input("themeName")] = [
             "primary" => $request->input("theme")["primary"],
             "primaryAlt" => $request->input("theme")["primaryAlt"],
@@ -25,24 +25,24 @@ class PreferenceThemeController extends Controller
             "black" => $request->input("theme")["black"],
         ];
 
-        $profile->preferences = $preferences;
-        $profile->save();
+        $user->profile->preferences = $preferences;
+        $user->profile->save();
 
-        return new LoggedInResource($profile->user()->first()->load('abilities'));
+        return new LoggedInResource($user->loadAbilities());
     }
 
-    public function destroy(Request $request, $id) {
-        $profile = Profile::where('user_id', $id)->first();
+    public function destroy(Request $request) {
+        $user = $request->user();
+        $preferences = $user->profile->preferences;
 
-        $preferences = $profile->preferences;
         if ($preferences['defaultDark'] == $request->input("themeName")) {
             $preferences['defaultDark'] = null;
         }
         unset($preferences['themes'][$request->input("themeName")]);
         
-        $profile->preferences = $preferences;
-        $profile->save();
+        $user->profile->preferences = $preferences;
+        $user->profile->save();
 
-        return new LoggedInResource($profile->user()->first()->load('abilities'));
+        return new LoggedInResource($user->loadAbilities());
     }
 }
