@@ -57,23 +57,23 @@ export const useAuthStore = defineStore('auth', {
 
         // Profile Theme Actions
         async saveProfileTheme(id, payload) {
-            const response = await this.http.post(`/profile/${id}/theme`, payload)
+            const response = await this.http.post(`/profile/theme`, payload)
             this.user = response.data.data
         },
         async removeProfileTheme(id, payload) {
-            const response = await this.http.post(`/profile/${id}/remove-theme`, {
+            const response = await this.http.post(`/profile/remove-theme`, {
                 themeName: payload
             })
             this.user = response.data.data
         },
         async setProfileDarkTheme(themeIdx) {
-            const response = await this.http.post(`/profile/${this.user.id}/dark`, {
+            const response = await this.http.post(`/profile/dark`, {
                 themeName: themeIdx
             })
             this.user = response.data.data
         },
         async setProfileLightTheme(themeIdx) {
-            const response = await this.http.post(`/profile/${this.user.id}/light`, {
+            const response = await this.http.post(`/profile/light`, {
                 themeName: themeIdx
             })
             this.user = response.data.data
