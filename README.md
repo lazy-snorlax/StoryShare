@@ -58,8 +58,21 @@ Running the start script should handle building the containers for deployment.
 ./start.sh
 ```
 
+## Upcoming Features
+- Collections - Being able to collect stories into named collections. This would be useful for series of stories (e.g. Harry Potter Collection)
+- Content Tags - Tagging stories based on content and performing searches based on those tags. These would be separate from Genres (e.g. A story is an Adventure/Fantasy with Graphic Violence).
+-  Metrics - Authors tracking audience interactions with a story (daily/weekly/monthly views) and see what stories engage audiences the most (most liked, most commented, highest word count, highest chapter count, etc)
+- Subscriptions - Readers subscribing to a story or author and receiving alerts on a new release (chapter or story). Considering subscribing to collections as well.
 
-## Build 0.3.5
+## Eventual Features
+- Paid subscriptions with Stripe API integration
+- Story Comissions
+- Story Prompts/Challenges
+- Reporting inappropriate stories (not tagged correctly, or breaks TOS)
+- Moderator Dashboard
+- Site News Blog (maybe Author News Blog too)
+
+## Current Build Stack 0.3.5
 - Vue 3
 - Laravel API
 - Nginx server
