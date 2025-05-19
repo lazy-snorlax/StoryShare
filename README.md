@@ -1,5 +1,5 @@
 # Story Share
-Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction.
+Inspired by AO3, this is a platform designed to for users to read, write and generally share works of fiction. Eventually, I would like to incorporate elements from from platforms like Patreon or SubscribeStar and have a way for author's to make a some kind of feasible income from this platform.
 
 ## Getting Started
 Story Share consists of a Laravel API backend, Vue frontend and MySQL database. To start the application, you will need to use [Docker Compose](https://docs.docker.com/compose/). 
