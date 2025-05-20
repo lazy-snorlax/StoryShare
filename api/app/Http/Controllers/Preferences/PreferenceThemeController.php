@@ -35,7 +35,7 @@ class PreferenceThemeController extends Controller
         $user = $request->user();
         $preferences = $user->profile->preferences;
 
-        if ($preferences['defaultDark'] == $request->input("themeName")) {
+        if (array_key_exists('defaultDark', $preferences) && $preferences['defaultDark'] == $request->input("themeName")) {
             $preferences['defaultDark'] = null;
         }
         unset($preferences['themes'][$request->input("themeName")]);
