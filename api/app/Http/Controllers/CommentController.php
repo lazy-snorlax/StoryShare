@@ -60,7 +60,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        abort_if($comment->user_id !== auth()->user()->id, 401, 'You are not authorized to do this.');
+        abort_if($comment->user_id !== $request->user()->id, 401, 'You are not authorized to do this.');
         // dd($request->input(), $comment);
         $comment->fill($request->only('content'));
         $comment->save();

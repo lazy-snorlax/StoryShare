@@ -143,4 +143,105 @@ class CommentTest extends TestCase
         $response->assertStatus(401);
         $response->assertJsonFragment(['message' => 'Unauthenticated.']);
     }
+
+    public function testAUserCanUpdateAComment() {
+        $user = $this->createUser();
+
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $comment = Comment::factory()->create([
+            'user_id' => $user->id,
+            'content' => 'Generated Comment',
+            'parent_id' => $chapter->id,
+            'parent_type' => 'chapter',
+            'approved' => true,
+            'approved_by' => $user->id,
+            'approved_at' => now(),
+        ]);
+
+        $response = $this->be($user)->putJson('api/comment/'.$comment->id, [
+            'content' => 'Tested Comment',
+        ]);
+        $response->assertSuccessful();
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has('data', fn (AssertableJson $json) => $json
+                ->has('id')
+                ->where('user_id', $user->id)
+                ->where('user_name', $user->name)
+                ->where('content', 'Tested Comment')
+                ->where('created_at', now()->format('H:i D, d M Y'))
+                ->where('updated_at', now()->format('H:i D, d M Y'))
+        ));
+    }
+
+    public function testAUserCanDeleteTheirComment() {
+        $user = $this->createUser();
+
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $comment = Comment::factory()->create([
+            'user_id' => $user->id,
+            'content' => 'Generated Comment',
+            'parent_id' => $chapter->id,
+            'parent_type' => 'chapter',
+            'approved' => true,
+            'approved_by' => $user->id,
+            'approved_at' => now(),
+        ]);
+
+        $response = $this->be($user)->deleteJson('api/comment/'.$comment->id);
+        $response->assertSuccessful();
+    }
+
+    public function testAnotherUserCannotDeleteOtherComments() {
+        $user = $this->createUser();
+        $user2 = $this->createUser();
+
+        $story = Story::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $chapter = Chapter::factory()->create([
+            'story_id' => $story->id,
+            'chapter_number' => 1,
+            'title' => 'Chapter ' . 1,
+            'summary' => 'This is chapter ' . 1 . ' in story ' . $story->title,
+            'notes' => 'This is a section for any author notes on this chapter.',
+        ]);
+
+        $comment = Comment::factory()->create([
+            'user_id' => $user->id,
+            'content' => 'Generated Comment',
+            'parent_id' => $chapter->id,
+            'parent_type' => 'chapter',
+            'approved' => true,
+            'approved_by' => $user->id,
+            'approved_at' => now(),
+        ]);
+
+        $response = $this->be($user2)->deleteJson('api/comment/'.$comment->id);
+        
+        $response->assertStatus(401);
+        $response->assertJsonFragment(['message' => 'You are not authorized to do this.']);
+    }
 }
