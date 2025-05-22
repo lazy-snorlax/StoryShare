@@ -12,7 +12,7 @@
                 <font-awesome-icon icon="fa-solid fa-bars"></font-awesome-icon>
             </button>
         </div>
-        <div v-if="isLoggedIn">
+        <div v-if="isLoggedIn" class="loggedin-avatar">
             <div class="avatar-border">
                 <Avatar :name="loggedInUser?.name" :imgSrc="imgSrc" :imgSize="60" />
             </div>
@@ -90,6 +90,14 @@ const resend = async() => {
 </script>
 
 <style>
+.loggedin-avatar {
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 5%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 5px;
+}
+
 .avatar-border {
     display: flex;
     align-items: center;
