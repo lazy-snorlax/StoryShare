@@ -132,10 +132,13 @@ import { ref } from "vue";
 import { ColorInputWithoutInstance } from "tinycolor2";
 
 import { useLoggedInUser } from '../../composables/use-logged-in-user';
+import { changeTheme } from '../../composables/change-theme'
+
 import { useAuthStore } from "../../stores/auth";
 import { toast } from 'vue3-toastify';
 
 const { loggedInUser } = useLoggedInUser()
+const { loadTheme, changeColour } = changeTheme()
 const { saveProfileTheme, removeProfileTheme, setProfileDarkTheme, setProfileLightTheme } = useAuthStore()
 const themeName = ref('')
 
@@ -264,21 +267,5 @@ const setAsDefaultTheme = (themeIdx, themeType) => {
     greyColour.value = theme['grey']
     blackColour.value = theme['black']
     console.log(">>>> Themes: ", loggedInUser?.value.preferences)
-}
-
-const changeColour = (prop, color) => { document.documentElement.style.setProperty(prop, color) }
-const loadTheme = (themeIdx) => {
-    const theme = loggedInUser?.value.preferences.themes[themeIdx]
-    console.log(">>>> Loading Theme: ", themeIdx, theme)
-    changeColour('--primary', theme["primary"])
-    changeColour('--primary-alt', theme["primaryAlt"])
-    changeColour('--light', theme["light"])
-    changeColour('--light-alt', theme["lightAlt"])
-    changeColour('--dark', theme["dark"])
-    changeColour('--dark-alt', theme["darkAlt"])
-
-    changeColour('--white', theme["white"])
-    changeColour('--grey', theme["grey"])
-    changeColour('--black', theme["black"])
 }
 </script>
