@@ -7,16 +7,21 @@
             <router-link v-else class="story-link" target="_blank" :to="{ name: 'story.single', params: { id: item.id } }">
                 <h4 class="my-3">{{ item.title }}</h4>
             </router-link>
+
+            <router-link class="story-link d-flex" :to="{ name: 'profile', params: { id: item.user_id } }">
+                <div class="avatar-border">
+                    <Avatar :name="item.user" :imgSrc="imgPath(item.imgSrc)" :imgSize="60" />
+                </div>
+                <p class="my-auto ms-2">{{ item.user }}</p>
+            </router-link>
+
             <div class="d-flex my-3">
-                <div class="rating me-3" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`" @click="open">{{ item.rating[0] }}</div>
-                <h5 class="">By: 
-                    <router-link class="story-link" :to="{ name: 'profile', params: { id: item.user_id } }">{{ item.user }}</router-link>
-                </h5>
-            </div>
-            <div class="genres">
-                <span v-for="genre in item.genres">
-                    {{ genre.name }}
-                </span>
+                <div class="rating me-3 my-auto" :class="`${ item.rating.toLowerCase().replace(' ', '-') }`" @click="open">{{ item.rating[0] }}</div>
+                <div class="genres my-auto">
+                    <span v-for="genre in item.genres">
+                        {{ genre.name }}
+                    </span>
+                </div>
             </div>
             <!-- <div class="tags"></div> -->
             <div class="dates">
@@ -64,9 +69,10 @@
     </li>
 </template>
 <script lang="ts" setup>
-
 import { useModal } from 'vue-final-modal'
 import ModalRatings from '../app/ModalRatings.vue';
+
+import Avatar from '../user/Avatar.vue';
 
 const props = defineProps({
     item: {
@@ -84,4 +90,20 @@ const { open, close } = useModal({
 	component: ModalRatings
 })
 
+const imgPath = (imgSrc) => { 
+    if (imgSrc) {
+        return import.meta.env.VITE_API_URL + imgSrc 
+    }
+    return null
+}
+
 </script>
+
+<style lang="scss" scoped>
+.story-link {
+    &:hover {
+        background-color: transparent;
+        color: var(--light);
+    }
+}
+</style>
