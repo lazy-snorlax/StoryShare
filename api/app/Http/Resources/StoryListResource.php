@@ -18,6 +18,7 @@ class StoryListResource extends JsonResource
             'id' => $this->id,
             'user' => $this->user->name,
             'user_id' => $this->user->id,
+            'imgSrc' => $this->when($this->user->profile->avatar != null, 'profile-image/' . $this->user->id, null),
             'title' => $this->title,
             'summary' => $this->summary,
             'notes' => $this->notes,
