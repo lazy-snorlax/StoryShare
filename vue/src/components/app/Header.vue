@@ -13,10 +13,25 @@
             </button>
         </div>
         <div v-if="isLoggedIn" class="loggedin-avatar">
-            <div class="avatar-border">
-                <Avatar :name="loggedInUser?.name" :imgSrc="imgSrc" :imgSize="60" />
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <div class="avatar-border">
+                        <Avatar :name="loggedInUser?.name" :imgSrc="imgSrc" :imgSize="60" />
+                    </div>
+                    <p class="my-auto ms-2">{{ loggedInUser?.email }}</p>
+                </button>
+                <div class="dropdown-content">
+                    <router-link class="rounded-top" :to="{ name:'profile', params: { id: loggedInUser?.id } }">
+                        <span class="text">Profile</span>
+                    </router-link>
+                    <router-link class="" :to="{ name:'my-account.preferences' }">
+                        <span class="text">Preferences</span>
+                    </router-link>
+                    <router-link class="rounded-bottom" :to="{ name:'my-account.security' }">
+                        <span class="text">Security</span>
+                    </router-link>
+                </div>
             </div>
-            <p class="mb-0 ms-2">{{ loggedInUser?.email }}</p>
         </div>
     </header>
     <header class="page-header" v-if="title != null && title != ''">
@@ -89,13 +104,56 @@ const resend = async() => {
 }
 </script>
 
-<style>
+<style lang="scss">
 .loggedin-avatar {
-    background-color: var(--dark);
+    /* background-color: var(--dark); */
     color: var(--light);
     border-radius: 5%;
     padding: 0.5rem 0.75rem;
     margin-bottom: 5px;
+    // display: inline-block;
+
+    .dropdown {
+        position: relative;
+    }
+    .dropbtn {
+        display: flex;
+        // background-color: #04AA6D;
+        // color: white;
+        padding: 0.25rem;
+        font-size: 16px;
+        border: none;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: transparent;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        background-color: var(--dark);
+        color: var(--light-alt);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover { 
+        background-color: var(--light-alt);
+        color: var(--dark-alt);
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content { 
+        display: block;
+    }
 }
 
 .avatar-border {
