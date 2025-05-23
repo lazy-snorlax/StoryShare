@@ -25,8 +25,8 @@
             </div>
             <!-- <div class="tags"></div> -->
             <div class="dates">
-                <p class="datetime">Created: <span>{{ item.created_at }}</span></p>
-                <p class="datetime">Updated: <span>{{ item.updated_at }}</span></p>
+                <span class="datetime">Created: <span>{{ item.created_at }}</span></span>
+                <span class="datetime">Updated: <span>{{ item.updated_at }}</span></span>
             </div>
         </div>
         <div class="summary" v-html="item.summary"></div>

@@ -9,6 +9,7 @@ li.blurb {
     color: var(--white);
     &:hover {
         background-color: var(--grey);
+        color: var(--black);
     }
     a {
         text-decoration: none;
@@ -16,10 +17,10 @@ li.blurb {
     }
     .header {
         .dates {
-            display: flex;
+            margin-bottom: 1rem;
             .datetime {
                 margin: 0rem auto;
-                margin-bottom: 1rem;
+                margin-right: 1.5rem;
             }
         }
         .rating {
