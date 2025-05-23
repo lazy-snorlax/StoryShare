@@ -61,6 +61,7 @@ class ProfileTest extends TestCase
                 ->has('joined')
                 ->has('language')
                 ->has('about_me')
+                ->has('imgSrc')
                 ->has('recent_stories')->count('recent_stories', 1)
                 ->has('recent_bookmarks')->count('recent_bookmarks', 1)
         ));
@@ -116,6 +117,7 @@ class ProfileTest extends TestCase
                 ->has('joined')
                 ->has('language')
                 ->has('about_me')
+                ->has('imgSrc')
                 ->has('recent_stories')->count('recent_stories', 2)
                 ->has('recent_bookmarks')->count('recent_bookmarks', 2)
         ));
@@ -144,6 +146,7 @@ class ProfileTest extends TestCase
                 ->has('joined')
                 ->where('language', 'english')
                 ->where('about_me', 'This is a test')
+                ->has('imgSrc')
                 ->has('recent_stories')->count('recent_stories', 0)
                 ->has('recent_bookmarks')
         ));
