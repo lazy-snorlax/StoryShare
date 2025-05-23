@@ -58,6 +58,7 @@ export type ProfileResource = {
     joined: string,
     about_me: string | null,
     language: string,
+    imgSrc: string | null,
     recent_stories: Array<StoryListResource>,
     recent_bookmarks: Array<StoryListResource>,
 }
