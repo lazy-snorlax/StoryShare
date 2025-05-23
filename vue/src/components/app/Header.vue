@@ -106,26 +106,22 @@ const resend = async() => {
 
 <style lang="scss">
 .loggedin-avatar {
-    /* background-color: var(--dark); */
     color: var(--light);
     border-radius: 5%;
     padding: 0.5rem 0.75rem;
     margin-bottom: 5px;
-    // display: inline-block;
 
     .dropdown {
         position: relative;
     }
     .dropbtn {
         display: flex;
-        // background-color: #04AA6D;
-        // color: white;
         padding: 0.25rem;
         font-size: 16px;
         border: none;
+        color: var(--primary);
     }
 
-    /* Dropdown Content (Hidden by Default) */
     .dropdown-content {
         display: none;
         position: absolute;
@@ -135,7 +131,6 @@ const resend = async() => {
         z-index: 1;
     }
     
-    /* Links inside the dropdown */
     .dropdown-content a {
         background-color: var(--dark);
         color: var(--light-alt);
@@ -144,13 +139,11 @@ const resend = async() => {
         display: block;
     }
 
-    /* Change color of dropdown links on hover */
     .dropdown-content a:hover { 
         background-color: var(--light-alt);
         color: var(--dark-alt);
     }
 
-    /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content { 
         display: block;
     }
