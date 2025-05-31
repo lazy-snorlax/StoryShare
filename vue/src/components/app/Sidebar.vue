@@ -1,5 +1,5 @@
 <template>
-    <div id="sidebar-wrapper" :class="`${is_expanded ? 'is-expanded' : ''}`">
+    <div id="sidebar-wrapper" :class="`${!is_expanded ? 'expanded' : ''}`">
         <div class="logo">
             <img :src="logo" alt="LOGO.png">
 			<h5 v-if="is_expanded">STORY SHARE</h5>
@@ -11,7 +11,6 @@
         <!-- <h3>Menu</h3> -->
 
         <div class="menu">
-			<!-- <theme-button /> -->
 			<router-link :to="{ name: 'stories.search' }" class="button mt-3">
 				<font-awesome-icon icon="magnifying-glass"></font-awesome-icon> <span class="text"> Browse </span>
 			</router-link> 
@@ -54,12 +53,6 @@
 					<i class="fa-solid fa-chart-simple"></i> <span class="text">Metrics</span>
 				</a>
 			</template>
-			<!-- <router-link to="/Collections" class="button">
-				<i class="fa-solid fa-layer-group"></i> <span class="text">Collections</span>
-			</router-link>
-			<router-link to="/Prompts" class="button">
-				<i class="fa-regular fa-comment-dots"></i> <span class="text">Prompts</span>
-			</router-link> -->
 		</div>
 
 		<!-- <div class="menu flex">
@@ -87,22 +80,9 @@
 				<a class="button" @click="logout">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Logout</span>
 				</a>
-				<!-- <router-link 
-					v-else
-					class="button" 
-					:to="{ name:'login' }" 
-					>
-					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-				</router-link> -->
 			</template>
 			<template v-else>
-				<!-- <a class="button" @click="open">
-					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
-				</a> -->
-				<router-link 
-					class="button" 
-					:to="{ name:'login' }" 
-					>
+				<router-link class="button" :to="{ name:'login' }">
 					<font-awesome-icon icon="fa-solid fa-user"></font-awesome-icon> <span class="text">Login</span>
 				</router-link>
 			</template>

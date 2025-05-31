@@ -23,30 +23,23 @@ body {
     min-height: 100%;
     flex: 1 1 100%;
     
-    #page-content-wrapper { 
-        min-width: calc(100% - 5rem);
-        @media (max-width: 1024px) {
-			min-width: 100%;
-		}
-    }
+    // #page-content-wrapper { 
+    //     min-width: calc(100% - 5rem);
+    //     @media (max-width: 1024px) {
+	// 		min-width: 100%;
+	// 	}
+    // }
 
-    &.toggled {
-        #page-content-wrapper { 
-            min-width: calc(100% - 16rem);
-            @media (max-width: 1024px) {
-                min-width: 100%;
-            }
-        }
-
+    &.toggled #sidebar-wrapper {
+        // margin-left: -16rem;
+        min-width: 5rem;
+        transition: min-width 0.3s ease-out;
     }
 
     &.transitioning {
         #page-content-wrapper {
             min-width: 100vw; // when animating close prevent visual shift of content by adding 100vw
             overflow-x: hidden;
-            header.page-header .middle {
-                min-width: 100%;
-            }
         }
     }
 }
