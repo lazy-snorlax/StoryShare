@@ -3,6 +3,8 @@
 	min-width: 16rem;
 	transition: min-width 0.3s ease-out;
 	background-color: var(--dark);
+	display: flex;
+	flex-direction: column;
 	
 	.flex {
 		flex: 1 1 0%;
@@ -18,29 +20,6 @@
 		}
 	}
 	
-	.menu-toggle-wrap {
-		display: flex;
-		justify-content: flex-end;
-		margin-bottom: 1rem;
-		position: relative;
-		top: 0;
-		transition: 0.2s ease-in-out;
-		.menu-toggle {
-			transition: 0.2s ease-in-out;
-			.material-icons, i, svg {
-				font-size: 2rem;
-				color: var(--light-alt);
-				transition: 0.2s ease-out;
-			}
-			
-			&:hover {
-				.material-icons, i {
-					color: var(--light-alt);
-					transform: translateX(0.5rem);
-				}
-			}
-		}
-	}
 	h3, .button .text {
 		opacity: 0;
 		transition: opacity 0.3s ease-in-out;
@@ -109,12 +88,6 @@
 			img {
 				width: 2rem;
 				margin: 0 1rem;
-			}
-		}
-		.menu-toggle-wrap {
-			top: -3rem;
-			.menu-toggle {
-				transform: rotate(-180deg);
 			}
 		}
 		.menu .button {
