@@ -23,12 +23,21 @@ body {
     min-height: 100%;
     flex: 1 1 100%;
     
-    // #page-content-wrapper { 
-    //     min-width: calc(100% - 5rem);
-    //     @media (max-width: 1024px) {
-	// 		min-width: 100%;
-	// 	}
-    // }
+    #page-content-wrapper { 
+        min-width: calc(100% - 16rem);
+        @media (max-width: 1024px) {
+			min-width: 100%;
+		}
+        transition: min-width 0.3s ease-out;
+    }
+    
+    &.toggled #page-content-wrapper { 
+        min-width: calc(100% - 5rem);
+        @media (max-width: 1024px) {
+			min-width: 100%;
+		}
+        transition: min-width 0.3s ease-out;
+    }
 
     &.toggled #sidebar-wrapper {
         // margin-left: -16rem;

@@ -2,10 +2,7 @@
     <div id="sidebar-wrapper" :class="`${!is_expanded ? 'expanded' : ''}`">
         <div class="logo">
             <img :src="logo" alt="LOGO.png">
-			<h5 v-if="is_expanded">STORY SHARE</h5>
-			<button class="close-sidebar"  @click="sidebarToggle">
-				<i class="fa fa-times"></i>
-			</button>
+			<h5 v-if="!is_expanded">STORY SHARE</h5>
         </div>
 
         <!-- <h3>Menu</h3> -->
