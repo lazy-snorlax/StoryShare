@@ -27,9 +27,12 @@
                     <router-link class="" :to="{ name:'my-account.preferences' }">
                         <span class="text">Preferences</span>
                     </router-link>
-                    <router-link class="rounded-bottom" :to="{ name:'my-account.security' }">
+                    <router-link class="" :to="{ name:'my-account.security' }">
                         <span class="text">Security</span>
                     </router-link>
+                    <a class="border-top rounded-bottom pe-auto" @click="logout">
+                        <span class="text-danger">Logout</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -53,7 +56,7 @@ import { toast } from 'vue3-toastify';
 
 import Avatar from '@/components/user/Avatar.vue';
 import { computed, ref } from 'vue';
-import { rand } from '@vueuse/core';
+import { useLogout } from '@/composables/use-logout';
 
 const props = defineProps<{
     headerKey?: Number | null,
@@ -63,6 +66,7 @@ const props = defineProps<{
 
 const { isLoggedIn } = useIsLoggedIn()
 const { loggedInUser } = useLoggedInUser()
+const { logout } = useLogout()
 const { toggleSidebar, resendVerifyEmail } = useAuthStore()
 const { rerender } = useProfile()
 
