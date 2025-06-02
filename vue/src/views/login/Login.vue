@@ -21,12 +21,14 @@
                     <router-link :to="{ name: 'forgot-password' }" class="small text-muted">Forgot Password?</router-link>
                 </div>
             </div>
-            <div class="row">
-                <div class="col text-end">
-                    <router-link to="/" class="button">
-                       <button class="btn btn-primary me-1">Return to Dashboard</button>
+            <div class="row mt-4">
+                <div class="col text-start">
+                    <router-link to="/" class="">
+                       <button class="btn btn-outline-primary me-1">Return to Dashboard</button>
                     </router-link>
-                    <button class="btn btn-primary" @click="submit">Login</button>
+                </div>
+                <div class="col text-end">
+                    <button class="btn btn-primary px-4" @click="submit">Login</button>
                 </div>
             </div>
         </div>
