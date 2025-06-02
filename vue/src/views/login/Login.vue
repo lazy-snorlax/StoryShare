@@ -2,7 +2,7 @@
     <div class="card card-authentication">
         <div class="card-body p-3">
             <img src="" alt="" class="logo">
-            <h1>Log In</h1>
+            <h1 class="text-center">Log In</h1>
 
             <div class="mb-3">
                 <label for="">Email Address</label>
