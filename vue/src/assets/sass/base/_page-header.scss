@@ -4,7 +4,6 @@ header.page-header {
     padding: 1rem 1.5rem;
     background-color: var(--dark-alt);
     color: var(--primary);
-    // border-bottom: 1px solid gray;
     
   
     display: flex;
@@ -103,39 +102,5 @@ header.page-header {
     .actions {
         margin-left: auto;
     }
-    // @include media-breakpoint-up(sm) {
-    //     .middle {
-    //         flex-wrap: nowrap;
-  
-    //         .actions {
-    //             flex: 0 0 auto;
-    //             width: auto;
-    //             max-width: 100%;
-    //         }
-    //     }
-    // }
-    // @include media-breakpoint-up(xl) {
-    //     flex-wrap: nowrap;
-  
-    //     .page-title { margin-top: 0; }
-    //     .actions { margin-right: 1rem; }
-  
-    //     .left {
-    //         order: 1;
-    //     }
-    //     .middle {
-    //         padding-top: 0;
-    //         order: 2;
-    //         flex: 1 1 auto;
-    //         max-width: 100%;
-    //     }
-    //     .right {
-    //         order: 3;
-  
-    //         flex: 0 0 auto;
-    //         width: auto;
-    //         max-width: 100%;
-    //     }
-    // }
 }
   
