@@ -61,14 +61,6 @@
 
                     &:hover,
                     &:focus { border-left-color: gray; }
-
-                    &.active { 
-                        // border-left-color: $primary; 
-                    }
-                }
-
-                .nav-item.active .nav-link { 
-                    // border-left-color: $primary; 
                 }
             }
         }

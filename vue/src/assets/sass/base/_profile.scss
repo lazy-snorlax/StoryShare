@@ -4,15 +4,6 @@
         flex-wrap: wrap;
         gap: 10px;
         min-height: 10rem;
-        
-        // .profile-pic img {
-        //     height: 12rem;
-        //     display: block;
-        //     margin: 0 auto;
-        //     width: fit-content;
-        //     align-items: center;
-        //     clip-path: circle();
-        // }
 
         .avatar-border {
             display: flex;
@@ -89,7 +80,6 @@
 
     .recents > div {
         flex: max(400px, (100% - 20px)/3);
-        // background-color: var(--dark);
         color: var(--light);
         border-radius: 15px;
         padding: 1rem;
