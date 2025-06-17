@@ -18,7 +18,7 @@
                     <div class="avatar-border">
                         <Avatar :name="loggedInUser?.name" :imgSrc="imgSrc" :imgSize="60" />
                     </div>
-                    <p class="my-auto ms-2">{{ loggedInUser?.email }}</p>
+                    <p class="my-auto ms-2">{{ loggedInUser?.name }}</p>
                 </button>
                 <div class="dropdown-content">
                     <router-link class="rounded-top" :to="{ name:'profile', params: { id: loggedInUser?.id } }">
