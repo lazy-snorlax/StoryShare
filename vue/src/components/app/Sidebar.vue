@@ -47,15 +47,24 @@
 		</div>
 
 		<div class="menu flex">
+			<template v-if="isLoggedIn && loggedInUser?.role?.name == 'admin'">
+				<router-link :to="{ name: 'admin.dashboard' }" class="button">
+					<font-awesome-icon icon="fa-solid fa-user-tie"></font-awesome-icon>
+					<span class="text">Admin Dashboard</span>
+				</router-link>
+				<a class="button">
+					<i class="fa-solid fa-users"></i> <span class="text">Users</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-tags"></i> <span class="text">Tags</span>
+				</a>
+				<a class="button">
+					<i class="fa-solid fa-flag"></i> <span class="text">Reports</span>
+				</a>
+			</template>
 		</div>
 		
 		<div class="menu">
-			<template v-if="isLoggedIn">
-				<router-link :to="{ name: 'admin.dashboard' }" class="button" v-if="loggedInUser?.role?.name == 'admin'">
-					<font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"></font-awesome-icon>
-					<span class="text">Admin Portal</span>
-				</router-link>
-			</template>
 			<template v-if="isLoggedIn">
 				<router-link 
 					class="button" 
