@@ -15,12 +15,6 @@
 				<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
 				<span class="text">Dashboard</span>
             </router-link>
-			<template v-if="isLoggedIn">
-				<router-link :to="{ name: 'admin.dashboard' }" class="button" v-if="loggedInUser?.role?.name == 'admin'">
-					<font-awesome-icon icon="fa-solid fa-table-columns"></font-awesome-icon>
-					<span class="text">Admin Portal</span>
-				</router-link>
-			</template>
         </div>
 		
         <div class="menu flex">
@@ -52,21 +46,16 @@
 			</template>
 		</div>
 
-		<!-- <div class="menu flex">
+		<div class="menu flex">
+		</div>
+		
+		<div class="menu">
 			<template v-if="isLoggedIn">
-				<a class="button">
-					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Outlines </span>
-				</a>
-				<a class="button">
-					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Character Creator </span>
-				</a>
-				<a class="button">
-					<i class="fa-solid fa-comment-dots"></i> <span class="text"> Prompts </span>
-				</a>
+				<router-link :to="{ name: 'admin.dashboard' }" class="button" v-if="loggedInUser?.role?.name == 'admin'">
+					<font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"></font-awesome-icon>
+					<span class="text">Admin Portal</span>
+				</router-link>
 			</template>
-		</div> -->
-
-        <div class="menu">
 			<template v-if="isLoggedIn">
 				<router-link 
 					class="button" 
