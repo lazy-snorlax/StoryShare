@@ -33,7 +33,7 @@ const { loadTheme } = changeTheme()
 
 onMounted(() => {
   let className = document.querySelector('#page-content-wrapper')?.className
-  if (loggedInUser?.value.preferences.defaultDark && className == "dark") {
+  if (loggedInUser?.value.preferences?.defaultDark && className == "dark") {
     loadTheme(loggedInUser?.value.preferences.defaultDark)
   }
 })

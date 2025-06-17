@@ -59,11 +59,11 @@
                 </div>
             </div>
             
-            <div v-if="loggedInUser?.preferences.themes" class="my-account card">
+            <div v-if="loggedInUser?.preferences?.themes" class="my-account card">
                 <div class="card-body">
                     <h2 class="text-center">Saved Themes</h2>
                     <div class="mx-auto d-flex row row-cols-auto">
-                        <template v-for="(theme, index) in loggedInUser?.preferences.themes" class="">
+                        <template v-for="(theme, index) in loggedInUser?.preferences?.themes" class="">
                             <div class="col col-sm-12 mx-3 mb-4">
                                 <h5 class="text-center">
                                     {{ index }}

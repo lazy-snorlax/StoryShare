@@ -74,7 +74,10 @@ const imgSrc = computed(()=> {
     if (rerender.value > 0) {
         return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc + '?r=' + rerender.value
     }
-    return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc
+    if (loggedInUser.value.imgSrc) {
+        return import.meta.env.VITE_API_URL + loggedInUser.value.imgSrc
+    }
+    return ''
 })
 
 const sidebarToggle = () => {
