@@ -93,5 +93,12 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
     Route::post('/comment', [Controllers\CommentController::class, 'store']);
     Route::put('/comment/{comment}', [Controllers\CommentController::class, 'update']);
     Route::delete('/comment/{comment}', [Controllers\CommentController::class, 'destroy']);
+});
 
+// Admin routes
+Route::middleware(['auth:sanctum', 'cors', 'isadmin'])->group(function() {
+    Route::prefix('/admin')->group(function() {
+        Route::get('/users', [Controllers\UserController::class, 'index']);
+        Route::get('/users/{id}', [Controllers\UserController::class, 'show']);
+    });
 });
