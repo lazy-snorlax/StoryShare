@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User\Profile;
+use App\Support\Enums\UserStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Nette\Utils\Random;
@@ -23,17 +24,19 @@ class DatabaseSeeder extends Seeder
 
         // Artisan::call('abilities:refresh');
 
-        // Users
+        // Admin User
         $admin = \App\Models\User::factory()->admin()->create([
             'name' => 'Admin User',
             'email' => 'admin@test.io',
+            'status' => UserStatus::Enabled->value,
         ]);
         Profile::factory()->for($admin)->create();
         
-        // Primary user
+        // User
         $user = \App\Models\User::factory()->user()->create([
             'name' => 'User',
             'email' => 'user@test.io',
+            'status' => UserStatus::Enabled->value,
         ]);
         Profile::factory()->for($user)->create();
         
@@ -42,6 +45,7 @@ class DatabaseSeeder extends Seeder
             $users = \App\Models\User::factory(5)->user()->create();
             foreach ($users as $u) {
                 Profile::factory()->for($u)->create();
+                $u->status = UserStatus::Enabled->value;
             }
 
             // Stories for primary user
