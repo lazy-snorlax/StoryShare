@@ -52,9 +52,9 @@
 					<font-awesome-icon icon="fa-solid fa-user-tie"></font-awesome-icon>
 					<span class="text">Admin Dashboard</span>
 				</router-link>
-				<a class="button">
-					<i class="fa-solid fa-users"></i> <span class="text">Users</span>
-				</a>
+				<router-link :to="{ name: 'admin.users.list' }" class="button">
+					<font-awesome-icon icon="fa-solid fa-users"></font-awesome-icon> <span class="text">Users</span>
+				</router-link>
 				<a class="button">
 					<i class="fa-solid fa-tags"></i> <span class="text">Tags</span>
 				</a>
