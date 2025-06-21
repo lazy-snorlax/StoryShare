@@ -98,7 +98,12 @@ Route::middleware(['auth:sanctum', 'cors'])->group(function () {
 // Admin routes
 Route::middleware(['auth:sanctum', 'cors', 'isadmin'])->group(function() {
     Route::prefix('/admin')->group(function() {
+        
         Route::get('/users', [Controllers\UserController::class, 'index']);
-        Route::get('/users/{id}', [Controllers\UserController::class, 'show']);
+        Route::prefix('/users/{user}')->group(function() {
+            Route::get('/', [Controllers\UserController::class, 'show']);
+            Route::put('/toggle-status', [Controllers\User\ToggleStatusController::class, 'update']);
+
+        });
     });
 });
