@@ -31,20 +31,34 @@
                             <option>Admin</option>
                         </select>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col">
-                        <label class="label">
-                            <span class=" label-text font-bold">Status</span>
-                        </label>
-                        <select class="form-select w-100" v-model="selectedStatus">
-                            <option disabled value="">Please select one</option>
-                            <option>ENABLED</option>
-                            <option>PENDING</option>
-                            <option>DISABLED</option>
-                        </select>
+                        <span class="form-label font-bold">Status</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="status" :class="user.status_class">{{ selectedStatus.toUpperCase() }}</span>
                     </div>
                 </div>
-                <div class="text-center mb-2">
-                    <!-- <button class="btn btn-success" @click="submit">Update User Details</button> -->
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <button 
+                            v-if="userStatus === 'enabled'" 
+                            @click="toggleStatus(userId)"
+                            class="btn btn-danger">
+                                Ban User
+                        </button>
+                        <button 
+                            v-else-if="userStatus === 'banned'"
+                            @click="toggleStatus(userId)"
+                            class="btn btn-danger">
+                                Un-Ban User
+                        </button>
+                    </div>
+                    <div class="col text-end">
+                        <button class="btn btn-success" @click="submit">Update User Details</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +74,7 @@ import { useUserStore } from '../../../stores/admin/users';
 const route = useRoute()
 const router = useRouter()
 
-const { getUser, updateUser } = useUserStore()
+const { getUser, toggleStatus, updateUser } = useUserStore()
 const { user } = storeToRefs(useUserStore())
 const userId = computed(() => { return user.value?.id })
 const userName = computed({
@@ -83,25 +97,26 @@ const selectedRole = ref(userRole)
 const selectedStatus = ref(userStatus)
 
 onBeforeMount(async () => { await getUser(route.params.id) })
-// const submit = async () => {
-//     try {
-//         if (!userRole.value) {
-//             console.log(">>> UserRole: ", userRole.value)
-//             return
-//         }
-//         const payload = {
-//             id: userId.value,
-//             name: userName.value,
-//             email: userEmail.value,
-//             role: userRole.value,
-//             status: userStatus.value,
-//         }
-//         console.log(">>> Update Payload: ", payload)
-//         updateUser(payload)
-//     } catch (error) {
-//         console.log(">>>> Errors: ", error)
-//     }
-// }
+
+const submit = async () => {
+    try {
+        if (!userRole.value) {
+            console.log(">>> UserRole: ", userRole.value)
+            return
+        }
+        const payload = {
+            id: userId.value,
+            name: userName.value,
+            email: userEmail.value,
+            role: userRole.value,
+            status: userStatus.value,
+        }
+        console.log(">>> Update Payload: ", payload)
+        updateUser(userId.value, payload)
+    } catch (error) {
+        console.log(">>>> Errors: ", error)
+    }
+}
 
 </script>
 
