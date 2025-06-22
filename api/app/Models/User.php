@@ -8,11 +8,10 @@ use App\Models\User\Profile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
+use App\Support\Enums\UserStatus;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,7 +34,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'email_verified_at'
+        'email_verified_at',
+        'two_factor_required',
+        'two_factor_method_preferred',
+        'two_factor_method_enabled',
+        'two_factor_secret',
+        'terms_agreed_at',
+        'privacy_policy_agreed_at',
     ];
 
     /**
@@ -54,7 +59,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'immutable_datetime',
+        'status' => UserStatus::class,
     ];
 
     /**
