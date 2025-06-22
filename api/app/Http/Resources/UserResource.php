@@ -19,7 +19,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'role' => $this->whenLoaded('role', fn () => $this->role?->title),
-            'status' => strtoupper($this->status),
+            'status' => $this->status,
+            'status_class' => $this->status->class(),
         ];
     }
 }
