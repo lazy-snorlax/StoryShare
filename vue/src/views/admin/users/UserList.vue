@@ -15,7 +15,9 @@
                         <div class="card-title col">{{ user.name }}</div>
                         <div class="card-title col">{{ user.email }}</div>
                         <div class="card-title col">{{ user.role }}</div>
-                        <div class="card-title col">{{ user.status.toUpperCase() }}</div>
+                        <div class="card-title col">
+                            <span class="status" :class="user.status_class">{{ user.status.toUpperCase() }}</span>
+                        </div>
                     </div>
                 </router-link>
             </template>
