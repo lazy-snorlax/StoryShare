@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LoggedInResource;
+use App\Support\Enums\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Lang;
@@ -29,6 +30,10 @@ class LoginController extends Controller
             // update last login?
 
             // check user enabled
+            if ($user->status !== UserStatus::Enabled) {
+                $auth->guard('web')->logout();
+                throw ValidationException::withMessages(['email' => [__('This account has been disabled. If you believe this is an error, contact support at support@storyshare.com')]]);
+            }
 
             // When user does not have a verified email we send them an email verification email again.
             // if (!$user->hasVerifiedEmail()) {
