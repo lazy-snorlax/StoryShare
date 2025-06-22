@@ -23,11 +23,11 @@ class UserController extends Controller
     public function update(Request $request, User $user) {
         $user->fill($request->only(['name']));
 
-        // $canMakeRestrictedUpdates = $request->user()->isNot($user);
-        // if ($canMakeRestrictedUpdates && $user->role->id !== $request->input('role_id')) {
-        //     $user->retract($user->role->name);
-        //     $user->assign(Role::find($request->input('role_id')));
-        // }
+        $canMakeRestrictedUpdates = $request->user()->isNot($user);
+        if ($canMakeRestrictedUpdates && $user->role->title !== $request->input('role')) {
+            $user->retract($user->role->name);
+            $user->assign(Role::where('title', '=', $request->input('role'))->first());
+        }
 
         // TODO: Verify email if user email is changed
         // if (($email = $request->input('email')) !== $user->email) {}
