@@ -102,6 +102,7 @@ Route::middleware(['auth:sanctum', 'cors', 'isadmin'])->group(function() {
         Route::get('/users', [Controllers\UserController::class, 'index']);
         Route::prefix('/users/{user}')->group(function() {
             Route::get('/', [Controllers\UserController::class, 'show']);
+            Route::put('/', [Controllers\UserController::class, 'update']);
             Route::put('/toggle-status', [Controllers\User\ToggleStatusController::class, 'update']);
 
         });
