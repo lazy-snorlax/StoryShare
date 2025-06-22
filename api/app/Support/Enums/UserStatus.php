@@ -6,14 +6,14 @@ enum UserStatus: string
 {
     case Enabled = 'enabled';
     case Pending = 'pending';
-    case Archived = 'archived';
+    case Banned = 'banned';
 
     public function title(): string
     {
         return match ($this) {
             self::Enabled => 'Enabled',
             self::Pending => 'Pending',
-            self::Archived => 'Archived'
+            self::Banned => 'Banned'
         };
     }
 
@@ -22,7 +22,7 @@ enum UserStatus: string
         return match ($this) {
             self::Enabled => 'status-success',
             self::Pending => 'status-info',
-            self::Archived => 'status-danger'
+            self::Banned => 'status-danger'
         };
     }
 }
