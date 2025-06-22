@@ -1,0 +1,30 @@
+.status {
+    color: #767676;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:before {
+        content: '';
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-right: 0.5rem;
+        background: #767676;
+        display: inline-block;
+        border-radius: 50%;
+
+        position: relative;
+        top: -0.125rem;
+    }
+    &.status-info {
+        color: var(--light);
+        &:before { background: var(--light); }
+    }
+    &.status-success {
+        color: var(--primary);
+        &:before { background: var(--primary); }
+    }
+    &.status-danger {
+        color: #c62b3b;
+        &:before { background: #c62b3b; }
+    }
+}

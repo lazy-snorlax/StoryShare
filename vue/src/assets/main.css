@@ -8,6 +8,8 @@
 @import './sass/base/_helpers.scss';
 @import './sass/base/_horizontal-nav.scss';
 @import './sass/base/_list-item.scss';
+@import './sass/base/_status.scss';
+
 @import './sass/story-search.scss';
 @import './sass/story-search-filters.scss';
 @import './sass/story-single.scss';
