@@ -69,8 +69,8 @@ Running the start script should handle building the containers for deployment.
 - Paid subscriptions with Stripe API integration
 - Story Comissions
 - Story Prompts/Challenges
-- Reporting inappropriate stories (not tagged correctly, or breaks TOS)
-- Moderator Dashboard
+- Reporting inappropriate stories (not tagged correctly, breaks TOS, etc)
+- Moderator Dashboard (Moderators will have limited access to admin features)
 - Site News Blog (maybe Author News Blog too)
 
 ## Current Build Stack 0.3.5
