@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Comment extends Model
 {
@@ -26,6 +27,7 @@ class Comment extends Model
     protected $hidden = [];
 
     protected $casts = [
+        'content' => PurifyHtmlOnGet::class,
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
         'approved_at' => 'datetime',
