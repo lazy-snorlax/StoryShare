@@ -5,6 +5,7 @@ namespace App\Models\User;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Profile extends Model 
 {
@@ -19,6 +20,7 @@ class Profile extends Model
     ];
 
     protected $casts = [
+        'about_me' => PurifyHtmlOnGet::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'preferences' => 'array',
