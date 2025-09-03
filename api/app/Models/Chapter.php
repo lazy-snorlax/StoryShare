@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Chapter extends Model
 {
@@ -25,6 +26,7 @@ class Chapter extends Model
     protected $hidden = [];
 
     protected $casts = [
+        'content' => PurifyHtmlOnGet::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
