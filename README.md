@@ -59,7 +59,7 @@ Running the start script should handle building the containers for deployment.
 ```
 
 ## Upcoming Features
-- Collections - Being able to collect stories into named collections. This would be useful for series of stories (e.g. Harry Potter Collection)
+- Collections - Being able to collect stories into named collections. This would be useful for series of stories (e.g. Harry Potter, Game of Thrones, Percy Jackson, etc)
 - Content Tags - Tagging stories based on content and performing searches based on those tags. These would be separate from Genres (e.g. A story is an Adventure/Fantasy with Graphic Violence).
 -  Metrics - Authors tracking audience interactions with a story (daily/weekly/monthly views) and see what stories engage audiences the most (most liked, most commented, highest word count, highest chapter count, etc)
 - Subscriptions - Readers subscribing to a story or author and receiving alerts on a new release (chapter or story). Considering subscribing to collections as well.
