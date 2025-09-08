@@ -76,6 +76,7 @@ Running the start script should handle building the containers for deployment.
 - Reporting inappropriate stories (not tagged correctly, breaks TOS, etc)
 - Moderator Dashboard (Moderators will have limited access to admin features)
 - Site News Blog (maybe Author News Blog too)
+- Fandoms - Being able to tag a story under a specific fandom
 
 ## Current Build Stack 0.3.5
 - Vue 3
